@@ -45,9 +45,9 @@ git push -u origin main
 4. Selecione o repositório `landingpage-nivela-oficial-replit`
 5. Configure:
    - **Framework Preset**: Vite
-   - **Root Directory**: `.` (raiz)
-   - **Build Command**: `cd client && npm run build`
-   - **Output Directory**: `client/dist/public`
+   - **Root Directory**: `client` (pasta client)
+   - **Build Command**: `npm run build` (auto-detectado)
+   - **Output Directory**: `dist/public` (auto-detectado)
 
 #### Opção B: Via CLI
 ```bash
@@ -79,11 +79,14 @@ VITE_SITE_URL=https://nivela.bembeauty.com.br
 
 ### Build Settings (Vercel)
 ```
-Framework Preset: Vite
-Build Command: cd client && npm run build
-Output Directory: client/dist/public
-Install Command: npm install
+Framework Preset: Vite (auto-detectado)
+Root Directory: client
+Build Command: npm run build (auto-detectado)
+Output Directory: dist/public (auto-detectado)
+Install Command: npm install (auto-detectado)
 ```
+
+**Nota**: Arquivo `vercel.json` foi removido para evitar conflitos. A Vercel detectará automaticamente as configurações corretas para projetos Vite.
 
 ---
 
