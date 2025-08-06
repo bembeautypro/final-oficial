@@ -12,6 +12,7 @@ This is a modern React-based landing page for NIVELA®, a professional hair care
 - 🎨 **VISUAL REFINEMENTS COMPLETED (Aug 2025)**: PreFooter and Footer premium aesthetics enhanced, button differentiation, social icons upgraded
 - 📱 **PWA PROMPTS REMOVED (Aug 2025)**: Disabled install prompts - website only, not an app
 - 📦 **DEPLOYMENT READY**: GitHub repository configured (bembeautypro/NIVELA), Vercel config optimized, build ready for production
+- 🎯 **VERCEL DEPLOY GUIDE**: Step-by-step guide created for nivela.bembeauty.com.br domain setup
 
 # User Preferences
 
