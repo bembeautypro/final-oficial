@@ -15,25 +15,13 @@
 
 ## 📋 PASSO A PASSO PARA DEPLOY
 
-### 1. **Configurar Novo Repositório GitHub**
+### 1. **Repositório GitHub Configurado**
 
-**IMPORTANTE**: Use a conta GitHub conectada nas configurações do Replit.
+✅ **Repositório**: https://github.com/bembeautypro/NIVELA.git
+✅ **Conectado**: Via configurações do Replit (bembeautypro)
+✅ **Status**: Pronto para receber o código
 
-#### Passo a Passo:
-1. **Vá para [github.com](https://github.com)** (conta conectada no Replit)
-2. **Clique em "New Repository"**
-3. **Configure**:
-   - Repository name: `nivela-landing-page-oficial`
-   - Description: `🚀 NIVELA® Landing Page - Production Ready | Premium beauty tech website`
-   - Visibility: Public
-   - ✅ Add README file
-   - ✅ Add .gitignore (Node)
-
-4. **Após criar, copie a URL do novo repositório**
-
-#### Conectar com Replit:
-- Use a funcionalidade "Import from GitHub" do Replit
-- Ou configure o push manual com a nova URL
+O repositório está conectado com a conta correta via Replit settings.
 
 ### 2. **Deploy na Vercel**
 
@@ -41,7 +29,7 @@
 1. Acesse [vercel.com](https://vercel.com)
 2. Clique em "New Project"
 3. Conecte sua conta GitHub
-4. Selecione o repositório `nivela-landing-page-oficial` (ou o nome que você escolheu)
+4. Selecione o repositório `bembeautypro/NIVELA`
 5. Configure:
    - **Framework Preset**: Vite
    - **Root Directory**: `client` (pasta client)
