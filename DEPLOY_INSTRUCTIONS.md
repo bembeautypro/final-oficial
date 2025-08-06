@@ -23,18 +23,29 @@
 
 O repositório está conectado com a conta correta via Replit settings.
 
-### 2. **Deploy na Vercel**
+### 2. **Deploy na Vercel com Domínio Personalizado**
 
-#### Opção A: Via GitHub (Recomendado)
+#### Passo 1: Deploy Inicial
 1. Acesse [vercel.com](https://vercel.com)
 2. Clique em "New Project"
 3. Conecte sua conta GitHub
 4. Selecione o repositório `bembeautypro/NIVELA`
-5. Configure:
-   - **Framework Preset**: Vite
-   - **Root Directory**: `client` (pasta client)
-   - **Build Command**: `npm run build` (auto-detectado)
-   - **Output Directory**: `dist/public` (auto-detectado)
+5. Configure automaticamente (vercel.json já configurado):
+   - **Framework**: Vite (detectado)
+   - **Build Command**: `cd client && npm run build`
+   - **Output Directory**: `client/dist/public`
+6. Clique em **"Deploy"**
+
+#### Passo 2: Configurar Domínio
+1. Após deploy bem-sucedido, vá em **"Settings"** → **"Domains"**
+2. Adicione: `nivela.bembeauty.com.br`
+3. Configure DNS no seu provedor:
+   ```
+   Type: CNAME
+   Name: nivela
+   Value: cname.vercel-dns.com
+   ```
+4. SSL será configurado automaticamente
 
 #### Opção B: Via CLI
 ```bash
@@ -66,14 +77,26 @@ VITE_SITE_URL=https://nivela.bembeauty.com.br
 
 ### Build Settings (Vercel)
 ```
-Framework Preset: Vite (auto-detectado)
-Root Directory: client
-Build Command: npm run build (auto-detectado)
-Output Directory: dist/public (auto-detectado)
-Install Command: npm install (auto-detectado)
+Framework Preset: Vite
+Build Command: cd client && npm run build
+Output Directory: client/dist/public
+Install Command: npm install
+Root Directory: . (raiz do projeto)
 ```
 
-**Nota**: Arquivo `vercel.json` foi removido para evitar conflitos. A Vercel detectará automaticamente as configurações corretas para projetos Vite.
+### Configuração DNS para nivela.bembeauty.com.br
+```
+CNAME Record:
+Name: nivela
+Value: cname.vercel-dns.com
+TTL: 300 (ou automático)
+```
+
+**Configuração**: Arquivo `vercel.json` otimizado com:
+- Build command específico para estrutura client/server
+- Headers de segurança (XSS, CSRF, Content-Type)
+- Cache otimizado para assets (1 ano)
+- SPA routing configurado
 
 ---
 
