@@ -15,26 +15,25 @@
 
 ## 📋 PASSO A PASSO PARA DEPLOY
 
-### 1. **Configurar Repositório GitHub**
+### 1. **Configurar Novo Repositório GitHub**
 
-```bash
-# No terminal, dentro da pasta do projeto:
-git init
-git add .
-git commit -m "🚀 NIVELA® Landing Page - Production Ready
+**IMPORTANTE**: Use a conta GitHub conectada nas configurações do Replit.
 
-✨ Premium landing page with mobile-first design
-⚡ Performance optimized (643KB bundle)
-📱 Touch-friendly UX with 44px+ targets
-🎨 Brand-consistent design system
-📊 Analytics ready (GTM + GA4)
-🚀 Vercel deployment configured"
+#### Passo a Passo:
+1. **Vá para [github.com](https://github.com)** (conta conectada no Replit)
+2. **Clique em "New Repository"**
+3. **Configure**:
+   - Repository name: `nivela-landing-page-oficial`
+   - Description: `🚀 NIVELA® Landing Page - Production Ready | Premium beauty tech website`
+   - Visibility: Public
+   - ✅ Add README file
+   - ✅ Add .gitignore (Node)
 
-# O repositório GitHub já está conectado diretamente via Replit:
-# https://github.com/PaoloAmendola/landingpage-nivela-oficial-replit.git
-git branch -M main
-git push -u origin main
-```
+4. **Após criar, copie a URL do novo repositório**
+
+#### Conectar com Replit:
+- Use a funcionalidade "Import from GitHub" do Replit
+- Ou configure o push manual com a nova URL
 
 ### 2. **Deploy na Vercel**
 
@@ -42,7 +41,7 @@ git push -u origin main
 1. Acesse [vercel.com](https://vercel.com)
 2. Clique em "New Project"
 3. Conecte sua conta GitHub
-4. Selecione o repositório `landingpage-nivela-oficial-replit`
+4. Selecione o repositório `nivela-landing-page-oficial` (ou o nome que você escolheu)
 5. Configure:
    - **Framework Preset**: Vite
    - **Root Directory**: `client` (pasta client)
