@@ -70,10 +70,13 @@ Na Vercel Dashboard:
 
 ### Variáveis de Ambiente (Vercel)
 ```
+DATABASE_URL=postgresql://[user]:[password]@[host]:[port]/[database]
 VITE_GTM_ID=GTM-KZW3RTWD
 VITE_GA_ID=G-SC9C7W6Q4F
 VITE_SITE_URL=https://nivela.bembeauty.com.br
 ```
+
+**Importante**: DATABASE_URL deve ser a connection string do seu projeto Supabase.
 
 ### Build Settings (Vercel)
 ```

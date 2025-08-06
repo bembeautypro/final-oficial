@@ -29,12 +29,18 @@ A Vercel detectará automaticamente via `vercel.json`:
 
 ### 5. **Configurar Domínio Personalizado**
 
-#### Após deploy bem-sucedido:
-1. Vá em **"Settings"** (na dashboard do projeto)
-2. Clique em **"Domains"** (menu lateral)
-3. Clique em **"Add"**
-4. Digite: `nivela.bembeauty.com.br`
-5. Clique em **"Add"**
+#### Configurar Variáveis de Ambiente (PRIMEIRO):
+1. Vá em **"Settings"** → **"Environment Variables"**
+2. Adicione sua connection string do Supabase:
+```
+DATABASE_URL = postgresql://[user]:[password]@[host]:[port]/[database]
+```
+
+#### Configurar Domínio:
+1. Ainda em **"Settings"**, clique em **"Domains"**
+2. Clique em **"Add"**
+3. Digite: `nivela.bembeauty.com.br`
+4. Clique em **"Add"**
 
 #### Configuração DNS (no seu provedor de domínio):
 ```
@@ -44,18 +50,20 @@ Value: cname.vercel-dns.com
 TTL: 300 (ou deixar automático)
 ```
 
-### 6. **Variáveis de Ambiente**
-1. Ainda em **"Settings"**, clique em **"Environment Variables"**
-2. Adicione estas variáveis:
+### 6. **Variáveis de Ambiente Completas**
+
+Adicione TODAS estas variáveis em **"Environment Variables"**:
 
 ```
+DATABASE_URL = postgresql://[user]:[password]@[host]:[port]/[database]
 VITE_GTM_ID = GTM-KZW3RTWD
 VITE_GA_ID = G-SC9C7W6Q4F
 VITE_SITE_URL = https://nivela.bembeauty.com.br
 ```
 
-3. Clique em **"Add"** para cada uma
-4. **"Redeploy"** para aplicar as variáveis
+**IMPORTANTE**: Substitua DATABASE_URL pela connection string do seu Supabase.
+
+Clique em **"Redeploy"** após adicionar todas as variáveis.
 
 ## ✅ RESULTADO FINAL
 

@@ -12,16 +12,28 @@ Landing page premium para **NIVELA®** da Bem Beauty Professional - produto revo
 - **Textura Gel Inteligente**: 30% mais rendimento
 - **Design Responsivo**: Mobile-first, otimizado para conversão
 
+## 🗄️ Configuração do Banco de Dados
+
+Este projeto usa **Supabase** como banco de dados PostgreSQL.
+
+### Setup Inicial:
+1. Crie projeto no [supabase.com](https://supabase.com)
+2. Copie connection string (Transaction pooler)
+3. Execute SQL de criação das tabelas (ver `SUPABASE_SETUP.md`)
+4. Configure variável `DATABASE_URL`
+
 ## 🚀 Deploy em Produção
 
 ### Vercel (Recomendado)
 ```bash
-# 1. Repositório conectado via Replit
-# GitHub: https://github.com/bembeautypro/NIVELA.git
-
-# 2. Deploy direto na Vercel (conectar GitHub repo)
-# Ou via CLI: vercel --prod
+# 1. Repositório: https://github.com/bembeautypro/NIVELA.git
+# 2. Configurar Supabase (ver SUPABASE_SETUP.md)
+# 3. Deploy na Vercel com variáveis de ambiente
 ```
+
+**Arquivos de Configuração:**
+- `SUPABASE_SETUP.md` - Setup completo do banco
+- `VERCEL_DEPLOY_GUIDE.md` - Deploy passo a passo
 
 ### Manual Build
 ```bash

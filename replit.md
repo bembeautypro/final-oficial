@@ -36,8 +36,8 @@ Preferred communication style: Simple, everyday language.
 - **Development**: Hot module replacement with Vite integration
 
 ## Data Storage Solutions
-- **Primary Database**: PostgreSQL via Neon Database service
-- **Schema Management**: Drizzle migrations with schema definitions in shared directory
+- **Primary Database**: PostgreSQL via Supabase (migrated from Neon)
+- **Schema Management**: Drizzle ORM with manual schema setup in Supabase
 - **Tables**: 
   - `leads_nivela` for lead capture with UTM tracking
   - `distribuidores` for distributor applications
@@ -66,8 +66,8 @@ Preferred communication style: Simple, everyday language.
 # External Dependencies
 
 ## Database Services
-- **Neon Database**: PostgreSQL hosting via `@neondatabase/serverless`
-- **Connection Pooling**: WebSocket-based connections for serverless compatibility
+- **Supabase**: PostgreSQL hosting with dashboard and real-time capabilities
+- **Connection Pooling**: Transaction pooler for serverless compatibility
 
 ## UI and Design
 - **Radix UI**: Accessible component primitives
