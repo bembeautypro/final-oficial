@@ -16,12 +16,11 @@ Landing page premium para **NIVELA®** da Bem Beauty Professional - produto revo
 
 ### Vercel (Recomendado)
 ```bash
-# 1. Clone o repositório
-git clone https://github.com/PaoloAmendola/landingpage-nivela-oficial-replit.git
-cd landingpage-nivela-oficial-replit
+# 1. Repositório já conectado via Replit
+# GitHub: https://github.com/PaoloAmendola/landingpage-nivela-oficial-replit.git
 
-# 2. Deploy direto na Vercel
-vercel --prod
+# 2. Deploy direto na Vercel (conectar GitHub repo)
+# Ou via CLI: vercel --prod
 ```
 
 ### Manual Build

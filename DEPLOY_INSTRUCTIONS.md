@@ -30,8 +30,8 @@ git commit -m "🚀 NIVELA® Landing Page - Production Ready
 📊 Analytics ready (GTM + GA4)
 🚀 Vercel deployment configured"
 
-# Conectar ao repositório GitHub que você criou:
-git remote add origin https://github.com/PaoloAmendola/landingpage-nivela-oficial-replit.git
+# O repositório GitHub já está conectado diretamente via Replit:
+# https://github.com/PaoloAmendola/landingpage-nivela-oficial-replit.git
 git branch -M main
 git push -u origin main
 ```
