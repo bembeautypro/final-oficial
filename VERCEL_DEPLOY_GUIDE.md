@@ -8,8 +8,8 @@ O projeto fullstack (frontend + backend Express) não estava configurado correta
 ### **1. vercel.json Corrigido (Frontend Only):**
 ```json
 {
-  "buildCommand": "vite build",
-  "outputDirectory": "dist",
+  "buildCommand": "npm run build:frontend",
+  "outputDirectory": "dist/public",
   "installCommand": "npm install"
 }
 ```
