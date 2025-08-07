@@ -1,5 +1,4 @@
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { db } from "./db";
 import { 
   leadsNivela, 
   distribuidores, 
@@ -15,10 +14,6 @@ import {
   type InsertAnalyticsEvent
 } from "@shared/schema";
 import { eq } from "drizzle-orm";
-
-const connectionString = process.env.DATABASE_URL!;
-const client = postgres(connectionString);
-const db = drizzle(client);
 
 export interface IStorage {
   // Lead NIVELA operations
