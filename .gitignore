@@ -7,11 +7,11 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # Build outputs
-dist
 dist-ssr
 *.local
 .output
 .vercel
+# NOTE: dist/ pasta necessária para deploy Vercel
 
 # Environment variables
 .env
@@ -74,8 +74,8 @@ jspm_packages/
 .yarn-integrity
 
 # parcel-bundler cache
-.cache
 .parcel-cache
+# NOTE: .cache pode ser necessário para alguns builds
 
 # next.js build output
 .next
