@@ -1,24 +1,39 @@
-import { Pool } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import ws from "ws";
+import { createClient } from '@supabase/supabase-js';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import * as schema from "@shared/schema";
 
-// Configuração para Supabase
-const DATABASE_URL = process.env.DATABASE_URL || "postgres://postgres:Ninaflor1403@@db.fdyzlqovxvdpkzlwuhjj.supabase.co:6543/postgres";
+// Verificar credenciais Supabase
+const supabaseApiUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Please add your Supabase connection string.",
-  );
+if (!supabaseApiUrl || !supabaseServiceKey) {
+  console.error("Missing Supabase credentials:", { 
+    hasUrl: !!supabaseApiUrl, 
+    hasKey: !!supabaseServiceKey 
+  });
+  throw new Error("NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set.");
 }
 
-// Configuração específica para Supabase
-export const pool = new Pool({ 
-  connectionString: DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-  max: 10,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 10000,
+// Cliente Supabase
+export const supabase = createClient(supabaseApiUrl, supabaseServiceKey, {
+  auth: {
+    autoRefreshToken: false,
+    persistSession: false
+  }
 });
 
-export const db = drizzle({ client: pool, schema });
+// URL PostgreSQL do Supabase fornecida pelo usuário
+const supabaseDatabaseUrl = "postgresql://postgres.fdyzlqovxvdpkzlwuhjj:Ninaflor1403@@aws-1-sa-east-1.pooler.supabase.com:6543/postgres";
+
+console.log("Connecting to Supabase pooler");
+
+const client = postgres(supabaseDatabaseUrl, {
+  ssl: { rejectUnauthorized: false },
+  max: 10,
+  idle_timeout: 30,
+  connect_timeout: 10,
+  prepare: false,
+});
+
+export const db = drizzle(client, { schema });

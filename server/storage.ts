@@ -1,4 +1,4 @@
-import { db } from "./db";
+import { db, supabase } from "./db";
 import { 
   leadsNivela, 
   distribuidores, 
@@ -33,18 +33,31 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   async createLeadNivela(leadData: InsertLeadNivela & { userAgent?: string; ipAddress?: string }): Promise<LeadNivela> {
-    const [lead] = await db.insert(leadsNivela).values({
-      nome: leadData.nome,
-      email: leadData.email,
-      telefone: leadData.telefone,
-      tipoEstabelecimento: leadData.tipoEstabelecimento,
-      utmSource: leadData.utmSource,
-      utmMedium: leadData.utmMedium,
-      utmCampaign: leadData.utmCampaign,
-      userAgent: leadData.userAgent,
-      ipAddress: leadData.ipAddress,
-    }).returning();
-    return lead;
+    try {
+      console.log("Inserting lead via Supabase:", leadData);
+      
+      // Usar cliente Supabase que está funcionando
+      const { data, error } = await supabase
+        .from('leads_nivela')
+        .insert({
+          nome: leadData.nome,
+          email: leadData.email,
+          telefone: leadData.telefone,
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error("Supabase error:", error);
+        throw error;
+      }
+
+      console.log("Lead created via Supabase:", data.id);
+      return data as LeadNivela;
+    } catch (error) {
+      console.error("Database error creating lead:", error);
+      throw error;
+    }
   }
 
   async getLeadsByEmail(email: string): Promise<LeadNivela[]> {
@@ -52,8 +65,26 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createDistribuidor(distribuidorData: InsertDistribuidor): Promise<Distribuidor> {
-    const [distribuidor] = await db.insert(distribuidores).values(distribuidorData).returning();
-    return distribuidor;
+    try {
+      console.log("Inserting distribuidor via Supabase:", distribuidorData);
+      
+      const { data, error } = await supabase
+        .from('distribuidores')
+        .insert(distribuidorData)
+        .select()
+        .single();
+
+      if (error) {
+        console.error("Supabase error:", error);
+        throw error;
+      }
+
+      console.log("Distribuidor created via Supabase:", data.id);
+      return data as Distribuidor;
+    } catch (error) {
+      console.error("Database error creating distribuidor:", error);
+      throw error;
+    }
   }
 
   async getDistribuidores(): Promise<Distribuidor[]> {
