@@ -5,27 +5,19 @@ O projeto fullstack (frontend + backend Express) não estava configurado correta
 
 ## ✅ **CORREÇÕES APLICADAS**
 
-### **1. vercel.json Corrigido:**
+### **1. vercel.json Corrigido (Frontend Only):**
 ```json
 {
+  "rootDirectory": "client",
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/public",        // Frontend build output
-  "functions": {
-    "dist/index.js": {                      // Backend compiled
-      "runtime": "nodejs18.x"
-    }
-  },
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/dist/index.js" },
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
-  ]
+  "outputDirectory": "dist"
 }
 ```
 
-### **2. Build Process:**
+### **2. Build Process (Frontend Only):**
 ```bash
-# Frontend: vite build → dist/public/
-# Backend: esbuild server/index.ts → dist/index.js
+# Frontend: vite build → client/dist/
+# Backend: Runs separately (development only)
 ```
 
 ## 🔧 **CONFIGURAÇÃO VERCEL**
