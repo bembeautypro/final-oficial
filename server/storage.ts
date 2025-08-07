@@ -70,7 +70,16 @@ export class DatabaseStorage implements IStorage {
       
       const { data, error } = await supabase
         .from('distribuidores')
-        .insert(distribuidorData)
+        .insert({
+          nome: distribuidorData.nome,
+          email: distribuidorData.email,
+          telefone: distribuidorData.telefone,
+          empresa: distribuidorData.empresa,
+          mensagem: distribuidorData.mensagem,
+          cidade: distribuidorData.cidade,
+          estado: distribuidorData.estado,
+          experiencia_distribuicao: distribuidorData.experienciaDistribuicao
+        })
         .select()
         .single();
 

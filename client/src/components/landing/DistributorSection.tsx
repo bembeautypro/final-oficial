@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 // Removed Supabase import - using placeholder
 import { toast } from "sonner";
@@ -30,10 +31,41 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
     telefone: "",
     email: "",
     cidade: "",
+    estado: "",
     ja_distribui: "",
     empresa: "",
     apresentacao: ""
   });
+
+  // Lista de cidades principais do Brasil com estados
+  const cidadesBrasil = [
+    { nome: "São Paulo", estado: "SP" },
+    { nome: "Rio de Janeiro", estado: "RJ" },
+    { nome: "Belo Horizonte", estado: "MG" },
+    { nome: "Brasília", estado: "DF" },
+    { nome: "Salvador", estado: "BA" },
+    { nome: "Fortaleza", estado: "CE" },
+    { nome: "Recife", estado: "PE" },
+    { nome: "Porto Alegre", estado: "RS" },
+    { nome: "Curitiba", estado: "PR" },
+    { nome: "Goiânia", estado: "GO" },
+    { nome: "Belém", estado: "PA" },
+    { nome: "Manaus", estado: "AM" },
+    { nome: "Campo Grande", estado: "MS" },
+    { nome: "Vitória", estado: "ES" },
+    { nome: "Natal", estado: "RN" },
+    { nome: "João Pessoa", estado: "PB" },
+    { nome: "Aracaju", estado: "SE" },
+    { nome: "Maceió", estado: "AL" },
+    { nome: "Teresina", estado: "PI" },
+    { nome: "São Luís", estado: "MA" },
+    { nome: "Palmas", estado: "TO" },
+    { nome: "Macapá", estado: "AP" },
+    { nome: "Rio Branco", estado: "AC" },
+    { nome: "Boa Vista", estado: "RR" },
+    { nome: "Cuiabá", estado: "MT" },
+    { nome: "Florianópolis", estado: "SC" }
+  ];
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -53,9 +85,10 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
           email: formData.email.trim().toLowerCase(),
           telefone: formData.telefone,
           empresa: formData.empresa.trim(),
-          experienciaDistribuicao: formData.ja_distribui,
+          experiencia_distribuicao: formData.ja_distribui,
           mensagem: formData.apresentacao.trim(),
-          cidade: formData.cidade.trim()
+          cidade: formData.cidade,
+          estado: formData.estado
         }),
       });
 
@@ -93,6 +126,17 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
       ...formData,
       ja_distribui: value
     });
+  };
+
+  const handleCidadeChange = (cidadeCompleta: string) => {
+    const cidadeSelecionada = cidadesBrasil.find(c => `${c.nome} - ${c.estado}` === cidadeCompleta);
+    if (cidadeSelecionada) {
+      setFormData({
+        ...formData,
+        cidade: cidadeSelecionada.nome,
+        estado: cidadeSelecionada.estado
+      });
+    }
   };
 
   if (isSubmitted) {
@@ -277,17 +321,25 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
                     </div>
                     <div>
                       <label htmlFor="dist-city" className="sr-only">Cidade</label>
-                      <Input
-                        id="dist-city"
-                        name="cidade"
-                        placeholder="Cidade *"
-                        value={formData.cidade}
-                        onChange={handleInputChange}
+                      <Select 
+                        onValueChange={handleCidadeChange}
                         required
-                        aria-label="Cidade"
-                        className="bg-background/50 h-10 md:h-11 text-sm md:text-base"
                         disabled={isLoading}
-                      />
+                      >
+                        <SelectTrigger className="bg-background/50 h-10 md:h-11 text-sm md:text-base">
+                          <SelectValue placeholder="Cidade *" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {cidadesBrasil.map((cidade) => (
+                            <SelectItem 
+                              key={`${cidade.nome}-${cidade.estado}`} 
+                              value={`${cidade.nome} - ${cidade.estado}`}
+                            >
+                              {cidade.nome} - {cidade.estado}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
 
