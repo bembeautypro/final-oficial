@@ -57,7 +57,7 @@ const Index = memo(() => {
       'retexturizador', 'hidro nutritivo', 'textura gel'
     ],
     canonical: 'https://nivela.bembeauty.com.br/',
-    ogImage: 'https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero.webp',
+    ogImage: 'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero%20(1).webp',
     ogType: 'website',
     locale: 'pt_BR',
     alternateLocales: ['en_US', 'es_ES'],
@@ -66,14 +66,14 @@ const Index = memo(() => {
         name: 'NIVELA® - Retexturizador Hidro Nutritivo 1kg',
         description: 'Produto revolucionário com tecnologia ASTRO QUAT V3® e ingredientes da Amazônia. Escova progressiva sem formol com textura gel inovadora.',
         brand: 'Bem Beauty Professional',
-        image: 'https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero.webp',
+        image: 'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero%20(1).webp',
         url: 'https://nivela.bembeauty.com.br/',
         availability: 'PreOrder'
       }),
       generateOrganizationSchema({
         name: 'Bem Beauty Professional',
         url: 'https://nivela.bembeauty.com.br/',
-        logo: 'https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/logo-bembeauty-transparente.png'
+        logo: 'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/logo-bembeauty-transparente.png'
       })
     ]
   });
@@ -100,8 +100,8 @@ const Index = memo(() => {
     
     // Start preloading critical resources
     preloadOptimized([
-      'https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero%20(1).webp',
-      'https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp'
+      'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero%20(1).webp',
+      'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp'
     ]);
     
     // Complete optimization after initial render
