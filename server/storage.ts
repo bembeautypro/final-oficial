@@ -101,21 +101,59 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createPerformanceMetric(metricData: InsertPerformanceMetric): Promise<PerformanceMetric> {
-    const [metric] = await db.insert(performanceMetrics).values(metricData).returning();
-    return metric;
+    try {
+      console.log("Inserting performance metric via Supabase:", metricData);
+      
+      const { data, error } = await supabase
+        .from('performance_metrics')
+        .insert({
+          metric_name: metricData.metricName,
+          metric_value: metricData.metricValue,
+          user_agent: metricData.userAgent,
+          page_url: metricData.pageUrl
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error("Supabase error creating metric:", error);
+        throw error;
+      }
+
+      console.log("Performance metric created via Supabase:", data.id);
+      return data as PerformanceMetric;
+    } catch (error) {
+      console.error("Database error creating performance metric:", error);
+      throw error;
+    }
   }
 
   async createAnalyticsEvent(eventData: InsertAnalyticsEvent & { userAgent?: string; ipAddress?: string }): Promise<AnalyticsEvent> {
-    const [event] = await db.insert(analyticsEvents).values({
-      eventName: eventData.eventName,
-      eventData: eventData.eventData,
-      userId: eventData.userId,
-      sessionId: eventData.sessionId,
-      pageUrl: eventData.pageUrl,
-      userAgent: eventData.userAgent,
-      ipAddress: eventData.ipAddress,
-    }).returning();
-    return event;
+    try {
+      console.log("Inserting analytics event via Supabase:", eventData);
+      
+      const { data, error } = await supabase
+        .from('analytics_events')
+        .insert({
+          event_name: eventData.eventName,
+          session_id: eventData.sessionId,
+          page_url: eventData.pageUrl,
+          user_agent: eventData.userAgent
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error("Supabase error creating analytics event:", error);
+        throw error;
+      }
+
+      console.log("Analytics event created via Supabase:", data.id);
+      return data as AnalyticsEvent;
+    } catch (error) {
+      console.error("Database error creating analytics event:", error);
+      throw error;
+    }
   }
 }
 
