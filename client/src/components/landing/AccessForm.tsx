@@ -4,8 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 import { LoadingState } from "@/components/ui/loading-state";
-// Removed Supabase import - using placeholder
+import { createClient } from '@supabase/supabase-js';
 import { toast } from "sonner";
+
+// Initialize Supabase client
+const supabase = createClient(
+  import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_URL || '',
+  import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+);
 
 interface AccessFormProps {
   id?: string;
@@ -85,26 +91,23 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
       // Capture tracking data
       const utmParams = new URLSearchParams(window.location.search);
       
-      // Send data to server API
-      const response = await fetch('/api/leads', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      // Send data directly to Supabase
+      const { error } = await supabase
+        .from('leads_nivela')
+        .insert({
           nome: formData.nome.trim(),
           email: formData.email.trim().toLowerCase(),
           telefone: formData.telefone,
-          tipoEstabelecimento: formData.tipo_estabelecimento,
-          utmSource: utmParams.get('utm_source') || 'access_form',
-          utmMedium: utmParams.get('utm_medium') || 'form',
-          utmCampaign: utmParams.get('utm_campaign') || 'acesso_exclusivo'
-        }),
-      });
+          tipo_estabelecimento: formData.tipo_estabelecimento,
+          utm_source: utmParams.get('utm_source') || 'access_form',
+          utm_medium: utmParams.get('utm_medium') || 'form',
+          utm_campaign: utmParams.get('utm_campaign') || 'acesso_exclusivo',
+          user_agent: navigator.userAgent,
+          ip_address: '0.0.0.0' // Client-side can't get real IP
+        });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Erro ao enviar dados');
+      if (error) {
+        throw new Error(error.message || 'Erro ao salvar dados');
       }
       
       setIsSubmitted(true);

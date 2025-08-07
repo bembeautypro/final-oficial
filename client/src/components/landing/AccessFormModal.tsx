@@ -5,7 +5,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 import { LoadingState } from "@/components/ui/loading-state";
+import { createClient } from '@supabase/supabase-js';
 import { toast } from "sonner";
+
+// Initialize Supabase client
+const supabase = createClient(
+  import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_URL || '',
+  import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+);
 
 interface AccessFormModalProps {
   isOpen: boolean;
@@ -97,26 +104,23 @@ const AccessFormModal = memo(({ isOpen, onClose }: AccessFormModalProps) => {
         user_agent: navigator.userAgent
       };
 
-      // Enviar para API do servidor
-      const response = await fetch('/api/leads', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      // Send data directly to Supabase
+      const { error } = await supabase
+        .from('leads_nivela')
+        .insert({
           nome: leadData.nome,
           email: leadData.email,
           telefone: leadData.telefone,
-          tipoEstabelecimento: leadData.tipo_estabelecimento,
-          utmSource: leadData.utm_source,
-          utmMedium: leadData.utm_medium,
-          utmCampaign: leadData.utm_campaign
-        }),
-      });
+          tipo_estabelecimento: leadData.tipo_estabelecimento,
+          utm_source: leadData.utm_source,
+          utm_medium: leadData.utm_medium,
+          utm_campaign: leadData.utm_campaign,
+          user_agent: navigator.userAgent,
+          ip_address: '0.0.0.0' // Client-side can't get real IP
+        });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Erro ao enviar dados');
+      if (error) {
+        throw new Error(error.message || 'Erro ao salvar dados');
       }
       
       setIsSubmitted(true);

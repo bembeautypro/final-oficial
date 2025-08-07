@@ -10,8 +10,14 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-// Removed Supabase import - using placeholder
+import { createClient } from '@supabase/supabase-js';
 import { toast } from "sonner";
+
+// Initialize Supabase client
+const supabase = createClient(
+  import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_URL || '',
+  import.meta.env.VITE_NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+);
 import { 
   Store, 
   TrendingUp, 
@@ -74,13 +80,10 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
     setIsLoading(true);
     
     try {
-      // Send data to server API
-      const response = await fetch('/api/distribuidores', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      // Send data directly to Supabase
+      const { error } = await supabase
+        .from('distribuidores')
+        .insert({
           nome: formData.nome.trim(),
           email: formData.email.trim().toLowerCase(),
           telefone: formData.telefone,
@@ -89,12 +92,10 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
           mensagem: formData.apresentacao.trim(),
           cidade: formData.cidade,
           estado: formData.estado
-        }),
-      });
+        });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Erro ao enviar dados');
+      if (error) {
+        throw new Error(error.message || 'Erro ao salvar dados');
       }
       
       setIsSubmitted(true);
