@@ -13,14 +13,16 @@
 5. Clique em **"Create new project"**
 6. Aguarde ~2 minutos para inicialização
 
-### 2. **Obter Connection String**
-1. No dashboard do projeto, clique em **"Connect"** (botão no topo)
-2. Vá em **"Connection string"** → **"Transaction pooler"**  
-3. Copie a URI:
-   ```
-   postgresql://postgres.xxx:[YOUR-PASSWORD]@aws-0-sa-east-1.pooler.supabase.com:6543/postgres
-   ```
-4. **Substitua `[YOUR-PASSWORD]`** pelo password do banco que você criou
+### 2. **Configuração DATABASE_URL**
+Use esta connection string do seu projeto Supabase:
+```
+postgres://postgres:Ninaflor1403@@db.fdyzlqovxvdpkzlwuhjj.supabase.co:6543/postgres
+```
+
+**Projeto configurado:**
+- Project URL: https://fdyzlqovxvdpkzlwuhjj.supabase.co
+- Database: PostgreSQL 15
+- Região: São Paulo (sa-east-1)
 
 ### 3. **Criar Tabelas**
 Execute este SQL no **SQL Editor** do Supabase:
