@@ -10,14 +10,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { createClient } from '@supabase/supabase-js';
 import { toast } from "sonner";
-
-// Initialize Supabase client
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://fdyzlqovxvdpkzlwuhjj.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZkeXpscW92eHZkcGt6bHd1aGpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1MjQwNzIsImV4cCI6MjA3MDEwMDA3Mn0.0itJku2mVxd8MIvk7lo7Y8gamram_QYCluzHbNUT88Y';
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 import { 
   Store, 
   TrendingUp, 
@@ -80,7 +73,12 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
     setIsLoading(true);
     
     try {
-      console.log('Enviando dados do distribuidor:', {
+      // Validação básica dos campos obrigatórios
+      if (!formData.nome?.trim() || !formData.telefone?.trim() || !formData.email?.trim() || !formData.cidade?.trim() || !formData.ja_distribui) {
+        throw new Error('Preencha todos os campos obrigatórios');
+      }
+
+      const dadosEnvio = {
         nome: formData.nome.trim(),
         email: formData.email.trim().toLowerCase(),
         telefone: formData.telefone.trim(),
@@ -89,24 +87,17 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
         estado: formData.estado.trim(),
         experiencia_distribuicao: formData.ja_distribui,
         mensagem: formData.apresentacao?.trim() || null
-      });
+      };
 
-      // Use the same API approach as leads
+      console.log('Enviando dados do distribuidor:', dadosEnvio);
+
+      // Use nossa API local em vez do Supabase direto
       const response = await fetch('/api/distribuidores', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          nome: formData.nome.trim(),
-          email: formData.email.trim().toLowerCase(),
-          telefone: formData.telefone.trim(),
-          empresa: formData.empresa?.trim() || null,
-          cidade: formData.cidade.trim(),
-          estado: formData.estado.trim(),
-          experiencia_distribuicao: formData.ja_distribui,
-          mensagem: formData.apresentacao?.trim() || null
-        })
+        body: JSON.stringify(dadosEnvio)
       });
 
       console.log('Response status:', response.status);
@@ -350,6 +341,7 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
                         onValueChange={handleCidadeChange}
                         required
                         disabled={isLoading}
+                        value={formData.cidade ? `${formData.cidade} - ${formData.estado}` : ""}
                       >
                         <SelectTrigger className="bg-background/50 h-10 md:h-11 text-sm md:text-base">
                           <SelectValue placeholder="Cidade *" />
@@ -378,6 +370,7 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
                       onValueChange={handleRadioChange}
                       className="flex flex-col xs:flex-row gap-3 xs:gap-6"
                       disabled={isLoading}
+                      required
                     >
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="sim" id="sim" />
