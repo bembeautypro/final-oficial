@@ -74,12 +74,19 @@ All colors MUST be HSL.
 
     --sidebar-background: 198 45% 12%;
     --sidebar-foreground: 30 33% 73%;
-    --sidebar-primary: 30 33% 73%;
-    --sidebar-primary-foreground: 198 52% 8%;
-    --sidebar-accent: 198 35% 20%;
-    --sidebar-accent-foreground: 30 33% 73%;
+    --sidebar-primary: 20 79% 35%;
+    --sidebar-primary-foreground: 30 33% 73%;
+    --sidebar-accent: 30 33% 73%;
+    --sidebar-accent-foreground: 198 52% 8%;
     --sidebar-border: 198 35% 20%;
     --sidebar-ring: 30 33% 73%;
+    
+    /* Enhanced Colors for Badges and CTAs */
+    --badge-premium: 20 79% 45%;         /* More intense caramel */
+    --badge-tech: 196 39% 35%;           /* More intense deep blue */
+    --badge-success: 142 76% 36%;        /* Intense green */
+    --cta-primary: 20 85% 40%;           /* High-intensity caramel */
+    --cta-secondary: 196 45% 30%;        /* High-intensity deep */
   }
 
   /* Light Theme */
@@ -87,6 +94,13 @@ All colors MUST be HSL.
     /* NIVELA® Brand Colors for Light Theme */
     --background: 0 0% 98%;               /* Brand Light */
     --foreground: 198 52% 8%;             /* Brand Black */
+    
+    /* Enhanced Light Theme Badge Colors */
+    --badge-premium: 20 85% 35%;          /* More vibrant for light theme */
+    --badge-tech: 196 50% 25%;            /* More vibrant deep blue */
+    --badge-success: 142 80% 30%;         /* More vibrant green */
+    --cta-primary: 20 90% 35%;            /* High-intensity for light */
+    --cta-secondary: 196 60% 25%;         /* High-intensity deep for light */
 
     --card: 0 0% 100%;
     --card-foreground: 198 52% 8%;
@@ -234,6 +248,57 @@ All colors MUST be HSL.
   .debug-panel {
     display: none !important;
     visibility: hidden !important;
+  }
+
+  /* Layout Fixes - Prevent overlapping and ensure proper spacing */
+  .section-container {
+    position: relative;
+    z-index: 1;
+    padding: 4rem 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .hero-section {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .content-section {
+    position: relative;
+    z-index: 20;
+    background: hsl(var(--background));
+    margin-top: 0;
+    padding-top: 2rem;
+  }
+
+  /* Fix badge positioning and intensity */
+  .badge-enhanced {
+    box-shadow: 0 4px 12px hsl(var(--brand-caramel) / 0.3);
+    border: 1px solid hsl(var(--brand-caramel) / 0.2);
+  }
+
+  /* Ensure proper container spacing */
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding: 0 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding: 0 3rem;
+    }
   }
 
   /* Improved mobile touch targets - Following iOS HIG and Material Design */

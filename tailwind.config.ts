@@ -2,7 +2,12 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./index.html", 
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./client/index.html", 
+    "./client/src/**/*.{js,jsx,ts,tsx}"
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -21,6 +26,13 @@ export default {
         'brand-cloud': 'hsl(var(--brand-cloud))',
         'brand-deep': 'hsl(var(--brand-deep))',
         'brand-light': 'hsl(var(--brand-light))',
+        
+        // Enhanced badge and CTA colors
+        'badge-premium': 'hsl(var(--badge-premium))',
+        'badge-tech': 'hsl(var(--badge-tech))',
+        'badge-success': 'hsl(var(--badge-success))',
+        'cta-primary': 'hsl(var(--cta-primary))',
+        'cta-secondary': 'hsl(var(--cta-secondary))',
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
