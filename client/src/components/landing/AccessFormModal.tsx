@@ -116,7 +116,9 @@ const AccessFormModal = memo(({ isOpen, onClose }: AccessFormModalProps) => {
           utm_medium: leadData.utm_medium,
           utm_campaign: leadData.utm_campaign,
           user_agent: navigator.userAgent,
-          ip_address: '0.0.0.0' // Client-side can't get real IP
+          ip_address: '0.0.0.0', // Client-side can't get real IP
+          status: 'pendente',
+          origem: 'landing_page'
         });
 
       if (error) {

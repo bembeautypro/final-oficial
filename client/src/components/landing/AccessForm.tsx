@@ -103,7 +103,9 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
           utm_medium: utmParams.get('utm_medium') || 'form',
           utm_campaign: utmParams.get('utm_campaign') || 'acesso_exclusivo',
           user_agent: navigator.userAgent,
-          ip_address: '0.0.0.0' // Client-side can't get real IP
+          ip_address: '0.0.0.0', // Client-side can't get real IP
+          status: 'pendente',
+          origem: 'landing_page'
         });
 
       if (error) {
