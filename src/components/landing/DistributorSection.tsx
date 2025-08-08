@@ -40,7 +40,11 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
     estado: "",
     ja_distribui: "",
     empresa: "",
-    apresentacao: ""
+    apresentacao: "",
+    cargo: "",
+    mensagem: "",
+    experiencia_distribuicao: "",
+    volume_vendas_mensal: ""
   });
 
   // Lista de cidades principais do Brasil com estados
