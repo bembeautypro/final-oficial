@@ -99,8 +99,8 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
           mensagem: formData.mensagem?.trim() || null,
           cidade: formData.cidade?.trim() || null,
           estado: formData.estado?.trim() || null,
-          experienciaDistribuicao: formData.experiencia_distribuicao?.trim() || null,
-          volumeVendasMensal: formData.volume_vendas_mensal?.trim() || null
+          experiencia_distribuicao: formData.experiencia_distribuicao?.trim() || null,
+          volume_vendas_mensal: formData.volume_vendas_mensal?.trim() || null
         })
       });
 
