@@ -68,20 +68,17 @@ export class DatabaseStorage implements IStorage {
     try {
       console.log("Inserting distribuidor via Supabase:", distribuidorData);
       
-      // Use Supabase for consistency with leads
+      // Simple Supabase insert with essential fields only
       const { data, error } = await supabase
         .from('distribuidores')
         .insert({
           nome: distribuidorData.nome,
           email: distribuidorData.email,
-          empresa: distribuidorData.empresa,
           telefone: distribuidorData.telefone || "Não informado",
+          empresa: distribuidorData.empresa || null,
           cidade: distribuidorData.cidade || "São Paulo",
           estado: distribuidorData.estado || "SP",
-          cargo: distribuidorData.cargo || null,
-          mensagem: distribuidorData.mensagem || null,
-          experiencia_distribuicao: distribuidorData.experiencia_distribuicao || null,
-          volume_vendas_mensal: distribuidorData.volume_vendas_mensal || null
+          mensagem: distribuidorData.mensagem || null
         })
         .select()
         .single();

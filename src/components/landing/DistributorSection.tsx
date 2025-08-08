@@ -40,11 +40,7 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
     estado: "",
     ja_distribui: "",
     empresa: "",
-    apresentacao: "",
-    cargo: "",
-    mensagem: "",
-    experiencia_distribuicao: "",
-    volume_vendas_mensal: ""
+    apresentacao: ""
   });
 
   // Lista de cidades principais do Brasil com estados
@@ -93,14 +89,12 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
         body: JSON.stringify({
           nome: formData.nome.trim(),
           email: formData.email.trim().toLowerCase(),
-          telefone: formData.telefone || null,
-          empresa: formData.empresa.trim(),
-          cargo: formData.cargo?.trim() || null,
-          mensagem: formData.mensagem?.trim() || null,
-          cidade: formData.cidade?.trim() || null,
-          estado: formData.estado?.trim() || null,
-          experiencia_distribuicao: formData.experiencia_distribuicao?.trim() || null,
-          volume_vendas_mensal: formData.volume_vendas_mensal?.trim() || null
+          telefone: formData.telefone.trim(),
+          empresa: formData.empresa?.trim() || null,
+          cidade: formData.cidade.trim(),
+          estado: formData.estado.trim(),
+          experiencia_distribuicao: formData.ja_distribui,
+          mensagem: formData.apresentacao?.trim() || null
         })
       });
 

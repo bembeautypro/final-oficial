@@ -53,7 +53,7 @@ export const distribuidores = pgTable("distribuidores", {
   nome: text("nome").notNull(),
   email: text("email").notNull(),
   telefone: text("telefone"),
-  empresa: text("empresa").notNull(),
+  empresa: text("empresa"),
   cargo: text("cargo"),
   mensagem: text("mensagem"),
   cidade: text("cidade"),
@@ -80,12 +80,14 @@ export const insertDistribuidorSchema = createInsertSchema(distribuidores).pick(
   email: true,
   telefone: true,
   empresa: true,
-  cargo: true,
   mensagem: true,
   cidade: true,
   estado: true,
   experiencia_distribuicao: true,
-  volume_vendas_mensal: true,
+}).partial({
+  empresa: true,
+  mensagem: true,
+  telefone: true
 });
 
 export const insertPerformanceMetricSchema = createInsertSchema(performanceMetrics).pick({
