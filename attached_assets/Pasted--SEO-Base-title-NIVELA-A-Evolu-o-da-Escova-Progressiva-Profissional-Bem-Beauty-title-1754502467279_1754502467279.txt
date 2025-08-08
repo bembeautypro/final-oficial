@@ -8,7 +8,7 @@
 <!-- Open Graph -->
 <meta property="og:title" content="NIVELA® - A Evolução da Escova Progressiva Profissional | Bem Beauty" />
 <meta property="og:description" content="Tecnologia ASTRO QUAT V3 com ativos da Amazônia. Segurança, rendimento e resultado impecável." />
-<meta property="og:image" content="https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero.webp" />
+<meta property="og:image" content="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero.webp" />
 <meta property="og:url" content="https://nivela.bembeauty.com.br/" />
 <meta property="og:type" content="website" />
 
@@ -16,13 +16,13 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="NIVELA® - A Evolução da Escova Progressiva Profissional | Bem Beauty" />
 <meta name="twitter:description" content="Sem formol, com ativos da Amazônia e tecnologia patenteada. Conheça a revolução capilar da Bem Beauty." />
-<meta name="twitter:image" content="https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero.webp" />
+<meta name="twitter:image" content="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero.webp" />
 
 <!-- Favicon e Manifest -->
-<link rel="icon" type="image/x-icon" href="https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/favicon/favicon.ico" />
-<link rel="apple-touch-icon" href="https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/favicon/apple-touch-icon.png" />
-<link rel="manifest" href="https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/favicon/site.webmanifest" />
-<link rel="icon" type="image/png" sizes="32x32" href="https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/favicon/favicon-32x32.png" />
+<link rel="icon" type="image/x-icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon.ico" />
+<link rel="apple-touch-icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/apple-touch-icon.png" />
+<link rel="manifest" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/site.webmanifest" />
+<link rel="icon" type="image/png" sizes="32x32" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon-32x32.png" />
 
 <!-- Google Tag Manager -->
 <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD"></script>
