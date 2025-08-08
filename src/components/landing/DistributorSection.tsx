@@ -80,6 +80,17 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
     setIsLoading(true);
     
     try {
+      console.log('Enviando dados do distribuidor:', {
+        nome: formData.nome.trim(),
+        email: formData.email.trim().toLowerCase(),
+        telefone: formData.telefone.trim(),
+        empresa: formData.empresa?.trim() || null,
+        cidade: formData.cidade.trim(),
+        estado: formData.estado.trim(),
+        experiencia_distribuicao: formData.ja_distribui,
+        mensagem: formData.apresentacao?.trim() || null
+      });
+
       // Use the same API approach as leads
       const response = await fetch('/api/distribuidores', {
         method: 'POST',
@@ -98,10 +109,16 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
         })
       });
 
+      console.log('Response status:', response.status);
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+        console.error('Erro na resposta:', errorData);
         throw new Error(errorData.error || 'Erro ao enviar solicitação');
       }
+
+      const responseData = await response.json();
+      console.log('Sucesso:', responseData);
       
       setIsSubmitted(true);
       toast.success('Solicitação enviada com sucesso!');
@@ -290,6 +307,7 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
                         aria-label="Nome completo"
                         className="bg-background/50 h-10 md:h-11 text-sm md:text-base"
                         disabled={isLoading}
+                        data-testid="input-nome"
                       />
                     </div>
                     <div>
@@ -305,6 +323,7 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
                         aria-label="Número do WhatsApp"
                         className="bg-background/50 h-10 md:h-11 text-sm md:text-base"
                         disabled={isLoading}
+                        data-testid="input-telefone"
                       />
                     </div>
                   </div>
@@ -406,6 +425,7 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
                     size="lg"
                     className="w-full font-bold h-12 md:h-14 text-sm md:text-base"
                     disabled={isLoading}
+                    data-testid="button-submit-distribuidor"
                   >
                     {isLoading ? (
                       <div className="flex items-center justify-center space-x-2 md:space-x-3">
