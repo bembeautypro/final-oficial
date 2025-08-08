@@ -113,12 +113,12 @@ const Header = memo(({ id }: HeaderProps) => {
               <div className="relative w-full flex justify-center lg:justify-end max-w-lg lg:max-w-none">
                 {/* Product Image */}
                 <PerformanceAwareImage 
-                  src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero%20(1).webp"
-                  alt="NIVELA® - Retexturizador hidro nutritivo de 1kg sendo apresentado por mãos profissionais"
-                  className="w-80 sm:w-96 md:w-[26rem] lg:w-[30rem] xl:w-[36rem] 2xl:w-[40rem] h-auto object-contain drop-shadow-2xl"
-                  width={640}
-                  height={640}
-                  sizes="(max-width: 640px) 320px, (max-width: 768px) 384px, (max-width: 1024px) 416px, (max-width: 1280px) 480px, 576px"
+                  src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-trans-comp.png"
+                  alt="NIVELA® - Retexturizador hidro nutritivo de 1kg com fundo transparente"
+                  className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
+                  width={800}
+                  height={800}
+                  sizes="(max-width: 640px) 288px, (max-width: 768px) 320px, (max-width: 1024px) 384px, (max-width: 1280px) 448px, 512px"
                   priority={true}
                   loading="eager"
                   placeholder="skeleton"

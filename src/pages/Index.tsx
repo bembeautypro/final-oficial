@@ -57,7 +57,7 @@ const Index = memo(() => {
       'retexturizador', 'hidro nutritivo', 'textura gel'
     ],
     canonical: 'https://nivela.bembeauty.com.br/',
-    ogImage: 'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero%20(1).webp',
+    ogImage: 'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-trans-comp.png',
     ogType: 'website',
     locale: 'pt_BR',
     alternateLocales: ['en_US', 'es_ES'],
@@ -66,7 +66,7 @@ const Index = memo(() => {
         name: 'NIVELA® - Retexturizador Hidro Nutritivo 1kg',
         description: 'Produto revolucionário com tecnologia ASTRO QUAT V3® e ingredientes da Amazônia. Escova progressiva sem formol com textura gel inovadora.',
         brand: 'Bem Beauty Professional',
-        image: 'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero%20(1).webp',
+        image: 'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-trans-comp.png',
         url: 'https://nivela.bembeauty.com.br/',
         availability: 'PreOrder'
       }),
@@ -100,7 +100,7 @@ const Index = memo(() => {
     
     // Start preloading critical resources
     preloadOptimized([
-      'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero%20(1).webp',
+      'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-trans-comp.png',
       'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp'
     ]);
     
