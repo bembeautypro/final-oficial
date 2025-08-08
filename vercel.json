@@ -1,5 +1,5 @@
 {
-  "buildCommand": "vite build",
-  "outputDirectory": "dist/public",
+  "buildCommand": "npx vite build --config vite.config.deploy.ts",
+  "outputDirectory": "dist",
   "installCommand": "npm install"
 }
