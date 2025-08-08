@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "preview": "npx serve dist -p 3000",
-    "build-preview": "npx vite build --config vite.config.deploy.ts && npx serve dist -p 3000"
+    "build:frontend": "vite build --config vite.config.deploy.ts",
+    "build:production": "vite build --config vite.config.deploy.ts && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
   }
 }
