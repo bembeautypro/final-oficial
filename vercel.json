@@ -1,15 +1,8 @@
 {
-  "version": 2,
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "functions": {
-    "api/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "builds": [
-    { "src": "vite.config.deploy.ts", "use": "@vercel/static-build" }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1.js" },
-    { "src": "/(.*)", "dest": "/" }
-  ]
+    "api/*.ts": { "runtime": "@vercel/node@3" }
+  }
 }
