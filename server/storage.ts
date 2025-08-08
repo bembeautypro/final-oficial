@@ -75,10 +75,12 @@ export class DatabaseStorage implements IStorage {
           email: distribuidorData.email,
           telefone: distribuidorData.telefone,
           empresa: distribuidorData.empresa,
+          cargo: distribuidorData.cargo,
           mensagem: distribuidorData.mensagem,
           cidade: distribuidorData.cidade,
           estado: distribuidorData.estado,
-          experiencia_distribuicao: distribuidorData.experienciaDistribuicao
+          experiencia_distribuicao: distribuidorData.experienciaDistribuicao,
+          volume_vendas_mensal: distribuidorData.volumeVendasMensal
         })
         .select()
         .single();

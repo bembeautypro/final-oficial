@@ -80,18 +80,29 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
     setIsLoading(true);
     
     try {
-      // Send data directly to Supabase
-      const { error } = await supabase
-        .from('distribuidores')
-        .insert({
+      // Use the same API approach as leads
+      const response = await fetch('/api/distribuidores', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           nome: formData.nome.trim(),
           email: formData.email.trim().toLowerCase(),
-          telefone: formData.telefone,
-          empresa: formData.empresa.trim() || 'Não informado'
-        });
+          telefone: formData.telefone || null,
+          empresa: formData.empresa.trim(),
+          cargo: formData.cargo?.trim() || null,
+          mensagem: formData.mensagem?.trim() || null,
+          cidade: formData.cidade?.trim() || null,
+          estado: formData.estado?.trim() || null,
+          experienciaDistribuicao: formData.experiencia_distribuicao?.trim() || null,
+          volumeVendasMensal: formData.volume_vendas_mensal?.trim() || null
+        })
+      });
 
-      if (error) {
-        throw new Error(error.message || 'Erro ao salvar dados');
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+        throw new Error(errorData.error || 'Erro ao enviar solicitação');
       }
       
       setIsSubmitted(true);
