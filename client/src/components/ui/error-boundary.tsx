@@ -101,7 +101,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
               </button>
             </div>
 
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+            {import.meta.env.DEV && this.state.error && (
               <details className="text-left mt-6 p-4 bg-muted rounded-lg">
                 <summary className="cursor-pointer font-medium mb-2">
                   Detalhes do Erro (Dev Mode)

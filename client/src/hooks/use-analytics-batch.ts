@@ -168,7 +168,7 @@ async function sendAnalyticsBatch(events: AnalyticsEvent[]) {
   }
 
   // Example implementation for custom analytics
-  if (process.env.NODE_ENV === 'production') {
+  if (import.meta.env.PROD) {
     try {
       await fetch('/api/analytics/batch', {
         method: 'POST',

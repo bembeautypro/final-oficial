@@ -46,7 +46,7 @@ export class EnhancedErrorBoundary extends Component<Props, State> {
     this.props.onError?.(error, errorInfo);
 
     // Report to external error tracking service in production
-    if (process.env.NODE_ENV === 'production') {
+    if (import.meta.env.PROD) {
       // Here you could integrate with services like Sentry, LogRocket, etc.
       this.reportError(error, errorInfo);
     }
@@ -145,7 +145,7 @@ export class EnhancedErrorBoundary extends Component<Props, State> {
               </Button>
             </div>
 
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+            {import.meta.env.DEV && this.state.error && (
               <details className="mt-4 p-4 bg-muted rounded-lg text-left text-xs">
                 <summary className="cursor-pointer font-medium">
                   Detalhes do erro (desenvolvimento)

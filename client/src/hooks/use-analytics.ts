@@ -49,7 +49,7 @@ const useAnalytics = () => {
     logger.info('Analytics: Page View', event);
     
     // In production, send to analytics service
-    if (process.env.NODE_ENV === 'production') {
+    if (import.meta.env.PROD) {
       // Integration with Google Analytics, Mixpanel, etc.
       if (typeof window.gtag !== 'undefined') {
         window.gtag('event', 'page_view', {
