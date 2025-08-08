@@ -94,7 +94,7 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
           nome: formData.nome.trim(),
           email: formData.email.trim().toLowerCase(),
           telefone: formData.telefone.trim(),
-          tipo_estabelecimento: formData.tipo_estabelecimento
+          tipoEstabelecimento: formData.tipo_estabelecimento
         })
       });
 

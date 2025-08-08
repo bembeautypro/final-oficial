@@ -108,7 +108,7 @@ const AccessFormModal = memo(({ isOpen, onClose }: AccessFormModalProps) => {
           nome: leadData.nome,
           email: leadData.email,
           telefone: leadData.telefone,
-          tipo_estabelecimento: leadData.tipo_estabelecimento
+          tipoEstabelecimento: leadData.tipo_estabelecimento
         })
       });
 
