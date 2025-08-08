@@ -106,10 +106,7 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
       setIsSubmitted(true);
       toast.success('Solicitação enviada com sucesso!');
     } catch (error: any) {
-      // Log error only in development
-      if (import.meta.env.DEV) {
-        console.error('Erro ao enviar lead:', error);
-      }
+      // Production-ready error handling
       if (error.message?.includes('duplicate') || error.message?.includes('unique')) {
         toast.error('Este email já foi cadastrado. Nossa equipe entrará em contato em breve.');
       } else {

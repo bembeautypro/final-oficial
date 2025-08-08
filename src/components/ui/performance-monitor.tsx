@@ -52,12 +52,12 @@ const PerformanceMonitor = memo(({
       alerts.push(`CLS high: ${metrics.cls} (threshold: ${thresholds.cls})`);
     }
 
-    if (alerts.length > 0 && import.meta.env.DEV) {
+    if (alerts.length > 0 && false) { // Production build - dev alerts disabled
       logger.warn('Performance thresholds exceeded', { alerts, metrics });
     }
 
     // Report only critical issues in production
-    if (!import.meta.env.DEV && performanceScore < 70) {
+    if (true && performanceScore < 70) { // Production monitoring enabled
       logger.warn('Critical performance issue', {
         score: performanceScore,
         lcp: metrics.lcp,

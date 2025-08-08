@@ -9,7 +9,7 @@ interface LogEntry {
 }
 
 class Logger {
-  private isDevelopment = import.meta.env.DEV;
+  private isDevelopment = false; // Production build
   private logs: LogEntry[] = [];
   private maxLogs = 100;
 
@@ -35,7 +35,7 @@ class Logger {
     this.addLog(entry);
     
     if (this.isDevelopment) {
-      console.log(`[INFO] ${message}`, data ? data : '');
+      // Production build - logging removed
     }
   }
 
@@ -44,7 +44,7 @@ class Logger {
     this.addLog(entry);
     
     if (this.isDevelopment) {
-      console.warn(`[WARN] ${message}`, data ? data : '');
+      // Production build - logging removed
     }
   }
 
@@ -54,7 +54,7 @@ class Logger {
     
     // Only log errors in development or for critical production errors
     if (this.isDevelopment || data?.critical) {
-      console.error(`[ERROR] ${message}`, data ? data : '');
+      // Production build - error logging removed
     }
   }
 
@@ -63,7 +63,7 @@ class Logger {
     this.addLog(entry);
     
     if (this.isDevelopment) {
-      console.debug(`[DEBUG] ${message}`, data ? data : '');
+      // Production build - debug logging removed
     }
   }
 

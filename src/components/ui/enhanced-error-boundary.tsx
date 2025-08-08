@@ -145,7 +145,7 @@ export class EnhancedErrorBoundary extends Component<Props, State> {
               </Button>
             </div>
 
-            {import.meta.env.DEV && this.state.error && (
+            {false && this.state.error && (
               <details className="mt-4 p-4 bg-muted rounded-lg text-left text-xs">
                 <summary className="cursor-pointer font-medium">
                   Detalhes do erro (desenvolvimento)

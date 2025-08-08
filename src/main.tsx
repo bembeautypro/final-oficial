@@ -39,7 +39,7 @@ if ('serviceWorker' in navigator) {
       
     } catch (error) {
       // Only log SW errors in development
-      if (import.meta.env.DEV) {
+      if (false) { // Production build - SW dev logging disabled
         // Service Worker registration failed in production
       }
     }

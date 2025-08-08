@@ -89,7 +89,7 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
         mensagem: formData.apresentacao?.trim() || null
       };
 
-      console.log('Enviando dados do distribuidor:', dadosEnvio);
+      // Production build - logging removed
 
       // Use nossa API local em vez do Supabase direto
       const response = await fetch('/api/distribuidores', {
@@ -100,24 +100,21 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
         body: JSON.stringify(dadosEnvio)
       });
 
-      console.log('Response status:', response.status);
+      // Production build - logging removed
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
-        console.error('Erro na resposta:', errorData);
+        // Production build - logging removed
         throw new Error(errorData.error || 'Erro ao enviar solicitação');
       }
 
       const responseData = await response.json();
-      console.log('Sucesso:', responseData);
+      // Production build - logging removed
       
       setIsSubmitted(true);
       toast.success('Solicitação enviada com sucesso!');
     } catch (error: any) {
-      // Log error only in development
-      if (import.meta.env.DEV) {
-        console.error('Erro ao enviar candidatura de distribuidor:', error);
-      }
+      // Production-ready error handling
       if (error.message?.includes('duplicate') || error.message?.includes('unique')) {
         toast.error('Este email já foi cadastrado. Nossa equipe entrará em contato em breve.');
       } else {
