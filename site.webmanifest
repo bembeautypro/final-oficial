@@ -1,0 +1,21 @@
+{
+  "name": "NIVELA® - Bem Beauty Professional",
+  "short_name": "NIVELA®",
+  "description": "A evolução da escova progressiva profissional com tecnologia ASTRO QUAT V3",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#9D4916",
+  "icons": [
+    {
+      "src": "https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

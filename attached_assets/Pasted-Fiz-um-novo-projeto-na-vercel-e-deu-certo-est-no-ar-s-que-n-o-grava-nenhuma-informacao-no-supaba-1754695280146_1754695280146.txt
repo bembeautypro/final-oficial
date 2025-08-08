@@ -1,0 +1,35 @@
+Fiz um novo projeto na vercel e deu certo, está no ar, só que nào grava nenhuma informacao no supabase, serre erros do console
+
+Manifest: Line: 1, column: 1, Syntax error.Understand this error
+nivela-2322.vercel.app/:1 <meta name="apple-mobile-web-app-capable" content="yes"> is deprecated. Please include <meta name="mobile-web-app-capable" content="yes">Understand this warning
+16The resource <URL> was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/jambu-amazonia.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/capsaicina-amazonia.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/andiroba-amazonia.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/jambu-amazonia.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/capsaicina-amazonia.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+nivela-2322.vercel.app/:1 The resource https://fsntuympgysgfgqdvzsp.supabase.co/storage/v1/object/public/imagens/andiroba-amazonia.webp was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate as value and it is preloaded intentionally.Understand this warning
+main-CgcIkj2E.js:162  POST https://nivela-2322.vercel.app/api/leads 405 (Method Not Allowed)
+u @ main-CgcIkj2E.js:162
+Pf @ vendor-1XCZ5AD1.js:29
+zf @ vendor-1XCZ5AD1.js:29
+Tf @ vendor-1XCZ5AD1.js:29
+ui @ vendor-1XCZ5AD1.js:29
+Ws @ vendor-1XCZ5AD1.js:29
+(anonymous) @ vendor-1XCZ5AD1.js:29
+Eo @ vendor-1XCZ5AD1.js:32
+ms @ vendor-1XCZ5AD1.js:29
+Rl @ vendor-1XCZ5AD1.js:29
+Gu @ vendor-1XCZ5AD1.js:29
+Qf @ vendor-1XCZ5AD1.js:29Understand this error
+DistributorSection-B6p6aZyH.js:26  POST https://nivela-2322.vercel.app/api/distribuidores 405 (Method Not Allowed)
