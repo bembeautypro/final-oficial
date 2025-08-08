@@ -87,11 +87,7 @@ const DistributorSection = ({ id }: DistributorSectionProps) => {
           nome: formData.nome.trim(),
           email: formData.email.trim().toLowerCase(),
           telefone: formData.telefone,
-          empresa: formData.empresa.trim() || 'Não informado',
-          experiencia_distribuicao: formData.ja_distribui,
-          mensagem: formData.apresentacao.trim(),
-          cidade: formData.cidade,
-          estado: formData.estado
+          empresa: formData.empresa.trim() || 'Não informado'
         });
 
       if (error) {

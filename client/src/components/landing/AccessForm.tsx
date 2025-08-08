@@ -97,15 +97,7 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
         .insert({
           nome: formData.nome.trim(),
           email: formData.email.trim().toLowerCase(),
-          telefone: formData.telefone,
-          tipo_estabelecimento: formData.tipo_estabelecimento,
-          utm_source: utmParams.get('utm_source') || 'access_form',
-          utm_medium: utmParams.get('utm_medium') || 'form',
-          utm_campaign: utmParams.get('utm_campaign') || 'acesso_exclusivo',
-          user_agent: navigator.userAgent,
-          ip_address: '0.0.0.0', // Client-side can't get real IP
-          status: 'pendente',
-          origem: 'landing_page'
+          telefone: formData.telefone
         });
 
       if (error) {

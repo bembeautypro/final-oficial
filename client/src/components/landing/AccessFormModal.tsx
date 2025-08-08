@@ -110,15 +110,7 @@ const AccessFormModal = memo(({ isOpen, onClose }: AccessFormModalProps) => {
         .insert({
           nome: leadData.nome,
           email: leadData.email,
-          telefone: leadData.telefone,
-          tipo_estabelecimento: leadData.tipo_estabelecimento,
-          utm_source: leadData.utm_source,
-          utm_medium: leadData.utm_medium,
-          utm_campaign: leadData.utm_campaign,
-          user_agent: navigator.userAgent,
-          ip_address: '0.0.0.0', // Client-side can't get real IP
-          status: 'pendente',
-          origem: 'landing_page'
+          telefone: leadData.telefone
         });
 
       if (error) {
