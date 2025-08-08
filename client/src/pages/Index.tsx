@@ -242,7 +242,7 @@ const Index = memo(() => {
       </main>
 
       <A11yControls />
-      <PerformanceMonitor reportingEnabled={!import.meta.env.DEV} />
+      <PerformanceMonitor reportingEnabled={false} />
 
       {isOffline && (
         <div 
