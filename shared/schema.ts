@@ -47,19 +47,13 @@ export const analyticsEvents = pgTable("analytics_events", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-// Distributors table
+// Distributors table - simplified to avoid constraint issues
 export const distribuidores = pgTable("distribuidores", {
   id: uuid("id").primaryKey().defaultRandom(),
   nome: text("nome").notNull(),
   email: text("email").notNull(),
   telefone: text("telefone"),
   empresa: text("empresa").notNull(),
-  cargo: text("cargo"),
-  mensagem: text("mensagem"),
-  cidade: text("cidade"),
-  estado: text("estado"),
-  experienciaDistribuicao: text("experiencia_distribuicao"),
-  volumeVendasMensal: text("volume_vendas_mensal"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
@@ -80,12 +74,6 @@ export const insertDistribuidorSchema = createInsertSchema(distribuidores).pick(
   email: true,
   telefone: true,
   empresa: true,
-  cargo: true,
-  mensagem: true,
-  cidade: true,
-  estado: true,
-  experienciaDistribuicao: true,
-  volumeVendasMensal: true,
 });
 
 export const insertPerformanceMetricSchema = createInsertSchema(performanceMetrics).pick({

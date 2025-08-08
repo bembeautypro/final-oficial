@@ -13,7 +13,7 @@ import {
   type InsertPerformanceMetric,
   type InsertAnalyticsEvent
 } from "@shared/schema";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 export interface IStorage {
   // Lead NIVELA operations
@@ -68,19 +68,16 @@ export class DatabaseStorage implements IStorage {
     try {
       console.log("Inserting distribuidor via Supabase:", distribuidorData);
       
+      // Use Supabase for consistency with leads
       const { data, error } = await supabase
         .from('distribuidores')
         .insert({
           nome: distribuidorData.nome,
           email: distribuidorData.email,
-          telefone: distribuidorData.telefone,
           empresa: distribuidorData.empresa,
-          cargo: distribuidorData.cargo,
-          mensagem: distribuidorData.mensagem,
-          cidade: distribuidorData.cidade,
-          estado: distribuidorData.estado,
-          experiencia_distribuicao: distribuidorData.experienciaDistribuicao,
-          volume_vendas_mensal: distribuidorData.volumeVendasMensal
+          telefone: distribuidorData.telefone || "Não informado",
+          cidade: "São Paulo",
+          estado: "SP"
         })
         .select()
         .single();
@@ -90,8 +87,9 @@ export class DatabaseStorage implements IStorage {
         throw error;
       }
 
-      console.log("Distribuidor created via Supabase:", data.id);
-      return data as Distribuidor;
+      const newDistribuidor = data as Distribuidor;
+      console.log("Distribuidor created via Supabase:", newDistribuidor.id);
+      return newDistribuidor;
     } catch (error) {
       console.error("Database error creating distribuidor:", error);
       throw error;
