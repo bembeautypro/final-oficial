@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-// Build específico para Vercel - Estrutura simplificada
+// Build específico para Vercel
 export default defineConfig({
   plugins: [react()],
   base: "/",
@@ -13,15 +13,25 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "attached_assets"),
     },
   },
-  root: ".",
   build: {
     outDir: "dist",
     emptyOutDir: true,
     assetsDir: "assets",
+    sourcemap: false,
+    minify: true,
     rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html")
+      },
       output: {
-        manualChunks: undefined,
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          utils: ['clsx', 'tailwind-merge']
+        },
       },
     },
   },
+  define: {
+    'process.env.NODE_ENV': '"production"'
+  }
 });
