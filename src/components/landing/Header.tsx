@@ -5,7 +5,7 @@ import { ParallaxContainer } from "@/components/ui/parallax-container";
 import { StaggerContainer } from "@/components/ui/stagger-container";
 import { PerformanceAwareImage } from "@/components/ui/performance-aware-image";
 import { CTAButton, CTAStrategies } from "@/components/ui/cta-button";
-import AccessFormModal from "@/components/landing/AccessFormModal";
+import AccessFormModal from "./AccessFormModal";
 import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
 
 import { ChevronDown } from "lucide-react";

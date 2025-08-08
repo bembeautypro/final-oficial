@@ -1,33 +1,33 @@
 import React, { memo, useEffect, lazy, Suspense, useState } from "react";
-import Header from "@/components/landing/Header";
-import Manifesto from "@/components/landing/Manifesto";
-import ProductSection from "@/components/landing/ProductSection";
-import Footer from "@/components/landing/Footer";
-import { Button } from "@/components/ui/button";
-import ScrollIndicator from "@/components/landing/ScrollIndicator";
+import Header from "../../../src/components/landing/Header";
+import Manifesto from "../../../src/components/landing/Manifesto";
+import ProductSection from "../../../src/components/landing/ProductSection";
+import Footer from "../../../src/components/landing/Footer";
+import { Button } from "../../../src/components/ui/button";
+import ScrollIndicator from "../../../src/components/landing/ScrollIndicator";
 
-import { A11yControls } from "@/components/ui/a11y-controls";
-import { EnhancedErrorBoundary } from "@/components/ui/enhanced-error-boundary";
-import { EnhancedLoadingState } from "@/components/ui/enhanced-loading-state";
+import { A11yControls } from "../../../src/components/ui/a11y-controls";
+import { EnhancedErrorBoundary } from "../../../src/components/ui/enhanced-error-boundary";
+import { EnhancedLoadingState } from "../../../src/components/ui/enhanced-loading-state";
 
 // Lazy load heavy components that are below-the-fold
-const CompleteTechnologySection = lazy(() => import("@/components/landing/CompleteTechnologySection"));
-const AmazonIngredientsSection = lazy(() => import("@/components/landing/AmazonIngredientsSection"));
-const SynergyCallout = lazy(() => import("@/components/landing/SynergyCallout"));
-const BemTechSection = lazy(() => import("@/components/landing/BemTechSection"));
-const DistributorSection = lazy(() => import("@/components/landing/DistributorSection"));
-const FAQSection = lazy(() => import("@/components/landing/FAQSection"));
-const PreFooter = lazy(() => import("@/components/landing/PreFooter"));
+const CompleteTechnologySection = lazy(() => import("../../../src/components/landing/CompleteTechnologySection"));
+const AmazonIngredientsSection = lazy(() => import("../../../src/components/landing/AmazonIngredientsSection"));
+const SynergyCallout = lazy(() => import("../../../src/components/landing/SynergyCallout"));
+const BemTechSection = lazy(() => import("../../../src/components/landing/BemTechSection"));
+const DistributorSection = lazy(() => import("../../../src/components/landing/DistributorSection"));
+const FAQSection = lazy(() => import("../../../src/components/landing/FAQSection"));
+const PreFooter = lazy(() => import("../../../src/components/landing/PreFooter"));
 
-import { usePWA } from "@/hooks/use-pwa";
-import { usePerformance } from "@/hooks/use-performance";
-import { useAnalytics } from "@/hooks/use-analytics";
-import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
-import { useEnhancedSEO, generateProductSchema, generateOrganizationSchema } from "@/components/ui/enhanced-seo";
-import { useAccessibilityEnhancements, announceToScreenReader } from "@/components/ui/enhanced-accessibility";
-import { SkipToContent } from "@/components/ui/skip-to-content";
-import { PerformanceMonitor } from "@/components/ui/performance-monitor";
-import { preloadCriticalResources } from "@/utils/preloader";
+import { usePWA } from "../../../src/hooks/use-pwa";
+import { usePerformance } from "../../../src/hooks/use-performance";
+import { useAnalytics } from "../../../src/hooks/use-analytics";
+import { usePerformanceOptimization } from "../../../src/hooks/use-performance-optimization";
+import { useEnhancedSEO, generateProductSchema, generateOrganizationSchema } from "../../../src/components/ui/enhanced-seo";
+import { useAccessibilityEnhancements, announceToScreenReader } from "../../../src/components/ui/enhanced-accessibility";
+import { SkipToContent } from "../../../src/components/ui/skip-to-content";
+import { PerformanceMonitor } from "../../../src/components/ui/performance-monitor";
+import { preloadCriticalResources } from "../../../src/utils/preloader";
 
 const Index = memo(() => {
   const { isOffline } = usePWA();

@@ -4,14 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 import { LoadingState } from "@/components/ui/loading-state";
-import { createClient } from '@supabase/supabase-js';
 import { toast } from "sonner";
-
-// Initialize Supabase client
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://fdyzlqovxvdpkzlwuhjj.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZkeXpscW92eHZkcGt6bHd1aGpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1MjQwNzIsImV4cCI6MjA3MDEwMDA3Mn0.0itJku2mVxd8MIvk7lo7Y8gamram_QYCluzHbNUT88Y';
-
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 interface AccessFormProps {
   id?: string;
@@ -91,17 +84,23 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
       // Capture tracking data
       const utmParams = new URLSearchParams(window.location.search);
       
-      // Send data directly to Supabase
-      const { error } = await supabase
-        .from('leads_nivela')
-        .insert({
+      // Use nossa API local
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           nome: formData.nome.trim(),
           email: formData.email.trim().toLowerCase(),
-          telefone: formData.telefone
-        });
+          telefone: formData.telefone.trim(),
+          tipo_estabelecimento: formData.tipo_estabelecimento
+        })
+      });
 
-      if (error) {
-        throw new Error(error.message || 'Erro ao salvar dados');
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+        throw new Error(errorData.error || 'Erro ao salvar dados');
       }
       
       setIsSubmitted(true);
