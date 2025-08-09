@@ -1,0 +1,72 @@
+Quero uma auditoria técnica completa do meu projeto para garantir deploy estável na Vercel com Supabase.
+Leia todo o workspace e produza arquivos .md na raiz, sem aplicar nenhuma mudança no código (apenas analisar e escrever relatórios).
+Entregáveis:
+	1.	REPO_MAP.md
+	•	Árvore completa de diretórios e arquivos (até 4 níveis), marcando:
+	•	pastas/arquivos duplicados por nome (case-insensitive), variações de singular/plural e versões antigas (ex.: api, apis, api-old, dist, build etc.)
+	•	arquivos grandes desnecessários no Git (ex.: dist/, .vercel/, node_modules/, imagens brutas).
+	•	Tabela com cada diretório → finalidade, linguagem/stack e status (ativo/legado/incerto).
+	2.	DUPLICATES_REPORT.md
+	•	Lista de duplicidades e conflitos: nomes semelhantes, componentes repetidos, páginas duplicadas, rotas /api concorrentes, handlers com a mesma responsabilidade.
+	•	Sugerir o diretório canônico de cada área (ex.: src/ para front, api/ para funções Vercel).
+	•	Indicar o que pode ser removido, movido ou renomeado.
+	3.	BUILD_AND_RUNTIME.md
+	•	Ler package.json, vite.config.*, tsconfig.*, vercel.json, .replit, replit.nix.
+	•	Validar: scripts de build (build, dev, start), pasta de saída (dist), e se a Vercel está apontando para o lugar certo.
+	•	Checar se há múltiplos pontos de entrada ou configs conflitantes.
+	•	Sinalizar qualquer uso incorreto de Edge Runtime quando há dependências Node-only.
+	4.	VERCEL_API_AUDIT.md
+	•	Mapear todas as rotas dentro de /api (ou onde estiverem).
+	•	Para cada rota: método(s) aceitos, esquema do body esperado, respostas, dependências e se há export default handler válido.
+	•	Confirmar se as rotas usadas pelos formulários existem e se estão sob Node runtime (não Edge) quando usam @supabase/supabase-js com service_role.
+	•	Apontar problemas típicos: 405, parse de JSON, CORS, import paths, case sensitivity.
+	5.	FORMS_WIRING.md
+	•	Encontrar todos os formulários no front (Profissional, Distribuidor etc.).
+	•	Para cada form: campos, validações, endpoint chamado, payload enviado, headers, tratamento de sucesso/erro.
+	•	Verificar se o payload bate com o handler da API.
+	•	Mostrar fluxo ponta-a-ponta: Form → Fetch → /api/... → Insert Supabase.
+	6.	SUPABASE_INTEGRATION.md
+	•	Qual client do Supabase é usado no front e/ou nas rotas server.
+	•	Se nas rotas: confirmar uso de SUPABASE_SERVICE_ROLE.
+	•	Se no front: confirmar uso de anon public key e políticas RLS para INSERT.
+	•	Listar tabelas esperadas (leads, distributors etc.), colunas críticas e se existem.
+	•	Sugerir índices e RLS.
+	•	Destacar diferenças entre Preview e Production (URL/chaves) que podem quebrar o deploy.
+	7.	ENV_VARS_MATRIX.md
+	•	Matriz de variáveis por ambiente (Replit, Vercel Preview, Vercel Production):
+	•	SUPABASE_URL, SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE, outras usadas.
+	•	Indicar onde estão faltando, onde estão erradas e quais NÃO podem ir pro front.
+	•	Checar se o código está lendo process.env.* certo e se há fallback perigoso.
+	8.	CLEAN_GIT_HISTORY.md
+	•	Plano para limpar o repo no GitHub sem perder o que funciona no Replit:
+	•	criar branch fix/vercel-structure;
+	•	mover/renomear diretórios para canônicos;
+	•	remover dist/, node_modules/ e legados;
+	•	adicionar .gitignore apropriado;
+	•	abrir PR com diffs claros.
+	•	Passo a passo de comandos Git.
+	9.	FIX_PR_PLAN.md
+	•	Lista de mudanças mínimas para estabilizar o deploy (em ordem de impacto):
+	•	ajustes em vercel.json (buildCommand/outputDirectory),
+	•	padronização da pasta /api,
+	•	correções de imports/caminhos,
+	•	alinhamento dos endpoints chamados pelos formulários,
+	•	criação/ajuste de policies no Supabase.
+	•	Incluir diffs propostos (patches) sem aplicar.
+	10.	CI_CHECKS.md
+	•	Propor scripts NPM e (opcional) um workflow do GitHub Actions para:
+	•	npm run check:repo (inspeção de duplicidades e rotas),
+	•	npm run check:api (valida handlers e métodos),
+	•	npm run build (garantir build na CI),
+	•	npm run test:form (teste de requisições fake nos endpoints).
+	•	Se útil, gerar tools/checks.js com verificações de:
+	•	existência de /api, export default, método POST;
+	•	validação de vercel.json;
+	•	varredura por duplicatas de pasta/arquivo;
+	•	leitura de process.env usada no código e alerta se variável não existe.
+
+Regras da auditoria
+	•	Não alterar código nem mover arquivos agora; apenas relatar.
+	•	Todos os relatórios em português, com checklists e blocos de código/diff.
+	•	Seja explícito sobre o que quebra o salvamento dos formulários em produção e por quê.
+	•	Conclua cada .md com um bloco “Próximos Passos” curto e objetivo.
