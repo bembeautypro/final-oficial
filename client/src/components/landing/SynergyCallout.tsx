@@ -32,9 +32,9 @@ const SynergyCallout = memo(({ id, className }: SynergyCalloutProps) => {
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
                 Quando a precisão molecular da tecnologia{" "}
                 <span className="font-semibold text-foreground">ASTRO QUAT V3®</span>{" "}
-                encontra a pureza dos ativos amazônicos, nasce uma revolução capilar que transforma fios em{" "}
+                encontra a pureza dos ativos amazônicos, nasce uma revolução capilar{" "}
                 <span className="font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                  obras de arte naturais
+                  que os cabeleireiros sempre esperaram
                 </span>
                 .
               </p>
