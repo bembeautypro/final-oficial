@@ -41,15 +41,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const distribuidor = await storage.createDistribuidor(distribuidorData);
       
       res.status(201).json({ success: true, distribuidor });
-    } catch (error: any) {
+    } catch (error) {
       if (error instanceof z.ZodError) {
         res.status(400).json({ error: "Invalid data", details: error.errors });
-      } else if (error?.code === '23505' || error?.message?.includes('duplicate') || error?.message?.includes('unique')) {
-        console.error("Duplicate email error:", error);
-        res.status(409).json({ error: "Este email já está cadastrado como distribuidor" });
       } else {
-        console.error("Error creating distribuidor:", error);
-        res.status(500).json({ error: "Internal server error" });
+        const errorCode = (error as any)?.code;
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        
+        if (errorCode === '23505' || errorMessage?.includes('duplicate') || errorMessage?.includes('unique')) {
+          console.error("Duplicate email error:", error);
+          res.status(409).json({ error: "Este email já está cadastrado como distribuidor" });
+        } else {
+          console.error("Error creating distribuidor:", error);
+          res.status(500).json({ error: "Internal server error" });
+        }
       }
     }
   });

@@ -23,12 +23,14 @@ export const supabase = createClient(supabaseApiUrl, supabaseServiceKey, {
   }
 });
 
-// URL PostgreSQL do Supabase fornecida pelo usuário
-const supabaseDatabaseUrl = "postgresql://postgres.fdyzlqovxvdpkzlwuhjj:Ninaflor1403@@aws-1-sa-east-1.pooler.supabase.com:6543/postgres";
+// Usar DATABASE_URL do ambiente (mais seguro)
+const databaseUrl = process.env.DATABASE_URL;
 
-console.log("Connecting to Supabase pooler");
+if (!databaseUrl) {
+  throw new Error("DATABASE_URL environment variable must be set");
+}
 
-const client = postgres(supabaseDatabaseUrl, {
+const client = postgres(databaseUrl, {
   ssl: { rejectUnauthorized: false },
   max: 10,
   idle_timeout: 30,

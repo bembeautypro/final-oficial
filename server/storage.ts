@@ -34,8 +34,6 @@ export interface IStorage {
 export class DatabaseStorage implements IStorage {
   async createLeadNivela(leadData: InsertLeadNivela & { userAgent?: string; ipAddress?: string }): Promise<LeadNivela> {
     try {
-      console.log("Inserting lead via Supabase:", leadData);
-      
       // SIMPLIFIED - 3 FIELDS ONLY
       const { data, error } = await supabase
         .from('leads_nivela')
@@ -48,18 +46,19 @@ export class DatabaseStorage implements IStorage {
         .single();
 
       if (error) {
-        console.error("Supabase error:", error);
         throw error;
       }
 
-      console.log("Lead created via Supabase:", data.id);
       // Map created_at to createdAt
       return {
         ...data,
         createdAt: new Date(data.created_at)
       } as LeadNivela;
     } catch (error) {
-      console.error("Database error creating lead:", error);
+      // Log apenas em desenvolvimento
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Database error creating lead:", error);
+      }
       throw error;
     }
   }
@@ -70,8 +69,6 @@ export class DatabaseStorage implements IStorage {
 
   async createDistribuidor(distribuidorData: InsertDistribuidor): Promise<Distribuidor> {
     try {
-      console.log("Inserting distribuidor via Supabase:", distribuidorData);
-      
       // SIMPLIFIED - 3 FIELDS ONLY
       const { data, error } = await supabase
         .from('distribuidores')
@@ -84,19 +81,19 @@ export class DatabaseStorage implements IStorage {
         .single();
 
       if (error) {
-        console.error("Supabase error:", error);
-        console.error("Database error creating distribuidor:", error);
         throw error;
       }
 
-      console.log("Distribuidor created via Supabase:", data.id);
       // Map created_at to createdAt
       return {
         ...data,
         createdAt: new Date(data.created_at)
       } as Distribuidor;
     } catch (error) {
-      console.error("Database error creating distribuidor:", error);
+      // Log apenas em desenvolvimento
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Database error creating distribuidor:", error);
+      }
       throw error;
     }
   }
@@ -107,8 +104,6 @@ export class DatabaseStorage implements IStorage {
 
   async createPerformanceMetric(metricData: InsertPerformanceMetric): Promise<PerformanceMetric> {
     try {
-      console.log("Inserting performance metric via Supabase:", metricData);
-      
       const { data, error } = await supabase
         .from('performance_metrics')
         .insert({
@@ -121,22 +116,21 @@ export class DatabaseStorage implements IStorage {
         .single();
 
       if (error) {
-        console.error("Supabase error creating metric:", error);
         throw error;
       }
 
-      console.log("Performance metric created via Supabase:", data.id);
       return data as PerformanceMetric;
     } catch (error) {
-      console.error("Database error creating performance metric:", error);
+      // Log apenas em desenvolvimento
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Database error creating performance metric:", error);
+      }
       throw error;
     }
   }
 
   async createAnalyticsEvent(eventData: InsertAnalyticsEvent & { userAgent?: string; ipAddress?: string }): Promise<AnalyticsEvent> {
     try {
-      console.log("Inserting analytics event via Supabase:", eventData);
-      
       const { data, error } = await supabase
         .from('analytics_events')
         .insert({
@@ -149,14 +143,15 @@ export class DatabaseStorage implements IStorage {
         .single();
 
       if (error) {
-        console.error("Supabase error creating analytics event:", error);
         throw error;
       }
 
-      console.log("Analytics event created via Supabase:", data.id);
       return data as AnalyticsEvent;
     } catch (error) {
-      console.error("Database error creating analytics event:", error);
+      // Log apenas em desenvolvimento
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Database error creating analytics event:", error);
+      }
       throw error;
     }
   }

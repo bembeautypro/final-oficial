@@ -13,8 +13,8 @@ export async function submitLead(payload: {
       telefone: payload.telefone?.trim()
     })
     return { ok: true as const, data: result }
-  } catch (error: any) {
-    return { ok: false as const, error: error.message }
+  } catch (error) {
+    return { ok: false as const, error: error instanceof Error ? error.message : String(error) }
   }
 }
 
@@ -30,10 +30,12 @@ export async function submitDistribuidor(payload: {
       telefone: payload.telefone?.trim()
     })
     return { ok: true as const, distribuidor: result }
-  } catch (error: any) {
-    if (error.code === '23505' || error.message?.includes('duplicate') || error.message?.includes('unique')) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    const errorCode = (error as any)?.code;
+    if (errorCode === '23505' || errorMessage?.includes('duplicate') || errorMessage?.includes('unique')) {
       return { ok: false as const, error: 'Este email já está cadastrado' }
     }
-    return { ok: false as const, error: error.message }
+    return { ok: false as const, error: errorMessage }
   }
 }

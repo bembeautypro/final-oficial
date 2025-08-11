@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
 
 interface PerformanceAwareImageProps {
   src: string;
@@ -10,7 +10,7 @@ interface PerformanceAwareImageProps {
   loading?: 'lazy' | 'eager';
 }
 
-export const PerformanceAwareImage: React.FC<PerformanceAwareImageProps> = ({
+export const PerformanceAwareImage = memo<PerformanceAwareImageProps>(({
   src,
   alt,
   className = '',
@@ -69,4 +69,4 @@ export const PerformanceAwareImage: React.FC<PerformanceAwareImageProps> = ({
       onError={handleError}
     />
   );
-};
+});

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
 
 interface VideoLazyProps {
   src: string;
@@ -12,10 +12,10 @@ interface VideoLazyProps {
   rootMargin?: string;
   'aria-label'?: string;
   title?: string;
-  onError?: (error: any) => void;
+  onError?: (error: Error | Event) => void;
 }
 
-export const VideoLazy: React.FC<VideoLazyProps> = ({
+export const VideoLazy = memo<VideoLazyProps>(({
   src,
   className = '',
   autoPlay = false,
@@ -51,10 +51,10 @@ export const VideoLazy: React.FC<VideoLazyProps> = ({
     return () => observer.disconnect();
   }, [isLoaded]);
 
-  const handleError = (error: any) => {
+  const handleError = (event: React.SyntheticEvent<HTMLVideoElement>) => {
     setHasError(true);
-    console.error('Video loading failed:', { src, error: error.message });
-    onError?.(error);
+    console.error('Video loading failed:', { src });
+    onError?.(event.nativeEvent);
   };
 
   if (hasError) {
@@ -82,4 +82,4 @@ export const VideoLazy: React.FC<VideoLazyProps> = ({
       />
     </div>
   );
-};
+});
