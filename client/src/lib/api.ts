@@ -20,7 +20,8 @@ export async function saveLead(input: {
     utm_medium: input.utm_medium,
     utm_campaign: input.utm_campaign,
     utm_content: input.utm_content,
-    utm_term: input.utm_term
+    utm_term: input.utm_term,
+    hp: ''
   }
   const { data, error } = await supabase
     .from('leads_nivela')
@@ -59,7 +60,8 @@ export async function saveDistribuidor(input: {
     empresa: input.empresa,
     cidade: input.cidade,
     estado: input.estado,
-    mensagem: input.mensagem
+    mensagem: input.mensagem,
+    hp: ''
   }
   const { data, error } = await supabase
     .from('distribuidores')
