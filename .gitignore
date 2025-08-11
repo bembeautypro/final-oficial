@@ -179,3 +179,8 @@ cache/
 # Runtime
 runtime/
 process.pid
+# Audit cleanup
+.cache/
+*.backup
+*.bak
+*.old

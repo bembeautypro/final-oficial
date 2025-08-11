@@ -37,7 +37,7 @@ const TechnologySection = memo(({ id }: TechnologySectionProps) => {
   ];
 
   const handleVideoError = () => {
-    console.warn('Erro ao carregar vídeo da tecnologia', { section: 'TechnologySection' });
+    // Erro de vídeo tratado silenciosamente em produção
   };
 
   return (
