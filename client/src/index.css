@@ -232,87 +232,87 @@ All colors MUST be HSL.
 }
 
 @layer base {
-  /* Hero Title - Extra Large and Responsive */
+  /* Hero Title - Tamanhos do projeto original */
   .hero-title-main {
-    @apply font-montserrat font-bold text-brand-light leading-[0.85] tracking-tight;
-    /* Mobile: 4rem (64px) - bem grande para mobile */
-    font-size: clamp(4rem, 12vw, 5.5rem);
+    @apply font-montserrat font-bold text-brand-light leading-[1.05] tracking-tight;
+    /* Mobile: 2.25rem (36px) */
+    font-size: clamp(2.25rem, 8vw, 3rem);
   }
 
   @media (min-width: 640px) {
     .hero-title-main {
-      /* Small: 5.5rem (88px) */
-      font-size: clamp(5.5rem, 12vw, 7rem);
+      /* Small: 3rem (48px) */
+      font-size: clamp(3rem, 8vw, 3.75rem);
     }
   }
 
   @media (min-width: 768px) {
     .hero-title-main {
-      /* Medium: 7rem (112px) */
-      font-size: clamp(7rem, 12vw, 9rem);
+      /* Medium: 3.75rem (60px) */
+      font-size: clamp(3.75rem, 7vw, 4.5rem);
     }
   }
 
   @media (min-width: 1024px) {
     .hero-title-main {
-      /* Large: 9rem (144px) */
-      font-size: clamp(9rem, 10vw, 12rem);
+      /* Large: 4.5rem (72px) */
+      font-size: clamp(4.5rem, 6vw, 6rem);
     }
   }
 
   @media (min-width: 1280px) {
     .hero-title-main {
-      /* XL: 12rem (192px) */
-      font-size: clamp(12rem, 8vw, 15rem);
+      /* XL: 6rem (96px) */
+      font-size: clamp(6rem, 5vw, 7rem);
     }
   }
 
   @media (min-width: 1536px) {
     .hero-title-main {
-      /* 2XL: 15rem (240px) - Maximum gigante */
-      font-size: 15rem;
+      /* 2XL: 7rem (112px) - Tamanho original máximo */
+      font-size: 7rem;
     }
   }
 
-  /* Hero Subtitle - Menor que o título principal */
+  /* Hero Subtitle - Proporcionalmente menor que o título */
   .hero-subtitle-text {
     @apply font-montserrat text-brand-cloud/90 leading-relaxed;
-    /* Mobile: 1.125rem (18px) */
-    font-size: clamp(1.125rem, 4vw, 1.375rem);
+    /* Mobile: 1rem (16px) */
+    font-size: clamp(1rem, 3vw, 1.125rem);
   }
 
   @media (min-width: 640px) {
     .hero-subtitle-text {
-      /* Small: 1.375rem (22px) */
-      font-size: clamp(1.375rem, 4vw, 1.625rem);
+      /* Small: 1.125rem (18px) */
+      font-size: clamp(1.125rem, 3vw, 1.25rem);
     }
   }
 
   @media (min-width: 768px) {
     .hero-subtitle-text {
-      /* Medium: 1.625rem (26px) */
-      font-size: clamp(1.625rem, 3.5vw, 2rem);
+      /* Medium: 1.25rem (20px) */
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
     }
   }
 
   @media (min-width: 1024px) {
     .hero-subtitle-text {
-      /* Large: 2rem (32px) */
-      font-size: clamp(2rem, 3vw, 2.5rem);
+      /* Large: 1.5rem (24px) */
+      font-size: clamp(1.5rem, 2vw, 1.75rem);
     }
   }
 
   @media (min-width: 1280px) {
     .hero-subtitle-text {
-      /* XL: 2.5rem (40px) */
-      font-size: clamp(2.5rem, 2.5vw, 3rem);
+      /* XL: 1.75rem (28px) */
+      font-size: clamp(1.75rem, 1.5vw, 2rem);
     }
   }
 
   @media (min-width: 1536px) {
     .hero-subtitle-text {
-      /* 2XL: 3rem (48px) - Máximo */
-      font-size: 3rem;
+      /* 2XL: 2rem (32px) - Tamanho original máximo */
+      font-size: 2rem;
     }
   }
 
