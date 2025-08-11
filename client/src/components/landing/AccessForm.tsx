@@ -1,0 +1,108 @@
+import React, { memo, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { LoadingState } from "@/components/ui/loading-state";
+import { toast } from "sonner";
+import { submitLead } from "@/lib/submit";
+
+interface AccessFormProps { id?: string; }
+
+const AccessForm = memo(({ id }: AccessFormProps) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ nome:"", email:"", telefone:"", tipo_estabelecimento:"" });
+  const [errors, setErrors] = useState({ nome:"", email:"", telefone:"", tipo_estabelecimento:"" });
+
+  const validateForm = () => {
+    const e = { nome:"", email:"", telefone:"", tipo_estabelecimento:"" }; let ok = true;
+    const nameOk = /^[a-zA-ZÀ-ÿ\s]{2,}$/.test(formData.nome.trim());
+    if (!nameOk) { e.nome = "Nome inválido"; ok = false; }
+    const mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim());
+    if (!mailOk) { e.email = "Email inválido"; ok = false; }
+    const telDigits = formData.telefone.replace(/\D/g,'');
+    if (!(telDigits.length>=10 && telDigits.length<=11)) { e.telefone = "WhatsApp deve ter 10–11 dígitos"; ok = false; }
+    if (!formData.tipo_estabelecimento) { e.tipo_estabelecimento = "Selecione o tipo"; ok = false; }
+    setErrors(e); return ok;
+  };
+
+  async function handleSubmit(ev: React.FormEvent) {
+    ev.preventDefault();
+    if (!validateForm()) return;
+    setIsLoading(true);
+    try {
+      const utm = new URLSearchParams(window.location.search);
+      const res = await submitLead({
+        ...formData,
+        utm_source: utm.get('utm_source'),
+        utm_medium: utm.get('utm_medium'),
+        utm_campaign: utm.get('utm_campaign')
+      });
+      if (!res.ok) throw new Error(res.error);
+      setIsSubmitted(true);
+      toast.success('Solicitação enviada!');
+    } catch (err:any) {
+      toast.error(err?.message || 'Erro ao enviar. Tente novamente.');
+    } finally { setIsLoading(false); }
+  }
+
+  const set = (k:string, v:string)=>setFormData(p=>({...p,[k]:v}));
+  const maskWhats = (v:string)=>{ const n=v.replace(/\D/g,''); if(n.length<=2)return`(${n}`; if(n.length<=7)return`(${n.slice(0,2)}) ${n.slice(2)}`; return`(${n.slice(0,2)}) ${n.slice(2,7)}-${n.slice(7,11)}`; };
+
+  if (isSubmitted) return (
+    <section className="py-12 px-4" id={id||"acesso"}>
+      <div className="max-w-lg mx-auto text-center bg-card/50 border rounded-3xl p-12">
+        <div className="w-20 h-20 bg-gradient-accent rounded-full flex items-center justify-center mx-auto mb-6">
+          <CheckCircle2 className="w-10 h-10" />
+        </div>
+        <h2 className="text-3xl font-bold">Solicitação Enviada!</h2>
+        <p className="mt-2 text-muted-foreground">Entraremos em contato em até 24h.</p>
+      </div>
+    </section>
+  );
+
+  return (
+    <section className="py-12 px-4" id={id||"acesso"}>
+      <div className="max-w-lg mx-auto">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl lg:text-4xl font-bold">Solicite seu acesso exclusivo</h2>
+          <p className="text-muted-foreground">Preencha 4 campos essenciais.</p>
+        </div>
+        <LoadingState isLoading={isLoading} variant="skeleton" className="h-96"
+          fallback={<div className="space-y-4 animate-pulse"><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/></div>}>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <Input placeholder="Nome completo" value={formData.nome} onChange={e=>set('nome',e.target.value)} required />
+              {errors.nome && <p className="text-red-500 text-sm mt-1 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.nome}</p>}
+            </div>
+            <div>
+              <Input type="email" placeholder="Email" value={formData.email} onChange={e=>set('email',e.target.value)} required />
+              {errors.email && <p className="text-red-500 text-sm mt-1 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.email}</p>}
+            </div>
+            <div>
+              <Input inputMode="tel" placeholder="WhatsApp" value={formData.telefone} onChange={e=>set('telefone',maskWhats(e.target.value))} required />
+              {errors.telefone && <p className="text-red-500 text-sm mt-1 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.telefone}</p>}
+            </div>
+            <div>
+              <Select value={formData.tipo_estabelecimento} onValueChange={(v)=>set('tipo_estabelecimento',v)} required>
+                <SelectTrigger><SelectValue placeholder="Tipo de estabelecimento" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="salao-proprio">Salão próprio</SelectItem>
+                  <SelectItem value="salao-terceiros">Salão de terceiros</SelectItem>
+                  <SelectItem value="atendimento-domiciliar">Atendimento domiciliar</SelectItem>
+                  <SelectItem value="studio-compartilhado">Studio/Espaço compartilhado</SelectItem>
+                  <SelectItem value="freelancer">Freelancer</SelectItem>
+                </SelectContent>
+              </Select>
+              {errors.tipo_estabelecimento && <p className="text-red-500 text-sm mt-1 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.tipo_estabelecimento}</p>}
+            </div>
+            <Button type="submit" variant="premium" size="xl" className="w-full">ENVIAR SOLICITAÇÃO</Button>
+          </form>
+        </LoadingState>
+      </div>
+    </section>
+  );
+});
+AccessForm.displayName = 'AccessForm';
+export default AccessForm;
