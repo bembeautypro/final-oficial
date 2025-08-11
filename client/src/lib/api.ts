@@ -10,12 +10,17 @@ export async function saveLead(input: {
   utm_campaign?: string | null
   utm_content?: string | null
   utm_term?: string | null
-  hp?: string
 }) {
   const payload = { 
-    ...input, 
-    email: input.email.toLowerCase().trim(), 
-    hp: input.hp ?? '' 
+    nome: input.nome,
+    email: input.email.toLowerCase().trim(),
+    telefone: input.telefone,
+    tipo_estabelecimento: input.tipo_estabelecimento,
+    utm_source: input.utm_source,
+    utm_medium: input.utm_medium,
+    utm_campaign: input.utm_campaign,
+    utm_content: input.utm_content,
+    utm_term: input.utm_term
   }
   const { data, error } = await supabase
     .from('leads_nivela')
@@ -36,16 +41,25 @@ export async function saveDistribuidor(input: {
   utm_campaign?: string | null
   utm_content?: string | null
   utm_term?: string | null
-  hp?: string
   empresa?: string | null
   cidade?: string | null
   estado?: string | null
   mensagem?: string | null
 }) {
   const payload = { 
-    ...input, 
-    email: input.email.toLowerCase().trim(), 
-    hp: input.hp ?? '' 
+    nome: input.nome,
+    email: input.email.toLowerCase().trim(),
+    telefone: input.telefone,
+    tipo_estabelecimento: input.tipo_estabelecimento,
+    utm_source: input.utm_source,
+    utm_medium: input.utm_medium,
+    utm_campaign: input.utm_campaign,
+    utm_content: input.utm_content,
+    utm_term: input.utm_term,
+    empresa: input.empresa,
+    cidade: input.cidade,
+    estado: input.estado,
+    mensagem: input.mensagem
   }
   const { data, error } = await supabase
     .from('distribuidores')

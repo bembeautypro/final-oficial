@@ -9,8 +9,7 @@ export async function submitLead(payload: {
     const result = await saveLead({
       nome: payload.nome?.trim(),
       email: payload.email?.trim().toLowerCase(),
-      telefone: payload.telefone?.trim(),
-      hp: ''
+      telefone: payload.telefone?.trim()
     })
     return { ok: true as const, data: result }
   } catch (error: any) {
@@ -35,8 +34,7 @@ export async function submitDistribuidor(payload: {
       empresa: payload.empresa?.trim() || null,
       mensagem: payload.mensagem?.trim() || null,
       cidade: payload.cidade?.trim() || null,
-      estado: payload.estado?.trim() || null,
-      hp: ''
+      estado: payload.estado?.trim() || null
     })
     return { ok: true as const, distribuidor: result }
   } catch (error: any) {
