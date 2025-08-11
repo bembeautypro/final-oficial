@@ -12,7 +12,7 @@ interface AccessFormModalProps {
 
 export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const [f, setF] = useState({ nome:"", email:"", telefone:"", tipo_estabelecimento:"" });
+  const [f, setF] = useState({ nome:"", email:"", telefone:"" });
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault(); setIsLoading(true);
@@ -22,14 +22,14 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
         nome: f.nome,
         email: f.email,
         telefone: f.telefone,
-        tipoEstabelecimento: f.tipo_estabelecimento || undefined,
+        tipoEstabelecimento: undefined,
         utm_source: utm.get('utm_source'),
         utm_medium: utm.get('utm_medium'),
         utm_campaign: utm.get('utm_campaign')
       });
       if (!r.ok) throw new Error(r.error);
       toast.success('Enviado com sucesso!');
-      setF({ nome:"", email:"", telefone:"", tipo_estabelecimento:"" });
+      setF({ nome:"", email:"", telefone:"" });
       onClose(); // Fechar modal após sucesso
     } catch (err:any) { toast.error(err?.message || 'Erro'); }
     finally { setIsLoading(false); }
@@ -90,18 +90,7 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
               />
             </div>
             
-            <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
-                Tipo de estabelecimento <span className="text-red-500">*</span>
-              </label>
-              <Input 
-                placeholder="Ex: Salão de beleza, Barbearia, Clínica estética" 
-                value={f.tipo_estabelecimento} 
-                onChange={e=>setF({...f, tipo_estabelecimento:e.target.value})} 
-                required 
-                className="h-12"
-              />
-            </div>
+
           </div>
           
           <div className="flex flex-col sm:flex-row gap-3 pt-4">

@@ -125,8 +125,9 @@ export const VideoLoader = ({ src, thumbnail, title, className = "" }: VideoLoad
         loop
         playsInline
         controls={false}
-        controlsList="nodownload nofullscreen noremoteplayback"
+        controlsList="nodownload nofullscreen noremoteplaybook"
         disablePictureInPicture
+        style={{ pointerEvents: 'none', aspectRatio: "16/9" }}
         preload="metadata"
         className="w-full h-full object-cover touch-target"
         onLoadedData={handleLoadedData}
@@ -137,7 +138,6 @@ export const VideoLoader = ({ src, thumbnail, title, className = "" }: VideoLoad
         tabIndex={0}
         width={640}
         height={360}
-        style={{ aspectRatio: "16/9" }}
       >
         <track kind="descriptions" src="" label={`Descrição do vídeo: ${title}`} />
         <track kind="captions" src="" label="Legendas disponíveis" />

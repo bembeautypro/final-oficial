@@ -51,7 +51,7 @@ const Header = memo(({ id }: HeaderProps) => {
                 
                 {/* Unified Brand + Title Block */}
                 <div className="space-y-3 lg:space-y-4">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-montserrat font-bold text-brand-light leading-[1.1] tracking-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl 2xl:text-[12rem] font-montserrat font-bold text-brand-light leading-[1.1] tracking-tight">
                     <span className="block text-brand-latte font-semibold mb-2">NIVELA®</span>
                     <span className="block">A evolução da</span>
                     <span className="block">escova progressiva</span>
