@@ -1,0 +1,286 @@
+Entendi, Paolo. Vamos voltar ao projeto original que já está no ar e só corrigir o envio dos formulários (com o mínimo de mudança possível). Vou te entregar um pacote de patches para você copiar e colar no projeto atual, sem refatorações grandes.
+
+⸻
+
+Plano de estabilização (rápido)
+	1.	Adicionar 3 rotas de API (Vercel Functions) para salvar no Supabase:
+	•	POST /api/leads
+	•	POST /api/distribuidores
+	•	GET  /api/health (diagnóstico)
+	2.	Criar o client admin do Supabase só no backend (não expor no front).
+	3.	Ajustar vercel.json (headers + redirects corretos, nada de middleware).
+	4.	Pingar e testar com cURL.
+	5.	Conectar os forms do seu HTML/React a essas rotas (snippet pronto).
+
+Abaixo estão TODOS os arquivos completos. É só criar/colocar nos locais indicados e deployar.
+
+⸻
+
+1) vercel.json (raiz do projeto)
+
+Substitua o seu pelo abaixo.
+
+{
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "dist",
+
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; img-src 'self' data: https:; media-src https:; connect-src 'self' https://*.supabase.co; script-src 'self'; style-src 'self' 'unsafe-inline'"
+        }
+      ]
+    }
+  ],
+
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.nivela.bembeauty.com.br" }],
+      "destination": "https://nivela.bembeauty.com.br/:path",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        { "type": "host", "value": "nivela.bembeauty.com.br" },
+        { "type": "header", "key": "x-forwarded-proto", "value": "http" }
+      ],
+      "destination": "https://nivela.bembeauty.com.br/:path",
+      "permanent": true
+    }
+  ]
+}
+
+Mantive CSP minimalista só com Supabase; GTM/GA4/Sentry podem ser reativados depois. O objetivo agora é fazer o form funcionar sem atrito.
+
+⸻
+
+2) Supabase admin client (somente backend)
+
+Crie api/_supabase.ts:
+
+// api/_supabase.ts
+import { createClient } from '@supabase/supabase-js'
+
+const url = process.env.SUPABASE_URL as string
+const serviceRole = process.env.SUPABASE_SERVICE_ROLE as string
+
+if (!url || !serviceRole) {
+  console.warn('[supabase] Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE')
+}
+
+export const supabaseAdmin = createClient(url, serviceRole, {
+  auth: { persistSession: false }
+})
+
+
+⸻
+
+3) Healthcheck
+
+Crie api/health.ts:
+
+// api/health.ts
+import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { supabaseAdmin } from './_supabase'
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  try {
+    const leads = await supabaseAdmin.from('leads').select('id', { head: true, count: 'exact' })
+    const dist  = await supabaseAdmin.from('distribuidores').select('id', { head: true, count: 'exact' })
+
+    return res.status(200).json({
+      ok: true,
+      env: {
+        SUPABASE_URL: !!process.env.SUPABASE_URL,
+        SUPABASE_SERVICE_ROLE: !!process.env.SUPABASE_SERVICE_ROLE
+      },
+      db: {
+        leads_count_available: leads.count ?? null,
+        distribuidores_count_available: dist.count ?? null,
+        leads_error: leads.error?.message ?? null,
+        distribuidores_error: dist.error?.message ?? null
+      },
+      now: new Date().toISOString()
+    })
+  } catch (e: any) {
+    return res.status(500).json({ ok: false, error: e?.message || 'health failed' })
+  }
+}
+
+
+⸻
+
+4) Leads
+
+Crie api/leads.ts:
+
+// api/leads.ts
+import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { supabaseAdmin } from './_supabase'
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' })
+
+  try {
+    const data = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {})
+    const { nome, email, telefone, origem } = data
+
+    if (!email) return res.status(400).json({ error: 'email_required' })
+
+    const payload = {
+      nome: (nome || '').toString().trim() || null,
+      email: (email || '').toString().trim().toLowerCase(),
+      telefone: (telefone || '').toString().trim() || null,
+      origem: (origem || 'landing-nivela').toString().trim()
+    }
+
+    const { error } = await supabaseAdmin.from('leads').insert(payload)
+    if (error) return res.status(400).json({ error: error.message })
+
+    return res.status(201).json({ ok: true })
+  } catch (e: any) {
+    return res.status(500).json({ error: e?.message || 'insert_failed' })
+  }
+}
+
+
+⸻
+
+5) Distribuidores
+
+Crie api/distribuidores.ts:
+
+// api/distribuidores.ts
+import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { supabaseAdmin } from './_supabase'
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' })
+
+  try {
+    const data = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {})
+    const { nome_responsavel, email, telefone, empresa, cidade, estado } = data
+
+    if (!email) return res.status(400).json({ error: 'email_required' })
+
+    const payload = {
+      nome_responsavel: (nome_responsavel || '').toString().trim() || null,
+      email: (email || '').toString().trim().toLowerCase(),
+      telefone: (telefone || '').toString().trim() || null,
+      empresa: (empresa || '').toString().trim() || null,
+      cidade: (cidade || '').toString().trim() || null,
+      estado: (estado || '').toString().trim() || null,
+      origem: 'landing-nivela'
+    }
+
+    const { error } = await supabaseAdmin.from('distribuidores').insert(payload)
+    if (error) return res.status(400).json({ error: error.message })
+
+    return res.status(201).json({ ok: true })
+  } catch (e: any) {
+    return res.status(500).json({ error: e?.message || 'insert_failed' })
+  }
+}
+
+
+⸻
+
+6) Conectar os formulários do front (HTML/React)
+
+Use esse snippet universal para o form de leads (adapte name dos inputs):
+
+<form id="formLead">
+  <input name="nome" placeholder="Seu nome" />
+  <input name="email" type="email" placeholder="Seu e-mail" required />
+  <input name="telefone" placeholder="Seu WhatsApp" />
+  <button type="submit">Quero saber mais</button>
+</form>
+
+<script>
+  document.getElementById('formLead')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const payload = Object.fromEntries(fd.entries());
+    payload.origem = 'landing-nivela';
+
+    try {
+      const r = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error || 'Erro ao enviar');
+      alert('Recebido! Entraremos em contato.');
+      e.target.reset();
+    } catch (err) {
+      alert('Não foi possível enviar agora. Tente novamente.');
+      console.error(err);
+    }
+  });
+</script>
+
+Para o form de distribuidores, troque a rota para /api/distribuidores e os name de inputs conforme seu HTML (ex.: nome_responsavel, empresa, cidade, estado etc).
+
+Se você estiver usando React, me diga o nome dos componentes de formulário e eu te mando o hook pronto (useSubmitLead) pra colar.
+
+⸻
+
+7) Variáveis de ambiente na Vercel (Production)
+	•	SUPABASE_URL → https://wsjrasprpcwkwmcbfdpv.supabase.co
+	•	SUPABASE_SERVICE_ROLE → a que você enviou
+
+Importante: o SERVICE_ROLE não deve ir pro front. Só na Vercel (backend).
+O front continua usando VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY apenas se ainda tiver alguma chamada direta ao Supabase (não é necessário para os formulários acima, pois usam as APIs).
+
+⸻
+
+8) Testes rápidos após deploy
+
+No seu domínio de produção:
+	•	Health:
+
+https://SEUAPP.vercel.app/api/health
+
+Deve retornar { ok: true, ... }.
+
+	•	Lead:
+
+curl -i -X POST https://SEUAPP.vercel.app/api/leads \
+  -H "Content-Type: application/json" \
+  -d '{"nome":"Teste","email":"t@t.com","telefone":"11999999999"}'
+
+Esperado: 201.
+
+	•	Distribuidor:
+
+curl -i -X POST https://SEUAPP.vercel.app/api/distribuidores \
+  -H "Content-Type: application/json" \
+  -d '{"nome_responsavel":"Ana","email":"ana@ex.com","empresa":"XPTO"}'
+
+Esperado: 201.
+
+⸻
+
+9) Caso seu CSP bloqueie algo
+
+Se você mantiver GTM/GA4/Supabase/Sentry no <head>, ajuste depois a CSP no vercel.json. Por enquanto deixei enxuta para não bloquear requests dos formulários.
+
+⸻
+
+Me diga:
+	•	Nome/IDs dos inputs dos seus forms atuais (lead e distribuidor).
+	•	Se estão em HTML puro ou React (qual componente).
+
+Com isso, te entrego o script “cola-e-funciona” exatamente alinhado ao seu DOM atual — sem risco de incompatibilidade.
