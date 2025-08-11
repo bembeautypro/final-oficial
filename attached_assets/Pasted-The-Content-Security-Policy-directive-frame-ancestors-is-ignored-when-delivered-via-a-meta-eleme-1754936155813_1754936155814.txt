@@ -1,0 +1,14 @@
+The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element.Understand this error
+js?id=G-SC9C7W6Q4F&cx=c&gtm=45He5870v9185104605za200&tag_exp=101509157~103116026~103200004~103233427~104684208~104684211~105033766~105033768~105091134~105103161~105103163~105135708~105135710:280 The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element.
+Lc @ js?id=G-SC9C7W6Q4F&cx=c&gtm=45He5870v9185104605za200&tag_exp=101509157~103116026~103200004~103233427~104684208~104684211~105033766~105033768~105091134~105103161~105103163~105135708~105135710:280Understand this error
+js?id=G-SC9C7W6Q4F&cx=c&gtm=45He5870v9185104605za200&tag_exp=101509157~103116026~103200004~103233427~104684208~104684211~105033766~105033768~105091134~105103161~105103163~105135708~105135710:280 The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element.
+Lc @ js?id=G-SC9C7W6Q4F&cx=c&gtm=45He5870v9185104605za200&tag_exp=101509157~103116026~103200004~103233427~104684208~104684211~105033766~105033768~105091134~105103161~105103163~105135708~105135710:280Understand this error
+js?id=G-SC9C7W6Q4F&cx=c&gtm=45He5870v9185104605za200&tag_exp=101509157~103116026~103200004~103233427~104684208~104684211~105033766~105033768~105091134~105103161~105103163~105135708~105135710:694 The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element.
+q @ js?id=G-SC9C7W6Q4F&cx=c&gtm=45He5870v9185104605za200&tag_exp=101509157~103116026~103200004~103233427~104684208~104684211~105033766~105033768~105091134~105103161~105103163~105135708~105135710:694Understand this error
+chunk-JKG5FPDI.js?v=9901240e:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+supabaseClient.ts:7 ENV URL: https://fdyzlqovxvdpkzlwuhjj.supabase.co
+supabaseClient.ts:8 ENV ANON: eyJhbGciOi…
+framer-motion.js?v=9901240e:696 Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+warnOnce @ framer-motion.js?v=9901240e:696Understand this warning
+fdyzlqovxvdpkzlwuhjj.supabase.co/rest/v1/leads_nivela?columns=%22nome%22%2C%22email%22%2C%22telefone%22&select=*:1  Failed to load resource: the server responded with a status of 401 ()Understand this error
+fdyzlqovxvdpkzlwuhjj.supabase.co/rest/v1/distribuidores?columns=%22nome%22%2C%22email%22%2C%22telefone%22%2C%22empresa%22%2C%22mensagem%22%2C%22cidade%22%2C%22estado%22&select=*:1  Failed to load resource: the server responded with a status 
