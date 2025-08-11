@@ -65,6 +65,14 @@ Preferred communication style: Simple, everyday language.
 - **ZERO ERRORS**: All LSP diagnostics resolved, application running smoothly
 - **PERFORMANCE**: Lazy loading maintained, bundle optimized, images/videos loading efficiently
 
+### Aug 11, 2025 - FORMS ENHANCEMENT & DATABASE FIX
+- **FORMS REDESIGNED**: Complete mobile-responsive redesign with clear required/optional field indicators
+- **MOBILE OPTIMIZATION**: 95% screen width, stacked buttons, proper touch targets, smooth scrolling
+- **FIELD VALIDATION**: Red asterisk (*) for required fields, gray "(opcional)" for optional fields
+- **ORGANIZED LAYOUT**: Sections for personal data, business data, and additional information
+- **DATABASE SCHEMA FIX**: Corrected NOT NULL constraints on cidade/estado fields in distribuidores table
+- **IMPROVED UX**: Better labels, placeholders, focus states with brand colors, increased input heights
+
 ## Project Structure
 
 ```
