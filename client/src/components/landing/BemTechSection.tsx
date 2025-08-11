@@ -80,7 +80,7 @@ const BemTechSection = memo(({ id }: BemTechSectionProps) => {
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-16 lg:mb-20" staggerDelay={0.2}>
           {technologies.map((tech, index) => {
             return (
-                <Card key={index} className="bg-card/50 backdrop-blur-sm border-primary/20 hover:border-accent/50 hover:scale-[1.02] transition-elegant duration-500 group shadow-card hover:shadow-card-hover">
+                <Card key={index} className="bg-card/50 backdrop-blur-sm border-primary/20 hover:border-accent/50 hover:scale-[1.02] transition-[transform,box-shadow] duration-200 ease-out duration-500 group shadow-card hover:shadow-card-hover">
                   <CardContent className="p-5 md:p-6 lg:p-7 space-y-4 lg:space-y-5 text-center">
                     {/* Title and Subtitle */}
                     <div className="space-y-2 lg:space-y-3">
@@ -118,11 +118,11 @@ const BemTechSection = memo(({ id }: BemTechSectionProps) => {
 
         {/* BemBOT Horizontal Block */}
         <div className="mb-12 lg:mb-16">
-          <Card className="bg-card/20 backdrop-blur-sm border border-primary/10 shadow-card hover:shadow-card-hover hover:scale-[1.01] transition-elegant duration-500 group">
+          <Card className="bg-card/20 backdrop-blur-sm border border-primary/10 shadow-card hover:shadow-card-hover hover:scale-[1.01] transition-[transform,box-shadow] duration-200 ease-out duration-500 group">
             <CardContent className="p-6 md:p-8 lg:p-10">
               <div className="text-center space-y-4 lg:space-y-6">
                 {/* Bot Icon */}
-                <div className="w-18 md:w-20 lg:w-24 h-18 md:h-20 lg:h-24 bg-gradient-tech-accent rounded-2xl lg:rounded-3xl flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-elegant duration-300">
+                <div className="w-18 md:w-20 lg:w-24 h-18 md:h-20 lg:h-24 bg-gradient-tech-accent rounded-2xl lg:rounded-3xl flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-[transform,box-shadow] duration-200 ease-out duration-300">
                   <Bot className="w-9 md:w-10 lg:w-12 h-9 md:h-10 lg:h-12 text-primary" aria-hidden="true" />
                 </div>
                 

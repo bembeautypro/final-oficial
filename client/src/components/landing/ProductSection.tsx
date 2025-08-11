@@ -36,7 +36,7 @@ const ProductSection = memo(({ id }: ProductSectionProps) => {
                 <LazyImage 
                   src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp" 
                   alt="NIVELA® Retexturizador Hidro Nutritivo 1kg - Produto em destaque com textura gel inovadora"
-                  className="w-full max-w-sm md:max-w-md lg:max-w-lg object-contain drop-shadow-2xl group-hover:scale-105 transition-elegant duration-500"
+                  className="w-full max-w-sm md:max-w-md lg:max-w-lg object-contain drop-shadow-2xl group-hover:scale-105 transition-[transform,box-shadow] duration-200 ease-out duration-500"
                   width={600}
                   height={600}
                   sizes="(max-width: 640px) 90vw, (max-width: 768px) 80vw, (max-width: 1024px) 50vw, 33vw"
@@ -44,7 +44,7 @@ const ProductSection = memo(({ id }: ProductSectionProps) => {
                   fallback="/placeholder.svg"
                 />
                 {/* Enhanced product glow effect */}
-                <div className="absolute inset-0 bg-gradient-accent/20 rounded-full blur-3xl -z-10 scale-75 group-hover:scale-90 transition-elegant duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-accent/20 rounded-full blur-3xl -z-10 scale-75 group-hover:scale-90 transition-[transform,box-shadow] duration-200 ease-out duration-500"></div>
               </div>
             </AnimatedSection>
           </ParallaxContainer>
@@ -53,7 +53,7 @@ const ProductSection = memo(({ id }: ProductSectionProps) => {
           <div className="space-y-4 lg:space-y-6 order-2 lg:order-2">
             {/* Feature Cards */}
             <StaggerContainer className="space-y-4 lg:space-y-5" staggerDelay={0.15}>
-              <Card className="bg-card/50 backdrop-blur-sm border-accent/30 hover:border-accent/60 hover:scale-[1.02] transition-elegant duration-300 group shadow-card hover:shadow-card-hover">
+              <Card className="bg-card/50 backdrop-blur-sm border-accent/30 hover:border-accent/60 hover:scale-[1.02] transition-[transform,box-shadow] duration-200 ease-out duration-300 group shadow-card hover:shadow-card-hover">
                 <CardContent className="p-5 md:p-6 lg:p-7 space-y-3">
                   <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-primary font-montserrat">
                     Tecnologia Avançada
@@ -64,7 +64,7 @@ const ProductSection = memo(({ id }: ProductSectionProps) => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-card/50 backdrop-blur-sm border-accent/30 hover:border-accent/60 hover:scale-[1.02] transition-elegant duration-300 group shadow-card hover:shadow-card-hover">
+              <Card className="bg-card/50 backdrop-blur-sm border-accent/30 hover:border-accent/60 hover:scale-[1.02] transition-[transform,box-shadow] duration-200 ease-out duration-300 group shadow-card hover:shadow-card-hover">
                 <CardContent className="p-5 md:p-6 lg:p-7 space-y-3">
                   <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-primary font-montserrat">
                     Segurança na aplicação
@@ -75,7 +75,7 @@ const ProductSection = memo(({ id }: ProductSectionProps) => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-card/50 backdrop-blur-sm border-accent/30 hover:border-accent/60 hover:scale-[1.02] transition-elegant duration-300 group shadow-card hover:shadow-card-hover">
+              <Card className="bg-card/50 backdrop-blur-sm border-accent/30 hover:border-accent/60 hover:scale-[1.02] transition-[transform,box-shadow] duration-200 ease-out duration-300 group shadow-card hover:shadow-card-hover">
                 <CardContent className="p-5 md:p-6 lg:p-7 space-y-3">
                   <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-primary font-montserrat">
                     Economia e Rendimento
@@ -86,7 +86,7 @@ const ProductSection = memo(({ id }: ProductSectionProps) => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-card/50 backdrop-blur-sm border-accent/30 hover:border-accent/60 hover:scale-[1.02] transition-elegant duration-300 group shadow-card hover:shadow-card-hover">
+              <Card className="bg-card/50 backdrop-blur-sm border-accent/30 hover:border-accent/60 hover:scale-[1.02] transition-[transform,box-shadow] duration-200 ease-out duration-300 group shadow-card hover:shadow-card-hover">
                 <CardContent className="p-5 md:p-6 lg:p-7 space-y-3">
                   <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-primary font-montserrat">
                     Compatibilidade Universal

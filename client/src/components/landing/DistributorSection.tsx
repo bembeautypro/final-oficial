@@ -79,7 +79,7 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon;
               return (
-                <Card key={index} className="bg-card/50 backdrop-blur-sm border-accent/30 hover:border-accent/60 hover:scale-[1.02] transition-elegant duration-300 group shadow-card hover:shadow-card-hover">
+                <Card key={index} className="bg-card/50 backdrop-blur-sm border-accent/30 hover:border-accent/60 hover:scale-[1.02] transition-[transform,box-shadow] duration-200 ease-out duration-300 group shadow-card hover:shadow-card-hover">
                   <CardContent className="p-6 text-center space-y-4">
                     <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto">
                       <IconComponent className="w-8 h-8 text-accent" />

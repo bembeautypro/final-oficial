@@ -55,7 +55,7 @@ const AmazonIngredientsSection = memo(({ id }: AmazonIngredientsSectionProps) =>
             <Card 
               key={ingredient.name}
               className={cn(
-                "relative p-4 transition-elegant duration-300 hover:border-accent/40 hover:scale-[1.02] hover:-translate-y-1 shadow-card hover:shadow-card-hover",
+                "relative p-4 transition-[transform,box-shadow] duration-200 ease-out duration-300 hover:border-accent/40 hover:scale-[1.02] hover:-translate-y-1 shadow-card hover:shadow-card-hover",
                 `bg-gradient-to-br ${ingredient.bgGradient} border-primary/20`
               )}
             >

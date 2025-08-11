@@ -8,7 +8,7 @@ interface VideoLoaderProps {
   className?: string;
 }
 
-const VideoLoader = ({ src, thumbnail, title, className = "" }: VideoLoaderProps) => {
+export const VideoLoader = ({ src, thumbnail, title, className = "" }: VideoLoaderProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -88,8 +88,8 @@ const VideoLoader = ({ src, thumbnail, title, className = "" }: VideoLoaderProps
         )}
         
         {/* Play button overlay */}
-        <div className="absolute inset-0 bg-brand-black/40 flex items-center justify-center group-hover:bg-brand-black/30 transition-elegant">
-          <div className="w-20 h-20 bg-gradient-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-elegant shadow-premium">
+        <div className="absolute inset-0 bg-brand-black/40 flex items-center justify-center group-hover:bg-brand-black/30 transition-[transform,box-shadow] duration-200 ease-out">
+          <div className="w-20 h-20 bg-gradient-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-[transform,box-shadow] duration-200 ease-out shadow-premium">
             <Play className="w-10 h-10 text-brand-black ml-1" />
           </div>
         </div>

@@ -1,0 +1,142 @@
+TAREFA: Fazer uma revisão completa e aplicar correções pontuais de DESIGN/UX/PERFORMANCE na landing NIVELA® — sem adicionar seções novas e sem mudar copy. Público: cabeleireiros e distribuidores 35–55 anos. Mobile-first, estética sofisticada.
+
+REGRAS:
+- NÃO adicionar novas seções, copy, gatilhos mentais ou blocos de conteúdo.
+- Pode ajustar: espaçamentos, tipografia, hierarquia visual, alinhamentos, contrastes, bordas, microanimações SUAVES, estados de foco/hover, performance (carregamento).
+- Manter identidade Bem Beauty / NIVELA e cores oficiais.
+- Tracking (GTM/GA4) deve permanecer funcional, sem violar CSP.
+- Após ajustes, gerar RELATÓRIO com tudo o que foi verificado, alterado e pendências.
+
+========================
+1) VERIFICAÇÕES DE SUPABASE
+========================
+1.1 ENV
+- Confirmar VITE_SUPABASE_URL=https://fdyzlqovxvdpkzlwuhjj.supabase.co
+- Confirmar VITE_SUPABASE_ANON_KEY ativo
+- VITE_ANALYTICS_ENABLED=true (se existir flag)
+
+1.2 Conectividade
+- Testar client @supabase/supabase-js com createClient(url, anon).
+- Fazer SELECT LIMIT 1 em:
+  - leads_nivela
+  - distribuidores
+  - analytics_events
+  - performance_metrics
+- Reportar latência média (3 tentativas).
+
+1.3 RLS & POLICIES (apenas leitura/insersão permitidas)
+- Confirmar que INSERT em leads_nivela e distribuidores funciona com payload mínimo (simulação MOCK sem gravar em produção – usar transação abortada se projeto permitir; se não, apenas validar permissão com EXPLAIN/hasAccess).
+- Confirmar que SELECT só retorna o esperado em contexto público (nunca dados sensíveis).
+- Validar que analytics_events e performance_metrics não permitem alterações indevidas do cliente.
+
+1.4 STORAGE BUCKETS
+- Confirmar buckets públicos: imagens, videos, favicon.
+- Verificar URLs dos assets (200/OK e MIME correto). Detectar e corrigir “//” duplo.
+- Conferir cache-control dos assets (se possível via headers).
+
+========================
+2) HTML/HEAD & SEO TÉCNICO (SEM MUDAR COPY)
+========================
+- Validar <html lang="pt-BR" dir="ltr">.
+- Garantir meta viewport, theme-color, color-scheme.
+- Conferir canonical, alternates, OG/Twitter, JSON-LD (Organization/WebSite/Product).
+- Favicons + manifest do Supabase corretos.
+- Resource hints: preconnect/dns-prefetch supabase/fonts; preload do hero .webp.
+- Checar robots.txt e sitemap.xml (mínimos).
+- Sem metas ou tags duplicadas. Remover redundâncias.
+
+========================
+3) PERFORMANCE (MOBILE-FIRST)
+========================
+Objetivos:
+- LCP < 2.5s em 4G “slow” (simulação Lighthouse).
+- CLS < 0.1 / INP < 200ms (threshold).
+- Bundle JS inicial: reduzir o que for trivially removível (sem alterar features).
+- CSS crítico enxuto; evitar estilos mortos.
+Ações:
+- Adiar scripts não críticos (defer/async).
+- Verificar lazy-loading em imagens não LCP e vídeos.
+- Garantir que o hero .webp é leve e dimensionado corretamente.
+- Revalidar preloads/preconnects.
+- Confirmar que GTM/GA4 não bloqueiam render (CSP ok).
+
+========================
+4) DESIGN & UX (SOFISTICAÇÃO, 35–55, SEM MUDAR CONTEÚDO)
+========================
+4.1 Tipografia
+- Hierarquia clara (H1/H2/H3), line-height confortável, espaçamentos verticais consistentes (8/12/16/24/32 px como escala base).
+- Tamanho mínimo de fonte em mobile 16px; títulos 28–36px; subtítulos 18–20px.
+- font-weight coerente (evitar ultralight em pequenos tamanhos).
+
+4.2 Espaçamentos & Grid
+- Padronizar paddings/margens: hero, seções, cards, listas, botões.
+- Garantir alinhamentos consistentes (gutter uniforme em mobile; 16px recomendado).
+- Evitar orfãs/viúvas em textos longos (CSS hyphens e balanceamento se aplicado).
+
+4.3 Botões & Estados
+- Estados hover/focus/active consistentes; foco visível (outline) AA.
+- Raio de borda e altura mínimos para toque (~44px).
+- Cursor, roles e aria-labels em elementos clicáveis.
+
+4.4 Cores & Contraste
+- Checar contrastes WCAG AA (texto e botões).
+- Corrigir quaisquer casos com contraste insuficiente sem alterar a paleta principal (usar variações mais escuras da cor oficial).
+- Evitar usar texto sobre imagens sem overlay suficiente.
+
+4.5 Microinterações (SUAVES)
+- Aplicar transições curtas (150–250ms) em :hover/:focus de botões/links, opacidade e transform suave (translateY(1–2px) no hover de CTAs, se fizer sentido).
+- Respeitar prefers-reduced-motion: reduzir animações.
+
+4.6 Componentes específicos
+- Formulários: labels claros, placeholders discretos, erro/sucesso com feedback textual, espaçamento entre campos consistente.
+
+========================
+5) REDIRECIONAMENTOS & LINKS
+========================
+- Banner Nuvemshop → landing com UTM (preservar UTMs).
+- CTA “ACESSAR LOJA OFICIAL” → https://bembeauty.com.br com UTM apropriada.
+- WhatsApp: link funcionando; incluir prefixo [utm:...] na mensagem (sem quebrar).
+- Links externos com rel="noopener" quando target="_blank".
+- 404/rota inexistente: experiência amigável (sem mudar copy/estrutura).
+
+========================
+6) TRACKING (SEM QUEBRAR CSP)
+========================
+- GTM=GTM-KZW3RTWD ativo; GA4=G-SC9C7W6Q4F via GTM (allowLinker, cross-domain: bembeauty.com.br, nivela.bembeauty.com.br).
+- Consent Mode default já aplicado; nenhum bloqueio de render.
+- Verificar disparo de:
+  - generate_lead (form pro)
+  - generate_lead_distribuidor
+  - cta_acessar_loja
+  - whatsapp_click
+  - video_manifesto_start/complete
+  - video_tecnologia_start/complete
+  - scroll_50 / scroll_90
+  - form_start / form_start_distribuidor
+- Web Vitals (CLS, LCP, INP) enviando para GA4 (eventos não-interativos).
+- Sem violações de CSP no console.
+
+========================
+7) QA DE ACESSIBILIDADE
+========================
+- Navegação por teclado completa (tab order lógico).
+- Foco visível sempre.
+- Alt text em imagens relevantes; role/aria onde necessário.
+- Tocar/pressionar elementos em mobile sem toques acidentais (hit area ≥ 44px).
+
+========================
+8) RELATÓRIO FINAL (GERAR E EXIBIR)
+========================
+Entregar um RELATÓRIO com:
+- ✅/⚠️ por item acima (1 a 7)
+- Lista de ajustes feitos (arquivo/linha + descrição do ajuste)
+- Core Web Vitals (Lighthouse mobile): LCP/CLS/INP + notas ≥ 95 (Perf, SEO, A11y, Best)
+- Tabela rápida de contraste (antes/depois, se houve correções)
+- Lista de URLs testadas (assets Supabase, favicons, manifest) com HTTP 200/OK
+- Confirmação de eventos disparando no DebugView do GA4
+- Pendências (se existirem) com proposta de solução
+
+IMPORTANTE:
+- NÃO adicionar seções novas, nem alterar o texto/copy. Foco em design, UX e performance.
+- Manter identidade e estética premium/sóbria.
+- Antes do commit, MOSTRAR DIFF dos arquivos alterados.

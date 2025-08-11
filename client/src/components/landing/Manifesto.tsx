@@ -1,6 +1,6 @@
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { ParallaxContainer } from "@/components/ui/parallax-container";
-import { VideoLazy } from "@/components/ui/video-lazy";
+import { VideoLoader } from "./VideoLoader";
 
 
 interface ManifestoProps {
@@ -37,20 +37,10 @@ const Manifesto = ({ id }: ManifestoProps) => {
             <AnimatedSection animation="scale" delay={0.6}>
               <div className="relative group max-w-3xl lg:max-w-4xl mx-auto">
                 <div className="relative overflow-hidden rounded-lg">
-                  <VideoLazy
-                    id="video-manifesto"
+                  <VideoLoader
                     src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/videos/video-manifesto-oficial-compactado.mp4"
-                    className="aspect-video"
-                    autoPlay={true}
-                    muted={true}
-                    loop={true}
-                    controls={false}
-                    preload="metadata"
-                    threshold={0.1}
-                    rootMargin="100px"
-                    aria-label="Vídeo institucional NIVELA - Manifesto da marca"
                     title="NIVELA - Nova era em retexturização capilar"
-                    onError={(error) => console.error('Erro ao carregar vídeo do manifesto', { error: error.message })}
+                    className="aspect-video"
                   />
                 </div>
               </div>

@@ -39,10 +39,11 @@ const Footer = ({ id }: FooterProps) => {
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToTop}
-        className="absolute -top-6 right-6 lg:right-12 bg-gradient-to-r from-brand-caramel to-brand-latte p-3 rounded-full shadow-elegant hover:shadow-glow transition-all duration-300 hover:scale-105 group hover:shadow-[0_0_20px_rgba(157,73,22,0.4)]"
-        aria-label="Voltar ao topo"
+        className="absolute -top-6 right-6 lg:right-12 bg-gradient-to-r from-brand-caramel to-brand-latte p-3 rounded-full shadow-elegant hover:shadow-glow transition-[transform,box-shadow] duration-200 ease-out hover:scale-105 group hover:shadow-[0_0_20px_rgba(157,73,22,0.4)] min-h-[48px] min-w-[48px]"
+        aria-label="Voltar ao topo da página"
+        data-testid="button-scroll-top"
       >
-        <ChevronUp className="h-5 w-5 text-white group-hover:text-brand-black transition-colors" />
+        <ChevronUp className="h-5 w-5 text-white group-hover:text-brand-black transition-colors duration-200" />
       </button>
 
       {/* Main Footer Content */}
@@ -113,9 +114,9 @@ const Footer = ({ id }: FooterProps) => {
                   <button
                     key={item.target}
                     onClick={() => scrollToSection(item.target)}
-                    className="block text-base font-montserrat text-brand-cloud hover:text-brand-latte transition-elegant group"
+                    className="block text-base font-montserrat text-brand-cloud hover:text-brand-latte transition-[transform,box-shadow] duration-200 ease-out group"
                   >
-                    <span className="border-b border-transparent group-hover:border-brand-latte transition-elegant">
+                    <span className="border-b border-transparent group-hover:border-brand-latte transition-[transform,box-shadow] duration-200 ease-out">
                       {item.label}
                     </span>
                   </button>
@@ -158,7 +159,7 @@ const Footer = ({ id }: FooterProps) => {
                     <p className="text-sm font-montserrat font-medium text-brand-latte">E-mail</p>
                     <a 
                       href="mailto:comercial@bembeauty.com.br" 
-                      className="text-sm font-montserrat text-brand-cloud hover:text-brand-latte transition-elegant"
+                      className="text-sm font-montserrat text-brand-cloud hover:text-brand-latte transition-[transform,box-shadow] duration-200 ease-out"
                     >
                       comercial@bembeauty.com.br
                     </a>
@@ -253,7 +254,7 @@ const Footer = ({ id }: FooterProps) => {
                 href="https://bembeauty.com.br/politica-de-privacidade"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-montserrat text-brand-cloud hover:text-brand-latte transition-elegant"
+                className="text-sm font-montserrat text-brand-cloud hover:text-brand-latte transition-[transform,box-shadow] duration-200 ease-out"
               >
                 Política de Privacidade
               </a>
@@ -261,7 +262,7 @@ const Footer = ({ id }: FooterProps) => {
                 href="https://bembeauty.com.br/termos-de-uso"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-montserrat text-brand-cloud hover:text-brand-latte transition-elegant"
+                className="text-sm font-montserrat text-brand-cloud hover:text-brand-latte transition-[transform,box-shadow] duration-200 ease-out"
               >
                 Termos de Uso
               </a>

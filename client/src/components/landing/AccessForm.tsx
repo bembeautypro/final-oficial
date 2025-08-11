@@ -66,27 +66,71 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
     <section className="py-12 px-4" id={id||"acesso"}>
       <div className="max-w-lg mx-auto">
         <div className="text-center mb-10">
-          <h2 className="text-3xl lg:text-4xl font-bold">Solicite seu acesso exclusivo</h2>
-          <p className="text-muted-foreground">Preencha 4 campos essenciais.</p>
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4">Solicite seu acesso exclusivo</h2>
+          <p className="text-lg text-muted-foreground">Preencha 4 campos essenciais.</p>
         </div>
         <LoadingState isLoading={isLoading} variant="skeleton" className="h-96"
           fallback={<div className="space-y-4 animate-pulse"><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/></div>}>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <Input placeholder="Nome completo" value={formData.nome} onChange={e=>set('nome',e.target.value)} required />
-              {errors.nome && <p className="text-red-500 text-sm mt-1 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.nome}</p>}
+              <label className="sr-only" htmlFor="nome">Nome completo (obrigatório)</label>
+              <Input 
+                id="nome"
+                placeholder="Nome completo *" 
+                value={formData.nome} 
+                onChange={e=>set('nome',e.target.value)} 
+                required 
+                className="h-14 text-base"
+                data-testid="input-nome"
+                aria-describedby={errors.nome ? "nome-error" : undefined}
+                aria-invalid={!!errors.nome}
+              />
+              {errors.nome && <p id="nome-error" className="text-red-500 text-sm mt-2 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.nome}</p>}
             </div>
             <div>
-              <Input type="email" placeholder="Email" value={formData.email} onChange={e=>set('email',e.target.value)} required />
-              {errors.email && <p className="text-red-500 text-sm mt-1 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.email}</p>}
+              <label className="sr-only" htmlFor="email">Email profissional (obrigatório)</label>
+              <Input 
+                id="email"
+                type="email" 
+                placeholder="Email profissional *" 
+                value={formData.email} 
+                onChange={e=>set('email',e.target.value)} 
+                required 
+                className="h-14 text-base"
+                data-testid="input-email"
+                aria-describedby={errors.email ? "email-error" : undefined}
+                aria-invalid={!!errors.email}
+              />
+              {errors.email && <p id="email-error" className="text-red-500 text-sm mt-2 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.email}</p>}
             </div>
             <div>
-              <Input inputMode="tel" placeholder="WhatsApp" value={formData.telefone} onChange={e=>set('telefone',maskWhats(e.target.value))} required />
-              {errors.telefone && <p className="text-red-500 text-sm mt-1 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.telefone}</p>}
+              <label className="sr-only" htmlFor="telefone">WhatsApp para contato (obrigatório)</label>
+              <Input 
+                id="telefone"
+                inputMode="tel" 
+                placeholder="WhatsApp *" 
+                value={formData.telefone} 
+                onChange={e=>set('telefone',maskWhats(e.target.value))} 
+                required 
+                className="h-14 text-base"
+                data-testid="input-telefone"
+                aria-describedby={errors.telefone ? "telefone-error" : undefined}
+                aria-invalid={!!errors.telefone}
+              />
+              {errors.telefone && <p id="telefone-error" className="text-red-500 text-sm mt-2 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.telefone}</p>}
             </div>
             <div>
+              <label className="sr-only" htmlFor="tipo-estabelecimento">Tipo de estabelecimento (obrigatório)</label>
               <Select value={formData.tipo_estabelecimento} onValueChange={(v)=>set('tipo_estabelecimento',v)} required>
-                <SelectTrigger><SelectValue placeholder="Tipo de estabelecimento" /></SelectTrigger>
+                <SelectTrigger 
+                  id="tipo-estabelecimento"
+                  className="h-14 text-base"
+                  data-testid="select-tipo-estabelecimento"
+                  aria-describedby={errors.tipo_estabelecimento ? "tipo-error" : undefined}
+                  aria-invalid={!!errors.tipo_estabelecimento}
+                >
+                  <SelectValue placeholder="Tipo de estabelecimento *" />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="salao-proprio">Salão próprio</SelectItem>
                   <SelectItem value="salao-terceiros">Salão de terceiros</SelectItem>
@@ -95,9 +139,17 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
                   <SelectItem value="freelancer">Freelancer</SelectItem>
                 </SelectContent>
               </Select>
-              {errors.tipo_estabelecimento && <p className="text-red-500 text-sm mt-1 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.tipo_estabelecimento}</p>}
+              {errors.tipo_estabelecimento && <p id="tipo-error" className="text-red-500 text-sm mt-2 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.tipo_estabelecimento}</p>}
             </div>
-            <Button type="submit" variant="premium" size="xl" className="w-full">ENVIAR SOLICITAÇÃO</Button>
+            <Button 
+              type="submit" 
+              variant="premium" 
+              size="xl" 
+              className="w-full h-16 text-lg font-semibold mt-8"
+              data-testid="button-enviar-solicitacao"
+            >
+              ENVIAR SOLICITAÇÃO
+            </Button>
           </form>
         </LoadingState>
       </div>

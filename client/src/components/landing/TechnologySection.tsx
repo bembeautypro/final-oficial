@@ -86,10 +86,10 @@ const TechnologySection = memo(({ id }: TechnologySectionProps) => {
               <div className="hidden md:block absolute top-1/2 left-1/4 w-1/2 h-0.5 bg-gradient-to-r from-accent/60 to-accent/30 transform -translate-y-1/2 z-0"></div>
               
               {processSteps.map((process, index) => (
-                <Card key={process.step} className="bg-card/40 backdrop-blur-sm border-primary/30 hover:border-accent/60 transition-elegant duration-300 group hover:shadow-card shadow-card relative z-10">
+                <Card key={process.step} className="bg-card/40 backdrop-blur-sm border-primary/30 hover:border-accent/60 transition-[transform,box-shadow] duration-200 ease-out duration-300 group hover:shadow-card shadow-card relative z-10">
                   <CardContent className="p-4 lg:p-6 relative">
                     {/* Number positioned half outside, half inside the card */}
-                    <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-accent rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-elegant duration-300 shadow-lg z-20">
+                    <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-accent rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-[transform,box-shadow] duration-200 ease-out duration-300 shadow-lg z-20">
                       <span className="font-bold text-sm text-brand-black font-montserrat">
                         {process.step}
                       </span>
