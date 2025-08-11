@@ -33,10 +33,9 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
     try {
       const utm = new URLSearchParams(window.location.search);
       const res = await submitLead({
-        ...formData,
-        utm_source: utm.get('utm_source'),
-        utm_medium: utm.get('utm_medium'),
-        utm_campaign: utm.get('utm_campaign')
+        nome: formData.nome,
+        email: formData.email,
+        telefone: formData.telefone
       });
       if (!res.ok) throw new Error(res.error);
       setIsSubmitted(true);
