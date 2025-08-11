@@ -107,7 +107,7 @@ class ResourcePreloader {
       as: 'image'
     });
 
-    this.preloadResource('https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-trans-comp.png', {
+    this.preloadResource('https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-hero.webp', {
       priority: 'high',
       as: 'image'
     });
