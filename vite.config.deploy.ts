@@ -2,9 +2,10 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-// Build específico para Vercel
+// Build específico para Vercel - estrutura simplificada
 export default defineConfig({
   plugins: [react()],
+  root: "client",
   base: "/",
   resolve: {
     alias: {
@@ -13,7 +14,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "dist",
+    outDir: "../dist",
     emptyOutDir: true,
     assetsDir: "assets",
     sourcemap: false,
