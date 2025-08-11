@@ -37,11 +37,23 @@ const Manifesto = ({ id }: ManifestoProps) => {
             <AnimatedSection animation="scale" delay={0.6}>
               <div className="relative group max-w-3xl lg:max-w-4xl mx-auto">
                 <div className="relative overflow-hidden rounded-lg">
-                  <VideoLoader
+                  <video
                     src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/videos/video-manifesto-oficial-compactado.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls={false}
+                    controlsList="nodownload nofullscreen noremoteplaybook"
+                    disablePictureInPicture
+                    preload="auto"
+                    className="w-full h-full object-cover aspect-video"
+                    style={{ pointerEvents: 'none' }}
+                    aria-label="NIVELA - Nova era em retexturização capilar"
                     title="NIVELA - Nova era em retexturização capilar"
-                    className="aspect-video"
-                  />
+                  >
+                    Seu navegador não suporta reprodução de vídeos HTML5.
+                  </video>
                 </div>
               </div>
             </AnimatedSection>

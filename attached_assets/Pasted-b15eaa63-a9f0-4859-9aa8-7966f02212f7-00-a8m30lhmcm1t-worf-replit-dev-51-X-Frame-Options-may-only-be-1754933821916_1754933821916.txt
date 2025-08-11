@@ -1,0 +1,24 @@
+b15eaa63-a9f0-4859-9aa8-7966f02212f7-00-a8m30lhmcm1t.worf.replit.dev/:51 X-Frame-Options may only be set via an HTTP header sent along with a document. It may not be set inside <meta>.Understand this error
+chunk-JKG5FPDI.js?v=9901240e:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+events.ts:135 The entry type 'cls' does not exist or isn't supported.
+(anonymous) @ events.ts:135Understand this warning
+events.ts:135 The entry type 'lcp' does not exist or isn't supported.
+(anonymous) @ events.ts:135Understand this warning
+events.ts:135 The entry type 'inp' does not exist or isn't supported.
+(anonymous) @ events.ts:135Understand this warning
+framer-motion.js?v=9901240e:696 Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+warnOnce @ framer-motion.js?v=9901240e:696Understand this warning
+submit.ts:28 Frontend submitDistribuidor payload: {nome: 'bananadinha', email: 'pirueba@gmail.com', telefone: '21996349790', empresa: '', cidade: '', …}
+submit.ts:40 Frontend prepared data: {nome: 'bananadinha', email: 'pirueba@gmail.com', telefone: '21996349790', empresa: null, mensagem: null, …}
+@supabase_supabase-js.js?v=9901240e:4230  POST https://fdyzlqovxvdpkzlwuhjj.supabase.co/rest/v1/distribuidores?select=* 401 (Unauthorized)
+(anonymous) @ @supabase_supabase-js.js?v=9901240e:4230
+(anonymous) @ @supabase_supabase-js.js?v=9901240e:4251
+fulfilled @ @supabase_supabase-js.js?v=9901240e:4203
+Promise.then
+step @ @supabase_supabase-js.js?v=9901240e:4216
+(anonymous) @ @supabase_supabase-js.js?v=9901240e:4218
+__awaiter6 @ @supabase_supabase-js.js?v=9901240e:4200
+(anonymous) @ @supabase_supabase-js.js?v=9901240e:4241
+then @ @supabase_supabase-js.js?v=9901240e:90Understand this error
+submit.ts:43 Supabase result: {result: null, error: {…}}
+submit.ts:46 Supabase error details: {code: '42501', details: null, hint: null, message: 'new row violates row-level security policy for table "distribuidores"'}
