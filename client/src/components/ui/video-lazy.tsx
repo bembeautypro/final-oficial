@@ -53,7 +53,7 @@ export const VideoLazy = memo<VideoLazyProps>(({
 
   const handleError = (event: React.SyntheticEvent<HTMLVideoElement>) => {
     setHasError(true);
-    console.error('Video loading failed:', { src });
+    // Video loading failed - handled gracefully
     onError?.(event.nativeEvent);
   };
 

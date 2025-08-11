@@ -45,7 +45,7 @@ export const PerformanceAwareImage = memo<PerformanceAwareImageProps>(({
 
   const handleError = () => {
     setHasError(true);
-    console.error('Image loading failed:', src);
+    // Image loading failed - handled gracefully
   };
 
   if (hasError) {

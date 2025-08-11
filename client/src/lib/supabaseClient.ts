@@ -4,7 +4,7 @@ const url = import.meta.env.VITE_SUPABASE_URL!
 const anon = import.meta.env.VITE_SUPABASE_ANON_KEY!
 
 if (!url || !anon) {
-  console.error('[Supabase] ENV ausentes: defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY')
+  throw new Error('[Supabase] ENV ausentes: defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY')
 }
 
 export const supabase = createClient(url, anon, { 

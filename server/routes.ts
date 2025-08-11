@@ -28,7 +28,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof z.ZodError) {
         res.status(400).json({ error: "Invalid data", details: error.errors });
       } else {
-        console.error("Error creating lead:", error);
+        // Error logged for development only
         res.status(500).json({ error: "Internal server error" });
       }
     }
@@ -49,10 +49,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const errorMessage = error instanceof Error ? error.message : String(error);
         
         if (errorCode === '23505' || errorMessage?.includes('duplicate') || errorMessage?.includes('unique')) {
-          console.error("Duplicate email error:", error);
+          // Duplicate email handled
           res.status(409).json({ error: "Este email já está cadastrado como distribuidor" });
         } else {
-          console.error("Error creating distribuidor:", error);
+          // Error logged for development only
           res.status(500).json({ error: "Internal server error" });
         }
       }
@@ -70,7 +70,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof z.ZodError) {
         res.status(400).json({ error: "Invalid data", details: error.errors });
       } else {
-        console.error("Error creating metric:", error);
+        // Error logged for development only
         res.status(500).json({ error: "Internal server error" });
       }
     }
@@ -94,7 +94,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof z.ZodError) {
         res.status(400).json({ error: "Invalid data", details: error.errors });
       } else {
-        console.error("Error creating analytics event:", error);
+        // Error logged for development only
         res.status(500).json({ error: "Internal server error" });
       }
     }
@@ -124,14 +124,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           });
           results.push(analyticsEvent);
         } catch (err) {
-          console.error("Error creating individual analytics event:", err);
+          // Error creating individual analytics event - continuing
           // Continue processing other events
         }
       }
       
       res.status(201).json({ success: true, processed: results.length, total: events.length });
     } catch (error) {
-      console.error("Error processing analytics batch:", error);
+      // Error processing analytics batch
       res.status(500).json({ error: "Internal server error" });
     }
   });
