@@ -25,18 +25,25 @@ export async function submitDistribuidor(payload: {
   cidade?: string
   estado?: string
 }) {
+  console.log('Frontend submitDistribuidor payload:', payload);
+  
   const data = {
     nome: payload.nome?.trim(),
     email: payload.email?.trim().toLowerCase(),
     telefone: payload.telefone?.trim(),
-    empresa: payload.empresa?.trim() || '',
-    mensagem: payload.mensagem?.trim() || '',
-    cidade: payload.cidade?.trim() || '',
-    estado: payload.estado?.trim() || '',
+    empresa: payload.empresa?.trim() || null,
+    mensagem: payload.mensagem?.trim() || null,
+    cidade: payload.cidade?.trim() || null,
+    estado: payload.estado?.trim() || null,
   }
   
+  console.log('Frontend prepared data:', data);
+  
   const { data: result, error } = await supabase.from('distribuidores').insert(data).select()
+  console.log('Supabase result:', { result, error });
+  
   if (error) {
+    console.error('Supabase error details:', error);
     if (error.code === '23505' || error.message?.includes('duplicate') || error.message?.includes('unique')) {
       return { ok: false as const, error: 'Este email já está cadastrado como distribuidor' }
     }
