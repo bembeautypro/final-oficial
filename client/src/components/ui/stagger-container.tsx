@@ -48,7 +48,7 @@ const StaggerContainer = ({
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={containerVariants}
-      className={cn(className)}
+      className={cn("relative", className)}
     >
       {Array.isArray(children) 
         ? children.map((child, index) => (

@@ -17,7 +17,7 @@ const PreFooter = lazy(() => import("@/components/landing/PreFooter"));
 const Index = memo(() => {
 
   return (
-    <div className="min-h-screen bg-background font-montserrat scroll-smooth">
+    <div className="relative min-h-screen bg-background font-montserrat scroll-smooth">
       <ScrollIndicator />
       <main id="main-content" tabIndex={-1}>
           <Header id="inicio" />

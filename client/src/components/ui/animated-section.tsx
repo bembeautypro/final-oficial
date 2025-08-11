@@ -64,7 +64,7 @@ const AnimatedSection = ({
         delay: adjustedDelay,
         ease: [0.4, 0, 0.2, 1]
       }}
-      className={cn(className)}
+      className={cn("relative", className)}
     >
       {children}
     </motion.div>
