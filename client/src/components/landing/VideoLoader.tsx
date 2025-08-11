@@ -128,11 +128,11 @@ export const VideoLoader = ({ src, thumbnail, title, className = "" }: VideoLoad
         controlsList="nodownload nofullscreen noremoteplaybook"
         disablePictureInPicture
         style={{ pointerEvents: 'none', aspectRatio: "16/9" }}
-        preload="metadata"
+        preload="auto"
         className="w-full h-full object-cover touch-target"
         onLoadedData={handleLoadedData}
         onError={handleError}
-        onLoadStart={() => setIsLoading(true)}
+        onLoadStart={() => setIsLoading(false)}
         aria-label={`Vídeo demonstrativo: ${title}`}
         title={title}
         tabIndex={0}

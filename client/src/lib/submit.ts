@@ -18,7 +18,7 @@ export async function submitLead(payload: {
     nome: payload.nome?.trim(),
     email: payload.email?.trim().toLowerCase(),
     telefone: payload.telefone?.trim(),
-    tipoEstabelecimento: payload.tipoEstabelecimento || null,
+
     utmSource: payload.utm_source ?? utm.utm_source ?? null,
     utmMedium: payload.utm_medium ?? utm.utm_medium ?? null,
     utmCampaign: payload.utm_campaign ?? utm.utm_campaign ?? null

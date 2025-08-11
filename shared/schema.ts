@@ -8,7 +8,7 @@ export const leadsNivela = pgTable("leads_nivela", {
   nome: text("nome").notNull(),
   email: text("email").notNull().unique(),
   telefone: text("telefone").notNull(),
-  tipoEstabelecimento: text("tipo_estabelecimento"),
+
   
   // Analytics tracking fields
   utmSource: text("utm_source"),
@@ -60,6 +60,11 @@ export const distribuidores = pgTable("distribuidores", {
   estado: text("estado"),
   experiencia_distribuicao: text("experiencia_distribuicao"),
   volume_vendas_mensal: text("volume_vendas_mensal"),
+  utm_source: text("utm_source"),
+  utm_medium: text("utm_medium"),
+  utm_campaign: text("utm_campaign"),
+  utm_content: text("utm_content"),
+  utm_term: text("utm_term"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
