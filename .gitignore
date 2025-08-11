@@ -90,6 +90,15 @@ jspm_packages/
 tmp/
 temp/
 
+# Temporary assets and uploads (NIVELA specific)
+attached_assets/
+*.tmp
+*.temp
+
+# Build outputs
+build/
+out/
+
 # OS generated files
 .DS_Store
 .DS_Store?

@@ -8,7 +8,7 @@ This is a professional landing page for NIVELA®, a premium hair treatment produ
 
 ## Recent Changes
 
-### Aug 11, 2025 - Critical Fixes Implemented
+### Aug 11, 2025 - Critical Fixes and Structure Cleanup Implemented
 - **API Distribuidores Fixed:** Now processes all fields sent by frontend (experiencia_distribuicao, mensagem)
 - **Centralized Supabase Client:** Created `api/_supabase.ts` for unified database access
 - **Build Configuration Corrected:** Fixed vite.config.deploy.ts paths from `src/` to `client/src/`
@@ -23,6 +23,9 @@ This is a professional landing page for NIVELA®, a premium hair treatment produ
 - **Form Components Updated:** AccessFormModal and DistributorSection with direct Supabase submission
 - **Environment Variables Fixed:** Configured VITE_SUPABASE variables for frontend
 - **Duplicate Email Handling:** Improved error messages for email constraint violations
+- **Repository Structure Cleanup:** Removed duplicate src/ folder, cleaned attached_assets/, updated .gitignore
+- **API Optimization:** Removed TypeScript duplicates in API folder, keeping only Vercel-compatible .js files
+- **Build Configuration:** Unified client/ as canonical frontend source, removed duplicate index.html
 - **Production Ready:** All tests passing, build optimized (166KB gzip), ready for Vercel
 
 ## User Preferences
