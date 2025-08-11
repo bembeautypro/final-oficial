@@ -16,7 +16,7 @@ interface DistributorSectionProps {
 const DistributorSection = memo(({ id }: DistributorSectionProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [f, setF] = useState({ nome:"", email:"", empresa:"", cidade:"", estado:"", mensagem:"" });
+  const [f, setF] = useState({ nome:"", email:"", telefone:"", empresa:"", cidade:"", estado:"", mensagem:"" });
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault(); 
@@ -25,7 +25,7 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
       const r = await submitDistribuidor(f);
       if (!r.ok) throw new Error(r.error);
       toast.success('Cadastro enviado com sucesso!');
-      setF({ nome:"", email:"", empresa:"", cidade:"", estado:"", mensagem:"" });
+      setF({ nome:"", email:"", telefone:"", empresa:"", cidade:"", estado:"", mensagem:"" });
       setIsModalOpen(false);
     } catch (err:any) { 
       toast.error(err?.message || 'Erro ao enviar cadastro'); 
@@ -126,6 +126,12 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
                   required 
                 />
               </div>
+              <Input 
+                placeholder="WhatsApp/Telefone" 
+                value={f.telefone} 
+                onChange={e=>setF({...f, telefone:e.target.value})} 
+                required 
+              />
               <Input 
                 placeholder="Empresa (se houver)" 
                 value={f.empresa} 

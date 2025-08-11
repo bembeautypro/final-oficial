@@ -26,6 +26,7 @@ export async function submitLead(payload: {
 export async function submitDistribuidor(payload: {
   nome: string
   email: string
+  telefone: string
   empresa?: string
   mensagem?: string
   cidade?: string
@@ -34,6 +35,7 @@ export async function submitDistribuidor(payload: {
   const data = {
     nome: payload.nome?.trim(),
     email: payload.email?.trim().toLowerCase(),
+    telefone: payload.telefone?.trim(),
     empresa: payload.empresa?.trim() || null,
     mensagem: payload.mensagem?.trim() || null,
     cidade: payload.cidade?.trim() || null,
