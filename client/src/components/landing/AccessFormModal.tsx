@@ -34,24 +34,88 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Solicitar Acesso Exclusivo</DialogTitle>
-          <DialogDescription>
+      <DialogContent className="w-[95vw] max-w-md mx-auto max-h-[90vh] overflow-y-auto">
+        <DialogHeader className="space-y-3 pb-4">
+          <DialogTitle className="text-lg sm:text-xl font-bold text-center">
+            Solicitar Acesso Exclusivo
+          </DialogTitle>
+          <DialogDescription className="text-sm text-center text-muted-foreground">
             Preencha os dados abaixo para ter acesso ao NIVELA®
+            <br />
+            <span className="text-xs text-brand-latte font-medium">* Campos obrigatórios</span>
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={onSubmit} className="space-y-4">
-          <Input placeholder="Nome completo" value={f.nome} onChange={e=>setF({...f, nome:e.target.value})} required />
-          <Input type="email" placeholder="Email" value={f.email} onChange={e=>setF({...f, email:e.target.value})} required />
-          <Input placeholder="WhatsApp" value={f.telefone} onChange={e=>setF({...f, telefone:e.target.value})} required />
-          <Input placeholder="Tipo de estabelecimento" value={f.tipo_estabelecimento} onChange={e=>setF({...f, tipo_estabelecimento:e.target.value})} required />
-          <div className="flex gap-2">
-            <Button type="button" variant="outline" onClick={onClose} className="flex-1">
+        <form onSubmit={onSubmit} className="space-y-5">
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <label className="text-sm font-medium text-foreground">
+                Nome completo <span className="text-red-500">*</span>
+              </label>
+              <Input 
+                placeholder="Digite seu nome completo" 
+                value={f.nome} 
+                onChange={e=>setF({...f, nome:e.target.value})} 
+                required 
+                className="h-12"
+              />
+            </div>
+            
+            <div className="space-y-1">
+              <label className="text-sm font-medium text-foreground">
+                Email profissional <span className="text-red-500">*</span>
+              </label>
+              <Input 
+                type="email" 
+                placeholder="seu@email.com" 
+                value={f.email} 
+                onChange={e=>setF({...f, email:e.target.value})} 
+                required 
+                className="h-12"
+              />
+            </div>
+            
+            <div className="space-y-1">
+              <label className="text-sm font-medium text-foreground">
+                WhatsApp <span className="text-red-500">*</span>
+              </label>
+              <Input 
+                placeholder="(11) 99999-9999" 
+                value={f.telefone} 
+                onChange={e=>setF({...f, telefone:e.target.value})} 
+                required 
+                className="h-12"
+              />
+            </div>
+            
+            <div className="space-y-1">
+              <label className="text-sm font-medium text-foreground">
+                Tipo de estabelecimento <span className="text-red-500">*</span>
+              </label>
+              <Input 
+                placeholder="Ex: Salão de beleza, Barbearia, Clínica estética" 
+                value={f.tipo_estabelecimento} 
+                onChange={e=>setF({...f, tipo_estabelecimento:e.target.value})} 
+                required 
+                className="h-12"
+              />
+            </div>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-3 pt-4">
+            <Button 
+              type="button" 
+              variant="outline" 
+              onClick={onClose} 
+              className="flex-1 h-12 text-sm font-medium"
+            >
               Cancelar
             </Button>
-            <Button type="submit" disabled={isLoading} className="flex-1">
-              {isLoading ? 'Enviando...' : 'Enviar'}
+            <Button 
+              type="submit" 
+              disabled={isLoading} 
+              className="flex-1 h-12 text-sm font-medium bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black hover:scale-105"
+            >
+              {isLoading ? 'Enviando...' : 'Solicitar Acesso'}
             </Button>
           </div>
         </form>
