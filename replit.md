@@ -76,14 +76,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-### Aug 11, 2025 - COMPLETE SIMPLIFICATION TO 3 FIELDS ONLY
+### Aug 11, 2025 - COMPLETE SIMPLIFICATION + FORM FIXES
 - **FORMS SIMPLIFIED**: Both forms now have only 3 fields (Nome, E-mail, WhatsApp)
 - **COLLECTIONS**: Maintained two separate collections (leads_nivela and distribuidores)
-- **DIRECT SUPABASE**: Forms write directly to Supabase without complications
-- **REMOVED FIELDS**: Eliminated all optional fields (empresa, cidade, estado, mensagem, etc)
+- **FRONTEND FIX**: Forms now use Express API (/api/leads, /api/distribuidores) instead of direct Supabase
+- **REMOVED FIELDS**: Eliminated all optional fields (empresa, cidade, estado, mensagem, etc)  
 - **CLEAN CODE**: All helpers, schemas, and storage simplified to minimal structure
-- **TESTING**: Confirmed working with IDs 65 (lead) and 155 (distributor)
-- **BUILD**: Ready for production deployment
+- **TESTING CONFIRMED**: Working perfectly with IDs 68 (lead) and 158 (distributor)
+- **DATABASE CLEANUP**: Removed duplicate indexes for better performance
+- **BUILD**: Ready for production deployment (324KB optimized)
 
 ### Aug 11, 2025 - COMPREHENSIVE SUPABASE INTEGRATION AUDIT & OPTIMIZATION
 - **DATABASE STRUCTURE**: Added missing fields (tipo_estabelecimento, hp, utm_content, utm_term) to both tables
