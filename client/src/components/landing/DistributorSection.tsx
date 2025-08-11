@@ -17,7 +17,7 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [f, setF] = useState({ nome:"", email:"", telefone:"", empresa:"", cidade:"", estado:"", mensagem:"" });
+  const [f, setF] = useState({ nome:"", email:"", telefone:"" });
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault(); 
@@ -26,7 +26,7 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
       const r = await submitDistribuidor(f);
       if (!r.ok) throw new Error(r.error);
       toast.success('Cadastro enviado com sucesso!');
-      setF({ nome:"", email:"", telefone:"", empresa:"", cidade:"", estado:"", mensagem:"" });
+      setF({ nome:"", email:"", telefone:"" });
       setIsSubmitted(true);
     } catch (err:any) { 
       toast.error(err?.message || 'Erro ao enviar cadastro'); 
@@ -140,44 +140,38 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
                 </DialogHeader>
             
             <form id="form-dist" data-form="distribuidor" onSubmit={onSubmit} className="space-y-6">
-              {/* Dados Pessoais */}
+              {/* SIMPLIFIED - 3 FIELDS ONLY */}
               <div className="space-y-4">
-                <h3 className="text-sm font-semibold text-foreground border-b border-border pb-2">
-                  Dados Pessoais
-                </h3>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-sm font-medium text-foreground">
-                      Nome completo <span className="text-red-500">*</span>
-                    </label>
-                    <Input 
-                      placeholder="Digite seu nome completo" 
-                      value={f.nome} 
-                      onChange={e=>setF({...f, nome:e.target.value})} 
-                      required 
-                      className="h-12"
-                    />
-                  </div>
-                  
-                  <div className="space-y-1">
-                    <label className="text-sm font-medium text-foreground">
-                      Email profissional <span className="text-red-500">*</span>
-                    </label>
-                    <Input 
-                      type="email" 
-                      placeholder="seu@email.com" 
-                      value={f.email} 
-                      onChange={e=>setF({...f, email:e.target.value})} 
-                      required 
-                      className="h-12"
-                    />
-                  </div>
+                <div className="space-y-1">
+                  <label className="text-sm font-medium text-foreground">
+                    Nome completo <span className="text-red-500">*</span>
+                  </label>
+                  <Input 
+                    placeholder="Digite seu nome completo" 
+                    value={f.nome} 
+                    onChange={e=>setF({...f, nome:e.target.value})} 
+                    required 
+                    className="h-12"
+                  />
                 </div>
                 
                 <div className="space-y-1">
                   <label className="text-sm font-medium text-foreground">
-                    WhatsApp/Telefone <span className="text-red-500">*</span>
+                    E-mail <span className="text-red-500">*</span>
+                  </label>
+                  <Input 
+                    type="email" 
+                    placeholder="seu@email.com" 
+                    value={f.email} 
+                    onChange={e=>setF({...f, email:e.target.value})} 
+                    required 
+                    className="h-12"
+                  />
+                </div>
+                
+                <div className="space-y-1">
+                  <label className="text-sm font-medium text-foreground">
+                    WhatsApp <span className="text-red-500">*</span>
                   </label>
                   <Input 
                     placeholder="(11) 99999-9999" 
@@ -185,70 +179,6 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
                     onChange={e=>setF({...f, telefone:e.target.value})} 
                     required 
                     className="h-12"
-                  />
-                </div>
-              </div>
-
-              {/* Dados Empresariais */}
-              <div className="space-y-4">
-                <h3 className="text-sm font-semibold text-foreground border-b border-border pb-2">
-                  Dados Empresariais
-                </h3>
-                
-                <div className="space-y-1">
-                  <label className="text-sm font-medium text-foreground">
-                    Nome da empresa <span className="text-gray-500 text-xs">(opcional)</span>
-                  </label>
-                  <Input 
-                    placeholder="Nome da sua empresa ou estabelecimento" 
-                    value={f.empresa} 
-                    onChange={e=>setF({...f, empresa:e.target.value})} 
-                    className="h-12"
-                  />
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1">
-                    <label className="text-sm font-medium text-foreground">
-                      Cidade <span className="text-gray-500 text-xs">(opcional)</span>
-                    </label>
-                    <Input 
-                      placeholder="Sua cidade" 
-                      value={f.cidade} 
-                      onChange={e=>setF({...f, cidade:e.target.value})} 
-                      className="h-12"
-                    />
-                  </div>
-                  
-                  <div className="space-y-1">
-                    <label className="text-sm font-medium text-foreground">
-                      Estado <span className="text-gray-500 text-xs">(opcional)</span>
-                    </label>
-                    <Input 
-                      placeholder="Seu estado" 
-                      value={f.estado} 
-                      onChange={e=>setF({...f, estado:e.target.value})} 
-                      className="h-12"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Mensagem */}
-              <div className="space-y-4">
-                <h3 className="text-sm font-semibold text-foreground border-b border-border pb-2">
-                  Informações Adicionais
-                </h3>
-                
-                <div className="space-y-1">
-                  <label className="text-sm font-medium text-foreground">
-                    Mensagem <span className="text-gray-500 text-xs">(opcional)</span>
-                  </label>
-                  <textarea 
-                    className="w-full p-4 border border-input bg-background rounded-xl resize-none min-h-[120px] text-sm focus:ring-2 focus:ring-brand-latte/50 focus:border-brand-latte transition-all" 
-                    placeholder="Conte-nos sobre sua experiência no setor de beleza, objetivos como distribuidor, ou qualquer informação relevante..."
-                    value={f.mensagem} 
-                    onChange={e=>setF({...f, mensagem:e.target.value})}
                   />
                 </div>
               </div>

@@ -2,13 +2,12 @@ import { pgTable, text, uuid, timestamp, inet, jsonb } from "drizzle-orm/pg-core
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-// Leads table for NIVELA® landing page - simplified structure
+// SIMPLIFIED - 3 FIELDS ONLY
 export const leadsNivela = pgTable("leads_nivela", {
   id: uuid("id").primaryKey().defaultRandom(),
   nome: text("nome").notNull(),
   email: text("email").notNull().unique(),
   telefone: text("telefone").notNull(),
-  hp: text("hp").default(""),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
@@ -35,17 +34,12 @@ export const analyticsEvents = pgTable("analytics_events", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-// Distributors table - simplified structure matching interface
+// SIMPLIFIED - 3 FIELDS ONLY
 export const distribuidores = pgTable("distribuidores", {
   id: uuid("id").primaryKey().defaultRandom(),
   nome: text("nome").notNull(),
   email: text("email").notNull(),
   telefone: text("telefone").notNull(),
-  empresa: text("empresa"),
-  cidade: text("cidade"),
-  estado: text("estado"),
-  mensagem: text("mensagem"),
-  hp: text("hp").default(""),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
@@ -60,15 +54,6 @@ export const insertDistribuidorSchema = createInsertSchema(distribuidores).pick(
   nome: true,
   email: true,
   telefone: true,
-  empresa: true,
-  mensagem: true,
-  cidade: true,
-  estado: true,
-}).partial({
-  empresa: true,
-  mensagem: true,
-  cidade: true,
-  estado: true,
 });
 
 export const insertPerformanceMetricSchema = createInsertSchema(performanceMetrics).pick({

@@ -36,16 +36,15 @@ export class DatabaseStorage implements IStorage {
     try {
       console.log("Inserting lead via Supabase:", leadData);
       
-      // Usar cliente Supabase com campos simplificados
+      // SIMPLIFIED - 3 FIELDS ONLY
       const { data, error } = await supabase
         .from('leads_nivela')
         .insert({
           nome: leadData.nome,
           email: leadData.email,
-          telefone: leadData.telefone,
-          hp: ''
+          telefone: leadData.telefone
         })
-        .select('id, nome, email, telefone, hp, created_at')
+        .select('id, nome, email, telefone, created_at')
         .single();
 
       if (error) {
@@ -54,7 +53,11 @@ export class DatabaseStorage implements IStorage {
       }
 
       console.log("Lead created via Supabase:", data.id);
-      return data as LeadNivela;
+      // Map created_at to createdAt
+      return {
+        ...data,
+        createdAt: new Date(data.created_at)
+      } as LeadNivela;
     } catch (error) {
       console.error("Database error creating lead:", error);
       throw error;
@@ -69,20 +72,15 @@ export class DatabaseStorage implements IStorage {
     try {
       console.log("Inserting distribuidor via Supabase:", distribuidorData);
       
-      // Simple Supabase insert with essential fields only
+      // SIMPLIFIED - 3 FIELDS ONLY
       const { data, error } = await supabase
         .from('distribuidores')
         .insert({
           nome: distribuidorData.nome,
           email: distribuidorData.email,
-          telefone: distribuidorData.telefone,
-          empresa: distribuidorData.empresa || null,
-          cidade: distribuidorData.cidade || null,
-          estado: distribuidorData.estado || null,
-          mensagem: distribuidorData.mensagem || null,
-          hp: ''
+          telefone: distribuidorData.telefone
         })
-        .select('id, nome, email, telefone, empresa, cidade, estado, mensagem, hp, created_at')
+        .select('id, nome, email, telefone, created_at')
         .single();
 
       if (error) {
@@ -91,9 +89,12 @@ export class DatabaseStorage implements IStorage {
         throw error;
       }
 
-      const newDistribuidor = data as Distribuidor;
-      console.log("Distribuidor created via Supabase:", newDistribuidor.id);
-      return newDistribuidor;
+      console.log("Distribuidor created via Supabase:", data.id);
+      // Map created_at to createdAt
+      return {
+        ...data,
+        createdAt: new Date(data.created_at)
+      } as Distribuidor;
     } catch (error) {
       console.error("Database error creating distribuidor:", error);
       throw error;
