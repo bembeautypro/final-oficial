@@ -57,43 +57,35 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
   ];
 
   return (
-    <section id={id} className="py-20 lg:py-28 bg-gradient-to-b from-secondary/30 via-background to-primary/5 relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(185,128,96,0.1),transparent_40%),radial-gradient(circle_at_70%_80%,rgba(207,155,128,0.08),transparent_40%)]" />
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <section id={id} className="py-12 md:py-16 lg:py-20 px-4 md:px-6 lg:px-12 bg-gradient-subtle">
+      <div className="max-w-6xl mx-auto">
         <AnimatedSection>
           {/* Header */}
-          <div className="text-center space-y-8 mb-20">
-            <div className="space-y-4">
-              <div className="inline-flex items-center justify-center px-4 py-2 bg-brand-latte/10 border border-brand-latte/20 rounded-full">
-                <span className="text-sm font-medium text-brand-latte">Oportunidade Exclusiva</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                Torne-se um <br className="hidden sm:block" />
-                <span className="bg-gradient-to-r from-brand-caramel to-brand-latte bg-clip-text text-transparent">
-                  Distribuidor NIVELA®
-                </span>
+          <div className="text-center space-y-4 lg:space-y-6 mb-12 md:mb-16 lg:mb-20">
+            <div className="space-y-3 lg:space-y-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-montserrat text-white tracking-tight leading-[1.1]">
+                Torne-se um <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Distribuidor NIVELA®</span>
               </h2>
+              <div className="h-0.5 lg:h-1 bg-gradient-accent mx-auto w-16 lg:w-24"></div>
             </div>
-            <p className="text-xl md:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed font-light">
-              Faça parte da revolução da beleza profissional e construa um negócio sólido 
-              com produtos premium de tecnologia internacional.
+            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground leading-relaxed max-w-3xl lg:max-w-4xl mx-auto">
+              Faça parte da revolução da beleza profissional. Oportunidade exclusiva para distribuidores 
+              comprometidos com a excelência.
             </p>
           </div>
 
           {/* Benefits Grid */}
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon;
               return (
-                <Card key={index} className="group bg-white/5 backdrop-blur-xl border border-white/10 hover:border-brand-latte/30 transition-all duration-500 hover:scale-[1.05] hover:shadow-2xl hover:shadow-brand-latte/10">
-                  <CardContent className="p-8 text-center space-y-6">
-                    <div className="w-20 h-20 bg-gradient-to-br from-brand-caramel/20 to-brand-latte/20 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300 border border-brand-latte/20">
-                      <IconComponent className="w-10 h-10 text-brand-latte group-hover:text-white transition-colors duration-300" />
+                <Card key={index} className="bg-card/50 backdrop-blur-sm border-accent/30 hover:border-accent/60 hover:scale-[1.02] transition-elegant duration-300 group shadow-card hover:shadow-card-hover">
+                  <CardContent className="p-6 text-center space-y-4">
+                    <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto">
+                      <IconComponent className="w-8 h-8 text-accent" />
                     </div>
-                    <h3 className="text-xl font-bold text-white group-hover:text-brand-latte transition-colors duration-300">{benefit.title}</h3>
-                    <p className="text-sm text-white/70 leading-relaxed group-hover:text-white/90 transition-colors duration-300">{benefit.description}</p>
+                    <h3 className="text-lg font-semibold text-primary">{benefit.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{benefit.description}</p>
                   </CardContent>
                 </Card>
               );
@@ -102,22 +94,13 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
 
           {/* CTA Section */}
           <div className="text-center">
-            <div className="inline-flex flex-col items-center space-y-6">
-              <p className="text-white/60 text-sm uppercase tracking-wider font-medium">
-                Comece agora sua jornada de sucesso
-              </p>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="group relative min-h-[64px] min-w-[350px] px-10 py-5 bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black font-bold text-lg rounded-2xl hover:scale-110 focus:scale-110 transition-all duration-500 hover:shadow-2xl hover:shadow-brand-latte/30 focus:outline-none focus:ring-4 focus:ring-brand-latte/50 overflow-hidden"
-                aria-label="Quero ser distribuidor NIVELA"
-              >
-                <span className="relative z-10">QUERO SER DISTRIBUIDOR</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </button>
-              <p className="text-white/50 text-xs max-w-md leading-relaxed">
-                * Processo de cadastro rápido e sem compromisso inicial
-              </p>
-            </div>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="min-h-[56px] min-w-[300px] px-8 py-4 bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black font-semibold rounded-xl hover:scale-105 focus:scale-105 transition-all duration-300 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brand-latte/50"
+              aria-label="Quero ser distribuidor NIVELA"
+            >
+              QUERO SER DISTRIBUIDOR
+            </button>
           </div>
         </AnimatedSection>
 
