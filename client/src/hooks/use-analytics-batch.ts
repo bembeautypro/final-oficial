@@ -170,11 +170,10 @@ async function sendAnalyticsBatch(events: AnalyticsEvent[]) {
   // Example implementation for custom analytics
   if (import.meta.env.PROD) {
     try {
-      await fetch('/api/analytics/batch', {
+      // Endpoint removido - usar console.log apenas
+      console.log('Analytics batch:', {
+        events: events,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({
           events,
           sessionId: getSessionId(),
@@ -197,7 +196,7 @@ function sendAnalyticsBeacon(events: AnalyticsEvent[]) {
       beacon: true
     });
 
-    navigator.sendBeacon('/api/analytics/batch', data);
+    // navigator.sendBeacon('/api/analytics/batch', data); // Endpoint removido
     
     logger.info('Analytics sent via beacon', { eventCount: events.length });
   } catch (error) {

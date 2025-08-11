@@ -55,20 +55,15 @@ export class EnhancedErrorBoundary extends Component<Props, State> {
   private reportError = (error: Error, errorInfo: React.ErrorInfo) => {
     // Example: Report to external service
     try {
-      fetch('/api/errors', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: error.message,
-          stack: error.stack,
-          componentStack: errorInfo.componentStack,
-          errorId: this.state.errorId,
-          timestamp: new Date().toISOString(),
-          url: window.location.href,
-          userAgent: navigator.userAgent
-        })
-      }).catch(() => {
-        // Fail silently to avoid infinite error loops
+      // Endpoint removido - usar console.log apenas  
+      console.error('Error reported:', {
+        message: error.message,
+        stack: error.stack,
+        componentStack: errorInfo.componentStack,
+        errorId: this.state.errorId,
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+        userAgent: navigator.userAgent
       });
     } catch {
       // Fail silently
