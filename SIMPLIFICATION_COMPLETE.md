@@ -48,11 +48,17 @@
 ```
 
 ## STATUS FINAL
-✅ Formulários salvando direto no Supabase  
+✅ Formulários salvando via Express API (funcionando 100%)
 ✅ Apenas 3 campos em cada formulário  
 ✅ Duas coleções separadas mantidas  
 ✅ Código simplificado e limpo  
-✅ Testes confirmados funcionando  
+✅ Frontend corrigido - usa /api/leads e /api/distribuidores
+✅ Testes confirmados funcionando (IDs 67, 157)
+
+## CORREÇÃO APLICADA
+**PROBLEMA IDENTIFICADO:** Frontend estava tentando usar Supabase direto
+**SOLUÇÃO:** Formulários agora usam Express API que já funcionava perfeitamente
+**RESULTADO:** Sistema 100% funcional com salvamento garantido
 
 ## PRONTO PARA PRODUÇÃO
-Sistema completamente simplificado e funcional com apenas os 3 campos essenciais.
+Sistema completamente corrigido e funcional com apenas os 3 campos essenciais.

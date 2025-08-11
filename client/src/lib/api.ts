@@ -1,22 +1,28 @@
-// SIMPLIFIED - 3 FIELDS ONLY (Nome, Email, WhatsApp)
-import { supabase } from './supabaseClient'
-
+// SIMPLIFIED - 3 FIELDS ONLY via Express API
 export async function saveLead(input: { 
   nome: string
   email: string
   telefone: string
 }) {
-  const { data, error } = await supabase
-    .from('leads_nivela')
-    .insert([{
+  const response = await fetch('/api/leads', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
       nome: input.nome.trim(),
       email: input.email.toLowerCase().trim(),
       telefone: input.telefone.trim()
-    }])
-    .select('id')
-  
-  if (error) throw error
-  return data?.[0]
+    })
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.error || 'Erro ao salvar lead')
+  }
+
+  const result = await response.json()
+  return result.lead
 }
 
 export async function saveDistribuidor(input: { 
@@ -24,15 +30,23 @@ export async function saveDistribuidor(input: {
   email: string
   telefone: string
 }) {
-  const { data, error } = await supabase
-    .from('distribuidores')
-    .insert([{
+  const response = await fetch('/api/distribuidores', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
       nome: input.nome.trim(),
       email: input.email.toLowerCase().trim(),
       telefone: input.telefone.trim()
-    }])
-    .select('id')
-  
-  if (error) throw error
-  return data?.[0]
+    })
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.error || 'Erro ao salvar distribuidor')
+  }
+
+  const result = await response.json()
+  return result.distribuidor
 }
