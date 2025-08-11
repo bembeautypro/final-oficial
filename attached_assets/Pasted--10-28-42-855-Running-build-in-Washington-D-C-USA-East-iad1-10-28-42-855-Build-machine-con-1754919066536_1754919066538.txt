@@ -1,0 +1,52 @@
+[10:28:42.855] Running build in Washington, D.C., USA (East) – iad1
+[10:28:42.855] Build machine configuration: 4 cores, 8 GB
+[10:28:42.875] Cloning github.com/bembeautypro/final-oficial (Branch: main, Commit: 028d084)
+[10:28:42.973] Previous build caches not available
+[10:28:43.146] Cloning completed: 271.000ms
+[10:28:45.574] Running "vercel build"
+[10:28:46.050] Vercel CLI 44.7.3
+[10:28:46.666] Running "install" command: `npm install`...
+[10:29:36.205] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[10:29:36.206] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[10:29:45.734] 
+[10:29:45.735] added 752 packages, and audited 753 packages in 59s
+[10:29:45.735] 
+[10:29:45.735] 150 packages are looking for funding
+[10:29:45.735]   run `npm fund` for details
+[10:29:45.777] 
+[10:29:45.778] 11 vulnerabilities (3 low, 6 moderate, 2 high)
+[10:29:45.778] 
+[10:29:45.778] To address all issues (including breaking changes), run:
+[10:29:45.778]   npm audit fix --force
+[10:29:45.778] 
+[10:29:45.778] Run `npm audit` for details.
+[10:29:46.064] 
+[10:29:46.064] > rest-express@1.0.0 build
+[10:29:46.064] > vite build --config vite.config.deploy.ts
+[10:29:46.064] 
+[10:29:46.352] [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+[10:29:46.716] transforming...
+[10:29:52.412] [32m✓[39m 2185 modules transformed.
+[10:29:52.714] rendering chunks...
+[10:29:52.953] computing gzip size...
+[10:29:53.005] [2mdist/[22m[2massets/[22m[32msite-cD1BAN5B.webmanifest              [39m[1m[2m  0.27 kB[22m[1m[22m
+[10:29:53.006] [2mdist/[22m[32mclient/index.html                             [39m[1m[2m  5.54 kB[22m[1m[22m[2m │ gzip:   1.74 kB[22m
+[10:29:53.007] [2mdist/[22m[2massets/[22m[35mindex-BUttzoBG.css                     [39m[1m[2m 94.64 kB[22m[1m[22m[2m │ gzip:  15.39 kB[22m
+[10:29:53.007] [2mdist/[22m[2massets/[22m[36mPreFooter-BNp9fyW-.js                  [39m[1m[2m  1.45 kB[22m[1m[22m[2m │ gzip:   0.81 kB[22m
+[10:29:53.007] [2mdist/[22m[2massets/[22m[36mSynergyCallout-DD742TIc.js             [39m[1m[2m  1.79 kB[22m[1m[22m[2m │ gzip:   0.80 kB[22m
+[10:29:53.008] [2mdist/[22m[2massets/[22m[36mAmazonIngredientsSection-B1CJMc1C.js   [39m[1m[2m  2.26 kB[22m[1m[22m[2m │ gzip:   1.07 kB[22m
+[10:29:53.009] [2mdist/[22m[2massets/[22m[36mCompleteTechnologySection-DpzY1BmI.js  [39m[1m[2m  5.26 kB[22m[1m[22m[2m │ gzip:   1.94 kB[22m
+[10:29:53.009] [2mdist/[22m[2massets/[22m[36mDistributorSection-CxilIvA3.js         [39m[1m[2m  5.73 kB[22m[1m[22m[2m │ gzip:   2.35 kB[22m
+[10:29:53.009] [2mdist/[22m[2massets/[22m[36mBemTechSection-BhGW7yeI.js             [39m[1m[2m  6.29 kB[22m[1m[22m[2m │ gzip:   2.35 kB[22m
+[10:29:53.010] [2mdist/[22m[2massets/[22m[36mFAQSection-e3XE_uCG.js                 [39m[1m[2m 10.84 kB[22m[1m[22m[2m │ gzip:   4.35 kB[22m
+[10:29:53.010] [2mdist/[22m[2massets/[22m[36mutils-BTGVH9Kg.js                      [39m[1m[2m 20.28 kB[22m[1m[22m[2m │ gzip:   6.83 kB[22m
+[10:29:53.011] [2mdist/[22m[2massets/[22m[36mvendor-CCqOfSOs.js                     [39m[1m[2m141.86 kB[22m[1m[22m[2m │ gzip:  45.59 kB[22m
+[10:29:53.011] [2mdist/[22m[2massets/[22m[36mindex-jA4ynae5.js                      [39m[1m[2m479.08 kB[22m[1m[22m[2m │ gzip: 147.21 kB[22m
+[10:29:53.011] [32m✓ built in 6.63s[39m
+[10:29:53.149] Build Completed in /vercel/output [1m]
+[10:29:53.266] Deploying outputs...
+[10:29:55.761] Deployment completed
+[10:29:56.618] Creating build cache...
+[10:30:13.889] Created build cache: 17.269s
+[10:30:13.889] Uploading build cache [100.90 MB]
+[10:30:15.184] Build cache uploaded: 1.296s

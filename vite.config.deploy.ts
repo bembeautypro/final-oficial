@@ -5,6 +5,7 @@ import path from "path";
 // Build específico para Vercel
 export default defineConfig({
   plugins: [react()],
+  root: "client",
   base: "/",
   resolve: {
     alias: {
@@ -13,7 +14,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "dist",
+    outDir: "../dist",
     emptyOutDir: true,
     assetsDir: "assets",
     sourcemap: false,
