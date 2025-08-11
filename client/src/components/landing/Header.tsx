@@ -51,18 +51,16 @@ const Header = memo(({ id }: HeaderProps) => {
                 
                 {/* Unified Brand + Title Block */}
                 <div className="space-y-4 lg:space-y-6">
-                <h1 className="hero-title-responsive">
-                    <span className="block text-brand-latte font-semibold mb-3 lg:mb-4">NIVELA®</span>
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-montserrat font-bold text-brand-light leading-[1.1] tracking-tight">
+                    <span className="block text-brand-latte font-semibold mb-2">NIVELA®</span>
                     <span className="block">A evolução da</span>
                     <span className="block">escova progressiva</span>
                   </h1>
                 </div>
                 
                 {/* Subtitle Description */}
-                <p className="hero-subtitle-responsive max-w-full lg:max-w-3xl mt-4 lg:mt-6 px-2 sm:px-0">
-                  <span className="block sm:inline">Desenvolvido com tecnologia patenteada,</span>
-                  <span className="block sm:inline"> sem formol, com ativos da Amazônia</span>
-                  <span className="block sm:inline"> e rendimento 30% superior.</span>
+                <p className="text-base sm:text-lg md:text-xl lg:text-xl font-montserrat text-brand-cloud/90 leading-relaxed max-w-full lg:max-w-3xl mt-4 lg:mt-6 px-2 sm:px-0">
+                  Desenvolvido com tecnologia patenteada, sem formol, com ativos da Amazônia e rendimento 30% superior.
                 </p>
 
                 {/* Badges - Hierarchical design */}
