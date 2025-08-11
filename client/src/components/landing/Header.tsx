@@ -50,16 +50,16 @@ const Header = memo(({ id }: HeaderProps) => {
               <div className="hero-content flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 w-full max-w-full lg:max-w-5xl px-2 sm:px-4 lg:px-0">
                 
                 {/* Unified Brand + Title Block */}
-                <div className="space-y-2 lg:space-y-3">
-                  <h1 className="hero-title-main">
-                    <span className="block text-brand-latte font-semibold mb-3 lg:mb-4">NIVELA®</span>
+                <div className="space-y-3 lg:space-y-4">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-montserrat font-bold text-brand-light leading-[1.1] tracking-tight">
+                    <span className="block text-brand-latte font-semibold">NIVELA®</span>
                     <span className="block">A evolução da</span>
                     <span className="block">escova progressiva</span>
                   </h1>
                 </div>
                 
                 {/* Subtitle Description */}
-                <p className="hero-subtitle-text max-w-full lg:max-w-4xl mt-4 lg:mt-6 px-2 sm:px-0">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-montserrat text-brand-cloud/90 leading-relaxed max-w-full lg:max-w-4xl mt-4 lg:mt-8 px-2 sm:px-0">
                   Desenvolvido com tecnologia patenteada, sem formol, com ativos da Amazônia e rendimento 30% superior.
                 </p>
 
@@ -82,7 +82,7 @@ const Header = memo(({ id }: HeaderProps) => {
                  {/* Primary CTA Button - Captura de Lead Premium */}
                  <button 
                    onClick={() => setIsModalOpen(true)}
-                   className="min-h-[48px] min-w-[280px] touch-manipulation px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-xl hover:scale-[1.02] focus:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-brand-latte/50 focus:ring-offset-2 transition-[transform,box-shadow] duration-200 ease-out text-sm sm:text-base lg:text-lg font-semibold w-full sm:w-auto max-w-sm bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black hover:shadow-premium active:scale-[0.98] cursor-pointer"
+                   className="min-h-[56px] min-w-[280px] touch-manipulation px-6 sm:px-8 lg:px-10 rounded-xl hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-latte/50 focus:ring-offset-2 transition-all duration-300 ease-out text-sm sm:text-base lg:text-lg font-semibold w-full sm:w-auto max-w-sm bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black hover:shadow-premium active:scale-[0.98] cursor-pointer"
                    aria-label="Solicitar acesso exclusivo ao NIVELA - Formulário de cadastro profissional"
                    tabIndex={0}
                    data-testid="button-solicitar-acesso"
