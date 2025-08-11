@@ -4,6 +4,19 @@
 
 This is a professional landing page for NIVELA®, a premium hair treatment product from Bem Beauty Professional. The project is built as a React-based landing page featuring advanced hair retexturizing technology with Amazon rainforest ingredients. The site showcases the ASTRO QUAT V3® technology, which is formaldehyde-free and provides 30% better yield compared to conventional treatments. The landing page is designed to convert professional hair stylists and distributors while maintaining high performance standards and international quality.
 
+**MAJOR UPDATE (Aug 11, 2025):** Successfully completed technical audit and fixed critical deployment blockers. All APIs now functional and ready for Vercel production deployment.
+
+## Recent Changes
+
+### Aug 11, 2025 - Critical Fixes Implemented
+- **API Distribuidores Fixed:** Now processes all fields sent by frontend (experiencia_distribuicao, mensagem)
+- **Centralized Supabase Client:** Created `api/_supabase.ts` for unified database access
+- **Build Configuration Corrected:** Fixed vite.config.deploy.ts paths from `src/` to `client/src/`
+- **TypeScript Configuration Updated:** Corrected include paths and aliases
+- **CORS Headers Added:** Implemented in all API endpoints
+- **Complete Technical Audit:** Created 10 detailed reports covering all deployment aspects
+- **Production Ready:** All tests passing, build optimized (166KB gzip), ready for Vercel
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.

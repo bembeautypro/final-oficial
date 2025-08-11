@@ -8,7 +8,7 @@ export default defineConfig({
   base: "/",
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      "@": path.resolve(__dirname, "client/src"),
       "@shared": path.resolve(__dirname, "shared"),
       "@assets": path.resolve(__dirname, "attached_assets"),
     },
@@ -21,7 +21,7 @@ export default defineConfig({
     minify: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, "index.html")
+        main: path.resolve(__dirname, "client/index.html")
       },
       output: {
         manualChunks: {
