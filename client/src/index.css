@@ -17,19 +17,27 @@ All colors MUST be HSL.
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+    
+    .transition-elegant,
+    .transition-sophisticated {
+      transition: none !important;
+    }
   }
   
   /* Enhanced focus styles for accessibility */
   *:focus-visible {
     outline: 2px solid hsl(var(--brand-latte));
-    outline-offset: 2px;
+    outline-offset: 3px;
     border-radius: 4px;
+    transition: outline-offset 0.15s ease-out;
   }
   
-  /* Improved touch targets for mobile */
+  /* Improved touch targets for mobile - iOS HIG & Material Design compliant */
   button, [role="button"], a, input, select, textarea {
     min-height: 44px;
     min-width: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   :root {
     /* NIVELA® Brand Colors - Cores Oficiais da Marca */

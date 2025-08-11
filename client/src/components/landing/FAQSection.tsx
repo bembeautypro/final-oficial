@@ -66,10 +66,10 @@ const FAQSection = memo(({ id }: FAQSectionProps) => {
                 className="group border border-primary/20 rounded-2xl px-6 py-1 hover:border-accent/40 hover:bg-primary/5 hover:scale-[1.01] transition-[transform,box-shadow] duration-200 ease-out duration-300 shadow-card hover:shadow-card-hover focus-within:ring-2 focus-within:ring-accent focus-within:ring-offset-2"
                 style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <AccordionTrigger className="text-left font-semibold text-lg lg:text-xl text-primary group-hover:text-accent transition-[transform,box-shadow] duration-200 ease-out py-5 min-h-12 focus-visible-enhanced">
+                <AccordionTrigger className="text-left font-semibold text-base md:text-lg lg:text-xl text-primary group-hover:text-accent transition-[transform,box-shadow] duration-200 ease-out py-5 min-h-[44px] focus-visible-enhanced">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground text-base lg:text-lg leading-relaxed pb-5">
+                <AccordionContent className="text-muted-foreground/90 text-sm md:text-base lg:text-lg leading-relaxed pb-5">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -79,7 +79,7 @@ const FAQSection = memo(({ id }: FAQSectionProps) => {
 
         {/* CTA Final */}
         <div className="mt-20 text-center space-y-8">
-          <p className="text-lg lg:text-xl xl:text-2xl text-muted-foreground font-montserrat">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground/90 font-montserrat">
             Ainda tem dúvidas? Nossa equipe especializada está pronta para ajudar.
           </p>
           <a 
@@ -88,7 +88,7 @@ const FAQSection = memo(({ id }: FAQSectionProps) => {
             rel="noopener noreferrer"
             data-gtm-event="whatsapp_click"
             data-whatsapp
-            className="inline-flex items-center justify-center text-lg lg:text-xl px-12 py-6 rounded-2xl hover:scale-105 hover:shadow-glow focus-visible-enhanced transition-[transform,box-shadow] duration-200 ease-out bg-gradient-primary text-white font-semibold"
+            className="inline-flex items-center justify-center text-base md:text-lg px-8 py-4 rounded-xl hover:scale-105 hover:shadow-glow focus-visible-enhanced transition-[transform,box-shadow] duration-200 ease-out bg-gradient-primary text-white font-semibold min-h-[48px]"
             aria-label="Falar com especialista no WhatsApp"
           >
             FALAR COM ESPECIALISTA

@@ -54,7 +54,7 @@ const TechnologySection = memo(({ id }: TechnologySectionProps) => {
           
           {/* Descriptive Paragraph */}
           <div className="max-w-5xl mx-auto">
-            <p className="text-lg lg:text-xl xl:text-2xl text-muted-foreground leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-muted-foreground/90 leading-relaxed">
               Desenvolvida por pesquisa molecular avançada, a tecnologia ASTRO QUAT V3® atua em escala nanométrica, reorganizando as ligações internas da fibra capilar com precisão e segurança, totalmente livre de formol.
             </p>
           </div>

@@ -65,10 +65,10 @@ const BemTechSection = memo(({ id }: BemTechSectionProps) => {
               </h2>
               <div className="h-0.5 lg:h-1 bg-gradient-accent mx-auto w-16 lg:w-24"></div>
             </div>
-            <h3 className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-medium text-primary/90">
+            <h3 className="text-lg md:text-xl lg:text-2xl font-medium text-primary/90">
               O primeiro ecossistema digital do setor de beleza
             </h3>
-            <p className="text-base md:text-lg lg:text-xl xl:text-2xl text-muted-foreground max-w-4xl lg:max-w-5xl mx-auto leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-muted-foreground/90 max-w-4xl lg:max-w-5xl mx-auto leading-relaxed">
               Uma infraestrutura completa de apoio ao cabeleireiro e ao distribuidor. 
               Um conjunto de apps inteligentes com IA integrada, que coloca conhecimento, 
               treinamento e suporte na palma da mão.
@@ -87,13 +87,13 @@ const BemTechSection = memo(({ id }: BemTechSectionProps) => {
                       <h4 className="text-xl md:text-2xl lg:text-3xl font-bold text-primary">
                         {tech.name}
                       </h4>
-                      <p className="text-base md:text-lg lg:text-xl text-accent">
+                      <p className="text-sm md:text-base lg:text-lg text-accent/90">
                         {tech.subtitle}
                       </p>
                     </div>
                     
                     {/* Features */}
-                    <ul className="space-y-2 lg:space-y-3 text-base md:text-lg lg:text-xl text-muted-foreground text-left" role="list">
+                    <ul className="space-y-2 lg:space-y-3 text-sm md:text-base lg:text-base text-muted-foreground/85 text-left" role="list">
                       {tech.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start space-x-2 lg:space-x-3">
                           <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-accent rounded-full mt-1.5 lg:mt-2 flex-shrink-0" aria-hidden="true"></div>
