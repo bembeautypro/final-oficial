@@ -2,26 +2,14 @@ import { pgTable, text, uuid, timestamp, inet, jsonb } from "drizzle-orm/pg-core
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-// Leads table for NIVELA® landing page
+// Leads table for NIVELA® landing page - simplified structure
 export const leadsNivela = pgTable("leads_nivela", {
   id: uuid("id").primaryKey().defaultRandom(),
   nome: text("nome").notNull(),
   email: text("email").notNull().unique(),
   telefone: text("telefone").notNull(),
-
-  
-  // Analytics tracking fields
-  utmSource: text("utm_source"),
-  utmMedium: text("utm_medium"),
-  utmCampaign: text("utm_campaign"),
-  userAgent: text("user_agent"),
-  ipAddress: inet("ip_address"),
-  
-  // Control fields
-  status: text("status").notNull().default("pendente"),
-  origem: text("origem").default("landing_page"),
+  hp: text("hp").default(""),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 // Performance metrics table
@@ -47,26 +35,18 @@ export const analyticsEvents = pgTable("analytics_events", {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
-// Distributors table - all fields optional except core ones
+// Distributors table - simplified structure matching interface
 export const distribuidores = pgTable("distribuidores", {
   id: uuid("id").primaryKey().defaultRandom(),
   nome: text("nome").notNull(),
   email: text("email").notNull(),
-  telefone: text("telefone"),
+  telefone: text("telefone").notNull(),
   empresa: text("empresa"),
-  cargo: text("cargo"),
-  mensagem: text("mensagem"),
   cidade: text("cidade"),
   estado: text("estado"),
-  experiencia_distribuicao: text("experiencia_distribuicao"),
-  volume_vendas_mensal: text("volume_vendas_mensal"),
-  utm_source: text("utm_source"),
-  utm_medium: text("utm_medium"),
-  utm_campaign: text("utm_campaign"),
-  utm_content: text("utm_content"),
-  utm_term: text("utm_term"),
+  mensagem: text("mensagem"),
+  hp: text("hp").default(""),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 // Insert schemas
@@ -74,13 +54,6 @@ export const insertLeadNivelaSchema = createInsertSchema(leadsNivela).pick({
   nome: true,
   email: true,
   telefone: true,
-  utmSource: true,
-  utmMedium: true,
-  utmCampaign: true,
-}).partial({
-  utmSource: true,
-  utmMedium: true,
-  utmCampaign: true,
 });
 
 export const insertDistribuidorSchema = createInsertSchema(distribuidores).pick({
@@ -91,22 +64,11 @@ export const insertDistribuidorSchema = createInsertSchema(distribuidores).pick(
   mensagem: true,
   cidade: true,
   estado: true,
-  utm_source: true,
-  utm_medium: true,
-  utm_campaign: true,
-  utm_content: true,
-  utm_term: true,
 }).partial({
   empresa: true,
   mensagem: true,
-  telefone: true,
   cidade: true,
   estado: true,
-  utm_source: true,
-  utm_medium: true,
-  utm_campaign: true,
-  utm_content: true,
-  utm_term: true,
 });
 
 export const insertPerformanceMetricSchema = createInsertSchema(performanceMetrics).pick({

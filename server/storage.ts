@@ -36,15 +36,16 @@ export class DatabaseStorage implements IStorage {
     try {
       console.log("Inserting lead via Supabase:", leadData);
       
-      // Usar cliente Supabase que está funcionando
+      // Usar cliente Supabase com campos simplificados
       const { data, error } = await supabase
         .from('leads_nivela')
         .insert({
           nome: leadData.nome,
           email: leadData.email,
           telefone: leadData.telefone,
+          hp: ''
         })
-        .select()
+        .select('id, nome, email, telefone, hp, created_at')
         .single();
 
       if (error) {
@@ -74,13 +75,14 @@ export class DatabaseStorage implements IStorage {
         .insert({
           nome: distribuidorData.nome,
           email: distribuidorData.email,
-          telefone: distribuidorData.telefone || "Não informado",
+          telefone: distribuidorData.telefone,
           empresa: distribuidorData.empresa || null,
-          cidade: distribuidorData.cidade || "São Paulo",
-          estado: distribuidorData.estado || "SP",
-          mensagem: distribuidorData.mensagem || null
+          cidade: distribuidorData.cidade || null,
+          estado: distribuidorData.estado || null,
+          mensagem: distribuidorData.mensagem || null,
+          hp: ''
         })
-        .select()
+        .select('id, nome, email, telefone, empresa, cidade, estado, mensagem, hp, created_at')
         .single();
 
       if (error) {
