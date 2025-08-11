@@ -43,23 +43,23 @@ const Header = memo(({ id }: HeaderProps) => {
       {/* Main Content Grid */}
       <div className="flex-1 px-4 sm:px-6 md:px-8 lg:px-12 pb-12 lg:pb-20">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid lg:grid-cols-5 gap-8 lg:gap-16 items-center justify-center min-h-[80vh] lg:min-h-screen py-6 lg:py-8">
+          <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-center justify-center min-h-[85vh] lg:min-h-screen py-4 lg:py-6">
             
             {/* Content Section - 60% width on desktop */}
             <div className="lg:col-span-3 order-2 lg:order-1 w-full flex justify-center">
-              <div className="hero-content flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-8 w-full max-w-full lg:max-w-4xl px-2 sm:px-4 lg:px-0">
+              <div className="hero-content flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 w-full max-w-full lg:max-w-5xl px-2 sm:px-4 lg:px-0">
                 
                 {/* Unified Brand + Title Block */}
-                <div className="space-y-4 lg:space-y-6">
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-montserrat font-bold text-brand-light leading-[1.1] tracking-tight">
-                    <span className="block text-brand-latte font-semibold mb-2">NIVELA®</span>
+                <div className="space-y-2 lg:space-y-3">
+                  <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[8rem] 2xl:text-[10rem] font-montserrat font-bold text-brand-light leading-[0.95] tracking-tight">
+                    <span className="block text-brand-latte font-semibold mb-3 lg:mb-4">NIVELA®</span>
                     <span className="block">A evolução da</span>
                     <span className="block">escova progressiva</span>
                   </h1>
                 </div>
                 
                 {/* Subtitle Description */}
-                <p className="text-base sm:text-lg md:text-xl lg:text-xl font-montserrat text-brand-cloud/90 leading-relaxed max-w-full lg:max-w-3xl mt-4 lg:mt-6 px-2 sm:px-0">
+                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-montserrat text-brand-cloud/90 leading-relaxed max-w-full lg:max-w-4xl mt-4 lg:mt-6 px-2 sm:px-0">
                   Desenvolvido com tecnologia patenteada, sem formol, com ativos da Amazônia e rendimento 30% superior.
                 </p>
 
