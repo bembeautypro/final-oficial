@@ -30,16 +30,14 @@ export async function submitDistribuidor(payload: {
   mensagem?: string
   cidade?: string
   estado?: string
-  experiencia_distribuicao?: string
 }) {
   const data = {
     nome: payload.nome?.trim(),
     email: payload.email?.trim().toLowerCase(),
-    empresa: payload.empresa?.trim() || 'Não informado',
+    empresa: payload.empresa?.trim() || null,
     mensagem: payload.mensagem?.trim() || null,
     cidade: payload.cidade?.trim() || null,
-    estado: payload.estado?.trim() || null,
-    experiencia_distribuicao: payload.experiencia_distribuicao || null
+    estado: payload.estado?.trim() || null
   }
   const { error } = await supabase.from('distribuidores').insert(data)
   if (error) {
