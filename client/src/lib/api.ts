@@ -16,12 +16,19 @@ export async function saveLead(input: {
     })
   })
 
+  const isJson = response.headers.get('content-type')?.includes('application/json')
   if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.error || 'Erro ao salvar lead')
+    let msg = response.statusText
+    if (isJson) {
+      try {
+        const error = await response.json()
+        msg = error?.error || msg
+      } catch {}
+    }
+    throw new Error(msg || 'Erro ao salvar lead')
   }
 
-  const result = await response.json()
+  const result = isJson ? await response.json() : {}
   return result.lead
 }
 
@@ -42,11 +49,18 @@ export async function saveDistribuidor(input: {
     })
   })
 
+  const isJson = response.headers.get('content-type')?.includes('application/json')
   if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.error || 'Erro ao salvar distribuidor')
+    let msg = response.statusText
+    if (isJson) {
+      try {
+        const error = await response.json()
+        msg = error?.error || msg
+      } catch {}
+    }
+    throw new Error(msg || 'Erro ao salvar distribuidor')
   }
 
-  const result = await response.json()
+  const result = isJson ? await response.json() : {}
   return result.distribuidor
 }
