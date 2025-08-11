@@ -46,15 +46,31 @@ Preferred communication style: Simple, everyday language.
 - **npm**: Package management
 
 #### Form Processing
-- **Lead Generation**: Direct integration with Supabase for lead capture
+- **Lead Generation**: Direct integration with Supabase for lead capture with UTM attribution
 - **Email Validation**: Client-side and server-side validation
 - **Phone Formatting**: Brazilian phone number formatting
+- **Analytics Tracking**: Complete form interaction tracking with conversion events
+- **UTM Persistence**: Campaign attribution maintained across form submissions
 
 #### Third-Party Integrations
-- **WhatsApp**: Direct integration for customer communication
+- **WhatsApp**: Direct integration for customer communication with UTM tracking
 - **Social Media**: Instagram and YouTube integration
+- **Google Tag Manager**: Complete implementation with container GTM-KZW3RTWD
+- **Google Analytics 4**: Advanced event tracking and conversion measurement
+- **Performance Monitoring**: Core Web Vitals and real-time performance metrics
 
 ## Recent Changes
+
+### Aug 11, 2025 - COMPREHENSIVE ANALYTICS & GTM/GA4 IMPLEMENTATION COMPLETE
+- **ANALYTICS FOUNDATION**: Full GTM/GA4 integration with advanced event tracking system
+- **UTM TRACKING**: Complete UTM parameter capture and persistence across user sessions
+- **FORM TRACKING**: Enhanced form submission tracking with lead generation events
+- **VIDEO ANALYTICS**: Progress tracking (25%, 50%, 75%, complete) for all video content
+- **PERFORMANCE MONITORING**: Core Web Vitals tracking (LCP, FID, CLS) with automatic reporting
+- **WHATSAPP INTEGRATION**: UTM injection into WhatsApp links for campaign attribution
+- **ERROR TRACKING**: Comprehensive error monitoring and exception reporting
+- **DATA LAYER**: Complete dataLayer implementation with structured event taxonomy
+- **SECURITY**: CSP headers implemented for enhanced security while maintaining analytics functionality
 
 ### Aug 11, 2025 - FINAL OPTIMIZATION & CLEANUP COMPLETE
 - **PRODUCTION STATUS**: Site live at nivela.bembeauty.com.br, all forms working perfectly

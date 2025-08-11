@@ -131,9 +131,11 @@ const Footer = ({ id }: FooterProps) => {
               
               {/* CTA Principal - WhatsApp com fundo sólido caramelo */}
               <a
-                href="https://wa.me/552139500901"
+                href="https://wa.me/552139500901?text=Quero%20conhecer%20o%20NIVELA"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-gtm-event="whatsapp_click"
+                data-whatsapp
                 className="inline-flex items-center justify-center space-x-2 bg-brand-caramel hover:bg-brand-caramel/90 px-6 py-3.5 rounded-xl font-montserrat font-semibold text-white hover:shadow-glow transition-all duration-300 hover:scale-105 group w-full sm:w-auto border border-brand-caramel/30 hover:border-brand-caramel/50 hover:shadow-[0_0_15px_rgba(157,73,22,0.4)]"
                 aria-label="Conversar no WhatsApp da Bem Beauty Professional"
               >
@@ -194,9 +196,11 @@ const Footer = ({ id }: FooterProps) => {
                   <Youtube className="h-6 w-6 text-brand-caramel group-hover:text-brand-latte transition-colors group-hover:drop-shadow-[0_0_8px_rgba(217,192,170,0.6)]" />
                 </a>
                 <a
-                  href="https://wa.me/552139500901"
+                  href="https://wa.me/552139500901?text=Quero%20conhecer%20o%20NIVELA"
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-gtm-event="whatsapp_click"
+                  data-whatsapp
                   className="p-4 bg-brand-caramel/10 border border-brand-caramel/30 rounded-xl hover:bg-brand-caramel/20 hover:border-brand-caramel/50 transition-all duration-300 hover:scale-110 group hover:shadow-[0_0_15px_rgba(157,73,22,0.3)]"
                   aria-label="Conversar no WhatsApp"
                 >

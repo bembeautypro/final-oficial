@@ -45,7 +45,7 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
             <span className="text-xs text-brand-latte font-medium">* Campos obrigatórios</span>
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={onSubmit} className="space-y-5">
+        <form id="form-pro" data-form="lead" onSubmit={onSubmit} className="space-y-5">
           <div className="space-y-4">
             <div className="space-y-1">
               <label className="text-sm font-medium text-foreground">
@@ -112,7 +112,8 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
             </Button>
             <Button 
               type="submit" 
-              disabled={isLoading} 
+              disabled={isLoading}
+              data-gtm-event="generate_lead"
               className="flex-1 h-12 text-sm font-medium bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black hover:scale-105"
             >
               {isLoading ? 'Enviando...' : 'Solicitar Acesso'}

@@ -96,6 +96,7 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
           <div className="text-center">
             <button
               onClick={() => setIsModalOpen(true)}
+              data-gtm-event="generate_lead_distribuidor"
               className="min-h-[56px] min-w-[300px] px-8 py-4 bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black font-semibold rounded-xl hover:scale-105 focus:scale-105 transition-all duration-300 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brand-latte/50"
               aria-label="Quero ser distribuidor NIVELA"
             >
@@ -118,7 +119,7 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
               </DialogDescription>
             </DialogHeader>
             
-            <form onSubmit={onSubmit} className="space-y-6">
+            <form id="form-dist" data-form="distribuidor" onSubmit={onSubmit} className="space-y-6">
               {/* Dados Pessoais */}
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold text-foreground border-b border-border pb-2">
@@ -243,7 +244,8 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
                 </Button>
                 <Button 
                   type="submit" 
-                  disabled={isLoading} 
+                  disabled={isLoading}
+                  data-gtm-event="form_submit_distribuidor"
                   className="flex-1 h-12 text-sm font-medium bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black hover:scale-105"
                 >
                   {isLoading ? 'Enviando...' : 'Enviar Cadastro'}

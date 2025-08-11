@@ -17,7 +17,7 @@ const PreFooter = ({ id }: PreFooterProps) => {
         
         <div className="flex justify-center mb-4">
           <a
-            href="https://bembeauty.com.br/?utm_source=landing-nivela&utm_medium=referral&utm_campaign=acesso_loja"
+            href="https://bembeauty.com.br/?utm_source=nivela_lp&utm_medium=cta&utm_campaign=redir_loja"
             data-gtm-event="cta_acessar_loja"
             target="_blank"
             rel="noopener noreferrer"

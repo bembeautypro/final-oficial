@@ -83,9 +83,11 @@ const FAQSection = memo(({ id }: FAQSectionProps) => {
             Ainda tem dúvidas? Nossa equipe especializada está pronta para ajudar.
           </p>
           <a 
-            href="https://wa.me/552139500901"
+            href="https://wa.me/552139500901?text=Quero%20conhecer%20o%20NIVELA"
             target="_blank"
             rel="noopener noreferrer"
+            data-gtm-event="whatsapp_click"
+            data-whatsapp
             className="inline-flex items-center justify-center text-lg lg:text-xl px-12 py-6 rounded-2xl hover:scale-105 hover:shadow-glow focus-visible-enhanced transition-elegant bg-gradient-primary text-white font-semibold"
             aria-label="Falar com especialista no WhatsApp"
           >

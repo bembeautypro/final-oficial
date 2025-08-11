@@ -1,0 +1,169 @@
+TAREFA: Aplicar configuração FINAL da landing NIVELA® (SEO completo, Social, Segurança/CSP, GTM+GA4 com Consent, Cross-domain, UTMs, Eventos, Web Vitals, Logs, Robots/Sitemap, QA).
+
+## 0) Premissas
+- Domínio canônico: https://nivela.bembeauty.com.br/
+- Supabase: fdyzlqovxvdpkzlwuhjj.supabase.co (não alterar)
+- IDs: GTM=GTM-KZW3RTWD, GA4=G-SC9C7W6Q4F
+- Definir ENV: VITE_ANALYTICS_ENABLED=true
+
+## 1) HEAD — SEO, Favicons, Manifest, Performance (inserir/atualizar sem duplicar)
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<html lang="pt-BR" dir="ltr">
+<meta name="theme-color" content="#0D181C">
+<meta name="color-scheme" content="dark light">
+<link rel="canonical" href="https://nivela.bembeauty.com.br/">
+<link rel="alternate" href="https://nivela.bembeauty.com.br/" hreflang="pt-BR">
+<link rel="alternate" href="https://nivela.bembeauty.com.br/" hreflang="x-default">
+
+<title>NIVELA® — Evolução da escova progressiva profissional | Bem Beauty Professional</title>
+<meta name="description" content="NIVELA®: retexturizador hidro nutritivo sem formol, com tecnologia ASTRO QUAT V3 e ativos da Amazônia. Performance profissional, brilho e disciplina duradoura.">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+
+<!-- Favicons/Manifest (Supabase) -->
+<link rel="icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="apple-touch-icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/apple-touch-icon.png">
+<link rel="manifest" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/site.webmanifest">
+
+<!-- Resource Hints -->
+<link rel="preconnect" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co">
+<link rel="dns-prefetch" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preload" as="image" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp" imagesizes="100vw">
+
+<!-- Fonts (se usar Google Fonts) -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bem Beauty Professional">
+<meta property="og:title" content="NIVELA® — Profissional, sem formol, com ASTRO QUAT V3">
+<meta property="og:description" content="Tecnologia exclusiva, alto rendimento e resultado premium para todos os tipos de cabelo.">
+<meta property="og:url" content="https://nivela.bembeauty.com.br/">
+<meta property="og:image" content="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp">
+<meta property="og:locale" content="pt_BR">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NIVELA® — Profissional, sem formol, com ASTRO QUAT V3">
+<meta name="twitter:description" content="Tecnologia exclusiva, alto rendimento e resultado premium.">
+<meta name="twitter:image" content="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Bem Beauty Professional","url":"https://bembeauty.com.br","logo":"https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/logo-bembeauty-transparente.png","sameAs":["https://www.instagram.com/bembeautyprofessional","https://www.youtube.com/@BemBeautyProfessional"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://nivela.bembeauty.com.br/","name":"NIVELA®","potentialAction":{"@type":"SearchAction","target":"https://nivela.bembeauty.com.br/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"NIVELA®","brand":{"@type":"Brand","name":"Bem Beauty Professional"},"description":"Retexturizador hidro nutritivo sem formol com tecnologia ASTRO QUAT V3 e ativos da Amazônia.","image":"https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp","sku":"NIVELA-PRO","audience":{"@type":"Audience","audienceType":"Profissionais cabeleireiros e salões"},"offers":{"@type":"Offer","priceCurrency":"BRL","availability":"https://schema.org/InStock","url":"https://bembeauty.com.br"}}</script>
+
+## 2) GTM + GA4 (Consent Mode, cross-domain)
+<!-- HEAD (antes de qualquer script de terceiros) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{ad_storage:'denied',analytics_storage:'granted',ad_user_data:'denied',ad_personalization:'denied'});
+  gtag('set','url_passthrough',true);
+</script>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD"></script>
+
+<!-- BODY (logo após <body>) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZW3RTWD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- No GTM: GA4 Config (G-SC9C7W6Q4F) com allowLinker=true, Cross-domain: bembeauty.com.br, nivela.bembeauty.com.br -->
+
+## 3) Segurança — Headers (aplicar no servidor/middleware)
+Content-Security-Policy:
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+  connect-src 'self' https://*.supabase.co https://*.supabase.in https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com;
+  img-src 'self' data: https://*.supabase.co;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
+  media-src 'self' https://*.supabase.co;
+  frame-src https://www.googletagmanager.com;
+Referrer-Policy: strict-origin-when-cross-origin
+X-Content-Type-Options: nosniff
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+## 4) Cache/Performance
+- CSS/JS: Cache-Control: public, max-age=31536000, immutable
+- HTML: Cache-Control: no-cache
+- Assets Supabase: usar ?v=YYYYMMDD ao atualizar
+- Scripts defer/async; remover bloqueios não essenciais
+
+## 5) Padronizar atributos HTML (se não existirem)
+<form id="form-pro" data-form="lead"> ... <button type="submit" data-gtm-event="generate_lead">Quero ser aprovado</button></form>
+<form id="form-dist" data-form="distribuidor"> ... <button type="submit" data-gtm-event="generate_lead_distribuidor">Quero ser distribuidor</button></form>
+<a href="https://wa.me/552139500901?text=Quero%20conhecer%20o%20NIVELA" data-gtm-event="whatsapp_click" data-whatsapp>WhatsApp</a>
+<video id="video-manifesto" controls src="..."></video>
+<video id="video-tecnologia" controls src="..."></video>
+<a href="https://bembeauty.com.br/?utm_source=nivela_lp&utm_medium=cta&utm_campaign=redir_loja" data-gtm-event="cta_acessar_loja">ACESSAR LOJA OFICIAL</a>
+
+## 6) UTMs — criar src/lib/utm.ts e iniciar no bootstrap
+// src/lib/utm.ts
+export function getUTMFromURL(){const p=new URLSearchParams(window.location.search);return{utm_source:p.get('utm_source'),utm_medium:p.get('utm_medium'),utm_campaign:p.get('utm_campaign'),utm_content:p.get('utm_content'),utm_term:p.get('utm_term')};}
+export function persistUTM(){const u=getUTMFromURL();const hasAny=Object.values(u).some(Boolean);if(hasAny) sessionStorage.setItem('nivela_utms',JSON.stringify(u));}
+export function readUTM(){try{return JSON.parse(sessionStorage.getItem('nivela_utms')||'{}');}catch{return{};}}
+
+// main.tsx (bootstrap)
+import { persistUTM } from './lib/utm'; persistUTM();
+
+## 7) Submit — mesclar UTM no insert (src/lib/submit.ts)
+import { readUTM } from './utm';
+export async function submitLead(payload:{nome:string;email:string;telefone:string;tipo_estabelecimento?:string;utm_source?:string|null;utm_medium?:string|null;utm_campaign?:string|null;utm_content?:string|null;utm_term?:string|null;}){
+  const utm=readUTM();
+  const data={nome:payload.nome?.trim(),email:payload.email?.trim().toLowerCase(),telefone:payload.telefone?.trim(),tipo_estabelecimento:payload.tipo_estabelecimento||null,utm_source:payload.utm_source??utm.utm_source??null,utm_medium:payload.utm_medium??utm.utm_medium??null,utm_campaign:payload.utm_campaign??utm.utm_campaign??null,utm_content:payload.utm_content??utm.utm_content??null,utm_term:payload.utm_term??utm.utm_term??null};
+  // inserir no Supabase conforme tabela
+}
+
+## 8) Eventos — criar src/analytics/events.ts e inicializar
+// src/analytics/events.ts
+export function initEventTracking(){
+  let s50=false,s90=false;
+  window.addEventListener('scroll',()=>{const s=(window.scrollY+window.innerHeight)/document.documentElement.scrollHeight*100; if(!s50&&s>=50){s50=true;window.dataLayer?.push({event:'scroll_50'});} if(!s90&&s>=90){s90=true;window.dataLayer?.push({event:'scroll_90'});}});
+  document.addEventListener('click',(e:any)=>{const el=e.target.closest('[data-gtm-event]'); if(el){window.dataLayer?.push({event:el.getAttribute('data-gtm-event')});}});
+  const pro=document.querySelector<HTMLFormElement>('[data-form="lead"]'); if(pro){const once=()=>{window.dataLayer?.push({event:'form_start'});pro.removeEventListener('input',once);}; pro.addEventListener('input',once); pro.addEventListener('submit',()=>window.dataLayer?.push({event:'generate_lead'}));}
+  const dist=document.querySelector<HTMLFormElement>('[data-form="distribuidor"]'); if(dist){const onceD=()=>{window.dataLayer?.push({event:'form_start_distribuidor'});dist.removeEventListener('input',onceD);}; dist.addEventListener('input',onceD); dist.addEventListener('submit',()=>window.dataLayer?.push({event:'generate_lead_distribuidor'}));}
+  document.querySelectorAll('[data-whatsapp]').forEach((a:Element)=>{a.addEventListener('click',(ev:any)=>{const href=(a as HTMLAnchorElement).href; if(!href.includes('wa.me')) return; const utm=sessionStorage.getItem('nivela_utms'); if(utm){try{const u=JSON.parse(utm);const tag=`[utm:${u.utm_source||'-'}/${u.utm_medium||'-'}/${u.utm_campaign||'-'}] `; const url=new URL(href); const txt=url.searchParams.get('text')||''; url.searchParams.set('text',(tag+txt).trim()); (a as HTMLAnchorElement).href=url.toString();}catch{}} window.dataLayer?.push({event:'whatsapp_click'});},{once:true});});
+  function bindVideo(id:string,base:string){const v=document.getElementById(id) as HTMLVideoElement|null; if(!v) return; let s10=false,s90=false; v.addEventListener('play',()=>window.dataLayer?.push({event:base+'_start'})); v.addEventListener('timeupdate',()=>{if(!v.duration||!isFinite(v.duration)) return; const p=v.currentTime/v.duration*100; if(!s10&&p>=10){s10=true;window.dataLayer?.push({event:base+'_10'});} if(!s90&&p>=90){s90=true;window.dataLayer?.push({event:base+'_complete'});}});}
+  bindVideo('video-manifesto','video_manifesto'); bindVideo('video-tecnologia','video_tecnologia');
+  function send(name:string,delta:number,id:string){ // GA4 via GTM
+    // @ts-ignore
+    if(window.gtag){window.gtag('event',name,{value:Math.round(name==='CLS'?delta*1000:delta),event_id:id,non_interaction:true});}}
+  ['CLS','LCP','INP'].forEach((metric)=>{ // @ts-ignore
+    new PerformanceObserver((list)=>{list.getEntries().forEach((e:any)=>{const v=e.value||0;const id=e.id||String(Date.now()+Math.random());send(metric,v,id);});}).observe({type:metric.toLowerCase(),buffered:true} as any);});
+  window.addEventListener('error',(e)=>{ // @ts-ignore
+    if(window.gtag) window.gtag('event','exception',{description:(e.message||'error'),fatal:false});});
+  window.addEventListener('unhandledrejection',(e:any)=>{ // @ts-ignore
+    if(window.gtag) window.gtag('event','exception',{description:(e.reason&&(e.reason.message||e.reason))||'promise rejection',fatal:false});});
+}
+// main.tsx
+import { initEventTracking } from './analytics/events'; initEventTracking();
+
+## 9) Robots e Sitemap
+/robots.txt:
+User-agent: *
+Allow: /
+Sitemap: https://nivela.bembeauty.com.br/sitemap.xml
+
+/sitemap.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://nivela.bembeauty.com.br/</loc></url>
+</urlset>
+
+## 10) GA4 — marcar como Conversion
+- generate_lead
+- generate_lead_distribuidor
+- cta_acessar_loja
+- whatsapp_click
+- video_manifesto_complete
+- video_tecnologia_complete
+
+## 11) QA automático
+- 200/OK: hero, vídeos, logo, favicons, manifest; sem “//” duplicado
+- Lighthouse: Performance/SEO/A11y/Best Practices ≥ 95
+- Console: sem CSP violations, sem erros
+- DebugView GA4: eventos de form/CTA/WhatsApp/vídeos ok
+- Mostrar diff de arquivos antes do commit

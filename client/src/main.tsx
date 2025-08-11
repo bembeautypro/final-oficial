@@ -2,6 +2,23 @@ import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import { persistUTM } from './lib/utm';
+import { initEventTracking } from './analytics/events';
+import { initPerformanceTracking } from './analytics/performance';
+
+// Initialize UTM tracking and analytics
+persistUTM();
+
+// Initialize event tracking and performance monitoring when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    initEventTracking();
+    initPerformanceTracking();
+  });
+} else {
+  initEventTracking();
+  initPerformanceTracking();
+}
 
 // Register advanced service worker - Enhanced duplicate prevention
 if ('serviceWorker' in navigator) {

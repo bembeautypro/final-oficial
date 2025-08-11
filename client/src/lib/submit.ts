@@ -1,4 +1,5 @@
 import { supabase } from './supabaseClient'
+import { readUTM } from './utm'
 
 export async function submitLead(payload: {
   nome: string
@@ -8,16 +9,23 @@ export async function submitLead(payload: {
   utm_source?: string | null
   utm_medium?: string | null
   utm_campaign?: string | null
+  utm_content?: string | null
+  utm_term?: string | null
 }) {
+  const utm = readUTM()
+  
   const data = {
     nome: payload.nome?.trim(),
     email: payload.email?.trim().toLowerCase(),
     telefone: payload.telefone?.trim(),
     tipo_estabelecimento: payload.tipo_estabelecimento || null,
-    utm_source: payload.utm_source || 'landing',
-    utm_medium: payload.utm_medium || 'form',
-    utm_campaign: payload.utm_campaign || 'nivela'
+    utm_source: payload.utm_source ?? utm.utm_source ?? null,
+    utm_medium: payload.utm_medium ?? utm.utm_medium ?? null,
+    utm_campaign: payload.utm_campaign ?? utm.utm_campaign ?? null,
+    utm_content: payload.utm_content ?? utm.utm_content ?? null,
+    utm_term: payload.utm_term ?? utm.utm_term ?? null
   }
+  
   const { error } = await supabase.from('leads_nivela').insert(data)
   if (error) return { ok: false as const, error: error.message }
   return { ok: true as const }
@@ -31,7 +39,14 @@ export async function submitDistribuidor(payload: {
   mensagem?: string
   cidade?: string
   estado?: string
+  utm_source?: string | null
+  utm_medium?: string | null
+  utm_campaign?: string | null
+  utm_content?: string | null
+  utm_term?: string | null
 }) {
+  const utm = readUTM()
+  
   // Preparar dados - campos opcionais podem ser strings vazias
   const data = {
     nome: payload.nome?.trim(),
@@ -40,7 +55,12 @@ export async function submitDistribuidor(payload: {
     empresa: payload.empresa?.trim() || '',
     mensagem: payload.mensagem?.trim() || '',
     cidade: payload.cidade?.trim() || '',
-    estado: payload.estado?.trim() || ''
+    estado: payload.estado?.trim() || '',
+    utm_source: payload.utm_source ?? utm.utm_source ?? null,
+    utm_medium: payload.utm_medium ?? utm.utm_medium ?? null,
+    utm_campaign: payload.utm_campaign ?? utm.utm_campaign ?? null,
+    utm_content: payload.utm_content ?? utm.utm_content ?? null,
+    utm_term: payload.utm_term ?? utm.utm_term ?? null
   }
   
   console.log('Enviando dados do distribuidor:', data)

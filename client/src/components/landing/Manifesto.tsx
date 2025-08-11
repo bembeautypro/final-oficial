@@ -38,6 +38,7 @@ const Manifesto = ({ id }: ManifestoProps) => {
               <div className="relative group max-w-3xl lg:max-w-4xl mx-auto">
                 <div className="relative overflow-hidden rounded-lg">
                   <VideoLazy
+                    id="video-manifesto"
                     src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/videos/video-manifesto-oficial-compactado.mp4"
                     className="aspect-video"
                     autoPlay={true}
