@@ -1,0 +1,174 @@
+TAREFA: Aplicar correções definitivas de segurança e integrações:
+1) remover CSP/X-Frame via <meta> do HTML,
+2) adicionar headers corretos (CSP, XFO, etc.) no dev/preview (Vite) e produção (Vercel),
+3) padronizar chamadas ao Supabase via supabase-js (ou REST com headers),
+4) corrigir Web Vitals (CLS/LCP/INP) e aviso do Framer Motion.
+
+## 1) REMOVER META TAGS DE SEGURANÇA DO HTML
+- Abra o arquivo de layout/index.html.
+- REMOVER todas as linhas:
+  <meta http-equiv="Content-Security-Policy" ...>
+  <meta http-equiv="X-Frame-Options" ...>
+- NÃO reintroduzir essas metas. Segurança deve ir em headers do servidor.
+
+## 2) HEADERS EM DEV/PREVIEW (Vite) E EM PRODUÇÃO (Vercel)
+
+### 2.1 Vite (dev/preview no Replit)
+- Editar (ou criar) vite.config.ts e aplicar este conteúdo:
+
+import { defineConfig } from 'vite';
+
+const csp = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+  "connect-src 'self' https://*.supabase.co https://*.supabase.in https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com",
+  "img-src 'self' data: https://*.supabase.co",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com",
+  "media-src 'self' https://*.supabase.co",
+  "frame-src https://www.googletagmanager.com",
+  "frame-ancestors 'self'"
+].join('; ');
+
+export default defineConfig({
+  server: {
+    headers: {
+      'Content-Security-Policy': csp,
+      'X-Frame-Options': 'SAMEORIGIN',
+      'X-Content-Type-Options': 'nosniff',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+      'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+      'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'
+    }
+  },
+  preview: {
+    headers: {
+      'Content-Security-Policy': csp,
+      'X-Frame-Options': 'SAMEORIGIN',
+      'X-Content-Type-Options': 'nosniff',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+      'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+      'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload'
+    }
+  }
+});
+
+### 2.2 Vercel (produção)
+- Criar/atualizar vercel.json na raiz:
+
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://*.supabase.co https://*.supabase.in https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; img-src 'self' data: https://*.supabase.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; media-src 'self' https://*.supabase.co; frame-src https://www.googletagmanager.com; frame-ancestors 'self';" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
+        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains; preload" }
+      ]
+    }
+  ]
+}
+
+## 3) SUPABASE — PARAR DE CHAMAR /rest/v1 SEM HEADERS
+### 3.1 Client oficial (preferido)
+- Criar/atualizar src/lib/supabaseClient.ts:
+
+import { createClient } from '@supabase/supabase-js';
+
+const url  = import.meta.env.VITE_SUPABASE_URL!;
+const anon = import.meta.env.VITE_SUPABASE_ANON_KEY!;
+
+if (!url || !anon) {
+  console.error('[Supabase] ENV ausentes: defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY');
+}
+
+export const supabase = createClient(url, anon, { auth: { persistSession: false } });
+
+### 3.2 Helpers de insert (usados nos formulários)
+- Criar src/lib/api.ts:
+
+import { supabase } from './supabaseClient';
+
+export async function saveLead(input: { nome:string; email:string; telefone:string; tipo_estabelecimento?:string|null; utm_source?:string|null; utm_medium?:string|null; utm_campaign?:string|null; utm_content?:string|null; utm_term?:string|null; hp?:string; }) {
+  const payload = { ...input, email: input.email.toLowerCase().trim(), hp: input.hp ?? '' };
+  const { data, error } = await supabase.from('leads_nivela').insert([payload]).select('id, created_at');
+  if (error) throw error;
+  return data?.[0];
+}
+
+export async function saveDistribuidor(input: { nome:string; email:string; telefone:string; tipo_estabelecimento?:string|null; utm_source?:string|null; utm_medium?:string|null; utm_campaign?:string|null; utm_content?:string|null; utm_term?:string|null; hp?:string; empresa?:string|null; cidade?:string|null; estado?:string|null; mensagem?:string|null; }) {
+  const payload = { ...input, email: input.email.toLowerCase().trim(), hp: input.hp ?? '' };
+  const { data, error } = await supabase.from('distribuidores').insert([payload]).select('id, created_at');
+  if (error) throw error;
+  return data?.[0];
+}
+
+### 3.3 Refatorar submits (substituir qualquer fetch('/rest/v1/...') pelos helpers)
+- Onde houver submit de lead → usar saveLead(...)
+- Onde houver submit de distribuidor → usar saveDistribuidor(...)
+- REMOVER parâmetros "columns=" nas URLs; padrão agora é supabase-js com .select()
+
+### 3.4 (Somente se precisar REST “na unha”)
+- Adicionar headers obrigatórios em qualquer fetch residual:
+  'apikey': ANON
+  'Authorization': 'Bearer ' + ANON
+  'Prefer': 'return=representation'
+- E usar apenas 'select=' (nunca 'columns=').
+
+## 4) WEB VITALS — substituir implementação
+- Criar src/analytics/webvitals.ts:
+
+export function initWebVitalsToGA4() {
+  // @ts-ignore
+  const gtag = window.gtag ? window.gtag : null;
+  const send = (name, value, id) => { if (!gtag) return; gtag('event', name, { value: Math.round(name==='CLS' ? value*1000 : value), event_id: id, non_interaction: true }); };
+
+  if ('PerformanceObserver' in window) {
+    try { // CLS
+      let cls = 0;
+      // @ts-ignore
+      const poCLS = new PerformanceObserver((list)=>{ list.getEntries().forEach((e)=>{ if(!e.hadRecentInput) cls += e.value || 0; }); send('CLS', cls, 'cls-'+Date.now()); });
+      // @ts-ignore
+      poCLS.observe({ type: 'layout-shift', buffered: true });
+    } catch {}
+
+    try { // LCP
+      let lcp = 0;
+      // @ts-ignore
+      const poLCP = new PerformanceObserver((list)=>{ const last = list.getEntries().pop(); if(last?.renderTime) lcp = last.renderTime; else if(last?.loadTime) lcp = last.loadTime; send('LCP', lcp, 'lcp-'+Date.now()); });
+      // @ts-ignore
+      poLCP.observe({ type: 'largest-contentful-paint', buffered: true });
+    } catch {}
+
+    try { // INP (aprox.)
+      let maxDuration = 0;
+      // @ts-ignore
+      const poINP = new PerformanceObserver((list)=>{ list.getEntries().forEach((e)=>{ const d = e.duration || 0; if (d > maxDuration) maxDuration = d; }); send('INP', maxDuration, 'inp-'+Date.now()); });
+      // @ts-ignore
+      poINP.observe({ type: 'event', buffered: true });
+    } catch {}
+  }
+}
+
+- No bootstrap (ex.: main.tsx), após GTM:
+import { initWebVitalsToGA4 } from './analytics/webvitals';
+initWebVitalsToGA4();
+
+## 5) FRAMER MOTION — aviso de posição
+- Adicionar no seu CSS global (ex.: src/styles/global.css):
+
+.motion-container, .section-animated, .framer-root { position: relative; }
+
+- Garanta que os wrappers dos componentes Motion usem uma dessas classes.
+
+## 6) QA RÁPIDO (executar após aplicar)
+- Console limpo: SEM avisos de "frame-ancestors via <meta>".
+- Network → chamada de insert do Supabase com headers:
+  Authorization: Bearer eyJ...
+  apikey: eyJ...
+- Inserções em leads_nivela e distribuidores retornando 200/201 (sem 401).
+- Framer Motion sem warnings.
+- GA4 DebugView recebendo generate_lead / generate_lead_distribuidor.

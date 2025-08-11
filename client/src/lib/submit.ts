@@ -1,22 +1,21 @@
-import { supabase } from './supabaseClient'
+import { saveLead, saveDistribuidor } from './api'
 
 export async function submitLead(payload: {
   nome: string
   email: string
   telefone: string
 }) {
-  const data = {
-    nome: payload.nome?.trim(),
-    email: payload.email?.trim().toLowerCase(),
-    telefone: payload.telefone?.trim(),
+  try {
+    const result = await saveLead({
+      nome: payload.nome?.trim(),
+      email: payload.email?.trim().toLowerCase(),
+      telefone: payload.telefone?.trim(),
+      hp: ''
+    })
+    return { ok: true as const, data: result }
+  } catch (error: any) {
+    return { ok: false as const, error: error.message }
   }
-  
-  const { error } = await supabase
-    .from('leads_nivela')
-    .insert([data])
-    .select('*')
-  if (error) return { ok: false as const, error: error.message }
-  return { ok: true as const }
 }
 
 export async function submitDistribuidor(payload: {
@@ -28,27 +27,22 @@ export async function submitDistribuidor(payload: {
   cidade?: string
   estado?: string
 }) {
-  const data = {
-    nome: payload.nome?.trim(),
-    email: payload.email?.trim().toLowerCase(),
-    telefone: payload.telefone?.trim(),
-    empresa: payload.empresa?.trim() || null,
-    mensagem: payload.mensagem?.trim() || null,
-    cidade: payload.cidade?.trim() || null,
-    estado: payload.estado?.trim() || null,
-  }
-  
-  const { data: result, error } = await supabase
-    .from('distribuidores')
-    .insert([data])
-    .select('*')
-  
-  if (error) {
+  try {
+    const result = await saveDistribuidor({
+      nome: payload.nome?.trim(),
+      email: payload.email?.trim().toLowerCase(),
+      telefone: payload.telefone?.trim(),
+      empresa: payload.empresa?.trim() || null,
+      mensagem: payload.mensagem?.trim() || null,
+      cidade: payload.cidade?.trim() || null,
+      estado: payload.estado?.trim() || null,
+      hp: ''
+    })
+    return { ok: true as const, distribuidor: result }
+  } catch (error: any) {
     if (error.code === '23505' || error.message?.includes('duplicate') || error.message?.includes('unique')) {
       return { ok: false as const, error: 'Este email já está cadastrado como distribuidor' }
     }
     return { ok: false as const, error: error.message }
   }
-  
-  return { ok: true as const }
 }
