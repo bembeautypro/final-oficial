@@ -1,5 +1,4 @@
-import React, { memo, useState, useEffect, useRef, useCallback } from 'react';
-import { cn } from '@/lib/utils';
+import React, { useState, useRef, useEffect } from 'react';
 
 interface PerformanceAwareImageProps {
   src: string;
@@ -8,162 +7,66 @@ interface PerformanceAwareImageProps {
   width?: number;
   height?: number;
   priority?: boolean;
-  quality?: number;
-  sizes?: string;
   loading?: 'lazy' | 'eager';
-  onLoad?: () => void;
-  onError?: () => void;
-  fallback?: string;
-  placeholder?: 'blur' | 'empty' | 'skeleton';
-  blurDataURL?: string;
 }
 
-const PerformanceAwareImage = memo(({
+export const PerformanceAwareImage: React.FC<PerformanceAwareImageProps> = ({
   src,
   alt,
-  className,
+  className = '',
   width,
   height,
   priority = false,
-  quality = 85,
-  sizes,
-  loading = 'lazy',
-  onLoad,
-  onError,
-  fallback,
-  placeholder = 'skeleton',
-  blurDataURL
-}: PerformanceAwareImageProps) => {
-  const [isLoading, setIsLoading] = useState(true);
+  loading = 'lazy'
+}) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [imageSrc, setImageSrc] = useState<string>('');
   const imgRef = useRef<HTMLImageElement>(null);
-  const observerRef = useRef<IntersectionObserver>();
 
-  // Generate WebP alternative if possible
-  const getOptimizedSrc = useCallback((originalSrc: string) => {
-    if (originalSrc.includes('supabase.co')) {
-      // For Supabase images, we already have WebP
-      return originalSrc;
-    }
-    return originalSrc;
-  }, []);
-
-  // Intersection Observer for lazy loading
   useEffect(() => {
-    if (priority || loading === 'eager') {
-      setImageSrc(getOptimizedSrc(src));
-      return;
-    }
+    const img = imgRef.current;
+    if (!img || priority) return;
 
-    if (!imgRef.current) return;
-
-    observerRef.current = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setImageSrc(getOptimizedSrc(src));
-          observerRef.current?.disconnect();
-        }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsLoaded(true);
+            observer.disconnect();
+          }
+        });
       },
-      {
-        threshold: 0.1,
-        rootMargin: '50px 0px'
-      }
+      { threshold: 0.1, rootMargin: '50px' }
     );
 
-    observerRef.current.observe(imgRef.current);
+    observer.observe(img);
+    return () => observer.disconnect();
+  }, [priority]);
 
-    return () => {
-      observerRef.current?.disconnect();
-    };
-  }, [src, priority, loading, getOptimizedSrc]);
-
-  const handleLoad = useCallback(() => {
-    setIsLoading(false);
-    onLoad?.();
-  }, [onLoad]);
-
-  const handleError = useCallback(() => {
+  const handleError = () => {
     setHasError(true);
-    setIsLoading(false);
-    if (fallback) {
-      setImageSrc(fallback);
-      setHasError(false);
-    }
-    onError?.();
-  }, [fallback, onError]);
-
-  const getPlaceholder = () => {
-    if (placeholder === 'blur' && blurDataURL) {
-      return (
-        <div 
-          className={cn(
-            'absolute inset-0 bg-cover bg-center transition-opacity duration-300',
-            isLoading ? 'opacity-100' : 'opacity-0'
-          )}
-          style={{ backgroundImage: `url(${blurDataURL})` }}
-        />
-      );
-    }
-
-    if (placeholder === 'skeleton') {
-      return (
-        <div 
-          className={cn(
-            'absolute inset-0 bg-gradient-to-r from-muted/10 via-muted/20 to-muted/10 animate-pulse transition-opacity duration-300',
-            isLoading ? 'opacity-100' : 'opacity-0'
-          )}
-        />
-      );
-    }
-
-    return null;
+    console.error('Image loading failed:', src);
   };
 
+  if (hasError) {
+    return (
+      <div className={`bg-gray-200 flex items-center justify-center ${className}`}>
+        <span className="text-gray-500 text-sm">Erro ao carregar imagem</span>
+      </div>
+    );
+  }
+
   return (
-    <div 
+    <img
       ref={imgRef}
-      className={cn('relative overflow-hidden', className)}
-      style={{ width, height }}
-    >
-      {/* Placeholder */}
-      {isLoading && getPlaceholder()}
-      
-      {/* Main Image */}
-      {imageSrc && (
-        <img
-          src={imageSrc}
-          alt={alt}
-          width={width}
-          height={height}
-          sizes={sizes}
-          loading={loading}
-          onLoad={handleLoad}
-          onError={handleError}
-          className={cn(
-            'transition-opacity duration-300',
-            isLoading || hasError ? 'opacity-0' : 'opacity-100',
-            'w-full h-full object-cover'
-          )}
-          style={{
-            aspectRatio: width && height ? `${width}/${height}` : undefined,
-            minHeight: !width && !height ? "200px" : undefined,
-            contentVisibility: 'auto',
-            containIntrinsicSize: width && height ? `${width}px ${height}px` : 'auto'
-          }}
-        />
-      )}
-
-      {/* Error State */}
-      {hasError && !fallback && (
-        <div className="absolute inset-0 flex items-center justify-center bg-muted/10 text-muted-foreground text-sm">
-          Falha ao carregar imagem
-        </div>
-      )}
-    </div>
+      src={priority || isLoaded ? src : undefined}
+      alt={alt}
+      className={className}
+      width={width}
+      height={height}
+      loading={loading}
+      onLoad={() => setIsLoaded(true)}
+      onError={handleError}
+    />
   );
-});
-
-PerformanceAwareImage.displayName = 'PerformanceAwareImage';
-
-export { PerformanceAwareImage };
+};

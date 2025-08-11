@@ -6,7 +6,7 @@ import { StaggerContainer } from "@/components/ui/stagger-container";
 import { PerformanceAwareImage } from "@/components/ui/performance-aware-image";
 import { CTAButton, CTAStrategies } from "@/components/ui/cta-button";
 import AccessFormModal from "./AccessFormModal";
-import { usePerformanceOptimization } from "@/hooks/use-performance-optimization";
+
 
 import { ChevronDown } from "lucide-react";
 
@@ -16,19 +16,7 @@ interface HeaderProps {
 
 const Header = memo(({ id }: HeaderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { startRenderTiming, endRenderTiming, optimizeImage } = usePerformanceOptimization({
-    enableImageOptimization: true,
-    performanceBudget: {
-      maxImageSize: 500 * 1024, // 500KB
-      maxBundleSize: 1024 * 1024, // 1MB
-      maxRenderTime: 100 // 100ms
-    }
-  });
 
-  useEffect(() => {
-    startRenderTiming();
-    return () => endRenderTiming();
-  }, [startRenderTiming, endRenderTiming]);
 
   return (
     <header id={id} className="hero-section relative overflow-hidden">

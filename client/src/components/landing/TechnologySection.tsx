@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { VideoLazy } from "@/components/ui/video-lazy";
-import { logger } from "@/utils/logger";
+
 
 interface TechnologySectionProps {
   id?: string;
@@ -37,7 +37,7 @@ const TechnologySection = memo(({ id }: TechnologySectionProps) => {
   ];
 
   const handleVideoError = () => {
-    logger.warn('Erro ao carregar vídeo da tecnologia', { section: 'TechnologySection' });
+    console.warn('Erro ao carregar vídeo da tecnologia', { section: 'TechnologySection' });
   };
 
   return (
