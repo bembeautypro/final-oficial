@@ -78,11 +78,13 @@ Preferred communication style: Simple, everyday language.
 
 ### Aug 11, 2025 - COMPREHENSIVE UX/UI DESIGN OPTIMIZATION
 - **TYPOGRAPHY HIERARCHY FIXED**: Corrected header H1 hierarchy on desktop (text-7xl to text-8xl progression)
-- **SUBTITLE OPTIMIZATION**: Reduced oversized paragraph text (from text-2xl to text-xl max) for better readability
+- **RESPONSIVE CONSISTENCY**: Criadas classes CSS customizadas (.hero-title-responsive, .hero-subtitle-responsive) para garantir visual idêntico entre preview e desktop
+- **BREAKPOINT OPTIMIZATION**: Implementados breakpoints específicos com clamp() para transições suaves entre tamanhos de tela
+- **SUBTITLE OPTIMIZATION**: Reduzidos tamanhos de parágrafos (máximo 1.75rem) para melhor legibilidade
 - **TOUCH TARGETS**: Enhanced all interactive elements to meet 44px minimum (iOS HIG & Material Design)
 - **MICROINTERACTIONS**: Standardized transitions to 200ms for snappier feel, consistent hover states
 - **CONTRAST IMPROVEMENTS**: Added opacity adjustments to text-muted-foreground for better legibility
-- **BUTTON REFINEMENT**: Reduced excessive padding on CTAs (from px-12 py-6 to px-8 py-4)
+- **BUTTON REFINEMENT**: Reduced excessive padding on CTAs (px-6 to px-10 responsivo)
 - **ACCESSIBILITY BOOST**: Enhanced focus states, tap highlighting, reduced motion support
 - **PERFORMANCE**: Optimized transition durations and removed redundant animations
 - **INTERNATIONAL STANDARDS**: Aligned with WCAG AA+, iOS HIG, and Material Design guidelines

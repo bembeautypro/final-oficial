@@ -43,30 +43,30 @@ const Header = memo(({ id }: HeaderProps) => {
       {/* Main Content Grid */}
       <div className="flex-1 px-4 sm:px-6 md:px-8 lg:px-12 pb-12 lg:pb-20">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid lg:grid-cols-5 gap-8 lg:gap-16 items-center justify-center min-h-screen py-6 lg:py-8">
+          <div className="grid lg:grid-cols-5 gap-8 lg:gap-16 items-center justify-center min-h-[80vh] lg:min-h-screen py-6 lg:py-8">
             
             {/* Content Section - 60% width on desktop */}
             <div className="lg:col-span-3 order-2 lg:order-1 w-full flex justify-center">
-              <div className="hero-content flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 w-full max-w-full lg:max-w-4xl px-2 sm:px-4 lg:px-0">
+              <div className="hero-content flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 lg:space-y-8 w-full max-w-full lg:max-w-4xl px-2 sm:px-4 lg:px-0">
                 
                 {/* Unified Brand + Title Block */}
-                <div className="space-y-3 lg:space-y-4">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-montserrat font-bold text-brand-light leading-[1.05] tracking-tight">
-                    <span className="block text-brand-latte font-semibold mb-2">NIVELA®</span>
+                <div className="space-y-4 lg:space-y-6">
+                <h1 className="hero-title-responsive">
+                    <span className="block text-brand-latte font-semibold mb-3 lg:mb-4">NIVELA®</span>
                     <span className="block">A evolução da</span>
                     <span className="block">escova progressiva</span>
                   </h1>
                 </div>
                 
                 {/* Subtitle Description */}
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-2xl 2xl:text-3xl font-montserrat text-brand-cloud/90 leading-relaxed max-w-full lg:max-w-4xl mt-6 lg:mt-8 px-2 sm:px-0">
+                <p className="hero-subtitle-responsive max-w-full lg:max-w-3xl mt-4 lg:mt-6 px-2 sm:px-0">
                   <span className="block sm:inline">Desenvolvido com tecnologia patenteada,</span>
                   <span className="block sm:inline"> sem formol, com ativos da Amazônia</span>
                   <span className="block sm:inline"> e rendimento 30% superior.</span>
                 </p>
 
                 {/* Badges - Hierarchical design */}
-                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 w-full max-w-full lg:max-w-3xl mt-6 lg:mt-12 mb-8 lg:mb-14 px-4 sm:px-0">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 w-full max-w-full lg:max-w-3xl mt-6 lg:mt-8 mb-6 lg:mb-8 px-4 sm:px-0">
                    <div className="bg-brand-deep/50 border border-brand-deep hover:bg-brand-deep/70 focus-visible:bg-brand-deep/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation" tabIndex={0} role="button" aria-label="Produto livre de formol">
                      <span className="text-base md:text-lg lg:text-xl font-bold text-brand-latte">LIVRE</span>
                      <span className="text-sm md:text-base font-normal text-brand-cloud/90">de formol</span>
@@ -84,7 +84,7 @@ const Header = memo(({ id }: HeaderProps) => {
                  {/* Primary CTA Button - Captura de Lead Premium */}
                  <button 
                    onClick={() => setIsModalOpen(true)}
-                   className="min-h-[60px] min-w-[300px] touch-manipulation px-8 sm:px-10 lg:px-12 rounded-xl hover:scale-[1.02] focus:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-brand-latte/50 focus:ring-offset-2 transition-[transform,box-shadow] duration-200 ease-out text-base sm:text-lg lg:text-xl font-semibold w-full sm:w-auto max-w-md bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black hover:shadow-premium active:scale-[0.98] cursor-pointer"
+                   className="min-h-[48px] min-w-[280px] touch-manipulation px-6 sm:px-8 lg:px-10 py-3 lg:py-4 rounded-xl hover:scale-[1.02] focus:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-brand-latte/50 focus:ring-offset-2 transition-[transform,box-shadow] duration-200 ease-out text-sm sm:text-base lg:text-lg font-semibold w-full sm:w-auto max-w-sm bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black hover:shadow-premium active:scale-[0.98] cursor-pointer"
                    aria-label="Solicitar acesso exclusivo ao NIVELA - Formulário de cadastro profissional"
                    tabIndex={0}
                    data-testid="button-solicitar-acesso"
