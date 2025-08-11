@@ -35,10 +35,8 @@ const Header = memo(({ id }: HeaderProps) => {
           className="h-8 md:h-10 w-auto object-contain"
           width={160}
           height={40}
-          sizes="(max-width: 768px) 160px, 200px"
           priority={true}
           loading="eager"
-          placeholder="skeleton"
         />
       </nav>
 
@@ -106,10 +104,8 @@ const Header = memo(({ id }: HeaderProps) => {
                   className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
                   width={800}
                   height={800}
-                  sizes="(max-width: 640px) 288px, (max-width: 768px) 320px, (max-width: 1024px) 384px, (max-width: 1280px) 448px, 512px"
                   priority={true}
                   loading="eager"
-                  placeholder="skeleton"
                 />
                 
                 {/* Enhanced spotlight glow effect */}

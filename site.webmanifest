@@ -1,11 +1,59 @@
 {
-  "name": "NIVELA",
-  "short_name": "NIVELA",
+  "name": "NIVELA® - Bem Beauty Professional",
+  "short_name": "NIVELA®",
+  "description": "Tecnologia ASTRO QUAT V3 com ativos da Amazônia. Segurança, rendimento e resultado impecável.",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#000000",
-  "theme_color": "#000000",
+  "theme_color": "#9D4916",
+  "lang": "pt-BR",
+  "scope": "/",
   "icons": [
-    { "src": "/favicon.ico", "sizes": "64x64 32x32 24x24 16x16", "type": "image/x-icon" }
+    {
+      "src": "https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["beauty", "business", "lifestyle"],
+  "shortcuts": [
+    {
+      "name": "Produto NIVELA®",
+      "short_name": "Produto",
+      "description": "Conheça o produto NIVELA®",
+      "url": "/#produto",
+      "icons": [
+        {
+          "src": "https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/web-app-manifest-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Distribuidor",
+      "short_name": "Distribuidor",
+      "description": "Seja um distribuidor NIVELA®",
+      "url": "/#distributor",
+      "icons": [
+        {
+          "src": "https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/web-app-manifest-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }
