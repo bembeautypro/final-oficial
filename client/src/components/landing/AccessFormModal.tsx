@@ -17,15 +17,10 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault(); setIsLoading(true);
     try {
-      const utm = new URLSearchParams(window.location.search);
       const r = await submitLead({
         nome: f.nome,
         email: f.email,
         telefone: f.telefone,
-        tipoEstabelecimento: undefined,
-        utm_source: utm.get('utm_source'),
-        utm_medium: utm.get('utm_medium'),
-        utm_campaign: utm.get('utm_campaign')
       });
       if (!r.ok) throw new Error(r.error);
       toast.success('Enviado com sucesso!');
