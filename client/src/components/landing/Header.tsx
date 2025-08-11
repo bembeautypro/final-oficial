@@ -51,7 +51,7 @@ const Header = memo(({ id }: HeaderProps) => {
                 
                 {/* Unified Brand + Title Block */}
                 <div className="space-y-2 lg:space-y-3">
-                  <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[8rem] 2xl:text-[10rem] font-montserrat font-bold text-brand-light leading-[0.95] tracking-tight">
+                  <h1 className="text-7xl sm:text-8xl md:text-9xl lg:text-[8rem] xl:text-[10rem] 2xl:text-[12rem] font-montserrat font-bold text-brand-light leading-[0.9] tracking-tight">
                     <span className="block text-brand-latte font-semibold mb-3 lg:mb-4">NIVELA®</span>
                     <span className="block">A evolução da</span>
                     <span className="block">escova progressiva</span>
@@ -59,7 +59,7 @@ const Header = memo(({ id }: HeaderProps) => {
                 </div>
                 
                 {/* Subtitle Description */}
-                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-montserrat text-brand-cloud/90 leading-relaxed max-w-full lg:max-w-4xl mt-4 lg:mt-6 px-2 sm:px-0">
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-2xl font-montserrat text-brand-cloud/90 leading-relaxed max-w-full lg:max-w-4xl mt-4 lg:mt-6 px-2 sm:px-0">
                   Desenvolvido com tecnologia patenteada, sem formol, com ativos da Amazônia e rendimento 30% superior.
                 </p>
 
