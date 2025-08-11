@@ -32,20 +32,20 @@ export async function submitDistribuidor(payload: {
   cidade?: string
   estado?: string
 }) {
-  // Preparar dados - campos opcionais (empresa, cidade, estado, mensagem) podem ser vazios
+  // Preparar dados - campos opcionais podem ser strings vazias
   const data = {
     nome: payload.nome?.trim(),
     email: payload.email?.trim().toLowerCase(),
     telefone: payload.telefone?.trim(),
-    empresa: payload.empresa?.trim() || null,
-    mensagem: payload.mensagem?.trim() || null,
-    cidade: payload.cidade?.trim() || null,
-    estado: payload.estado?.trim() || null
+    empresa: payload.empresa?.trim() || '',
+    mensagem: payload.mensagem?.trim() || '',
+    cidade: payload.cidade?.trim() || '',
+    estado: payload.estado?.trim() || ''
   }
   
   console.log('Enviando dados do distribuidor:', data)
   
-  const { error } = await supabase.from('distribuidores').insert(data)
+  const { data: result, error } = await supabase.from('distribuidores').insert(data).select()
   if (error) {
     console.error('Erro ao inserir distribuidor:', error)
     if (error.code === '23505' || error.message?.includes('duplicate') || error.message?.includes('unique')) {
@@ -54,6 +54,6 @@ export async function submitDistribuidor(payload: {
     return { ok: false as const, error: error.message }
   }
   
-  console.log('Distribuidor cadastrado com sucesso')
+  console.log('Distribuidor cadastrado com sucesso:', result)
   return { ok: true as const }
 }
