@@ -16,6 +16,7 @@ interface DistributorSectionProps {
 const DistributorSection = memo(({ id }: DistributorSectionProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [f, setF] = useState({ nome:"", email:"", telefone:"", empresa:"", cidade:"", estado:"", mensagem:"" });
 
   async function onSubmit(e: React.FormEvent) {
@@ -26,7 +27,7 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
       if (!r.ok) throw new Error(r.error);
       toast.success('Cadastro enviado com sucesso!');
       setF({ nome:"", email:"", telefone:"", empresa:"", cidade:"", estado:"", mensagem:"" });
-      setIsModalOpen(false);
+      setIsSubmitted(true);
     } catch (err:any) { 
       toast.error(err?.message || 'Erro ao enviar cadastro'); 
     }
@@ -106,18 +107,37 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
         </AnimatedSection>
 
         {/* Distributor Form Modal */}
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <Dialog open={isModalOpen} onOpenChange={(open) => { setIsModalOpen(open); if (!open) setIsSubmitted(false); }}>
           <DialogContent className="w-[95vw] max-w-2xl mx-auto max-h-[95vh] overflow-y-auto">
-            <DialogHeader className="space-y-3 pb-6">
-              <DialogTitle className="text-xl sm:text-2xl font-bold text-center">
-                Cadastro de Distribuidor
-              </DialogTitle>
-              <DialogDescription className="text-sm text-center text-muted-foreground">
-                Preencha as informações abaixo para se tornar um distribuidor NIVELA®
-                <br />
-                <span className="text-xs text-brand-latte font-medium">* Campos obrigatórios</span>
-              </DialogDescription>
-            </DialogHeader>
+            {isSubmitted ? (
+              <div className="text-center py-8">
+                <div className="w-20 h-20 bg-gradient-accent rounded-full flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-10 h-10 text-brand-black" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <h2 className="text-3xl font-bold mb-4">Obrigado!</h2>
+                <p className="text-lg text-muted-foreground">Seu cadastro foi enviado com sucesso.</p>
+                <p className="text-base text-muted-foreground mt-2">Nossa equipe entrará em contato em até 24 horas.</p>
+                <Button 
+                  onClick={() => { setIsModalOpen(false); setIsSubmitted(false); }}
+                  className="mt-6 px-8 py-3"
+                >
+                  Fechar
+                </Button>
+              </div>
+            ) : (
+              <>
+                <DialogHeader className="space-y-3 pb-6">
+                  <DialogTitle className="text-xl sm:text-2xl font-bold text-center">
+                    Cadastro de Distribuidor
+                  </DialogTitle>
+                  <DialogDescription className="text-sm text-center text-muted-foreground">
+                    Preencha as informações abaixo para se tornar um distribuidor NIVELA®
+                    <br />
+                    <span className="text-xs text-brand-latte font-medium">* Campos obrigatórios</span>
+                  </DialogDescription>
+                </DialogHeader>
             
             <form id="form-dist" data-form="distribuidor" onSubmit={onSubmit} className="space-y-6">
               {/* Dados Pessoais */}
@@ -252,6 +272,8 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
                 </Button>
               </div>
             </form>
+              </>
+            )}
           </DialogContent>
         </Dialog>
       </div>

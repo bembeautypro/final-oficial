@@ -69,7 +69,6 @@ export const insertLeadNivelaSchema = createInsertSchema(leadsNivela).pick({
   nome: true,
   email: true,
   telefone: true,
-  tipoEstabelecimento: true,
   utmSource: true,
   utmMedium: true,
   utmCampaign: true,

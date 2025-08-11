@@ -125,6 +125,8 @@ export const VideoLoader = ({ src, thumbnail, title, className = "" }: VideoLoad
         loop
         playsInline
         controls={false}
+        controlsList="nodownload nofullscreen noremoteplayback"
+        disablePictureInPicture
         preload="metadata"
         className="w-full h-full object-cover touch-target"
         onLoadedData={handleLoadedData}

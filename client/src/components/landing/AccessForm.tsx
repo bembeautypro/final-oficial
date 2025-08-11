@@ -1,7 +1,7 @@
 import React, { memo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { LoadingState } from "@/components/ui/loading-state";
 import { toast } from "sonner";
@@ -12,18 +12,17 @@ interface AccessFormProps { id?: string; }
 const AccessForm = memo(({ id }: AccessFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ nome:"", email:"", telefone:"", tipo_estabelecimento:"" });
-  const [errors, setErrors] = useState({ nome:"", email:"", telefone:"", tipo_estabelecimento:"" });
+  const [formData, setFormData] = useState({ nome:"", email:"", telefone:"" });
+  const [errors, setErrors] = useState({ nome:"", email:"", telefone:"" });
 
   const validateForm = () => {
-    const e = { nome:"", email:"", telefone:"", tipo_estabelecimento:"" }; let ok = true;
+    const e = { nome:"", email:"", telefone:"" }; let ok = true;
     const nameOk = /^[a-zA-ZÀ-ÿ\s]{2,}$/.test(formData.nome.trim());
     if (!nameOk) { e.nome = "Nome inválido"; ok = false; }
     const mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim());
     if (!mailOk) { e.email = "Email inválido"; ok = false; }
     const telDigits = formData.telefone.replace(/\D/g,'');
     if (!(telDigits.length>=10 && telDigits.length<=11)) { e.telefone = "WhatsApp deve ter 10–11 dígitos"; ok = false; }
-    if (!formData.tipo_estabelecimento) { e.tipo_estabelecimento = "Selecione o tipo"; ok = false; }
     setErrors(e); return ok;
   };
 
@@ -56,8 +55,9 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
         <div className="w-20 h-20 bg-gradient-accent rounded-full flex items-center justify-center mx-auto mb-6">
           <CheckCircle2 className="w-10 h-10" />
         </div>
-        <h2 className="text-3xl font-bold">Solicitação Enviada!</h2>
-        <p className="mt-2 text-muted-foreground">Entraremos em contato em até 24h.</p>
+        <h2 className="text-3xl font-bold mb-4">Obrigado!</h2>
+        <p className="text-lg text-muted-foreground">Sua solicitação foi enviada com sucesso.</p>
+        <p className="text-base text-muted-foreground mt-2">Nossa equipe entrará em contato em até 24 horas.</p>
       </div>
     </section>
   );
@@ -67,7 +67,7 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
       <div className="max-w-lg mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">Solicite seu acesso exclusivo</h2>
-          <p className="text-lg text-muted-foreground">Preencha 4 campos essenciais.</p>
+          <p className="text-lg text-muted-foreground">Preencha 3 campos essenciais.</p>
         </div>
         <LoadingState isLoading={isLoading} variant="skeleton" className="h-96"
           fallback={<div className="space-y-4 animate-pulse"><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/></div>}>
@@ -118,28 +118,6 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
                 aria-invalid={!!errors.telefone}
               />
               {errors.telefone && <p id="telefone-error" className="text-red-500 text-sm mt-2 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.telefone}</p>}
-            </div>
-            <div>
-              <label className="sr-only" htmlFor="tipo-estabelecimento">Tipo de estabelecimento (obrigatório)</label>
-              <Select value={formData.tipo_estabelecimento} onValueChange={(v)=>set('tipo_estabelecimento',v)} required>
-                <SelectTrigger 
-                  id="tipo-estabelecimento"
-                  className="h-14 text-base"
-                  data-testid="select-tipo-estabelecimento"
-                  aria-describedby={errors.tipo_estabelecimento ? "tipo-error" : undefined}
-                  aria-invalid={!!errors.tipo_estabelecimento}
-                >
-                  <SelectValue placeholder="Tipo de estabelecimento *" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="salao-proprio">Salão próprio</SelectItem>
-                  <SelectItem value="salao-terceiros">Salão de terceiros</SelectItem>
-                  <SelectItem value="atendimento-domiciliar">Atendimento domiciliar</SelectItem>
-                  <SelectItem value="studio-compartilhado">Studio/Espaço compartilhado</SelectItem>
-                  <SelectItem value="freelancer">Freelancer</SelectItem>
-                </SelectContent>
-              </Select>
-              {errors.tipo_estabelecimento && <p id="tipo-error" className="text-red-500 text-sm mt-2 flex items-center gap-1"><AlertCircle className="w-4 h-4"/>{errors.tipo_estabelecimento}</p>}
             </div>
             <Button 
               type="submit" 
