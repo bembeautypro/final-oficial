@@ -14,10 +14,12 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initEventTracking();
     initPerformanceTracking();
+    import('./analytics/webvitals').then(({ initWebVitalsToGA4 }) => initWebVitalsToGA4());
   });
 } else {
   initEventTracking();
   initPerformanceTracking();
+  import('./analytics/webvitals').then(({ initWebVitalsToGA4 }) => initWebVitalsToGA4());
 }
 
 // Register service worker for caching and performance

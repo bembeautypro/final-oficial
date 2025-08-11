@@ -682,4 +682,11 @@ All colors MUST be HSL.
   .lovable-floating-badge {
     display: none !important;
   }
+
+  /* Fix Framer Motion position warning */
+  .section-animated,
+  .motion-container,
+  section[id] {
+    position: relative;
+  }
 }

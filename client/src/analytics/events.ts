@@ -112,31 +112,8 @@ export function initEventTracking() {
     subtree: true
   });
 
-  // Core Web Vitals tracking
-  function send(name: string, delta: number, id: string) {
-    if (window.gtag) {
-      window.gtag('event', name, {
-        value: Math.round(name === 'CLS' ? delta * 1000 : delta),
-        event_id: id,
-        non_interaction: true
-      });
-    }
-  }
-
-  // Web Vitals observers
-  ['CLS', 'LCP', 'INP'].forEach((metric) => {
-    try {
-      new PerformanceObserver((list) => {
-        list.getEntries().forEach((e: any) => {
-          const v = e.value || 0;
-          const id = e.id || String(Date.now() + Math.random());
-          send(metric, v, id);
-        });
-      }).observe({ type: metric.toLowerCase(), buffered: true } as any);
-    } catch (error) {
-      // Performance observer not supported in this browser
-    }
-  });
+  // Core Web Vitals tracking - REMOVED
+  // Using proper implementation in webvitals.ts instead
 
   // Error tracking
   window.addEventListener('error', (e) => {

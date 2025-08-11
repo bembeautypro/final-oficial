@@ -11,7 +11,10 @@ export async function submitLead(payload: {
     telefone: payload.telefone?.trim(),
   }
   
-  const { error } = await supabase.from('leads_nivela').insert(data)
+  const { error } = await supabase
+    .from('leads_nivela')
+    .insert([data])
+    .select('*')
   if (error) return { ok: false as const, error: error.message }
   return { ok: true as const }
 }
@@ -35,7 +38,10 @@ export async function submitDistribuidor(payload: {
     estado: payload.estado?.trim() || null,
   }
   
-  const { data: result, error } = await supabase.from('distribuidores').insert(data).select()
+  const { data: result, error } = await supabase
+    .from('distribuidores')
+    .insert([data])
+    .select('*')
   
   if (error) {
     if (error.code === '23505' || error.message?.includes('duplicate') || error.message?.includes('unique')) {
