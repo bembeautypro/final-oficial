@@ -76,6 +76,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Aug 11, 2025 - DATABASE OPTIMIZATION & SUPABASE POLICIES CLEANUP COMPLETE
+- **SUPABASE POLICIES**: Duplicated RLS policies cleaned up for optimal performance
+- **SINGLE POLICIES**: One policy per table/action - distribuidores and leads_nivela optimized  
+- **INDEX CLEANUP**: Duplicate index on distribuidores(created_at) removed
+- **FORM FIXES**: UTM tracking completely removed, both forms working perfectly
+- **VIDEO FIXED**: Manifesto video autoplay without controls implemented
+- **RLS SECURITY**: Proper Row Level Security configuration with public insert permissions
+- **ANALYTICS TABLES**: RLS enabled on analytics_events/performance_metrics (deny by default)
+
 ### Aug 11, 2025 - COMPREHENSIVE DESIGN/UX/PERFORMANCE REVIEW COMPLETE
 - **MOBILE-FIRST OPTIMIZATION**: Typography increased for better mobile impact (H1: 3xl→7xl progression)
 - **TOUCH TARGETS**: All interactive elements upgraded to 44px+ minimum for professional use

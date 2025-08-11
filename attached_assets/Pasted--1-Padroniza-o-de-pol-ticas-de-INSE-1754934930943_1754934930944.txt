@@ -1,0 +1,147 @@
+-- =========================================================
+-- 1) Padronização de políticas de INSERT (1 por role/ação)
+-- Tabelas: distribuidores, leads_nivela
+-- Remove políticas antigas e cria uma única política clara
+-- =========================================================
+
+-- Função auxiliar: drop policy if exists (nome sensível a maiúsc./minusc.)
+-- (Usamos DO blocks para não falhar se a policy não existir)
+do $$
+begin
+  -- public.distribuidores
+  if exists (select 1 from pg_policies where schemaname='public' and tablename='distribuidores' and polname='Allow public inserts') then
+    execute 'drop policy "Allow public inserts" on public.distribuidores';
+  end if;
+  if exists (select 1 from pg_policies where schemaname='public' and tablename='distribuidores' and polname='Anon insert distribuidores') then
+    execute 'drop policy "Anon insert distribuidores" on public.distribuidores';
+  end if;
+  if exists (select 1 from pg_policies where schemaname='public' and tablename='distribuidores' and polname='Anon pode inserir distribuidores') then
+    execute 'drop policy "Anon pode inserir distribuidores" on public.distribuidores';
+  end if;
+  -- nossa anterior (se existir) para evitar conflito de nomes
+  if exists (select 1 from pg_policies where schemaname='public' and tablename='distribuidores' and polname='dist_insert_public') then
+    execute 'drop policy "dist_insert_public" on public.distribuidores';
+  end if;
+
+  -- public.leads_nivela
+  if exists (select 1 from pg_policies where schemaname='public' and tablename='leads_nivela' and polname='Allow public inserts') then
+    execute 'drop policy "Allow public inserts" on public.leads_nivela';
+  end if;
+  if exists (select 1 from pg_policies where schemaname='public' and tablename='leads_nivela' and polname='Anon insert leads') then
+    execute 'drop policy "Anon insert leads" on public.leads_nivela';
+  end if;
+  if exists (select 1 from pg_policies where schemaname='public' and tablename='leads_nivela' and polname='Anon pode inserir leads') then
+    execute 'drop policy "Anon pode inserir leads" on public.leads_nivela';
+  end if;
+  if exists (select 1 from pg_policies where schemaname='public' and tablename='leads_nivela' and polname='leads_insert_public') then
+    execute 'drop policy "leads_insert_public" on public.leads_nivela';
+  end if;
+end$$;
+
+-- Garante RLS ON (boas práticas) — se já estiver ligado, não altera
+alter table public.distribuidores enable row level security;
+alter table public.leads_nivela  enable row level security;
+
+-- Política ÚNICA de INSERT (público) — distribuidores
+create policy "dist_insert_public"
+on public.distribuidores
+for insert
+to anon, authenticated
+with check (
+  coalesce(hp,'') = '' -- honeypot (se existir)
+  and coalesce(length(trim(nome)),0) >= 2
+  and position('@' in lower(coalesce(email::text,''))) > 1
+  and length(regexp_replace(coalesce(telefone,''), '\D','','g')) between 10 and 13
+);
+
+-- Política ÚNICA de INSERT (público) — leads_nivela
+create policy "leads_insert_public"
+on public.leads_nivela
+for insert
+to anon, authenticated
+with check (
+  coalesce(hp,'') = '' -- honeypot (se existir)
+  and coalesce(length(trim(nome)),0) >= 2
+  and position('@' in lower(coalesce(email::text,''))) > 1
+  and length(regexp_replace(coalesce(telefone,''), '\D','','g')) between 10 and 13
+);
+
+-- Observação: não criamos SELECT/UPDATE/DELETE — por padrão segue negado (mais seguro).
+-- Se precisar SELECT público depois, criamos política separada e bem restrita.
+
+
+-- =========================================================
+-- 2) Índice duplicado em distribuidores(created_at)
+-- Manteremos: distribuidores_created_at_idx
+-- Dropar: idx_distribuidores_created_at
+-- =========================================================
+do $$
+begin
+  if exists (
+    select 1
+    from pg_indexes
+    where schemaname='public'
+      and tablename='distribuidores'
+      and indexname='idx_distribuidores_created_at'
+  ) then
+    execute 'drop index public.idx_distribuidores_created_at';
+  end if;
+end$$;
+
+
+-- =========================================================
+-- 3) Índices marcados como "unused" — manter por enquanto
+-- Recomendação: observar 30 dias. Se seguir sem uso, descomente o DROP.
+-- =========================================================
+
+-- -- leads_nivela: idx_leads_created_at (UNUSED)
+-- drop index if exists public.idx_leads_created_at;
+
+-- -- distribuidores: distribuidor_created_at_idx já mantido; se este abaixo seguir sem uso, pode dropar:
+-- -- drop index if exists public.distribuidores_created_at_idx;
+
+-- -- analytics_events (UNUSED):
+-- -- drop index if exists public.idx_analytics_event_name;
+-- -- drop index if exists public.idx_analytics_session_id;
+
+
+-- =========================================================
+-- 4) Tabelas com RLS ON e sem políticas (analytics_events, performance_metrics)
+-- Estado atual (seguro): negar tudo (sem políticas = sem acesso).
+-- Opções (comente/descomente o que desejar):
+--    A) Manter como está (recomendado) => nenhum acesso público.
+--    B) Desativar RLS (se for puramente interna/sem dados sensíveis).
+--    C) Permitir apenas INSERT via service_role (nunca expor no frontend).
+-- =========================================================
+
+-- A) Manter como está (nenhuma ação)
+
+-- B) (OPCIONAL) Desativar RLS nessas tabelas
+-- alter table public.analytics_events     disable row level security;
+-- alter table public.performance_metrics  disable row level security;
+
+-- C) (OPCIONAL) Permitir somente INSERT via service_role (não acessível no frontend)
+-- create policy "ae_insert_service"
+-- on public.analytics_events
+-- for insert
+-- to service_role
+-- with check (true);
+
+-- create policy "pm_insert_service"
+-- on public.performance_metrics
+-- for insert
+-- to service_role
+-- with check (true);
+
+
+-- =========================================================
+-- 5) Conferências rápidas (opcional)
+-- =========================================================
+-- Ver políticas atuais
+-- select schemaname, tablename, polname, cmd, roles, with_check
+-- from pg_policies
+-- where schemaname='public' and tablename in ('distribuidores','leads_nivela');
+
+-- Ver índices por tabela
+-- select schemaname, tablename, indexname from pg_indexes
+-- where schemaname='public' and tablename in ('distribuidores','leads_nivela','analytics_events');
