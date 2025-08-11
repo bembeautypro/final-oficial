@@ -85,6 +85,7 @@ export class DatabaseStorage implements IStorage {
 
       if (error) {
         console.error("Supabase error:", error);
+        console.error("Database error creating distribuidor:", error);
         throw error;
       }
 
