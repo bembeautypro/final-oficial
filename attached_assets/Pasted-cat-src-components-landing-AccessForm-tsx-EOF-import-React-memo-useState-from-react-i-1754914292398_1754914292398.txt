@@ -1,3 +1,4 @@
+cat > src/components/landing/AccessForm.tsx <<'EOF'
 import React, { memo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -106,3 +107,4 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
 });
 AccessForm.displayName = 'AccessForm';
 export default AccessForm;
+EOF
