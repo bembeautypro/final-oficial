@@ -32,6 +32,7 @@ export async function submitDistribuidor(payload: {
   cidade?: string
   estado?: string
 }) {
+  // Preparar dados - campos opcionais (empresa, cidade, estado, mensagem) podem ser vazios
   const data = {
     nome: payload.nome?.trim(),
     email: payload.email?.trim().toLowerCase(),
@@ -41,12 +42,18 @@ export async function submitDistribuidor(payload: {
     cidade: payload.cidade?.trim() || null,
     estado: payload.estado?.trim() || null
   }
+  
+  console.log('Enviando dados do distribuidor:', data)
+  
   const { error } = await supabase.from('distribuidores').insert(data)
   if (error) {
+    console.error('Erro ao inserir distribuidor:', error)
     if (error.code === '23505' || error.message?.includes('duplicate') || error.message?.includes('unique')) {
       return { ok: false as const, error: 'Este email já está cadastrado como distribuidor' }
     }
     return { ok: false as const, error: error.message }
   }
+  
+  console.log('Distribuidor cadastrado com sucesso')
   return { ok: true as const }
 }
