@@ -78,7 +78,6 @@ export const insertLeadNivelaSchema = createInsertSchema(leadsNivela).pick({
   utmMedium: true,
   utmCampaign: true,
 }).partial({
-  tipoEstabelecimento: true,
   utmSource: true,
   utmMedium: true,
   utmCampaign: true,
@@ -92,11 +91,22 @@ export const insertDistribuidorSchema = createInsertSchema(distribuidores).pick(
   mensagem: true,
   cidade: true,
   estado: true,
-  experiencia_distribuicao: true,
+  utm_source: true,
+  utm_medium: true,
+  utm_campaign: true,
+  utm_content: true,
+  utm_term: true,
 }).partial({
   empresa: true,
   mensagem: true,
-  telefone: true
+  telefone: true,
+  cidade: true,
+  estado: true,
+  utm_source: true,
+  utm_medium: true,
+  utm_campaign: true,
+  utm_content: true,
+  utm_term: true,
 });
 
 export const insertPerformanceMetricSchema = createInsertSchema(performanceMetrics).pick({
