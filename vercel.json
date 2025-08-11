@@ -3,6 +3,13 @@
   "installCommand": "npm install",
   "outputDirectory": "dist",
 
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+
   "headers": [
     {
       "source": "/(.*)",
