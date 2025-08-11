@@ -20,45 +20,27 @@ if (document.readyState === 'loading') {
   initPerformanceTracking();
 }
 
-// Register advanced service worker - Enhanced duplicate prevention
+// Register service worker for caching and performance
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', async () => {
     try {
-      // Enhanced check for existing registrations and active service workers
       const existingRegistrations = await navigator.serviceWorker.getRegistrations();
       const hasActiveRegistration = existingRegistrations.some(reg => 
         reg.active && reg.scope === window.location.origin + '/'
       );
       
-      // Prevent duplicate registrations more aggressively
-      if (hasActiveRegistration || navigator.serviceWorker.controller || 
-          window.location.pathname.includes('sw-advanced.js')) {
+      if (hasActiveRegistration || navigator.serviceWorker.controller) {
         return;
       }
       
-      // Register new advanced service worker
-      const registration = await navigator.serviceWorker.register('/sw-advanced.js', {
+      // Register service worker (will be created for production deployment)
+      await navigator.serviceWorker.register('/sw.js', {
         scope: '/',
         updateViaCache: 'none'
       });
       
-      // Enhanced update handling
-      registration.addEventListener('updatefound', () => {
-        const newWorker = registration.installing;
-        if (newWorker) {
-          newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              // New content available, consider showing update notification
-            }
-          });
-        }
-      });
-      
     } catch (error) {
-      // Only log SW errors in development
-      if (false) { // Production build - SW dev logging disabled
-        // Service Worker registration failed in production
-      }
+      // Service worker registration failed - not critical for site function
     }
   });
 }

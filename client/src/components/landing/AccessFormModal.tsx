@@ -19,7 +19,10 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
     try {
       const utm = new URLSearchParams(window.location.search);
       const r = await submitLead({
-        ...f,
+        nome: f.nome,
+        email: f.email,
+        telefone: f.telefone,
+        tipoEstabelecimento: f.tipo_estabelecimento || undefined,
         utm_source: utm.get('utm_source'),
         utm_medium: utm.get('utm_medium'),
         utm_campaign: utm.get('utm_campaign')

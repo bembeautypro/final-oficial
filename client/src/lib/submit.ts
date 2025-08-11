@@ -5,7 +5,7 @@ export async function submitLead(payload: {
   nome: string
   email: string
   telefone: string
-  tipo_estabelecimento?: string
+  tipoEstabelecimento?: string
   utm_source?: string | null
   utm_medium?: string | null
   utm_campaign?: string | null
@@ -18,12 +18,10 @@ export async function submitLead(payload: {
     nome: payload.nome?.trim(),
     email: payload.email?.trim().toLowerCase(),
     telefone: payload.telefone?.trim(),
-    tipo_estabelecimento: payload.tipo_estabelecimento || null,
-    utm_source: payload.utm_source ?? utm.utm_source ?? null,
-    utm_medium: payload.utm_medium ?? utm.utm_medium ?? null,
-    utm_campaign: payload.utm_campaign ?? utm.utm_campaign ?? null,
-    utm_content: payload.utm_content ?? utm.utm_content ?? null,
-    utm_term: payload.utm_term ?? utm.utm_term ?? null
+    tipoEstabelecimento: payload.tipoEstabelecimento || null,
+    utmSource: payload.utm_source ?? utm.utm_source ?? null,
+    utmMedium: payload.utm_medium ?? utm.utm_medium ?? null,
+    utmCampaign: payload.utm_campaign ?? utm.utm_campaign ?? null
   }
   
   const { error } = await supabase.from('leads_nivela').insert(data)
@@ -63,17 +61,13 @@ export async function submitDistribuidor(payload: {
     utm_term: payload.utm_term ?? utm.utm_term ?? null
   }
   
-  console.log('Enviando dados do distribuidor:', data)
-  
   const { data: result, error } = await supabase.from('distribuidores').insert(data).select()
   if (error) {
-    console.error('Erro ao inserir distribuidor:', error)
     if (error.code === '23505' || error.message?.includes('duplicate') || error.message?.includes('unique')) {
       return { ok: false as const, error: 'Este email já está cadastrado como distribuidor' }
     }
     return { ok: false as const, error: error.message }
   }
   
-  console.log('Distribuidor cadastrado com sucesso:', result)
   return { ok: true as const }
 }

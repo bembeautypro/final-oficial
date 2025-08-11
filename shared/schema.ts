@@ -8,7 +8,7 @@ export const leadsNivela = pgTable("leads_nivela", {
   nome: text("nome").notNull(),
   email: text("email").notNull().unique(),
   telefone: text("telefone").notNull(),
-  tipoEstabelecimento: text("tipo_estabelecimento").notNull(),
+  tipoEstabelecimento: text("tipo_estabelecimento"),
   
   // Analytics tracking fields
   utmSource: text("utm_source"),
@@ -69,6 +69,11 @@ export const insertLeadNivelaSchema = createInsertSchema(leadsNivela).pick({
   nome: true,
   email: true,
   telefone: true,
+  tipoEstabelecimento: true,
+  utmSource: true,
+  utmMedium: true,
+  utmCampaign: true,
+}).partial({
   tipoEstabelecimento: true,
   utmSource: true,
   utmMedium: true,

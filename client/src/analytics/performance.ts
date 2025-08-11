@@ -24,7 +24,7 @@ export function reportWebVitals() {
     // Largest Contentful Paint
     new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        console.log('LCP:', entry.startTime);
+  
         if (window.dataLayer) {
           window.dataLayer.push({
             event: 'web_vitals',
@@ -41,7 +41,7 @@ export function reportWebVitals() {
       for (const entry of list.getEntries()) {
         const fidEntry = entry as any;
         const fidValue = fidEntry.processingStart - fidEntry.startTime;
-        console.log('FID:', fidValue);
+
         if (window.dataLayer) {
           window.dataLayer.push({
             event: 'web_vitals',
@@ -62,7 +62,7 @@ export function reportWebVitals() {
           clsValue += clsEntry.value;
         }
       }
-      console.log('CLS:', clsValue);
+
       if (window.dataLayer) {
         window.dataLayer.push({
           event: 'web_vitals',
@@ -94,7 +94,7 @@ export function reportPageLoadMetrics() {
         first_contentful_paint: navigation?.loadEventEnd || 0
       };
 
-      console.log('Page Load Metrics:', metrics);
+
       
       if (window.dataLayer) {
         window.dataLayer.push({
@@ -107,6 +107,8 @@ export function reportPageLoadMetrics() {
 }
 
 export function initPerformanceTracking() {
+  if (typeof window === 'undefined') return;
+  
   reportWebVitals();
   reportPageLoadMetrics();
 }

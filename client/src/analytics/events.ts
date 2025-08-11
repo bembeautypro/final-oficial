@@ -67,13 +67,13 @@ export function initEventTracking() {
           url.searchParams.set('text', (tag + txt).trim());
           (a as HTMLAnchorElement).href = url.toString();
         } catch (e) {
-          console.warn('UTM WhatsApp injection failed', e);
+          // UTM injection failed - continue without modification
         }
       }
     });
   });
 
-  // Video tracking
+  // Video tracking - Enhanced with delayed binding for dynamic content
   function bindVideo(id: string, base: string) {
     const v = document.getElementById(id) as HTMLVideoElement | null;
     if (!v) return;
@@ -97,8 +97,20 @@ export function initEventTracking() {
     });
   }
 
+  // Initial video binding
   bindVideo('video-manifesto', 'video_manifesto');
   bindVideo('video-tecnologia', 'video_tecnologia');
+  
+  // Setup MutationObserver for dynamically loaded videos
+  const videoObserver = new MutationObserver(() => {
+    bindVideo('video-manifesto', 'video_manifesto');
+    bindVideo('video-tecnologia', 'video_tecnologia');
+  });
+  
+  videoObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
 
   // Core Web Vitals tracking
   function send(name: string, delta: number, id: string) {
@@ -122,7 +134,7 @@ export function initEventTracking() {
         });
       }).observe({ type: metric.toLowerCase(), buffered: true } as any);
     } catch (error) {
-      console.warn(`Performance observer for ${metric} not supported`, error);
+      // Performance observer not supported in this browser
     }
   });
 
