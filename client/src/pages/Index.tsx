@@ -100,7 +100,7 @@ const Index = memo(() => {
     
     // Start preloading critical resources
     preloadOptimized([
-      'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-trans-comp.png',
+      'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp',
       'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp'
     ]);
     
