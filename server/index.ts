@@ -20,14 +20,21 @@ app.use((req,res,next)=>{
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Fix MIME type issues for JavaScript files
+// Fix MIME type issues and cache headers for static assets
 app.use((req, res, next) => {
   if (req.path.endsWith('.js')) {
     res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   } else if (req.path.endsWith('.css')) {
     res.setHeader('Content-Type', 'text/css; charset=utf-8');
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   } else if (req.path.endsWith('.ts') || req.path.endsWith('.tsx')) {
     res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+  } else if (req.path.match(/\.(png|jpg|jpeg|gif|ico|svg|webp|avif)$/)) {
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+  } else if (req.path.match(/\.(woff|woff2|ttf|eot)$/)) {
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
   next();
 });
