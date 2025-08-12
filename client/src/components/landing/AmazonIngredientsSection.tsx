@@ -22,7 +22,7 @@ const amazonIngredients = [
     scientificName: "Theobroma grandiflorum",
     description: "Hidratação profunda e prolongada, criando uma barreira protetora contra ressecamento.",
     origin: "Floresta Amazônica",
-    bgGradient: "from-brand-deep/20 to-brand-latte/10",
+    bgGradient: "from-amber-500/10 to-yellow-600/15",
     originColor: "text-emerald-600"
   },
   {

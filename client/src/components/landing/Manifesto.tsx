@@ -46,14 +46,11 @@ const Manifesto = ({ id }: ManifestoProps) => {
                     controls={false}
                     controlsList="nodownload nofullscreen noremoteplaybook"
                     disablePictureInPicture
-                    preload="metadata"
-                    poster=""
+                    preload="auto"
                     className="w-full h-full object-cover aspect-video"
                     style={{ pointerEvents: 'none' }}
                     aria-label="NIVELA - Nova era em retexturização capilar"
                     title="NIVELA - Nova era em retexturização capilar"
-                    width={800}
-                    height={450}
                   >
                     Seu navegador não suporta reprodução de vídeos HTML5.
                   </video>

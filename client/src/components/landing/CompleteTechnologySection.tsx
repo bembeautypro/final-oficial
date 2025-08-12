@@ -37,7 +37,7 @@ const processSteps = [
     title: "Realinhamento",
     description: "Realinha a estrutura da queratina, reduzindo frizz e volume",
     badge: "Alinhamento Preciso", 
-    gradient: "from-brand-latte/5 to-brand-latte/10"
+    gradient: "from-amber-500/5 to-orange-500/8"
   }
 ];
 

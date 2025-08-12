@@ -33,15 +33,15 @@ const ProductSection = memo(({ id }: ProductSectionProps) => {
           <ParallaxContainer speed="slow" className="relative flex items-center justify-center order-1 lg:order-1">
             <AnimatedSection animation="slide-right" delay={0.4}>
               <div className="relative group">
-                <img 
+                <LazyImage 
                   src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp" 
                   alt="NIVELA® Retexturizador Hidro Nutritivo 1kg - Produto em destaque com textura gel inovadora"
                   className="w-full max-w-sm md:max-w-md lg:max-w-lg object-contain drop-shadow-2xl group-hover:scale-105 transition-[transform,box-shadow] duration-200 ease-out duration-500"
                   width={600}
                   height={600}
-                  style={{aspectRatio: '1/1'}}
-                  loading="lazy"
-                  decoding="async"
+                  sizes="(max-width: 640px) 90vw, (max-width: 768px) 80vw, (max-width: 1024px) 50vw, 33vw"
+                  priority={true}
+                  fallback="/placeholder.svg"
                 />
                 {/* Enhanced product glow effect */}
                 <div className="absolute inset-0 bg-gradient-accent/20 rounded-full blur-3xl -z-10 scale-75 group-hover:scale-90 transition-[transform,box-shadow] duration-200 ease-out duration-500"></div>

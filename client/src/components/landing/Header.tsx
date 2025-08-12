@@ -100,11 +100,8 @@ const Header = memo(({ id }: HeaderProps) => {
                 <img 
                   src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
                   alt="NIVELA® - A evolução da escova progressiva profissional"
-                  width={800} 
-                  height={933}
-                  style={{aspectRatio: '6/7'}}
-                  {...({fetchpriority: "high"} as any)}
-                  decoding="async"
+                  width="800" 
+                  height="933"
                   loading="eager"
                   className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
                 />
