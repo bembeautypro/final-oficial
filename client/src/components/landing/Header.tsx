@@ -104,7 +104,7 @@ const Header = memo(({ id }: HeaderProps) => {
                     alt="NIVELA® - A evolução da escova progressiva profissional"
                     width={800} 
                     height={933}
-                    style={{aspectRatio: '6/7', objectFit: 'cover'}}
+                    style={{aspectRatio: '6/7'}}
                     decoding="async"
                     loading="eager"
                     className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
