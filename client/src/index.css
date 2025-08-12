@@ -10,7 +10,7 @@
     /* NIVELA Brand Colors */
     --brand-black: 12 20 28; /* #0C141C */
     --brand-latte: 212 175 55; /* #D4AF37 */
-    --brand-caramel: 184 148 31; /* #B8941F */
+    --brand-caramel: 212 175 55; /* Same as brand-latte - #D4AF37 */
     --brand-cloud: 232 224 201; /* #E8E0C9 */
     --brand-deep: 13 24 28; /* #0D181C */
     --brand-light: 245 242 232; /* #F5F2E8 */
@@ -39,14 +39,14 @@
     
     /* Enhanced UI Colors */
     --badge-premium: 212 175 55;
-    --badge-tech: 184 148 31;
+    --badge-tech: 212 175 55;
     --badge-success: 34 197 94;
     --cta-primary: 212 175 55;
     --cta-secondary: 13 24 28;
     
     /* Chart Colors */
     --chart-1: 212 175 55;
-    --chart-2: 184 148 31;
+    --chart-2: 212 175 55;
     --chart-3: 232 224 201;
     --chart-4: 164 166 169;
     --chart-5: 38 50 59;
@@ -56,7 +56,7 @@
     --sidebar-foreground: 245 242 232;
     --sidebar-primary: 212 175 55;
     --sidebar-primary-foreground: 13 24 28;
-    --sidebar-accent: 184 148 31;
+    --sidebar-accent: 212 175 55;
     --sidebar-accent-foreground: 13 24 28;
     --sidebar-border: 38 50 59;
     --sidebar-ring: 212 175 55;
