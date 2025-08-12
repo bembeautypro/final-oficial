@@ -1,4 +1,4 @@
-/* Montserrat font with font-display: swap */
+/* Montserrat font with font-display: swap for performance */
 @font-face {
   font-family: "Montserrat";
   src: url("https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Uw-.woff2") format("woff2");
@@ -29,61 +29,59 @@
 
 @layer base {
   :root {
-    /* Brand Colors - NIVELA */
-    --brand-black: 12 20 28; /* #0C141C - Deep charcoal */
-    --brand-latte: 54 45 23; /* #d4af37 - Premium gold */
-    --brand-caramel: 37 28 13; /* #B8941F - Rich caramel */
-    --brand-cloud: 245 242 232; /* #F5F2E8 - Soft cream */
-    --brand-deep: 13 24 28; /* #0D181C - Deep navy */
-    --brand-light: 245 242 232; /* #F5F2E8 - Light cream */
+    /* NIVELA Brand Colors */
+    --brand-black: 12 20 28; /* #0C141C */
+    --brand-latte: 212 175 55; /* #D4AF37 */
+    --brand-caramel: 184 148 31; /* #B8941F */
+    --brand-cloud: 232 224 201; /* #E8E0C9 */
+    --brand-deep: 13 24 28; /* #0D181C */
+    --brand-light: 245 242 232; /* #F5F2E8 */
     
-    /* Enhanced Badge Colors */
-    --badge-premium: 54 45 23; /* Premium gold */
-    --badge-tech: 180 158 102; /* Tech amber */
-    --badge-success: 134 180 102; /* Success green */
+    /* UI System Colors (shadcn compatible) */
+    --background: 13 24 28;
+    --foreground: 245 242 232;
+    --card: 26 35 42;
+    --card-foreground: 245 242 232;
+    --popover: 26 35 42;
+    --popover-foreground: 245 242 232;
+    --primary: 212 175 55;
+    --primary-foreground: 13 24 28;
+    --secondary: 38 50 59;
+    --secondary-foreground: 245 242 232;
+    --muted: 38 50 59;
+    --muted-foreground: 164 166 169;
+    --accent: 212 175 55;
+    --accent-foreground: 13 24 28;
+    --destructive: 239 68 68;
+    --destructive-foreground: 248 250 252;
+    --border: 38 50 59;
+    --input: 38 50 59;
+    --ring: 212 175 55;
+    --radius: 0.5rem;
     
-    /* CTA Colors */
-    --cta-primary: 54 45 23; /* Primary gold */
-    --cta-secondary: 13 24 28; /* Secondary deep */
-    
-    /* UI System Colors */
-    --background: 13 24 28; /* Deep navy background */
-    --foreground: 245 242 232; /* Light cream text */
-    --card: 26 37 44; /* Card background */
-    --card-foreground: 245 242 232; /* Card text */
-    --popover: 26 37 44; /* Popover background */
-    --popover-foreground: 245 242 232; /* Popover text */
-    --primary: 54 45 23; /* Primary gold */
-    --primary-foreground: 13 24 28; /* Primary text */
-    --secondary: 180 158 102; /* Secondary amber */
-    --secondary-foreground: 13 24 28; /* Secondary text */
-    --muted: 38 50 59; /* Muted background */
-    --muted-foreground: 164 166 169; /* Muted text */
-    --accent: 180 158 102; /* Accent amber */
-    --accent-foreground: 13 24 28; /* Accent text */
-    --destructive: 239 68 68; /* Error red */
-    --destructive-foreground: 248 250 252; /* Error text */
-    --border: 38 50 59; /* Border color */
-    --input: 38 50 59; /* Input background */
-    --ring: 54 45 23; /* Focus ring */
-    --radius: 0.5rem; /* Border radius */
+    /* Enhanced UI Colors */
+    --badge-premium: 212 175 55;
+    --badge-tech: 184 148 31;
+    --badge-success: 34 197 94;
+    --cta-primary: 212 175 55;
+    --cta-secondary: 13 24 28;
     
     /* Chart Colors */
-    --chart-1: 54 45 23; /* Chart primary */
-    --chart-2: 180 158 102; /* Chart secondary */
-    --chart-3: 134 180 102; /* Chart tertiary */
-    --chart-4: 102 180 165; /* Chart quaternary */
-    --chart-5: 102 134 180; /* Chart quinary */
+    --chart-1: 212 175 55;
+    --chart-2: 184 148 31;
+    --chart-3: 232 224 201;
+    --chart-4: 164 166 169;
+    --chart-5: 38 50 59;
     
     /* Sidebar Colors */
-    --sidebar-background: 26 37 44; /* Sidebar bg */
-    --sidebar-foreground: 245 242 232; /* Sidebar text */
-    --sidebar-primary: 54 45 23; /* Sidebar primary */
-    --sidebar-primary-foreground: 13 24 28; /* Sidebar primary text */
-    --sidebar-accent: 180 158 102; /* Sidebar accent */
-    --sidebar-accent-foreground: 13 24 28; /* Sidebar accent text */
-    --sidebar-border: 38 50 59; /* Sidebar border */
-    --sidebar-ring: 54 45 23; /* Sidebar ring */
+    --sidebar-background: 26 35 42;
+    --sidebar-foreground: 245 242 232;
+    --sidebar-primary: 212 175 55;
+    --sidebar-primary-foreground: 13 24 28;
+    --sidebar-accent: 184 148 31;
+    --sidebar-accent-foreground: 13 24 28;
+    --sidebar-border: 38 50 59;
+    --sidebar-ring: 212 175 55;
     
     /* Premium Gradients */
     --gradient-brand: linear-gradient(135deg, hsl(var(--brand-latte)) 0%, hsl(var(--brand-caramel)) 100%);
@@ -91,9 +89,6 @@
     --gradient-accent: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--secondary)) 100%);
     --gradient-subtle: linear-gradient(135deg, hsl(var(--muted)) 0%, hsl(var(--card)) 100%);
     --gradient-radial: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
-    --gradient-tech-primary: linear-gradient(135deg, hsl(var(--badge-tech)) 0%, hsl(var(--badge-premium)) 100%);
-    --gradient-tech-secondary: linear-gradient(135deg, hsl(var(--badge-success)) 0%, hsl(var(--badge-tech)) 100%);
-    --gradient-tech-accent: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--primary)) 100%);
     
     /* Premium Shadows */
     --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.1);
@@ -108,26 +103,25 @@
   }
   
   .dark {
-    /* Enhanced dark mode with richer contrast */
-    --background: 8 16 20; /* Deeper background */
-    --foreground: 250 248 242; /* Warmer foreground */
-    --card: 20 28 32; /* Richer card background */
-    --card-foreground: 250 248 242; /* Consistent foreground */
-    --popover: 20 28 32; /* Consistent popover */
-    --popover-foreground: 250 248 242; /* Consistent text */
-    --primary: 58 49 27; /* Richer primary */
-    --primary-foreground: 250 248 242; /* Better contrast */
-    --secondary: 32 40 44; /* Subtle secondary */
-    --secondary-foreground: 250 248 242; /* Clear text */
-    --muted: 32 40 44; /* Refined muted */
-    --muted-foreground: 156 158 161; /* Better readability */
-    --accent: 58 49 27; /* Consistent accent */
-    --accent-foreground: 250 248 242; /* Clear accent text */
-    --destructive: 204 60 60; /* Adjusted error */
-    --destructive-foreground: 250 248 242; /* Clear error text */
-    --border: 32 40 44; /* Subtle borders */
-    --input: 32 40 44; /* Input styling */
-    --ring: 58 49 27; /* Focus indication */
+    --background: 8 16 20;
+    --foreground: 250 248 242;
+    --card: 20 28 32;
+    --card-foreground: 250 248 242;
+    --popover: 20 28 32;
+    --popover-foreground: 250 248 242;
+    --primary: 220 179 59;
+    --primary-foreground: 8 16 20;
+    --secondary: 32 40 44;
+    --secondary-foreground: 250 248 242;
+    --muted: 32 40 44;
+    --muted-foreground: 156 158 161;
+    --accent: 220 179 59;
+    --accent-foreground: 8 16 20;
+    --destructive: 204 60 60;
+    --destructive-foreground: 250 248 242;
+    --border: 32 40 44;
+    --input: 32 40 44;
+    --ring: 220 179 59;
   }
 }
 
@@ -174,5 +168,14 @@
   
   .backface-hidden {
     backface-visibility: hidden;
+  }
+  
+  /* Hero title responsive classes */
+  .hero-title-responsive {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+  }
+  
+  .hero-subtitle-responsive {
+    font-size: clamp(1.125rem, 3vw, 1.5rem);
   }
 }
