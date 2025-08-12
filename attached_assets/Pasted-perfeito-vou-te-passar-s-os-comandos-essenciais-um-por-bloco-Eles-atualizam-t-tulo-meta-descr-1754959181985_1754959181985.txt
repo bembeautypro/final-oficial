@@ -1,0 +1,38 @@
+perfeito — vou te passar só os comandos essenciais (um por bloco).
+Eles atualizam título, meta description, e também Open Graph/Twitter pra o Google pegar direitinho.
+
+1) Título (index.html)
+
+sed -i 's#<title>.*</title>#<title>NIVELA® - A Evolução da Escova Progressiva Profissional</title>#' index.html
+
+2) Meta description (cria se não existir)
+
+grep -q 'meta name="description"' index.html && sed -i 's#<meta name="description"[^>]*>#<meta name="description" content="Descubra o retexturizador profissional sem formol que une tecnologia exclusiva e ativos da Amazônia para um resultado impecável.">#' index.html || sed -i 's#<head>#<head>\n<meta name="description" content="Descubra o retexturizador profissional sem formol que une tecnologia exclusiva e ativos da Amazônia para um resultado impecável.">#' index.html
+
+3) Open Graph (title/description) — cria ou substitui antes de </head>
+
+awk 'BEGIN{t=0;d=0} {print} /<meta property="og:title"/{t=1} /<meta property="og:description"/{d=1} END{if(!t)print "<meta property=\"og:title\" content=\"NIVELA® - A Evolução da Escova Progressiva Profissional\">"; if(!d)print "<meta property=\"og:description\" content=\"Descubra o retexturizador profissional sem formol que une tecnologia exclusiva e ativos da Amazônia para um resultado impecável.\">"}' index.html > /tmp/_idx && mv /tmp/_idx index.html
+
+sed -i 's#<meta property="og:title"[^>]*>#<meta property="og:title" content="NIVELA® - A Evolução da Escova Progressiva Profissional">#' index.html
+
+sed -i 's#<meta property="og:description"[^>]*>#<meta property="og:description" content="Descubra o retexturizador profissional sem formol que une tecnologia exclusiva e ativos da Amazônia para um resultado impecável.">#' index.html
+
+4) Twitter (title/description) — cria ou substitui
+
+grep -q 'name="twitter:title"' index.html && sed -i 's#<meta name="twitter:title"[^>]*>#<meta name="twitter:title" content="NIVELA® - A Evolução da Escova Progressiva Profissional">#' index.html || sed -i 's#</head>#<meta name="twitter:title" content="NIVELA® - A Evolução da Escova Progressiva Profissional">\n</head>#' index.html
+
+grep -q 'name="twitter:description"' index.html && sed -i 's#<meta name="twitter:description"[^>]*>#<meta name="twitter:description" content="Descubra o retexturizador profissional sem formol que une tecnologia exclusiva e ativos da Amazônia para um resultado impecável.">#' index.html || sed -i 's#</head>#<meta name="twitter:description" content="Descubra o retexturizador profissional sem formol que une tecnologia exclusiva e ativos da Amazônia para um resultado impecável.">\n</head>#' index.html
+
+5) Commit e deploy
+
+git add index.html
+
+git commit -m "seo: título/descrição atualizados (Google), OG e Twitter"
+
+git push origin main
+
+6) Depois do deploy
+	•	Abra o Google Search Console → Inspeção de URL → cole https://nivela.bembeauty.com.br/ → Solicitar indexação.
+	•	Opcional: em Sitemaps, envie https://nivela.bembeauty.com.br/sitemap.xml (se já tiver).
+
+Se quiser, te passo também um comando rápido pra conferir se o <title> e a description ficaram certinhos via terminal.
