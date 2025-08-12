@@ -14,6 +14,7 @@ const BemTechSection = memo(({ id }: BemTechSectionProps) => {
     {
       name: "BemHUB™",
       subtitle: "Central estratégica do distribuidor",
+      subtitleColor: "text-blue-400",
       features: [
         "Guia interativo do produto",
         "Treinamentos com quiz e certificado",
@@ -26,6 +27,7 @@ const BemTechSection = memo(({ id }: BemTechSectionProps) => {
     {
       name: "BemEDUCA™",
       subtitle: "Treinamento imersivo e inteligente", 
+      subtitleColor: "text-green-400",
       features: [
         "Módulos curtos e objetivos",
         "Técnicas consultivas e quebra de objeções",
@@ -37,6 +39,7 @@ const BemTechSection = memo(({ id }: BemTechSectionProps) => {
     {
       name: "BemPRO™",
       subtitle: "Consultor digital do cabeleireiro moderno",
+      subtitleColor: "text-purple-400",
       features: [
         "Guia técnico completo de aplicação",
         "Ficha de anamnese digital + histórico de clientes",
@@ -87,7 +90,7 @@ const BemTechSection = memo(({ id }: BemTechSectionProps) => {
                       <h4 className="text-xl md:text-2xl lg:text-3xl font-bold text-primary">
                         {tech.name}
                       </h4>
-                      <p className="text-sm md:text-base lg:text-lg text-accent/90">
+                      <p className={`text-sm md:text-base lg:text-lg ${tech.subtitleColor}`}>
                         {tech.subtitle}
                       </p>
                     </div>
