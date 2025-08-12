@@ -8,6 +8,8 @@ interface PerformanceAwareImageProps {
   height?: number;
   priority?: boolean;
   loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  decoding?: 'sync' | 'async' | 'auto';
 }
 
 export const PerformanceAwareImage = memo<PerformanceAwareImageProps>(({
@@ -17,7 +19,9 @@ export const PerformanceAwareImage = memo<PerformanceAwareImageProps>(({
   width,
   height,
   priority = false,
-  loading = 'lazy'
+  loading = 'lazy',
+  fetchpriority,
+  decoding
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -65,6 +69,8 @@ export const PerformanceAwareImage = memo<PerformanceAwareImageProps>(({
       width={width}
       height={height}
       loading={loading}
+      fetchPriority={fetchpriority}
+      decoding={decoding}
       onLoad={() => setIsLoaded(true)}
       onError={handleError}
     />

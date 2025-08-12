@@ -30,7 +30,7 @@ const Header = memo(({ id }: HeaderProps) => {
       {/* Navigation */}
       <nav className="w-full px-4 md:px-8 lg:px-12 py-8 flex justify-center items-center relative z-10">
         <PerformanceAwareImage 
-          src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/logo-bembeauty-transparente.png"
+          src="/img/logo.png"
           alt="Bem Beauty Professional - Logo da marca"
           className="h-8 md:h-10 w-auto object-contain"
           width={160}
@@ -98,13 +98,15 @@ const Header = memo(({ id }: HeaderProps) => {
               <div className="relative w-full flex justify-center lg:justify-end max-w-lg lg:max-w-none">
                 {/* Product Image */}
                 <PerformanceAwareImage 
-                  src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
+                  src="/img/nivela-hero.webp"
                   alt="NIVELA® - Retexturizador hidro nutritivo de 1kg com fundo transparente"
                   className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
                   width={800}
                   height={800}
                   priority={true}
                   loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
                 />
                 
                 {/* Enhanced spotlight glow effect */}
