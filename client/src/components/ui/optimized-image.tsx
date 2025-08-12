@@ -1,134 +1,79 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { cn } from '@/lib/utils';
+import React, { useEffect, useRef, useState } from 'react';
+import { ImageOptimizer } from '@/utils/imageOptimizer';
 
-interface OptimizedImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface OptimizedImageProps {
   src: string;
   alt: string;
+  className?: string;
   width?: number;
   height?: number;
   priority?: boolean;
-  className?: string;
-  fallback?: string;
-  sizes?: string;
-  objectFit?: 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
+  quality?: number;
+  format?: 'webp' | 'avif' | 'auto';
+  placeholder?: string;
 }
 
-export const OptimizedImage = React.memo(({
+export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   src,
   alt,
+  className = '',
   width,
   height,
   priority = false,
-  className,
-  fallback = '/placeholder.svg',
-  sizes,
-  objectFit = 'cover',
-  loading,
-  decoding = 'async',
-  ...props
-}: OptimizedImageProps) => {
+  quality = 80,
+  format = 'webp',
+  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzJkMzc0OCIvPjwvc3ZnPg=='
+}) => {
+  const imgRef = useRef<HTMLImageElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [isInView, setIsInView] = useState(priority);
-  const imgRef = useRef<HTMLImageElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer for lazy loading
+  const optimizedSrc = ImageOptimizer.optimizeImage(src, {
+    width,
+    height,
+    quality,
+    format
+  });
+
   useEffect(() => {
-    if (priority || isInView) return;
+    const img = imgRef.current;
+    if (!img) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          observer.disconnect();
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '50px'
-      }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
+    if (priority) {
+      // Load immediately for above-the-fold images
+      img.src = optimizedSrc;
+    } else {
+      // Use lazy loading for below-the-fold images
+      img.dataset.src = optimizedSrc;
+      img.src = placeholder;
+      ImageOptimizer.lazyLoad(img);
     }
 
-    return () => observer.disconnect();
-  }, [priority, isInView]);
+    const handleLoad = () => setIsLoaded(true);
+    const handleError = () => setHasError(true);
 
-  const handleLoad = () => {
-    setIsLoaded(true);
-  };
+    img.addEventListener('load', handleLoad);
+    img.addEventListener('error', handleError);
 
-  const handleError = () => {
-    setHasError(true);
-    setIsLoaded(true);
-  };
-
-  // Calculate aspect ratio for preventing layout shift
-  const aspectRatio = width && height ? `${width}/${height}` : "16/9";
+    return () => {
+      img.removeEventListener('load', handleLoad);
+      img.removeEventListener('error', handleError);
+    };
+  }, [optimizedSrc, priority, placeholder]);
 
   return (
-    <div
-      ref={containerRef}
-      className={cn("relative overflow-hidden", className)}
-      style={{
-        aspectRatio,
-        width: width ? `${width}px` : undefined,
-        height: height ? `${height}px` : undefined,
-        minHeight: !width && !height ? "200px" : undefined
-      }}
-    >
-      {/* Placeholder/Loading state */}
-      {!isLoaded && (
-        <div
-          className="absolute inset-0 bg-muted/20 animate-pulse flex items-center justify-center"
-          aria-hidden="true"
-        >
-          <div className="w-8 h-8 border-2 border-muted/40 border-t-primary rounded-full animate-spin" />
-        </div>
-      )}
-
-      {/* Actual image */}
-      {isInView && (
-        <img
-          ref={imgRef}
-          src={hasError ? fallback : src}
-          alt={alt}
-          width={width}
-          height={height}
-          className={cn(
-            "transition-opacity duration-300",
-            `object-${objectFit}`,
-            isLoaded ? "opacity-100" : "opacity-0",
-            "w-full h-full"
-          )}
-          loading={loading || (priority ? "eager" : "lazy")}
-          decoding={decoding}
-          sizes={sizes}
-          onLoad={handleLoad}
-          onError={handleError}
-          style={{
-            aspectRatio,
-            imageRendering: 'crisp-edges'
-          }}
-          {...props}
-        />
-      )}
-
-      {/* Error state */}
-      {hasError && (
-        <div
-          className="absolute inset-0 bg-muted/10 flex items-center justify-center text-muted-foreground text-sm"
-          role="img"
-          aria-label="Imagem não pôde ser carregada"
-        >
-          Imagem indisponível
-        </div>
-      )}
-    </div>
+    <img
+      ref={imgRef}
+      alt={alt}
+      className={`transition-opacity duration-300 ${
+        isLoaded ? 'opacity-100' : 'opacity-70'
+      } ${hasError ? 'opacity-50' : ''} ${className}`}
+      width={width}
+      height={height}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding="async"
+    />
   );
-});
+};
 
-OptimizedImage.displayName = 'OptimizedImage';
+export default OptimizedImage;
