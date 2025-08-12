@@ -1,7 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
-import securityHeaders from "./security-headers";
+import { securityHeaders, redirectWww } from "./security-headers";
 import path from "path";
 
 const app = express();
@@ -10,12 +10,7 @@ const app = express();
 app.use(securityHeaders);
 
 // WWW redirect middleware
-app.use((req,res,next)=>{
-  if (req.headers.host && req.headers.host.startsWith('www.')) {
-    return res.redirect(301, `https://${req.headers.host.replace(/^www\./,'')}${req.url}`);
-  }
-  next();
-});
+app.use(redirectWww);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
