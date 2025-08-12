@@ -1,0 +1,49 @@
+Aplique as seguintes alterações no projeto atual:
+
+1. Criar a pasta `public` na raiz, se não existir, e dentro dela criar:
+   - `robots.txt` com:
+     User-agent: *
+     Allow: /
+     Sitemap: https://nivela.bembeauty.com.br/sitemap.xml
+   - `sitemap.xml` com:
+     <?xml version="1.0" encoding="UTF-8"?>
+     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+       <url><loc>https://nivela.bembeauty.com.br/</loc><priority>1.0</priority></url>
+     </urlset>
+
+2. Garantir que a pasta `public` seja copiada no build do Vite e que o servidor (Express ou equivalente) sirva `/robots.txt` e `/sitemap.xml` com `Content-Type` correto (`text/plain` e `application/xml`).
+
+3. No arquivo principal de HTML (`index.html` ou equivalente no Vite):
+   - No `<head>` adicione:
+     <link rel="preconnect" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co" crossorigin>
+     <link rel="preload" as="image" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp" fetchpriority="high" imagesrcset="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 768w, https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 1080w" imagesizes="(max-width: 768px) 100vw, 50vw">
+     <link rel="canonical" href="https://nivela.bembeauty.com.br/">
+
+4. Na tag `<img>` da hero:
+   - Adicionar `fetchpriority="high"` e `decoding="async"`.
+   - Garantir atributos `width`, `height` e `style="aspect-ratio: 6/7; object-fit: cover"`.
+
+5. Ativar purge do Tailwind (tailwind.config.js):
+   module.exports = {
+     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
+     theme: { extend: {} },
+     plugins: []
+   }
+
+6. Remover CSS/JS não usado:
+   - Ativar tree shaking no Vite (`rollupOptions: { treeshake: true }`).
+   - Carregar scripts abaixo da dobra com import dinâmico.
+
+7. Ajustar ordem de títulos para que haja apenas um `<h1>` no topo e depois `<h2>` sequenciais.
+
+8. Melhorar contraste dos textos sobre imagens (usar overlay leve ou alterar cor).
+
+9. Em todos os vídeos `<video>`, adicionar um `<track kind="captions" srclang="pt" label="Português" default>`.
+
+10. No carregamento do GTM/GA4, usar:
+    <script defer src="https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)}
+      gtag('consent','default',{ad_storage:'denied',analytics_storage:'granted'});
+    </script>
