@@ -6,28 +6,20 @@ interface VideoLazyProps {
   autoPlay?: boolean;
   muted?: boolean;
   loop?: boolean;
-  controls?: boolean;
-  preload?: 'metadata' | 'auto' | 'none';
   threshold?: number;
-  rootMargin?: string;
-  'aria-label'?: string;
-  title?: string;
   onError?: (error: Error | Event) => void;
 }
 
 export const VideoLazy = memo<VideoLazyProps>(({
   src,
   className = '',
-  autoPlay = false,
+  autoPlay = true,
   muted = true,
-  loop = false,
-  controls = false,
-  preload = 'metadata',
-  'aria-label': ariaLabel,
-  title,
+  loop = true,
+  threshold = 0.3,
   onError
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -38,29 +30,35 @@ export const VideoLazy = memo<VideoLazyProps>(({
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !isLoaded) {
-            setIsLoaded(true);
-            observer.disconnect();
+          setIsInView(entry.isIntersecting);
+          
+          if (entry.isIntersecting) {
+            // Video is visible - play
+            video.play().catch(() => {
+              // Autoplay failed - handled gracefully
+            });
+          } else {
+            // Video is out of view - pause
+            video.pause();
           }
         });
       },
-      { threshold: 0.1, rootMargin: '100px' }
+      { threshold, rootMargin: '50px' }
     );
 
     observer.observe(video);
     return () => observer.disconnect();
-  }, [isLoaded]);
+  }, [threshold]);
 
   const handleError = (event: React.SyntheticEvent<HTMLVideoElement>) => {
     setHasError(true);
-    // Video loading failed - handled gracefully
     onError?.(event.nativeEvent);
   };
 
   if (hasError) {
     return (
       <div className={`bg-gray-200 flex items-center justify-center ${className}`}>
-        <span className="text-gray-500">Erro ao carregar vídeo</span>
+        <span className="text-gray-500 text-sm">Erro ao carregar vídeo</span>
       </div>
     );
   }
@@ -69,15 +67,17 @@ export const VideoLazy = memo<VideoLazyProps>(({
     <div className={className}>
       <video
         ref={videoRef}
-        src={isLoaded ? src : undefined}
-        autoPlay={autoPlay && isLoaded}
+        src={src}
+        autoPlay={autoPlay}
         muted={muted}
         loop={loop}
-        controls={controls}
-        preload={preload}
+        playsInline
+        controls={false}
+        disablePictureInPicture
+        controlsList="nodownload nofullscreen noremoteplaybook"
+        preload="metadata"
         className="w-full h-full object-cover"
-        aria-label={ariaLabel}
-        title={title}
+        style={{ pointerEvents: 'none' }}
         onError={handleError}
       />
     </div>

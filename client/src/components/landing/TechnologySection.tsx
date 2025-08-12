@@ -66,11 +66,10 @@ const TechnologySection = memo(({ id }: TechnologySectionProps) => {
             <VideoLazy
               src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/videos/tecnologia-oficial-compactado.mp4"
               className="w-full aspect-[4/3] object-cover rounded-lg"
-              autoPlay={false}
+              autoPlay={true}
               muted={true}
               loop={true}
-              controls={true}
-              title="Tecnologia ASTRO QUAT V3® - Demonstração Molecular"
+              threshold={0.3}
               onError={handleVideoError}
             />
           </div>
@@ -121,8 +120,7 @@ const TechnologySection = memo(({ id }: TechnologySectionProps) => {
                 autoPlay={true}
                 muted={true}
                 loop={true}
-                controls={false}
-                title="Tecnologia ASTRO QUAT V3® - Demonstração Molecular"
+                threshold={0.3}
                 onError={handleVideoError}
               />
             </div>

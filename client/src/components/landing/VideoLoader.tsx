@@ -139,8 +139,6 @@ export const VideoLoader = ({ src, thumbnail, title, className = "" }: VideoLoad
         width={640}
         height={360}
       >
-        <track kind="descriptions" src="" label={`Descrição do vídeo: ${title}`} />
-        <track kind="captions" src="" label="Legendas disponíveis" />
         Seu navegador não suporta reprodução de vídeos HTML5.
       </video>
     </div>
