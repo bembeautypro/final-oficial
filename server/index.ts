@@ -49,6 +49,24 @@ app.use((req, res, next) => {
   next();
 });
 
+// Add explicit routes for SEO files before catch-all
+app.get("/robots.txt", (_req, res) => {
+  res.set("Content-Type", "text/plain");
+  res.send(`User-agent: *
+Allow: /
+
+Sitemap: https://nivela.bembeauty.com.br/sitemap.xml
+`);
+});
+
+app.get("/sitemap.xml", (_req, res) => {
+  res.set("Content-Type", "application/xml");
+  res.send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://nivela.bembeauty.com.br/</loc><priority>1.0</priority></url>
+</urlset>`);
+});
+
 (async () => {
   const server = await registerRoutes(app);
 

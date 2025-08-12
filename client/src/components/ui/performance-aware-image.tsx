@@ -60,19 +60,23 @@ export const PerformanceAwareImage = memo<PerformanceAwareImageProps>(({
     );
   }
 
-  return (
-    <img
-      ref={imgRef}
-      src={priority || isLoaded ? src : undefined}
-      alt={alt}
-      className={className}
-      width={width}
-      height={height}
-      loading={loading}
-      fetchPriority={fetchpriority}
-      decoding={decoding}
-      onLoad={() => setIsLoaded(true)}
-      onError={handleError}
-    />
-  );
+  // Build props object with correct typing
+  const imgProps: React.ImgHTMLAttributes<HTMLImageElement> = {
+    src: priority || isLoaded ? src : undefined,
+    alt,
+    className,
+    width,
+    height,
+    loading,
+    decoding,
+    onLoad: () => setIsLoaded(true),
+    onError: handleError,
+  };
+
+  // Add fetchpriority as DOM attribute (TypeScript doesn't know about it yet)
+  if (fetchpriority) {
+    (imgProps as any).fetchpriority = fetchpriority;
+  }
+
+  return <img ref={imgRef} {...imgProps} />;
 });
