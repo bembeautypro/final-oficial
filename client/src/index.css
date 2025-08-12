@@ -80,27 +80,7 @@
     --transition-elegant: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   
-  .dark {
-    --background: 8 16 20;
-    --foreground: 250 248 242;
-    --card: 20 28 32;
-    --card-foreground: 250 248 242;
-    --popover: 20 28 32;
-    --popover-foreground: 250 248 242;
-    --primary: 220 179 59;
-    --primary-foreground: 8 16 20;
-    --secondary: 32 40 44;
-    --secondary-foreground: 250 248 242;
-    --muted: 32 40 44;
-    --muted-foreground: 156 158 161;
-    --accent: 220 179 59;
-    --accent-foreground: 8 16 20;
-    --destructive: 204 60 60;
-    --destructive-foreground: 250 248 242;
-    --border: 32 40 44;
-    --input: 32 40 44;
-    --ring: 220 179 59;
-  }
+  /* Remove dark theme - NIVELA uses only one color scheme */
 }
 
 @layer base {
@@ -108,11 +88,17 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
     font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background-color: rgb(13, 24, 28) !important; /* Force NIVELA dark background */
-    color: rgb(245, 242, 232) !important; /* Force NIVELA light text */
+    background-color: #0d181c !important; /* NIVELA dark background */
+    color: #f5f2e8 !important; /* NIVELA light text */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+  
+  html {
+    background-color: #0d181c !important;
   }
   
   /* Performance optimizations */
@@ -160,11 +146,23 @@
     font-size: clamp(1.125rem, 3vw, 1.5rem);
   }
   
-  /* Force NIVELA colors */
-  .bg-primary { background-color: rgb(212, 175, 55) !important; }
-  .text-primary { color: rgb(212, 175, 55) !important; }
-  .bg-accent { background-color: rgb(212, 175, 55) !important; }
-  .text-accent { color: rgb(212, 175, 55) !important; }
-  .bg-background { background-color: rgb(13, 24, 28) !important; }
-  .text-foreground { color: rgb(245, 242, 232) !important; }
+  /* Force NIVELA colors for all Tailwind classes */
+  .bg-primary, .bg-accent, .bg-brand-latte, .bg-cta-primary { 
+    background-color: #D4AF37 !important; 
+  }
+  .text-primary, .text-accent, .text-brand-latte, .text-cta-primary { 
+    color: #D4AF37 !important; 
+  }
+  .bg-background, .bg-brand-deep { 
+    background-color: #0d181c !important; 
+  }
+  .text-foreground, .text-brand-light { 
+    color: #f5f2e8 !important; 
+  }
+  .border-primary, .border-accent { 
+    border-color: #D4AF37 !important; 
+  }
+  .ring-primary, .ring-accent { 
+    --tw-ring-color: #D4AF37 !important; 
+  }
 }
