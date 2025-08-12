@@ -52,6 +52,7 @@ const Manifesto = ({ id }: ManifestoProps) => {
                     aria-label="NIVELA - Nova era em retexturização capilar"
                     title="NIVELA - Nova era em retexturização capilar"
                   >
+                    <track kind="captions" srcLang="pt" label="Português" default />
                     Seu navegador não suporta reprodução de vídeos HTML5.
                   </video>
                 </div>

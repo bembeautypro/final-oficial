@@ -132,7 +132,7 @@ export const AccessibleVideo = React.memo(({
         {...props}
       >
         <track kind="descriptions" src="" label={`Descrição: ${description || title}`} />
-        <track kind="captions" src="" label="Legendas" />
+        <track kind="captions" srcLang="pt" label="Português" default />
         Seu navegador não suporta vídeos HTML5.
       </video>
 

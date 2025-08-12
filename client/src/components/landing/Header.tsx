@@ -102,7 +102,7 @@ const Header = memo(({ id }: HeaderProps) => {
                   alt="NIVELA® - Retexturizador hidro nutritivo de 1kg com fundo transparente"
                   className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
                   width={800}
-                  height={800}
+                  height={933}
                   priority={true}
                   loading="eager"
                   fetchpriority="high"
