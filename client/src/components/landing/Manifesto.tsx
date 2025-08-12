@@ -47,7 +47,7 @@ const Manifesto = ({ id }: ManifestoProps) => {
                     controlsList="nodownload nofullscreen noremoteplaybook"
                     disablePictureInPicture
                     preload="metadata"
-                    poster="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/poster-manifesto.webp"
+                    poster=""
                     className="w-full h-full object-cover aspect-video"
                     style={{ pointerEvents: 'none' }}
                     aria-label="NIVELA - Nova era em retexturização capilar"

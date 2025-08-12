@@ -34,11 +34,10 @@
     
     <!-- Performance: Critical Resource Hints -->
     <link rel="preconnect" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
-    <link rel="dns-prefetch" href="https://unpkg.com">
     
     <!-- Performance: Critical LCP Image Preload -->
     <link rel="preload" as="image" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp" fetchpriority="high" imagesrcset="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 768w, https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 1080w" imagesizes="(max-width: 768px) 100vw, 50vw">
@@ -48,7 +47,7 @@
       /* Critical CSS for immediate rendering */
       *{box-sizing:border-box}
       html{scroll-behavior:smooth}
-      body{margin:0;padding:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0d181c;color:#f5f2e8;line-height:1.6;-webkit-text-size-adjust:100%}
+      body{margin:0;padding:0;font-family:'Montserrat',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0d181c;color:#f5f2e8;line-height:1.6;-webkit-text-size-adjust:100%}
       
       /* Hero Critical Styles */
       .hero-section{min-height:100vh;background:linear-gradient(135deg,#0d181c 0%,#1a2c34 100%);position:relative;display:flex;align-items:center;justify-content:center}
@@ -69,9 +68,7 @@
       @keyframes loading{0%{background-position:200% 0}100%{background-position:-200% 0}}
     </style>
     
-    <!-- Fonts - Maximum Performance -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Uw-.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v26/JTUSjIg1_i6t8kCHKm459Wlhzg.woff2" as="font" type="font/woff2" crossorigin>
+
     <script>
       // Critical font loading with fallback
       const fontDisplay = document.createElement('link');
