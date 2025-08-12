@@ -1,3 +1,22 @@
+/* NIVELA CORE COLORS - ABSOLUTE PRIORITY */
+* {
+  --nivela-background: #0d181c !important;
+  --nivela-text: #f5f2e8 !important;
+  --nivela-gold: #D4AF37 !important;
+}
+
+*, *::before, *::after {
+  background-color: var(--nivela-background) !important;
+  color: var(--nivela-text) !important;
+}
+
+html, body, #root {
+  background-color: #0d181c !important;
+  color: #f5f2e8 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* Montserrat font with Google Fonts import */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 

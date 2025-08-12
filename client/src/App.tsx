@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { ThemeProvider } from "@/components/ui/theme-provider";
+// ThemeProvider removed - NIVELA uses fixed colors
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Router } from "wouter";
@@ -27,16 +27,14 @@ const queryClient = new QueryClient({
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <TooltipProvider delayDuration={200} skipDelayDuration={300}>
-          <Toaster />
-          <Sonner />
-          <Router>
-            <Route path="/" component={Index} />
-            {/* No catch-all route - landing page only */}
-          </Router>
-        </TooltipProvider>
-      </ThemeProvider>
+      <TooltipProvider delayDuration={200} skipDelayDuration={300}>
+        <Toaster />
+        <Sonner />
+        <Router>
+          <Route path="/" component={Index} />
+          {/* No catch-all route - landing page only */}
+        </Router>
+      </TooltipProvider>
     </QueryClientProvider>
   );
 };
