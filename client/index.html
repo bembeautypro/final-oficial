@@ -103,27 +103,19 @@
     }
     </script>
     
-    <!-- GTM + GA4 with Consent Mode -->
+    <!-- GA4 via GTM with cross-domain -->
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('consent', 'default', {
-        ad_storage: 'denied',
-        analytics_storage: 'granted',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied'
-      });
-      gtag('set', 'url_passthrough', true);
+      function gtag(){dataLayer.push(arguments)}
+      // Consent default
+      gtag('consent','default',{ad_storage:'denied',analytics_storage:'granted'});
+      // GA4 config com cross-domain (ajuste a tag no GTM para ler estas opções)
+      window.GA4_CONFIG = {
+        linker: { domains: ['bembeauty.com.br'] },
+        allow_google_signals: false
+      };
     </script>
-    <script>
-      // GTM - Deferred Loading for Performance
-      window.addEventListener("load", function() {
-        var script = document.createElement("script");
-        script.defer = true;
-        script.src = "https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD";
-        document.head.appendChild(script);
-      });
-    </script>
+    <script defer src="https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD"></script>
   </head>
   <body>
     <!-- GTM noscript -->
@@ -131,5 +123,44 @@
     
     <div id="root"></div>
     <script type="module" src="./src/main.tsx"></script>
+    
+    <!-- Web Vitals → Supabase -->
+    <script type="module">
+      import { onLCP, onFCP, onCLS, onTTFB, onINP } from 'https://unpkg.com/web-vitals@3/dist/web-vitals.attribution.js?module';
+
+      const SUPABASE_URL = 'https://fdyzlqovxvdpkzlwuhjj.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZkeXpscW92eHZkcGt6bHd1aGpqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ1MjQwNzIsImV4cCI6MjA3MDEwMDA3Mn0.0itJku2mVxd8MIvk7lo7Y8gamram_QYCluzHbNUT88Y';
+
+      const send = (metric) => {
+        const payload = {
+          created_at: new Date().toISOString(),
+          page: location.pathname,
+          name: metric.name,
+          value: metric.value,
+          id: metric.id,
+          url: location.href,
+          device: 'mobile'
+        };
+        fetch(`${SUPABASE_URL}/rest/v1/performance_metrics`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=representation'
+          },
+          body: JSON.stringify(payload)
+        }).catch(()=>{});
+      };
+
+      onLCP(send); onFCP(send); onCLS(send); onTTFB(send); onINP(send);
+    </script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(()=>{});
+    }
+    </script>
   </body>
 </html>
