@@ -1,0 +1,48 @@
+Aplique as correções abaixo no projeto atual:
+
+OBJETIVO
+- Eliminar 404 das fontes (.woff2)
+- Permitir Web‑Vitals sem abrir CSP externa
+- Manter performance (sem scripts de 3º desnecessários)
+
+AÇÕES
+
+1) FONTES LOCAIS (parar de apontar para caminhos quebrados)
+- Crie a pasta /public/fonts se não existir.
+- Baixe/importe os arquivos woff2 que o projeto usa (ex.: Montserrat 400/700 e Poppins se aplicável) e salve como:
+  /public/fonts/Montserrat-400.woff2
+  /public/fonts/Montserrat-700.woff2
+  /public/fonts/Poppins-400.woff2 (se estiver em uso)
+- No CSS global, crie/garanta @font-face com caminho local estável e swap:
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat-400.woff2") format("woff2");
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat-700.woff2") format("woff2");
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+- Substitua qualquer referência antiga a arquivos tipo “JTUSjIg1_... .woff2” pelos nomes acima.
+- No <head>, se houver <link rel="preload" as="font">, aponte para os novos caminhos:
+  <link rel="preload" href="/fonts/Montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+
+2) WEB‑VITALS (sem quebrar CSP)
+- Remover o import via unpkg do Web‑Vitals.
+- Crie o arquivo local em /public/js/web-vitals.attribution.js com o conteúdo oficial da lib (versão 3) ou equivalente já minificado.
+  (Se não tiver o arquivo local agora, crie um placeholder vazio para não quebrar a página.)
+- No index.html, substitua o script externo por:
+  <script type="module" src="/js/web-vitals.attribution.js"></script>
+
+3) CSP (opcional – só se houver middleware de headers)
+- Se existir middleware de segurança (CSP) no servidor, mantenha:
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com
+- NÃO adicione unpkg à CSP (evita ampliar a superfície). Como agora o Web‑Vitals é local, não é necessário.
+
+4) BUILD E TESTE
+- Rebuild do projeto.
+- Confirmar no console do navegador:
+  - Sem 404 de fontes
+  - Sem bloqueio CSP do Web‑Vitals
+  - PageSpeed/Lighthouse rodam normalmente

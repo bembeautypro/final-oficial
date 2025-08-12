@@ -3,11 +3,11 @@ import { Request, Response, NextFunction } from 'express';
 export function securityHeaders(req: Request, res: Response, next: NextFunction) {
   // Content Security Policy - Allow necessary resources for production
   res.setHeader('Content-Security-Policy',
-    "default-src 'self' https://*.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; " +
+    "default-src 'self' https://*.supabase.co https://www.googletagmanager.com https://www.google-analytics.com; " +
     "img-src 'self' data: https://*.supabase.co; " +
-    "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://unpkg.com; " +
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-    "font-src 'self' data: https://fonts.gstatic.com; " +
+    "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; " +
+    "style-src 'self' 'unsafe-inline'; " +
+    "font-src 'self' data:; " +
     "frame-ancestors 'self' https://*.replit.dev https://*.replit.com;"
   );
 
