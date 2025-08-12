@@ -8,11 +8,11 @@ function securityHeaders(req: Request, res: Response, next: NextFunction) {
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "font-src 'self' data: https://fonts.gstatic.com; " +
     "connect-src 'self' https://*.supabase.co https://www.google-analytics.com; " +
-    "frame-ancestors 'self';");
+    "frame-ancestors 'self' *.replit.dev *.replit.com;");
   res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  // X-Frame-Options removed to allow Replit preview iframe
   next();
 }
 
