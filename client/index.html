@@ -56,12 +56,35 @@
     <!-- Performance: Critical LCP Image Preload -->
     <link rel="preload" as="image" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp" fetchpriority="high" imagesrcset="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 768w, https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 1080w" imagesizes="(max-width: 768px) 100vw, 50vw">
     
-    <!-- CSS Critical Inlined (Minimal for FCP) -->
+    <!-- CSS Critical Inlined (NIVELA Colors Guaranteed) -->
     <style>
       /* Critical CSS for immediate rendering */
       *{box-sizing:border-box}
       html{scroll-behavior:smooth}
-      body{margin:0;padding:0;font-family:'Montserrat',system-ui,sans-serif;line-height:1.6}
+      body{
+        margin:0;
+        padding:0;
+        font-family:'Montserrat',system-ui,sans-serif;
+        line-height:1.6;
+        background-color:#0d181c !important;
+        color:#f5f2e8 !important;
+      }
+      
+      /* Force NIVELA brand colors immediately */
+      .bg-primary, [class*="bg-primary"] { background-color: #D4AF37 !important; }
+      .text-primary, [class*="text-primary"] { color: #D4AF37 !important; }
+      .bg-accent, [class*="bg-accent"] { background-color: #D4AF37 !important; }
+      .text-accent, [class*="text-accent"] { color: #D4AF37 !important; }
+      .bg-background { background-color: #0d181c !important; }
+      .text-foreground { color: #f5f2e8 !important; }
+      
+      /* CSS Variables fallback */
+      :root {
+        --background: 13 24 28;
+        --foreground: 245 242 232;
+        --primary: 212 175 55;
+        --accent: 212 175 55;
+      }
     </style>
     
 
