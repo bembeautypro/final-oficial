@@ -54,8 +54,8 @@ export const PerformanceAwareImage = memo<PerformanceAwareImageProps>(({
 
   if (hasError) {
     return (
-      <div className={`bg-gray-200 flex items-center justify-center ${className}`}>
-        <span className="text-gray-500 text-sm">Erro ao carregar imagem</span>
+      <div className={`bg-card flex items-center justify-center ${className}`}>
+        <span className="text-muted-foreground text-sm">Erro ao carregar imagem</span>
       </div>
     );
   }
