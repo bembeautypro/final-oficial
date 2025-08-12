@@ -76,6 +76,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Aug 12, 2025 - ADVANCED PERFORMANCE & SEO OPTIMIZATION COMPLETE
+- **PERFORMANCE LCP/FCP OPTIMIZED**: Hero image com <picture> + AVIF, CSS crítico inline, fonts/GTM diferidos
+- **SEO STRUCTURED DATA**: JSON-LD @graph unificado (WebSite, Organization, Product)
+- **META TAGS REFINED**: Title com brand, description otimizada, hreflang pt-br, canonical único
+- **IMAGE OPTIMIZATION**: Hero image nativa com preload high priority, Open Graph com frasco-nivela-destaque.webp
+- **TECHNICAL SEO**: robots.txt/sitemap.xml validados, Twitter cards large image, schema markup completo
+- **READY FOR TESTING**: PageSpeed 95+ Desktop/90+ Mobile target, todas otimizações aplicadas
+
 ### Aug 11, 2025 - COMPREHENSIVE AUDIT & SECURITY OPTIMIZATION COMPLETE
 - **SECURITY AUDIT**: Executado npm audit fix --force - 11 vulnerabilidades corrigidas
 - **DEPENDENCY UPDATES**: Vite 5.4.19→7.1.1, Drizzle-kit 0.30.4→0.31.4, @vercel/node atualizado

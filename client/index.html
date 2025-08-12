@@ -14,7 +14,7 @@
     
     <!-- Canonical and Language -->
     <link rel="canonical" href="https://nivela.bembeauty.com.br/">
-    <link rel="alternate" href="https://nivela.bembeauty.com.br/" hreflang="pt-BR">
+    <link rel="alternate" href="https://nivela.bembeauty.com.br/" hreflang="pt-br">
     <link rel="alternate" href="https://nivela.bembeauty.com.br/" hreflang="x-default">
     
     <!-- SEO Meta Tags -->
@@ -70,45 +70,36 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Bem Beauty Professional",
-      "url": "https://bembeauty.com.br",
-      "logo": "https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/logo-bembeauty-transparente.png",
-      "sameAs": [
-        "https://www.instagram.com/bembeautyprofessional",
-        "https://www.youtube.com/@BemBeautyProfessional"
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "NIVELA® - Bem Beauty Professional",
+          "url": "https://nivela.bembeauty.com.br/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://nivela.bembeauty.com.br/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "name": "Bem Beauty Professional",
+          "url": "https://bembeauty.com.br",
+          "logo": "https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/logo-bembeauty-transparente.png",
+          "sameAs": [
+            "https://www.instagram.com/bembeautyprofessional",
+            "https://www.youtube.com/@BemBeautyProfessional"
+          ]
+        },
+        {
+          "@type": "Product",
+          "name": "NIVELA®",
+          "brand": "Bem Beauty Professional",
+          "description": "Retexturizador profissional sem formol, com tecnologia patenteada e ativos da Amazônia, rendimento 30% superior.",
+          "image": "https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp",
+          "url": "https://nivela.bembeauty.com.br/"
+        }
       ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://nivela.bembeauty.com.br/",
-      "name": "NIVELA®",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://nivela.bembeauty.com.br/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "NIVELA®",
-      "brand": {
-        "@type": "Brand",
-        "name": "Bem Beauty Professional"
-      },
-      "description": "Retexturizador hidro nutritivo sem formol com tecnologia ASTRO QUAT V3 e ativos da Amazônia.",
-      "image": "https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp",
-      "sku": "NIVELA-PRO",
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Profissionais cabeleireiros e salões de beleza"
-      }
     }
     </script>
     
