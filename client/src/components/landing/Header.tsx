@@ -97,17 +97,19 @@ const Header = memo(({ id }: HeaderProps) => {
             <div className="lg:col-span-2 flex justify-center lg:justify-end order-1 lg:order-2 w-full px-4 sm:px-6 lg:px-0">
               <div className="relative w-full flex justify-center lg:justify-end max-w-lg lg:max-w-none">
                 {/* Product Image */}
-                <PerformanceAwareImage 
-                  src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
-                  alt="NIVELA® - Retexturizador hidro nutritivo de 1kg com fundo transparente"
-                  className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
-                  width={800}
-                  height={933}
-                  priority={true}
-                  loading="eager"
-                  fetchpriority="high"
-                  decoding="async"
-                />
+                <picture>
+                  <source srcSet="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.avif" type="image/avif" />
+                  <img 
+                    src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
+                    alt="NIVELA® - A evolução da escova progressiva profissional"
+                    width="1200" 
+                    height="1400"
+                    style={{aspectRatio: '6/7', objectFit: 'cover'}}
+ 
+                    decoding="async"
+                    className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
+                  />
+                </picture>
                 
                 {/* Enhanced spotlight glow effect */}
                 <div className="absolute inset-0 bg-white/15 rounded-full blur-3xl -z-10 scale-110"></div>

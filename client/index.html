@@ -28,19 +28,29 @@
     <link rel="apple-touch-icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     
-    <!-- Resource Hints -->
-    <link rel="preconnect" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co">
-    <link rel="dns-prefetch" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co">
+    <!-- Performance: Resource Hints -->
+    <link rel="preconnect" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://www.google-analytics.com">
-    <link rel="preconnect" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co" crossorigin>
-    <link rel="preload" as="image" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp" fetchpriority="high" imagesrcset="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 768w, https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 1080w" imagesizes="(max-width: 768px) 100vw, 50vw">
+    
+    <!-- Performance: Critical LCP Image Preload -->
+    <link rel="preload" as="image" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp" fetchpriority="high">
     <link rel="canonical" href="https://nivela.bembeauty.com.br/">
     
-    <!-- Fonts (Google Fonts) - Optimized loading -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
+    <!-- CSS Critical Inlined -->
+    <style>
+      /* Critical CSS for LCP optimization */
+      .hero-section{min-height:100vh;background:linear-gradient(135deg,#0d181c 0%,#1a2c34 100%);position:relative}
+      .hero-content h1{font-family:Montserrat,sans-serif;font-weight:700;color:#f5f2e8;line-height:1.1}
+      .hero-content p{font-family:Montserrat,sans-serif;color:#e8e0c9;opacity:0.9}
+      body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#0d181c;color:#f5f2e8}
+    </style>
+    
+    <!-- Fonts (Google Fonts) - Deferred loading -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"></noscript>
     
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -115,7 +125,15 @@
       });
       gtag('set', 'url_passthrough', true);
     </script>
-    <script defer src="https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD"></script>
+    <script>
+      // GTM - Deferred Loading for Performance
+      window.addEventListener("load", function() {
+        var script = document.createElement("script");
+        script.defer = true;
+        script.src = "https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD";
+        document.head.appendChild(script);
+      });
+    </script>
   </head>
   <body>
     <!-- GTM noscript -->

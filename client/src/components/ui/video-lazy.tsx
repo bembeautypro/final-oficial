@@ -76,6 +76,7 @@ export const VideoLazy = memo<VideoLazyProps>(({
         disablePictureInPicture
         controlsList="nodownload nofullscreen noremoteplaybook"
         preload="metadata"
+
         className="w-full h-full object-cover"
         style={{ pointerEvents: 'none' }}
         onError={handleError}

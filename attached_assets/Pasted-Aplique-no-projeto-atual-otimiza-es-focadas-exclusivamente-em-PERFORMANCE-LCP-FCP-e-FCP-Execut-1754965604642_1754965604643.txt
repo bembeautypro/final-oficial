@@ -1,0 +1,80 @@
+Aplique, no projeto atual, otimizações focadas exclusivamente em PERFORMANCE (LCP/FCP e FCP). Execute na ordem abaixo:
+
+1) PRECONNECT / PRELOAD (index.html)
+- No <head>, adicione:
+  <link rel="preconnect" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co" crossorigin>
+  <link rel="preload" as="image" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp" fetchpriority="high">
+  <!-- Se houver fonte local usada na dobra (ex.: Montserrat 700), preloade a woff2: -->
+  <!-- <link rel="preload" href="/fonts/Montserrat-700.woff2" as="font" type="font/woff2" crossorigin> -->
+
+2) HERO COMO <img> COM PRIORIDADE (melhor LCP)
+- Se a hero atualmente usa background-image em CSS, refatore para um <img>.
+- No componente/HTML da hero, garanta:
+  <img
+    src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
+    alt="NIVELA® - A evolução da escova progressiva profissional"
+    width="1200" height="1400"
+    style="aspect-ratio: 6/7; object-fit: cover"
+    fetchpriority="high" decoding="async">
+- Se possível, gere também versão AVIF e use <picture>:
+  <picture>
+    <source srcset="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.avif" type="image/avif">
+    <img ... (mesmos atributos acima) >
+  </picture>
+
+3) IMAGENS ABAIXO DA DOBRA
+- Todas as imagens fora da dobra: adicionar loading="lazy" e width/height ou aspect-ratio correspondente.
+- Onde couber, adicionar srcset e sizes corretos para reduzir payload.
+
+4) VÍDEOS
+- Em vídeos da página: usar preload="metadata", adicionar poster leve (WebP) e NÃO auto-carregar abaixo da dobra.
+  <video controls preload="metadata" poster="/imagens/poster-manifesto.webp">...</video>
+
+5) CSS CRÍTICO E PURGE
+- Ativar/confirmar purge do Tailwind:
+  tailwind.config.js → content: ["./index.html","./src/**/*.{ts,tsx,js,jsx}"]
+- Gerar CSS mínimo crítico inlined (header + hero até ~3KB) e deixar o restante no arquivo principal.
+  No index.html, antes de fechar </head>, injetar um bloco <style> apenas com estilos da dobra (sem @imports).
+- Manter o CSS principal assim:
+  <link rel="preload" href="/assets/index.css" as="style">
+  <link rel="stylesheet" href="/assets/index.css">
+
+6) JS NÃO CRÍTICO (adiar e dividir)
+- Todos scripts não essenciais devem carregar com defer OU import dinâmico após load:
+  <script defer src="/assets/index.js"></script>
+- Para bibliotecas de animação/efeitos (se houver), mover para import dinâmico:
+  window.addEventListener("load", async () => {
+    const mod = await import("./animations");
+    if (mod?.initAnimations) mod.initAnimations();
+  });
+- Em vite.config.ts, habilitar tree-shaking:
+  export default defineConfig({
+    build: {
+      target: "es2018",
+      cssCodeSplit: true,
+      sourcemap: false,
+      rollupOptions: { treeshake: true }
+    }
+  });
+
+7) FONTES COM SWAP (evitar bloqueio de render)
+- No CSS global (ex.: src/styles.css), definir @font-face com font-display: swap nas fontes usadas na dobra (somente pesos realmente usados):
+  @font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat-700.woff2") format("woff2");
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+
+8) CACHE DE ASSETS (Express e Supabase)
+- No servidor (Express), aumentar cache dos estáticos:
+  app.use(require("express").static(path.join(__dirname,"../dist/public"), { maxAge: "1y", etag: false }));
+- Nos arquivos do Supabase Storage (imagens/vídeos), definir cabeçalho Cache-Control: public, max-age=31536000, immutable.
+
+9) REFLOW FORÇADO E CLS ZERO
+- Garantir width/height (ou aspect-ratio) para logos, ícones, botões e imagens de carrossel.
+- Evitar leituras de layout em loops (getBoundingClientRect/offsetHeight). Onde inevitável, usar requestAnimationFrame.
+
+10) VERIFICAÇÃO
+- Após aplicar, rodar build e servir. Em seguida:
+  - Testar no PageSpeed (Mobile).
+  - Metas: LCP < 2.5s, FCP < 2.0s, TBT baixo, CLS ~0.
