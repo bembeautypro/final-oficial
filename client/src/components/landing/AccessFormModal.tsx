@@ -15,7 +15,14 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
   const [f, setF] = useState({ nome:"", email:"", telefone:"" });
 
   async function onSubmit(e: React.FormEvent) {
-    e.preventDefault(); setIsLoading(true);
+    e.preventDefault(); 
+    
+    // GTmetrix: Check honeypot anti-spam
+    const formElement = e.currentTarget as HTMLFormElement;
+    const honeypot = formElement.querySelector('input[name="hp"]') as HTMLInputElement;
+    if (honeypot?.value) return; // Silent reject if bot filled honeypot
+    
+    setIsLoading(true);
     try {
       const r = await submitLead({
         nome: f.nome,
@@ -32,7 +39,7 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] max-w-md mx-auto max-h-[90vh] overflow-y-auto">
+      <DialogContent className="w-[95vw] max-w-md mx-auto max-h-[90vh] overflow-y-auto modal-form">
         <DialogHeader className="space-y-3 pb-4">
           <DialogTitle className="text-lg sm:text-xl font-bold text-center">
             Solicitar Acesso Exclusivo
@@ -43,18 +50,23 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
             <span className="text-xs text-brand-latte font-medium">* Campos obrigatórios</span>
           </DialogDescription>
         </DialogHeader>
-        <form id="form-pro" data-form="lead" onSubmit={onSubmit} className="space-y-5">
+        <form id="form-pro" data-form="lead" onSubmit={onSubmit} className="space-y-5 form">
+          {/* GTmetrix: Honeypot anti-spam */}
+          <input type="text" name="hp" className="honeypot" tabIndex={-1} autoComplete="off" />
           <div className="space-y-4">
             <div className="space-y-1">
               <label className="text-sm font-medium text-foreground">
                 Nome completo <span className="text-red-500">*</span>
               </label>
               <Input 
+                type="text"
                 placeholder="Digite seu nome completo" 
                 value={f.nome} 
                 onChange={e=>setF({...f, nome:e.target.value})} 
                 required 
+                autoComplete="name"
                 className="h-12"
+                style={{fontSize: '16px'}}
               />
             </div>
             
@@ -68,7 +80,9 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
                 value={f.email} 
                 onChange={e=>setF({...f, email:e.target.value})} 
                 required 
+                autoComplete="email"
                 className="h-12"
+                style={{fontSize: '16px'}}
               />
             </div>
             
@@ -77,11 +91,15 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
                 WhatsApp <span className="text-red-500">*</span>
               </label>
               <Input 
+                type="tel"
+                inputMode="tel"
                 placeholder="(11) 99999-9999" 
                 value={f.telefone} 
                 onChange={e=>setF({...f, telefone:e.target.value})} 
                 required 
+                autoComplete="tel"
                 className="h-12"
+                style={{fontSize: '16px'}}
               />
             </div>
             

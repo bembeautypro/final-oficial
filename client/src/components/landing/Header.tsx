@@ -99,10 +99,15 @@ const Header = memo(({ id }: HeaderProps) => {
                 {/* Product Image */}
                 <img 
                   src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
+                  srcSet="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-640.webp 640w, https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-960.webp 960w, https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 1080w"
+                  sizes="(max-width: 640px) 320px, (max-width: 768px) 384px, (max-width: 1024px) 448px, (max-width: 1280px) 512px, 576px"
                   alt="NIVELA® - A evolução da escova progressiva profissional"
                   width="800" 
                   height="933"
                   loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  style={{aspectRatio: '800/933', objectFit: 'contain'}}
                   className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
                 />
                 

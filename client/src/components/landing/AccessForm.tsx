@@ -29,6 +29,12 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
   async function handleSubmit(ev: React.FormEvent) {
     ev.preventDefault();
     if (!validateForm()) return;
+    
+    // GTmetrix: Check honeypot anti-spam
+    const formElement = ev.currentTarget as HTMLFormElement;
+    const honeypot = formElement.querySelector('input[name="hp"]') as HTMLInputElement;
+    if (honeypot?.value) return; // Silent reject if bot filled honeypot
+    
     setIsLoading(true);
     try {
       const utm = new URLSearchParams(window.location.search);
@@ -70,16 +76,21 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
         </div>
         <LoadingState isLoading={isLoading} variant="skeleton" className="h-96"
           fallback={<div className="space-y-4 animate-pulse"><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/></div>}>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 form">
+            {/* GTmetrix: Honeypot anti-spam */}
+            <input type="text" name="hp" className="honeypot" tabIndex={-1} autoComplete="off" />
             <div>
               <label className="sr-only" htmlFor="nome">Nome completo (obrigatório)</label>
               <Input 
                 id="nome"
+                type="text"
                 placeholder="Nome completo *" 
                 value={formData.nome} 
                 onChange={e=>set('nome',e.target.value)} 
                 required 
+                autoComplete="name"
                 className="h-14 text-base"
+                style={{fontSize: '16px'}}
                 data-testid="input-nome"
                 aria-describedby={errors.nome ? "nome-error" : undefined}
                 aria-invalid={!!errors.nome}
@@ -95,7 +106,9 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
                 value={formData.email} 
                 onChange={e=>set('email',e.target.value)} 
                 required 
+                autoComplete="email"
                 className="h-14 text-base"
+                style={{fontSize: '16px'}}
                 data-testid="input-email"
                 aria-describedby={errors.email ? "email-error" : undefined}
                 aria-invalid={!!errors.email}
@@ -106,12 +119,15 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
               <label className="sr-only" htmlFor="telefone">WhatsApp para contato (obrigatório)</label>
               <Input 
                 id="telefone"
+                type="tel"
                 inputMode="tel" 
                 placeholder="WhatsApp *" 
                 value={formData.telefone} 
                 onChange={e=>set('telefone',maskWhats(e.target.value))} 
                 required 
+                autoComplete="tel"
                 className="h-14 text-base"
+                style={{fontSize: '16px'}}
                 data-testid="input-telefone"
                 aria-describedby={errors.telefone ? "telefone-error" : undefined}
                 aria-invalid={!!errors.telefone}

@@ -1,0 +1,127 @@
+Aplique as seguintes melhorias no projeto atual, orientadas pelo relatório GTmetrix (84/100, LCP ~0,98s, TBT ~330ms, Total 16,3MB, cache ineficiente). Objetivos: reduzir payload e TBT, corrigir bfcache, tornar animações composited, ajustar imagens e consertar corte do formulário mobile (leads/distribuidores). NÃO alterar a lógica de autoplay previamente implementada.
+
+────────────────────────────────────────────────────────────────
+A) VÍDEOS PESADOS (principal fonte do payload de 16,3MB)
+1) Ativar carregamento progressivo e cache forte:
+   - Em todos os <video> mantenha preload="none" (ou somente em vídeos abaixo da dobra) e garanta poster leve (WebP 720p, ~40–80KB).
+   - Versão de arquivo com “hash de versão” no nome (ex.: OFICIAL-Astroquat-animacao.v3.mp4). Atualizar referências para novos nomes.
+   - Confirmar que os arquivos de vídeo estão em CDN/Storage com Cache-Control: public, max-age=31536000, immutable (se o cabeçalho não puder ser alterado aqui, manter versionamento nos nomes).
+
+2) Controlar download fora do viewport:
+   - Manter o script já existente de lazy-attach do <source> (IntersectionObserver) e apenas garantir rootMargin='200px 0px' para iniciar o download pouco antes de entrar em vista.
+
+────────────────────────────────────────────────────────────────
+B) JS/CSS (TBT ~330ms; 6 long tasks; evitar bloquear main thread)
+1) Separar o JS por seções abaixo da dobra com import dinâmico:
+   window.addEventListener('load', async () => {
+     const mod = await import('./chunks/belowFold.js');
+     mod?.init?.();
+   });
+
+2) Verificações no build (Vite):
+   - Habilitar tree-shaking e split:
+     build: { target: "es2018", cssCodeSplit: true, sourcemap: false, rollupOptions: { treeshake: true } }
+   - Remover qualquer dependência não utilizada detectada no bundle (minimizar vendor).
+
+3) bfcache (2 failure reasons no relatório):
+   - Remover listeners de 'unload' e 'beforeunload' se existirem.
+   - Eventos de scroll/touch/mouse PASSIVE por padrão:
+     addEventListener('scroll', handler, { passive: true });
+
+────────────────────────────────────────────────────────────────
+C) ANIMAÇÕES NÃO COMPOSITADAS (12 ocorrências; evitar layout/paint)
+1) Restringir animações a transform/opacity:
+   .will-animate { will-change: transform, opacity; }
+   .fade-in { transition: opacity .3s ease; }
+   .slide-up { transition: transform .3s ease; transform: translateY(0); }
+   /* Alterar quaisquer animações que usem left/top/width/height para transform */
+
+2) Desabilitar animações em reduce-motion:
+   @media (prefers-reduced-motion: reduce) {
+     * { animation: none !important; transition: none !important; }
+   }
+
+────────────────────────────────────────────────────────────────
+D) IMAGENS (pequenas economias; “properly size” + next-gen)
+1) Para imagens de conteúdo (ex.: frasco-nivela-destaque.webp e logo):
+   - Garantir width/height ou aspect-ratio e srcset/sizes:
+     <img src=".../frasco-nivela-destaque-1080.webp"
+          srcset=".../frasco-640.webp 640w, .../frasco-960.webp 960w, .../frasco-1080.webp 1080w"
+          sizes="(max-width:768px) 100vw, 50vw"
+          width="1080" height="1080" style="aspect-ratio:1/1;object-fit:cover" loading="lazy" decoding="async">
+   - Manter AVIF como <source> quando disponível.
+
+2) Evitar carregamento de imagens que não aparecem no mobile (condicional via CSS/JS).
+
+────────────────────────────────────────────────────────────────
+E) CACHE DE ESTÁTICOS DO APP E INVALIDAÇÃO DE ÍCONES
+1) Estáticos (se houver servidor Express): 
+   app.use(require('express').static('dist/public', { maxAge: '1y', etag: false }));
+
+2) Versionar links de favicon/manifest para limpar cache antigo do navegador:
+   <link rel="icon" href="/favicon/favicon.ico?v=4">
+   <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png?v=4">
+   <link rel="manifest" href="/favicon/site.webmanifest?v=4">
+
+────────────────────────────────────────────────────────────────
+F) FORMULÁRIOS (LEADS + DISTRIBUIDORES) — CORTE/DIAGRAMAÇÃO NO MOBILE
+(Problema: ao focar, o teclado corta os campos; 100vh; modal estreito; falta de scroll e zoom indesejado no iOS.)
+
+1) Viewport e tipografia:
+   - No <head>, confirmar:
+     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+   - Inputs com font-size:16px para evitar zoom automático no iOS:
+     .form input, .form select, .form textarea { font-size:16px; line-height:1.25; }
+
+2) Altura responsiva com teclado (iOS/Android):
+   - Substituir 100vh por 100dvh nos wrappers de formulário:
+     .form-shell { min-height:100dvh; display:flex; flex-direction:column; }
+     .form-scroll { overflow-y:auto; -webkit-overflow-scrolling:touch; max-height:100dvh; padding-bottom: env(safe-area-inset-bottom, 16px); }
+
+3) Foco e rolagem ao campo:
+   - Em JS global:
+     document.querySelectorAll('.form input, .form textarea, .form select').forEach(el=>{
+       el.style.scrollMarginTop = '96px';
+       el.addEventListener('focus', ()=>{ el.scrollIntoView({block:'center', behavior:'smooth'}); });
+     });
+
+4) Layout de campos (quebras corretas):
+   @media (max-width:640px){
+     .grid-form { display:grid; grid-template-columns:1fr; gap:12px; }
+   }
+   .form label { display:block; margin-bottom:6px; }
+   .field { display:flex; flex-direction:column; gap:6px; }
+
+5) Modais/steppers de formulário:
+   - Se o formulário abre em modal, torná-lo full screen em mobile:
+     .modal-form { position:fixed; inset:0; width:100%; height:100dvh; overflow:auto; background:#0D181C; }
+
+6) Campos e teclados adequados:
+   - Telefone/WhatsApp: <input type="tel" inputmode="tel" autocomplete="tel">
+   - Email: <input type="email" autocomplete="email">
+   - Nome: <input type="text" autocomplete="name">
+
+7) Honeypot anti-spam sem quebrar envio:
+   - Adicionar: <input type="text" name="hp" id="hp" style="position:absolute;left:-9999px;opacity:0" tabindex="-1" autocomplete="off">
+   - No submit, se hp preenchido → abortar; se a coluna “hp” não existir no backend, ignorar silenciosamente (não bloquear envio).
+
+8) Mensagens fixas (sem reflow):
+   .form .msg { min-height:20px; font-size:12px; color:#D9C0AA; }
+
+────────────────────────────────────────────────────────────────
+G) TERCEIROS E GTM (impacto leve em TBT)
+1) Carregar GTM com defer (já configurado) e disparar tags fora da dobra quando possível.
+2) Evitar bibliotecas de medição que rodem no início; mover inicialização para after load.
+
+────────────────────────────────────────────────────────────────
+H) VERIFICAÇÃO
+1) Build/Deploy.
+2) Rodar GTmetrix e PageSpeed (MOBILE). Esperado:
+   - Total size << 6MB (sem pré-carregar vídeos),
+   - TBT < 200ms,
+   - LCP ~1s mantido.
+3) Testar formulários em iOS e Android:
+   - Sem corte ao focar,
+   - Rolagem suave até o campo,
+   - Sem zoom inesperado,
+   - Envio ok.

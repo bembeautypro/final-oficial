@@ -43,7 +43,7 @@ export const VideoLazy = memo<VideoLazyProps>(({
           }
         });
       },
-      { threshold, rootMargin: '50px' }
+      { threshold, rootMargin: '200px 0px' }
     );
 
     observer.observe(video);

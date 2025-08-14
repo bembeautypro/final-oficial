@@ -673,4 +673,95 @@ All colors MUST be HSL.
   section[id] {
     position: relative;
   }
+
+  /* ===== GTmetrix Performance Optimizations ===== */
+  
+  /* GTmetrix: Composited animations only (no layout/paint) */
+  .will-animate { 
+    will-change: transform, opacity; 
+  }
+  
+  .fade-in { 
+    transition: opacity 0.3s ease; 
+  }
+  
+  .slide-up { 
+    transition: transform 0.3s ease; 
+    transform: translateY(0); 
+  }
+
+  /* GTmetrix: Form improvements for mobile - NO zoom on iOS */
+  .form input, .form select, .form textarea, input, select, textarea {
+    font-size: 16px !important;
+    line-height: 1.25;
+  }
+
+  /* GTmetrix: Mobile form height - use dvh instead of vh */
+  .form-shell {
+    min-height: 100dvh !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-scroll {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: 100dvh !important;
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+  }
+
+  /* GTmetrix: Form focus scroll margin - smooth focus navigation */
+  .form input, .form textarea, .form select, input, textarea, select {
+    scroll-margin-top: 96px;
+  }
+
+  /* GTmetrix: Mobile form grid layout */
+  @media (max-width: 640px) {
+    .grid-form { 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 12px; 
+    }
+  }
+
+  .form label { 
+    display: block; 
+    margin-bottom: 6px; 
+  }
+  
+  .field { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 6px; 
+  }
+
+  /* GTmetrix: Modal full screen on mobile */
+  @media (max-width: 640px) {
+    .modal-form { 
+      position: fixed !important; 
+      inset: 0 !important; 
+      width: 100% !important; 
+      height: 100dvh !important; 
+      max-height: none !important;
+      overflow: auto !important; 
+      border-radius: 0 !important;
+      margin: 0 !important;
+    }
+  }
+
+  /* GTmetrix: Fixed message heights to avoid reflow */
+  .form .msg { 
+    min-height: 20px; 
+    font-size: 12px; 
+    color: hsl(var(--brand-latte)); 
+  }
+
+  /* GTmetrix: Honeypot field positioning */
+  .honeypot {
+    position: absolute !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    tabindex: -1 !important;
+  }
 }
