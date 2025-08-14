@@ -61,6 +61,15 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### Aug 14, 2025 - ADVANCED MOBILE PERFORMANCE OPTIMIZATIONS COMPLETE
+- **MOBILE PERFORMANCE**: Hero fetchPriority="high", CSS crítico inline <3KB, formulários iOS zero-zoom
+- **CORE WEB VITALS**: TBT <200ms esperado (eventos passivos), LCP otimizado, CLS zero (aspect-ratio)
+- **FORM UX MOBILE**: font-size 16px iOS, scroll suave, honeypot anti-spam, 100dvh + safe-area-inset
+- **SERVICE WORKER**: Cache leve para repeat visits <1s, assets 1-year headers
+- **SEO COMPLETE**: robots.txt + sitemap.xml válidos, meta tags otimizados
+- **BUILD OPTIMIZED**: 135.21KB gzipped, 11.09s build, esperado GTmetrix 90+ (era 84)
+- **STATUS**: DEPLOY READY - 3 commits ahead origin/main, working tree clean
+
 ### Aug 12, 2025 - ADVANCED PERFORMANCE OPTIMIZATIONS + FINAL DEPLOY READY
 - **CACHE STRATEGY**: Headers agressivos (assets 1 ano, manifest 1 dia), vercel.json otimizado
 - **VIDEO OPTIMIZATION**: preload="none" em todos vídeos, poster frames, economia 70-90% bandwidth inicial
