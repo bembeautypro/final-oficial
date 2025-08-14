@@ -51,8 +51,8 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
           </DialogDescription>
         </DialogHeader>
         <form id="form-pro" data-form="lead" onSubmit={onSubmit} className="space-y-5 form">
-          {/* GTmetrix: Honeypot anti-spam */}
-          <input type="text" name="hp" className="honeypot" tabIndex={-1} autoComplete="off" />
+          {/* Honeypot anti-spam */}
+          <input type="text" name="hp" id="hp" style={{position: 'absolute', left: '-9999px', opacity: 0}} tabIndex={-1} autoComplete="off" />
           <div className="space-y-4">
             <div className="space-y-1">
               <label className="text-sm font-medium text-foreground">

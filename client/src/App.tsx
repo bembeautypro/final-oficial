@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Router } from "wouter";
 import { useEffect } from "react";
 import Index from "./pages/Index";
-import { initGTmetrixOptimizations } from '@/lib/gtmetrix-optimizations';
+import { initPerformanceOptimizations } from '@/lib/performance-optimizations';
 // NotFound component removed - landing page only
 
 const queryClient = new QueryClient({
@@ -27,9 +27,9 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  // GTmetrix: Initialize performance optimizations
+  // Performance: Initialize mobile/desktop optimizations
   useEffect(() => {
-    initGTmetrixOptimizations();
+    initPerformanceOptimizations();
   }, []);
 
   return (

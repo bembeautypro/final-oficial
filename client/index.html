@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR" dir="ltr">
   <head>
-    <!-- Google Tag Manager - DEFERRED LOADING -->
-    <script>window.addEventListener("load",function(){var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD";document.head.appendChild(s)});</script>
-    <!-- End Google Tag Manager -->
+    <!-- GTM/GA4 defer (não bloquear render) -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)}
+      gtag('consent','default',{ad_storage:'denied',analytics_storage:'granted'});
+    </script>
+    <script defer src="https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD"></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -18,8 +22,8 @@
     <link rel="alternate" href="https://nivela.bembeauty.com.br/" hreflang="x-default">
     
     <!-- SEO Meta Tags -->
-    <title>NIVELA® - A Evolução da Escova Progressiva Profissional</title>
-    <meta name="description" content="Descubra o retexturizador profissional sem formol que une tecnologia exclusiva e ativos da Amazônia para um resultado impecável.">
+    <title>NIVELA® - A Evolução da Escova Progressiva Profissional | Bem Beauty Professional</title>
+    <meta name="description" content="Descubra NIVELA — desenvolvido com tecnologia patenteada, sem formol, com ativos da Amazônia e rendimento 30% superior.">
     <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
     <meta name="googlebot" content="index,follow">
     
@@ -29,17 +33,29 @@
     <meta property="og:image:height" content="512">
     
     <!-- Favicons/Manifest (NIVELA Brand) -->
-    <link rel="icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon.ico?v=5" type="image/x-icon">
-    <link rel="icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon-16x16.png?v=5" sizes="16x16" type="image/png">
-    <link rel="icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon-32x32.png?v=5" sizes="32x32" type="image/png">
-    <link rel="icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon-192x192.png?v=5" sizes="192x192" type="image/png">
-    <link rel="icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon-512x512.png?v=5" sizes="512x512" type="image/png">
-    <link rel="apple-touch-icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/apple-touch-icon.png?v=5" sizes="180x180">
-    <link rel="manifest" href="/site.webmanifest?v=5">
+    <link rel="icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon.ico?v=4">
+    <link rel="apple-touch-icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/apple-touch-icon.png?v=4">
+    <link rel="manifest" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/site.webmanifest?v=4">
     <meta name="theme-color" content="#0D181C">
     
     <!-- Performance: Critical Resource Hints -->
     <link rel="preconnect" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co" crossorigin>
+    <!-- Hero com prioridade -->
+    <link rel="preload" as="image" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp" fetchpriority="high">
+    
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+      html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+      .hero-container{min-height:100vh;display:flex;align-items:center;background:linear-gradient(135deg,#0D181C 0%,#1a2328 100%)}
+      .hero-grid{display:grid;grid-template-columns:1fr;gap:2rem;max-width:1200px;margin:0 auto;padding:1rem}
+      @media(min-width:1024px){.hero-grid{grid-template-columns:3fr 2fr;gap:4rem}}
+      .hero-text{color:#fff;text-align:center}@media(min-width:1024px){.hero-text{text-align:left}}
+      .hero-title{font-size:2.5rem;font-weight:800;line-height:1.1;margin:0 0 1rem}
+      @media(min-width:768px){.hero-title{font-size:3.5rem}}
+      .hero-subtitle{font-size:1.125rem;opacity:0.9;margin:0 0 2rem}
+      .btn-primary{display:inline-flex;align-items:center;justify-content:center;padding:1rem 2rem;background:#D9C0AA;color:#0D181C;border:none;border-radius:0.75rem;font-weight:600;text-decoration:none;transition:transform 0.2s}
+      .btn-primary:hover{transform:translateY(-2px)}
+    </style>
 
 
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
@@ -194,5 +210,23 @@
     </script>
     
     <!-- Service Worker Registration - Removed (handled in main.tsx) -->
+    <!-- Service Worker Registration -->
+    <script>
+      if('serviceWorker' in navigator){ 
+        navigator.serviceWorker.register('/sw.js').catch(()=>{}); 
+      }
+    </script>
+    
+    <!-- Form Mobile Optimizations -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.form input, .form textarea, .form select').forEach(el=>{
+          el.style.scrollMarginTop = '96px';
+          el.addEventListener('focus', ()=>{ 
+            el.scrollIntoView({block:'center', behavior:'smooth'}); 
+          });
+        });
+      });
+    </script>
   </body>
 </html>

@@ -97,19 +97,27 @@ const Header = memo(({ id }: HeaderProps) => {
             <div className="lg:col-span-2 flex justify-center lg:justify-end order-1 lg:order-2 w-full px-4 sm:px-6 lg:px-0">
               <div className="relative w-full flex justify-center lg:justify-end max-w-lg lg:max-w-none">
                 {/* Product Image */}
-                <img 
-                  src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
-                  srcSet="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-640.webp 640w, https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-960.webp 960w, https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 1080w"
-                  sizes="(max-width: 640px) 320px, (max-width: 768px) 384px, (max-width: 1024px) 448px, (max-width: 1280px) 512px, 576px"
-                  alt="NIVELA® - A evolução da escova progressiva profissional"
-                  width="800" 
-                  height="933"
-                  loading="eager"
-                  fetchPriority="high"
-                  decoding="async"
-                  style={{aspectRatio: '800/933', objectFit: 'contain'}}
-                  className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
-                />
+                <picture>
+                  <source srcSet="
+                    https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-768.avif 768w,
+                    https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-1080.avif 1080w
+                  " type="image/avif" />
+                  <img
+                    src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
+                    srcSet="
+                      https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-768.webp 768w,
+                      https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-1080.webp 1080w,
+                      https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-1440.webp 1440w
+                    "
+                    sizes="(max-width:768px) 100vw, 50vw"
+                    alt="NIVELA® - A evolução da escova progressiva profissional"
+                    width="1080" height="1320"
+                    style={{aspectRatio: '6/7', objectFit: 'cover'}}
+                    fetchPriority="high" 
+                    decoding="async"
+                    className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
+                  />
+                </picture>
                 
                 {/* Enhanced spotlight glow effect */}
                 <div className="absolute inset-0 bg-white/15 rounded-full blur-3xl -z-10 scale-110"></div>

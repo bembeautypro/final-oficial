@@ -77,8 +77,8 @@ const AccessForm = memo(({ id }: AccessFormProps) => {
         <LoadingState isLoading={isLoading} variant="skeleton" className="h-96"
           fallback={<div className="space-y-4 animate-pulse"><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/><div className="h-12 bg-muted/20 rounded-xl"/></div>}>
           <form onSubmit={handleSubmit} className="space-y-6 form">
-            {/* GTmetrix: Honeypot anti-spam */}
-            <input type="text" name="hp" className="honeypot" tabIndex={-1} autoComplete="off" />
+            {/* Honeypot anti-spam */}
+            <input type="text" name="hp" id="hp" style={{position: 'absolute', left: '-9999px', opacity: 0}} tabIndex={-1} autoComplete="off" />
             <div>
               <label className="sr-only" htmlFor="nome">Nome completo (obrigatório)</label>
               <Input 

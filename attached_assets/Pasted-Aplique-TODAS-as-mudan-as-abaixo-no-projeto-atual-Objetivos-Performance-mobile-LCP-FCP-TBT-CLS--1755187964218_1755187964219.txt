@@ -1,0 +1,195 @@
+Aplique TODAS as mudanças abaixo no projeto atual. Objetivos:
+- Performance mobile (LCP/FCP/TBT/CLS)
+- Cache forte e versionamento
+- Imagens corretas (srcset/sizes/lazy)
+- JS/CSS fora da dobra (split / defer)
+- Formulários (leads/distribuidores) corrigidos no mobile
+- SEO mínimo (title/description/canonical)
+- Ícones/manifest padronizados (sem ícone do Lovable)
+- Robots/Sitemap válidos
+
+────────────────────────────────────────────────────────────────
+0) PREMISSAS (não duplicar se já existir)
+- Domínio canônico: https://nivela.bembeauty.com.br/
+- Supabase assets (imagens/vídeos/favicons) conforme já usados no projeto.
+
+────────────────────────────────────────────────────────────────
+1) HEAD (index.html)
+No <head>, GARANTIR (sem duplicar):
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NIVELA® - A Evolução da Escova Progressiva Profissional | Bem Beauty Professional</title>
+  <meta name="description" content="Descubra NIVELA — desenvolvido com tecnologia patenteada, sem formol, com ativos da Amazônia e rendimento 30% superior.">
+  <link rel="canonical" href="https://nivela.bembeauty.com.br/">
+
+  <!-- Performance/Conexões -->
+  <link rel="preconnect" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co" crossorigin>
+  <!-- Hero com prioridade -->
+  <link rel="preload" as="image" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp" fetchpriority="high">
+
+  <!-- Favicons/Manifest (usar seus assets; versionar p/ limpar cache) -->
+  <link rel="icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/favicon.ico?v=4">
+  <link rel="apple-touch-icon" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/apple-touch-icon.png?v=4">
+  <link rel="manifest" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/favicon/site.webmanifest?v=4">
+  <meta name="theme-color" content="#0D181C">
+
+  <!-- GTM/GA4 defer (não bloquear render) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments)}
+    gtag('consent','default',{ad_storage:'denied',analytics_storage:'granted'});
+  </script>
+  <script defer src="https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD"></script>
+
+────────────────────────────────────────────────────────────────
+2) ROBOTS E SITEMAP (SEM HTML!)
+Criar/garantir na pasta /public (o Vite copia para /dist/public):
+- /public/robots.txt  (conteúdo exato)
+User-agent: *
+Allow: /
+
+Sitemap: https://nivela.bembeauty.com.br/sitemap.xml
+
+- /public/sitemap.xml  (conteúdo exato)
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://nivela.bembeauty.com.br/</loc><priority>1.0</priority></url>
+</urlset>
+
+────────────────────────────────────────────────────────────────
+3) HERO E IMAGENS (sem CLS, responsivas, lazy)
+No componente/HTML da HERO, trocar para <picture> (sem alterar visual):
+  <picture>
+    <source srcset="
+      https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-768.avif 768w,
+      https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-1080.avif 1080w
+    " type="image/avif">
+    <img
+      src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
+      srcset="
+        https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-768.webp 768w,
+        https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-1080.webp 1080w,
+        https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero-1440.webp 1440w
+      "
+      sizes="(max-width:768px) 100vw, 50vw"
+      alt="NIVELA® - A evolução da escova progressiva profissional"
+      width="1080" height="1320"
+      style="aspect-ratio:6/7;object-fit:cover"
+      fetchpriority="high" decoding="async">
+  </picture>
+
+Para TODAS as outras imagens abaixo da dobra:
+- Adicionar loading="lazy"
+- Incluir width/height ou style="aspect-ratio:W/H"
+- Incluir srcset/sizes coerentes (reduz payload)
+- Evitar imagens ocultas no mobile (condicional via CSS/JS)
+
+────────────────────────────────────────────────────────────────
+4) FONTES (sem 404 e sem bloquear render)
+- Remover referências quebradas a .woff2 (nomes “JTUS…”) e qualquer <link rel="preload"> que aponte para arquivos inexistentes.
+- Manter @font-face somente se os arquivos existirem LOCALMENTE em /public/fonts/*.woff2 com:
+  font-display: swap;
+- Caso não existam arquivos locais, usar fallback “system-ui,-apple-system,Segoe UI,Roboto” (sem baixar nada externo) até disponibilizar os .woff2 locais.
+
+────────────────────────────────────────────────────────────────
+5) CSS (Purge + crítico mínimo)
+- tailwind.config.{js,ts}: garantir
+  content: ["./index.html","./src/**/*.{ts,tsx,js,jsx}"]
+- Injetar um bloco <style> MUITO curto (≤3KB) com estilos só da dobra (header+hero) ANTES do CSS principal.
+- CSS principal continuar linkado:
+  <link rel="preload" href="/assets/index.css" as="style">
+  <link rel="stylesheet" href="/assets/index.css">
+
+────────────────────────────────────────────────────────────────
+6) JS (reduzir TBT / long tasks; bfcache OK)
+- No entry principal, adiar qualquer script abaixo da dobra com import dinâmico:
+  window.addEventListener('load', async () => {
+    const m = await import('./chunks/belowFold.js');
+    m?.init?.();
+  });
+- Garantir listeners PASSIVE para scroll/touch:
+  // exemplo global
+  const add = EventTarget.prototype.addEventListener;
+  EventTarget.prototype.addEventListener = function(t, l, o){ 
+    if(['scroll','touchstart','touchmove','mousewheel'].includes(t) && (typeof o!=='object' || o===null)){
+      o = { passive:true };
+    } else if (o && typeof o==='object' && o.passive===undefined && ['scroll','touchstart','touchmove','mousewheel'].includes(t)){
+      o.passive = true;
+    }
+    return add.call(this,t,l,o);
+  };
+- REMOVER event listeners 'unload'/'beforeunload' se existirem (melhora bfcache).
+- Vite build otimizado (vite.config.*):
+  export default defineConfig({
+    build: {
+      target: "es2018",
+      cssCodeSplit: true,
+      sourcemap: false,
+      rollupOptions: { treeshake: true }
+    }
+  });
+
+────────────────────────────────────────────────────────────────
+7) ANIMAÇÕES COMPOSITADAS (evitar layout/paint)
+- Substituir animações que alterem left/top/width/height por transform/opacity.
+- Adicionar utilitários:
+  .will-animate { will-change: transform, opacity; }
+  @media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important;} }
+
+────────────────────────────────────────────────────────────────
+8) FORMULÁRIOS (leads e distribuidores) — CORTE/DIAGRAMAÇÃO MOBILE
+- No <head> (já acima): viewport-fit=cover.
+- CSS global:
+  .form input,.form select,.form textarea{ font-size:16px; line-height:1.25; } /* evita zoom iOS */
+  .form-shell{ min-height:100dvh; display:flex; flex-direction:column; }
+  .form-scroll{ overflow-y:auto; -webkit-overflow-scrolling:touch; max-height:100dvh; padding-bottom: env(safe-area-inset-bottom,16px); }
+  @media (max-width:640px){ .grid-form{ display:grid; grid-template-columns:1fr; gap:12px; } }
+  .form label{ display:block; margin-bottom:6px; }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .form .msg{ min-height:20px; font-size:12px; color:#D9C0AA; }
+
+- JS global (antes de </body>):
+  <script>
+  document.querySelectorAll('.form input, .form textarea, .form select').forEach(el=>{
+    el.style.scrollMarginTop = '96px';
+    el.addEventListener('focus', ()=>{ el.scrollIntoView({block:'center', behavior:'smooth'}); });
+  });
+  </script>
+
+- Inputs corretos:
+  telefone: <input type="tel" inputmode="tel" autocomplete="tel">
+  email:    <input type="email" autocomplete="email">
+  nome:     <input type="text" autocomplete="name">
+
+- Honeypot anti-spam (não quebrar envio se coluna hp não existir):
+  <input type="text" name="hp" id="hp" style="position:absolute;left:-9999px;opacity:0" tabindex="-1" autocomplete="off">
+
+────────────────────────────────────────────────────────────────
+9) CACHE & VERSIONAMENTO (estáticos e ícones)
+- Se houver servidor (Express ou similar):
+  app.use(require('express').static('dist/public', { maxAge: '1y', etag: false }));
+- Versionar ícones/manifest (já acima com ?v=4).
+- Para imagens/vídeos no Supabase Storage, adotar nomes versionados (ex.: nivela-hero-1080.v3.webp, video-astroquat.v3.mp4) e atualizar referências no HTML.
+
+────────────────────────────────────────────────────────────────
+10) SERVICE WORKER (opcional leve; acelerar navegação recorrente)
+Criar /public/sw.js com:
+  const STATIC_CACHE='nivela-static-v1';
+  const STATIC_ASSETS=['/','/index.html','/assets/index.css'];
+  self.addEventListener('install',e=>{e.waitUntil(caches.open(STATIC_CACHE).then(c=>c.addAll(STATIC_ASSETS)));});
+  self.addEventListener('fetch',e=>{
+    const u=new URL(e.request.url);
+    if(/\.(png|jpe?g|webp|avif|svg)$/.test(u.pathname)){
+      e.respondWith((async()=>{const c=await caches.open(STATIC_CACHE);const r=await c.match(e.request);const f=fetch(e.request).then(res=>{c.put(e.request,res.clone());return res;});return r||f;})()); return;
+    }
+    if (STATIC_ASSETS.includes(u.pathname)){ e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))); }
+  });
+
+Registrar no index.html (antes de </body>):
+  <script> if('serviceWorker' in navigator){ navigator.serviceWorker.register('/sw.js').catch(()=>{}); } </script>
+
+────────────────────────────────────────────────────────────────
+11) VERIFICAÇÃO PÓS-DEPLOY (não precisa responder; apenas executar)
+- Rodar PageSpeed/GTmetrix (MOBILE). Esperado:
+  • LCP ≤ ~1–2s, FCP ≤ ~2s, TBT < 200ms, CLS ≈ 0
+  • Total inicial sem pré-carregar vídeos reduzido
+- Testar formulários no iOS/Android: sem corte/zoom; rolagem correta; envio OK.
