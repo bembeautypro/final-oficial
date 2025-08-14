@@ -209,16 +209,34 @@
       });
     </script>
     
-    <!-- Service Worker Registration - Removed (handled in main.tsx) -->
-    <!-- Service Worker Registration -->
+    <!-- Service Worker Registration - Deferred -->
     <script>
-      if('serviceWorker' in navigator){ 
-        navigator.serviceWorker.register('/sw.js').catch(()=>{}); 
-      }
+      // Load SW after critical resources loaded
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          if('serviceWorker' in navigator){ 
+            navigator.serviceWorker.register('/sw.js').catch(()=>{}); 
+          }
+        }, 2000);
+      });
     </script>
     
-    <!-- Form Mobile Optimizations -->
+    <!-- Performance Optimizations: Passive Events + bfcache + Form Mobile -->
     <script>
+      // 1) Tornar eventos de scroll/touch passivos por padrão
+      (function(){
+        const ORIG = EventTarget.prototype.addEventListener;
+        EventTarget.prototype.addEventListener = function(t, l, o){
+          const needsPassive = ['scroll','touchstart','touchmove','mousewheel','wheel'].includes(t);
+          if (needsPassive) {
+            if (!o || typeof o !== 'object') o = { passive: true };
+            else if (o.passive === undefined) o.passive = true;
+          }
+          return ORIG.call(this, t, l, o);
+        };
+      })();
+      
+      // 2) Form Mobile Optimizations
       document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.form input, .form textarea, .form select').forEach(el=>{
           el.style.scrollMarginTop = '96px';
@@ -226,6 +244,11 @@
             el.scrollIntoView({block:'center', behavior:'smooth'}); 
           });
         });
+      });
+      
+      // 3) bfcache optimization - evitar listeners problemáticos
+      window.addEventListener('pagehide', function(event) {
+        // Não usar event.persisted - pode quebrar bfcache
       });
     </script>
   </body>

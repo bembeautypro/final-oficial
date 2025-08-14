@@ -8,6 +8,7 @@ import { Route, Router } from "wouter";
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import { initPerformanceOptimizations } from '@/lib/performance-optimizations';
+import loadBelowFoldContent from '@/lib/below-fold-loader';
 // NotFound component removed - landing page only
 
 const queryClient = new QueryClient({
@@ -27,9 +28,15 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  // Performance: Initialize mobile/desktop optimizations
+  // Performance: Initialize mobile/desktop optimizations + below-fold loading
   useEffect(() => {
+    // Critical optimizations first
     initPerformanceOptimizations();
+    
+    // Load below-fold content after critical rendering
+    setTimeout(() => {
+      loadBelowFoldContent();
+    }, 1000);
   }, []);
 
   return (

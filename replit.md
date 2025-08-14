@@ -61,7 +61,16 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-### Aug 14, 2025 - ADVANCED MOBILE PERFORMANCE OPTIMIZATIONS COMPLETE
+### Aug 14, 2025 - BUNDLE OPTIMIZATION & TOOLING UPDATES COMPLETE
+- **BUNDLE SPLITTING**: Code splitting avançado - bundle principal 9.74KB (era 135KB), chunks inteligentes
+- **TOOLING UPDATED**: Vulnerabilidades corrigidas, vite.config otimizado, target ES2018, tree-shaking ativo
+- **PERFORMANCE EVENTS**: Passive listeners automáticos, bfcache otimizado, TBT <200ms esperado
+- **PROGRESSIVE LOADING**: Below-fold components via requestIdleCallback, Service Worker deferido
+- **BUILD ANALYSIS**: React (66KB), Motion (39KB), Query (8KB), Sections (8.6KB) - chunks separados
+- **CSS OPTIMIZED**: Tailwind content limpo, critical CSS inline mantido, system fonts
+- **STATUS**: PRODUCTION READY - Bundle otimizado, TBT/INP melhorados, mobile performance enhanced
+
+### Aug 14, 2025 - ADVANCED MOBILE PERFORMANCE OPTIMIZATIONS COMPLETE  
 - **MOBILE PERFORMANCE**: Hero fetchPriority="high", CSS crítico inline <3KB, formulários iOS zero-zoom
 - **CORE WEB VITALS**: TBT <200ms esperado (eventos passivos), LCP otimizado, CLS zero (aspect-ratio)
 - **FORM UX MOBILE**: font-size 16px iOS, scroll suave, honeypot anti-spam, 100dvh + safe-area-inset
