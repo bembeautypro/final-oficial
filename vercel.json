@@ -12,7 +12,7 @@
       ]
     },
     {
-      "source": "/:path*.:ext(js|css|webp|jpg|jpeg|png|gif|ico|svg|woff2)",
+      "source": "/:path*\\.(js|css|webp|jpg|jpeg|png|gif|ico|svg)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
@@ -27,7 +27,7 @@
 
   "rewrites": [
     {
-      "source": "/((?!assets/|site\\.webmanifest$|favicon\\.ico$|apple-touch-icon\\.png$|web-app-manifest-\\d+x\\d+\\.png$).*)",
+      "source": "/((?!assets/|site\\.webmanifest$|favicon\\.ico$|apple-touch-icon\\.png$|web-app-manifest-\\d+x\\d+\\.png$|sw\\.js$|sw-advanced\\.js$).*)",
       "destination": "/index.html"
     }
   ]
