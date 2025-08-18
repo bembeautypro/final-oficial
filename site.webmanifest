@@ -1,11 +1,20 @@
 {
-  "name": "NIVELA - Bem Beauty",
+  "name": "NIVELA® - A Evolução da Escova Progressiva Profissional",
   "short_name": "NIVELA",
+  "description": "Descubra o retexturizador profissional sem formol que une tecnologia exclusiva e ativos da Amazônia para um resultado impecável.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFFFFF",
+  "background_color": "#0D181C",
   "theme_color": "#254C5A",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "pt-BR",
   "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
     {
       "src": "/favicon-96x96.png",
       "sizes": "96x96",
@@ -19,12 +28,14 @@
     {
       "src": "/web-app-manifest-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/web-app-manifest-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
