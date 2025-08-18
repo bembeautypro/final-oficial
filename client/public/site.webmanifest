@@ -1,18 +1,18 @@
 {
-  "name": "NIVELA® - A Evolução da Escova Progressiva Profissional",
+  "name": "NIVELA® - Escova Progressiva Profissional",
   "short_name": "NIVELA",
   "description": "Descubra o retexturizador profissional sem formol que une tecnologia exclusiva e ativos da Amazônia para um resultado impecável.",
   "start_url": "/",
-  "display": "standalone",
-  "background_color": "#0D181C",
-  "theme_color": "#254C5A",
-  "orientation": "portrait-primary",
   "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
   "lang": "pt-BR",
+  "background_color": "#0D181C",
+  "theme_color": "#D4AF37",
   "icons": [
     {
       "src": "/favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "16x16 24x24 32x32 64x64",
       "type": "image/x-icon"
     },
     {
@@ -23,7 +23,8 @@
     {
       "src": "/apple-touch-icon.png",
       "sizes": "180x180",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/web-app-manifest-192x192.png",
