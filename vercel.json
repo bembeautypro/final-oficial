@@ -1,79 +1,10 @@
-{
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "outputDirectory": "dist",
-
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+{ "buildCommand":"npm run build","installCommand":"npm install","outputDirectory":"dist",
+  "headers":[
+    {"source":"/assets/:path*","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
+    {"source":"/:path*.(js|css|webp|jpg|jpeg|png|gif|ico|svg|png)","headers":[{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]},
+    {"source":"/site.webmanifest","headers":[{"key":"Content-Type","value":"application/manifest+json"}]}
   ],
-
-  "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
-      ]
-    },
-    {
-      "source": "/(.*\\.(webp|jpg|jpeg|png|gif|ico|svg))$",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/(.*\\.(js|css))$", 
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/site.webmanifest",
-      "headers": [
-        { "key": "Content-Type", "value": "application/manifest+json" },
-        { "key": "Cache-Control", "value": "public, max-age=86400" }
-      ]
-    },
-    {
-      "source": "/(favicon.ico|android-chrome.*|apple-touch-icon.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; connect-src 'self' https://*.supabase.co https://*.supabase.in https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com https://pagead2.googlesyndication.com; img-src 'self' data: https://*.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; style-src 'self' 'unsafe-inline'; font-src 'self'; media-src 'self' https://*.supabase.co; frame-src https://www.googletagmanager.com https://googleads.g.doubleclick.net; frame-ancestors 'self'"
-        }
-      ]
-    }
-  ],
-
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.nivela.bembeauty.com.br" }],
-      "destination": "https://nivela.bembeauty.com.br/:path",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        { "type": "host", "value": "nivela.bembeauty.com.br" },
-        { "type": "header", "key": "x-forwarded-proto", "value": "http" }
-      ],
-      "destination": "https://nivela.bembeauty.com.br/:path",
-      "permanent": true
-    }
+  "rewrites":[
+    {"source":"/((?!assets/|site\\.webmanifest$|favicon\\.ico$|apple-touch-icon\\.png$|web-app-manifest-\\d+x\\d+\\.png$).*)","destination":"/index.html"}
   ]
 }
