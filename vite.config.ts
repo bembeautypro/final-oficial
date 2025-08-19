@@ -10,13 +10,15 @@ export default defineConfig({
   root: "client",
   publicDir: "public",
   resolve: {
-    alias: { "@": path.resolve(process.cwd(), "client/src") },
-    dedupe: ["react", "react-dom"], // <- evita 2 cópias
+    alias: {
+      "@": path.resolve(process.cwd(), "client/src"),
+    },
+    dedupe: ["react", "react-dom"],
   },
   build: {
-    outDir: path.resolve(process.cwd(), "dist"),
+    outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
-    sourcemap: true, // temporário p/ depuração
+    sourcemap: true, // habilita map para depuração
     cssMinify: true,
     minify: "esbuild",
     chunkSizeWarningLimit: 1024,
@@ -24,11 +26,13 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (!id.includes("node_modules")) return;
-          if (id.includes("react")) return "vendor-react";
+
+          if (id.includes("react") || id.includes("react-dom")) return "vendor-react";
           if (id.includes("@radix-ui")) return "vendor-radix";
           if (id.includes("@tanstack")) return "vendor-query";
           if (id.includes("framer-motion")) return "vendor-motion";
           if (id.includes("@supabase")) return "vendor-supabase";
+
           return "vendor";
         },
       },
@@ -37,8 +41,18 @@ export default defineConfig({
   plugins: [
     react(),
     ...(ANALYZE
-      ? [visualizer({ filename: "dist/stats.html", template: "treemap", gzipSize: true, brotliSize: true, open: false })]
+      ? [
+          visualizer({
+            filename: "dist/stats.html",
+            template: "treemap",
+            gzipSize: true,
+            brotliSize: true,
+            open: false,
+          }),
+        ]
       : []),
   ],
-  server: { port: 5173 },
+  server: {
+    port: 5173,
+  },
 });
