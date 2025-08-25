@@ -13,7 +13,6 @@ root.render(
   </StrictMode>
 );
 
-// Service Worker básico (opcional)
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js?v=3").catch(() => {});
-}
+// if ('serviceWorker' in navigator) {
+//   navigator.serviceWorker.register('/sw.js?v=3').catch(() => {});
+// }
