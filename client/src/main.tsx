@@ -6,7 +6,6 @@ import "./index.css";
 
 const rootEl = document.getElementById("root")!;
 const root = createRoot(rootEl);
-rootEl.innerHTML = "";
 
 root.render(
   <StrictMode>
@@ -14,12 +13,7 @@ root.render(
   </StrictMode>
 );
 
-// Service Worker básico opcional
+// Service Worker básico (opcional)
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    const swUrl = "/sw.js?v=2";
-    navigator.serviceWorker.register(swUrl).catch((err) => {
-      console.warn("SW registration failed:", err);
-    });
-  });
+  navigator.serviceWorker.register("/sw.js?v=3").catch(() => {});
 }
