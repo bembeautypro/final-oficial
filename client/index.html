@@ -123,18 +123,13 @@
   </script>
 </head>
 <body>
-  <!-- GTM noscript -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZW3RTWD"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    
-  <div id="root">
-    <div class="hero-section">
-      <div class="hero-content">
-        <h1 style="opacity:0.1">NIVELA®</h1>
-        <p style="opacity:0.1">A Evolução da Escova Progressiva</p>
-      </div>
-    </div>
-  </div>
+  <!-- GTM noscript (sempre no body) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZW3RTWD"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+
+  <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
