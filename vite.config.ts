@@ -14,37 +14,37 @@ export default defineConfig({
   publicDir: "public",
 
   resolve: {
-    alias: { "@": path.resolve(process.cwd(), "client/src")},
+    alias: { "@": path.resolve(process.cwd(), "client/src") },
     dedupe: ["react", "react-dom"],
   },
 
-  // vite.config.ts (trecho)
-build: {
-  outDir: path.resolve(import.meta.dirname, "dist"),
-  emptyOutDir: true,
-  sourcemap: false, // pode voltar p/ false quando acabar o debug
-  cssMinify: true,
-  minify: "esbuild",
-  chunkSizeWarningLimit: 1024,
-  rollupOptions: {
-    output: {
-      // dentro de rollupOptions.output
-manualChunks(id: string) {
-  if (!id.includes("node_modules")) return;
+  build: {
+    outDir: path.resolve(import.meta.dirname, "dist"),
+    emptyOutDir: true,
+    sourcemap: false, // pode voltar p/ false quando acabar o debug
+    cssMinify: true,
+    minify: "esbuild",
+    chunkSizeWarningLimit: 1024,
+    rollupOptions: {
+      output: {
+        // separa vendors de forma estável (Win/Mac/Linux)
+        manualChunks(id: string) {
+          if (!id.includes("node_modules")) return;
 
-  const has = (pkg: string) => new RegExp(`[\\\\/]node_modules[\\\\/]${pkg}[\\\\/]`).test(id);
+          const has = (pkg: string) =>
+            new RegExp(`[\\\\/]node_modules[\\\\/]${pkg}[\\\\/]`).test(id);
 
-  if (has("react") || has("react-dom")) return "vendor-react";
-  if (has("@radix-ui")) return "vendor-radix";
-  if (has("@tanstack")) return "vendor-query";
-  if (has("framer-motion")) return "vendor-motion";
-  if (has("@supabase")) return "vendor-supabase";
+          if (has("react") || has("react-dom")) return "vendor-react";
+          if (has("@radix-ui")) return "vendor-radix";
+          if (has("@tanstack")) return "vendor-query";
+          if (has("framer-motion")) return "vendor-motion";
+          if (has("@supabase")) return "vendor-supabase";
 
-  return "vendor";
+          return "vendor";
+        },
       },
     },
   },
-},
 
   plugins: [
     react(),
