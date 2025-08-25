@@ -28,18 +28,19 @@ build: {
   chunkSizeWarningLimit: 1024,
   rollupOptions: {
     output: {
-      manualChunks(id: string) {
-        if (!id.includes("node_modules")) return;
+      // dentro de rollupOptions.output
+manualChunks(id: string) {
+  if (!id.includes("node_modules")) return;
 
-        // Só separa grupos bem específicos:
-        if (/node_modules\/react\/|node_modules\/react-dom\//.test(id)) return "vendor-react";
-        if (/node_modules\/@radix-ui\//.test(id)) return "vendor-radix";
-        if (/node_modules\/@tanstack\//.test(id)) return "vendor-query";
-        if (/node_modules\/framer-motion\//.test(id)) return "vendor-motion";
-        if (/node_modules\/@supabase\//.test(id)) return "vendor-supabase";
+  const has = (pkg: string) => new RegExp(`[\\\\/]node_modules[\\\\/]${pkg}[\\\\/]`).test(id);
 
-        // Tudo o que sobrar vai para "vendor"
-        return "vendor";
+  if (has("react") || has("react-dom")) return "vendor-react";
+  if (has("@radix-ui")) return "vendor-radix";
+  if (has("@tanstack")) return "vendor-query";
+  if (has("framer-motion")) return "vendor-motion";
+  if (has("@supabase")) return "vendor-supabase";
+
+  return "vendor";
       },
     },
   },
