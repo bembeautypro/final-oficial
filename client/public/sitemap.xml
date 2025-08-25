@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Página principal da landing -->
+  <url>
+    <loc>https://nivela.bembeauty.com.br/</loc>
+    <lastmod>2025-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Página da loja principal -->
+  <url>
+    <loc>https://bembeauty.com.br/</loc>
+    <lastmod>2025-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Página do formulário para profissionais -->
+  <url>
+    <loc>https://nivela.bembeauty.com.br/#profissionais</loc>
+    <lastmod>2025-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Página do formulário para distribuidores -->
+  <url>
+    <loc>https://nivela.bembeauty.com.br/#distribuidores</loc>
+    <lastmod>2025-08-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
