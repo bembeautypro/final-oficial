@@ -14,9 +14,7 @@ export default defineConfig({
   publicDir: "public",
 
   resolve: {
-    alias: {
-      "@": path.resolve(process.cwd(), "client/src"),
-    },
+    alias: { "@": path.resolve(process.cwd(), "client/src")},
     dedupe: ["react", "react-dom"],
   },
 
