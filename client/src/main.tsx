@@ -6,8 +6,6 @@ import "./index.css";
 
 const rootEl = document.getElementById("root")!;
 const root = createRoot(rootEl);
-
-// limpa qualquer skeleton SSR antigo
 rootEl.innerHTML = "";
 
 root.render(
@@ -16,10 +14,10 @@ root.render(
   </StrictMode>
 );
 
-// Service Worker básico (opcional)
+// Service Worker básico opcional
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    const swUrl = "/sw.js?v=2"; // cache-bust para usuários antigos
+    const swUrl = "/sw.js?v=2";
     navigator.serviceWorker.register(swUrl).catch((err) => {
       console.warn("SW registration failed:", err);
     });
