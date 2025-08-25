@@ -18,32 +18,33 @@ export default defineConfig({
     dedupe: ["react", "react-dom"],
   },
 
-  build: {
-    // gera dist/ na raiz do repo (fora de client/)
-    outDir: path.resolve(import.meta.dirname, "dist"),
-    emptyOutDir: true,
+  // vite.config.ts (trecho)
+/* ... */
+build: {
+  outDir: path.resolve(import.meta.dirname, "dist"),
+  emptyOutDir: true,
+  sourcemap: false, // pode voltar p/ false quando acabar o debug
+  cssMinify: true,
+  minify: "esbuild",
+  chunkSizeWarningLimit: 1024,
+  rollupOptions: {
+    output: {
+      manualChunks(id: string) {
+        if (!id.includes("node_modules")) return;
 
-    // deixe ligado só enquanto depura
-    sourcemap: true,
+        // Só separa grupos bem específicos:
+        if (/node_modules\/react\/|node_modules\/react-dom\//.test(id)) return "vendor-react";
+        if (/node_modules\/@radix-ui\//.test(id)) return "vendor-radix";
+        if (/node_modules\/@tanstack\//.test(id)) return "vendor-query";
+        if (/node_modules\/framer-motion\//.test(id)) return "vendor-motion";
+        if (/node_modules\/@supabase\//.test(id)) return "vendor-supabase";
 
-    cssMinify: true,
-    minify: "esbuild",
-    chunkSizeWarningLimit: 1024,
-
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (!id.includes("node_modules")) return;
-          if (id.includes("react") || id.includes("react-dom")) return "vendor-react";
-          if (id.includes("@radix-ui")) return "vendor-radix";
-          if (id.includes("@tanstack")) return "vendor-query";
-          if (id.includes("framer-motion")) return "vendor-motion";
-          if (id.includes("@supabase")) return "vendor-supabase";
-          return "vendor";
-        },
+        // Tudo o que sobrar vai para "vendor"
+        return "vendor";
       },
     },
   },
+},
 
   plugins: [
     react(),
