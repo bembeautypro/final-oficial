@@ -19,7 +19,6 @@ export default defineConfig({
   },
 
   // vite.config.ts (trecho)
-/* ... */
 build: {
   outDir: path.resolve(import.meta.dirname, "dist"),
   emptyOutDir: true,
