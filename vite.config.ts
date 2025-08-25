@@ -7,10 +7,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 const ANALYZE = process.env.ANALYZE === "true";
 
 export default defineConfig({
-  // a pasta do seu index.html
   root: "client",
-
-  // serve estáticos a partir de client/public
   publicDir: "public",
 
   resolve: {
@@ -21,47 +18,19 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
-    sourcemap: false, // pode voltar p/ false quando acabar o debug
+    sourcemap: true,        // ← ligue para termos stacktrace claro
     cssMinify: true,
     minify: "esbuild",
     chunkSizeWarningLimit: 1024,
-    rollupOptions: {
-      output: {
-        // separa vendors de forma estável (Win/Mac/Linux)
-        manualChunks(id: string) {
-          if (!id.includes("node_modules")) return;
-
-          const has = (pkg: string) =>
-            new RegExp(`[\\\\/]node_modules[\\\\/]${pkg}[\\\\/]`).test(id);
-
-          if (has("react") || has("react-dom")) return "vendor-react";
-          if (has("@radix-ui")) return "vendor-radix";
-          if (has("@tanstack")) return "vendor-query";
-          if (has("framer-motion")) return "vendor-motion";
-          if (has("@supabase")) return "vendor-supabase";
-
-          return "vendor";
-        },
-      },
-    },
+    // ⚠️ sem rollupOptions/manualChunks — deixe o Vite decidir
   },
 
   plugins: [
     react(),
     ...(ANALYZE
-      ? [
-          visualizer({
-            filename: "dist/stats.html",
-            template: "treemap",
-            gzipSize: true,
-            brotliSize: true,
-            open: false,
-          }),
-        ]
+      ? [visualizer({ filename: "dist/stats.html", template: "treemap", gzipSize: true, brotliSize: true, open: false })]
       : []),
   ],
 
-  server: {
-    port: 5173,
-  },
+  server: { port: 5173 },
 });
