@@ -21,14 +21,6 @@
   padding-bottom: env(safe-area-inset-bottom, 16px); 
 }
 
-@media (max-width: 640px) { 
-  .grid-form { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 12px; 
-  } 
-}
-
 .form label { 
   display: block; 
   margin-bottom: 6px; 
@@ -773,14 +765,7 @@ All colors MUST be HSL.
   }
 
   /* GTmetrix: Mobile form grid layout */
-  @media (max-width: 640px) {
-    .grid-form { 
-      display: grid; 
-      grid-template-columns: 1fr; 
-      gap: 12px; 
-    }
-  }
-
+  
   .form label { 
     display: block; 
     margin-bottom: 6px; 
@@ -819,6 +804,55 @@ All colors MUST be HSL.
     left: -9999px !important;
     opacity: 0 !important;
     pointer-events: none !important;
-    tabindex: -1 !important;
+  }
+}
+/* ===== Fix: centralização e largura dos formulários ===== */
+.form,
+form {
+  width: 100%;
+  max-width: 640px;      /* ~max-w-lg */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;    /* ~px-4 */
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+/* Inputs e campos ocupam 100% da largura disponível */
+form input,
+form select,
+form textarea,
+.form input,
+.form select,
+.form textarea,
+.field,
+.form .field {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===== Fix: grid do formulário ===== */
+/* Base: 1 coluna (mobile-first) */
+.grid-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+/* ≥ 640px: 2 colunas */
+@media (min-width: 640px) {
+  .grid-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Botões 100% no mobile (opcional, ajuda UX) */
+@media (max-width: 640px) {
+  form button,
+  form [type="submit"],
+  .form button,
+  .form [type="submit"] {
+    width: 100%;
   }
 }
