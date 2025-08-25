@@ -17,7 +17,7 @@
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <meta name="googlebot" content="index,follow" />
 
-  <!-- Favicons & Manifest (garante que o navegador/Google usem os ícones da marca) -->
+  <!-- Favicons & Manifest -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -41,7 +41,7 @@
         content="Retexturizador profissional sem formol, com tecnologia exclusiva e ativos da Amazônia para um resultado impecável." />
   <meta name="twitter:image" content="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp" />
 
-  <!-- Rastreadores (defer para não bloquear render) -->
+  <!-- Google Tag Manager / GA4 -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments)}
@@ -49,14 +49,31 @@
   </script>
   <script defer src="https://www.googletagmanager.com/gtm.js?id=GTM-KZW3RTWD"></script>
 
-  <!-- Hints de performance -->
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1024478626141816');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1024478626141816&ev=PageView&noscript=1"/>
+  </noscript>
+
+  <!-- Performance -->
   <link rel="preconnect" href="https://fdyzlqovxvdpkzlwuhjj.supabase.co" crossorigin />
-  <!-- Se a imagem realmente aparece no primeiro screen, mantenha o preload; senão, remova -->
   <link rel="preload" as="image"
         href="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
         fetchpriority="high" />
 
-  <!-- CSS crítico mínimo (mantive sua base) -->
+  <!-- CSS crítico -->
   <style>
     html{line-height:1.15;-webkit-text-size-adjust:100%}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,system-ui,sans-serif;background:#0D181C;color:#f5f2e8}
@@ -68,7 +85,7 @@
     .btn-primary:hover{background:#B8941F;transform:translateY(-1px)}
   </style>
 
-  <!-- JSON-LD (mantido) -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -105,68 +122,19 @@
   }
   </script>
 </head>
-  <body>
-    <!-- GTM noscript -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZW3RTWD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<body>
+  <!-- GTM noscript -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZW3RTWD"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
-    <div id="root">
-      <div class="hero-section">
-        <div class="hero-content">
-          <h1 style="opacity:0.1">NIVELA®</h1>
-          <p style="opacity:0.1">A Evolução da Escova Progressiva</p>
-        </div>
+  <div id="root">
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1 style="opacity:0.1">NIVELA®</h1>
+        <p style="opacity:0.1">A Evolução da Escova Progressiva</p>
       </div>
     </div>
-    <script type="module" src="/src/main.tsx"></script>
-    
-    <!-- Performance Scripts -->
-    <script>
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          try {
-            if (typeof PerformanceObserver !== 'undefined') {
-              console.log('Performance tracking initialized');
-            }
-          } catch (e) {}
-        }, 2000);
-      });
-    </script>
-    
-    <script>
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          if('serviceWorker' in navigator){ 
-            navigator.serviceWorker.register('/sw.js').catch(()=>{}); 
-          }
-        }, 2000);
-      });
-    </script>
-    
-    <script>
-      (function(){
-        const ORIG = EventTarget.prototype.addEventListener;
-        EventTarget.prototype.addEventListener = function(t, l, o){
-          const needsPassive = ['scroll','touchstart','touchmove','mousewheel','wheel'].includes(t);
-          if (needsPassive) {
-            if (!o || typeof o !== 'object') o = { passive: true };
-            else if (o.passive === undefined) o.passive = true;
-          }
-          return ORIG.call(this, t, l, o);
-        };
-      })();
-      
-      document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.form input, .form textarea, .form select').forEach(el=>{
-          el.style.scrollMarginTop = '96px';
-          el.addEventListener('focus', ()=>{ 
-            el.scrollIntoView({block:'center', behavior:'smooth'}); 
-          });
-        });
-      });
-      
-      window.addEventListener('pagehide', function(event) {
-        // bfcache safe
-      });
-    </script>
-  </body>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
 </html>
