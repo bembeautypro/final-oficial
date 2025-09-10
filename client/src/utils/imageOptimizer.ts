@@ -84,7 +84,7 @@ export class ImageOptimizer {
       link.rel = 'preload';
       link.as = 'image';
       link.href = url;
-      link.fetchPriority = 'high';
+      link.fetchpriority = 'high';
       document.head.appendChild(link);
       
       this.imageCache.add(url);

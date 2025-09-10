@@ -1,0 +1,22 @@
+chunk-YQ5BCTVV.js?v=cdc79dcc:521 Warning: React does not recognize the `fetchPriority` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `fetchpriority` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at img
+    at div
+    at div
+    at div
+    at div
+    at div
+    at header
+    at https://27d5d098-85f6-4fa9-96cc-ea30b530cebe-00-1kay529c76ek6.kirk.replit.dev/src/components/landing/Header.tsx:21:35
+    at main
+    at div
+    at https://27d5d098-85f6-4fa9-96cc-ea30b530cebe-00-1kay529c76ek6.kirk.replit.dev/src/pages/Index.tsx:45:3
+    at Route (https://27d5d098-85f6-4fa9-96cc-ea30b530cebe-00-1kay529c76ek6.kirk.replit.d…/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=cdc79dcc:279:16)
+    at Router (https://27d5d098-85f6-4fa9-96cc-ea30b530cebe-00-1kay529c76ek6.kirk.replit.d…/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=cdc79dcc:235:17)
+    at Provider (https://27d5d098-85f6-4fa9-96cc-ea30b530cebe-00-1kay529c76ek6.kirk.replit.d…unner/workspace/node_modules/.vite/deps/chunk-QG2TWDGP.js?v=cdc79dcc:44:15)
+    at TooltipProvider (https://27d5d098-85f6-4fa9-96cc-ea30b530cebe-00-1kay529c76ek6.kirk.replit.d…space/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=cdc79dcc:2271:5)
+    at V (https://27d5d098-85f6-4fa9-96cc-ea30b530cebe-00-1kay529c76ek6.kirk.replit.d…e/runner/workspace/node_modules/.vite/deps/next-themes.js?v=cdc79dcc:44:25)
+    at J (https://27d5d098-85f6-4fa9-96cc-ea30b530cebe-00-1kay529c76ek6.kirk.replit.d…e/runner/workspace/node_modules/.vite/deps/next-themes.js?v=cdc79dcc:42:18)
+    at ThemeProvider (https://27d5d098-85f6-4fa9-96cc-ea30b530cebe-00-1kay529c76ek6.kirk.replit.dev/src/components/ui/theme-provider.tsx:18:33)
+    at QueryClientProvider (https://27d5d098-85f6-4fa9-96cc-ea30b530cebe-00-1kay529c76ek6.kirk.replit.d…rkspace/node_modules/.vite/deps/@tanstack_react-query.js?v=cdc79dcc:2873:3)
+    at App (https://27d5d098-85f6-4fa9-96cc-ea30b530cebe-00-1kay529c76ek6.kirk.replit.dev/src/App.tsx?v=2e2Yj3SDtmOkQEpSI95C2:46:3)
+printWarning	@	chunk-YQ5BCTVV.js?v=cdc79dcc:521
