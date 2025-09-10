@@ -38,7 +38,7 @@ const Manifesto = ({ id }: ManifestoProps) => {
               <div className="relative group max-w-3xl lg:max-w-4xl mx-auto">
                 <div className="relative overflow-hidden rounded-lg">
                   <video
-                    src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/videos/video-manifesto-oficial-compactado.mp4"
+                    src="/videos/video-manifesto.mp4"
                     autoPlay
                     muted
                     loop

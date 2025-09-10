@@ -129,7 +129,7 @@ const CompleteTechnologySection = memo(({ id }: CompleteTechnologySectionProps) 
             <AnimatedSection animation="scale" delay={0.3}>
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-elegant">
                 <VideoLazy
-                  src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/videos/OFICIAL-Astroquat-animacaao-julho.mp4"
+                  src="/videos/video-astroquat.mp4"
                   autoPlay
                   muted
                   loop
