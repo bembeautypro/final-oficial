@@ -1,4 +1,4 @@
-import { db, supabase } from "./db";
+import { db } from "./db";
 import { 
   leadsNivela, 
   distribuidores, 
@@ -35,25 +35,16 @@ export class DatabaseStorage implements IStorage {
   async createLeadNivela(leadData: InsertLeadNivela & { userAgent?: string; ipAddress?: string }): Promise<LeadNivela> {
     try {
       // SIMPLIFIED - 3 FIELDS ONLY
-      const { data, error } = await supabase
-        .from('leads_nivela')
-        .insert({
+      const [lead] = await db
+        .insert(leadsNivela)
+        .values({
           nome: leadData.nome,
           email: leadData.email,
           telefone: leadData.telefone
         })
-        .select('id, nome, email, telefone, created_at')
-        .single();
+        .returning();
 
-      if (error) {
-        throw error;
-      }
-
-      // Map created_at to createdAt
-      return {
-        ...data,
-        createdAt: new Date(data.created_at)
-      } as LeadNivela;
+      return lead;
     } catch (error) {
       // Log apenas em desenvolvimento
       if (process.env.NODE_ENV === 'development') {
@@ -70,25 +61,16 @@ export class DatabaseStorage implements IStorage {
   async createDistribuidor(distribuidorData: InsertDistribuidor): Promise<Distribuidor> {
     try {
       // SIMPLIFIED - 3 FIELDS ONLY
-      const { data, error } = await supabase
-        .from('distribuidores')
-        .insert({
+      const [distribuidor] = await db
+        .insert(distribuidores)
+        .values({
           nome: distribuidorData.nome,
           email: distribuidorData.email,
           telefone: distribuidorData.telefone
         })
-        .select('id, nome, email, telefone, created_at')
-        .single();
+        .returning();
 
-      if (error) {
-        throw error;
-      }
-
-      // Map created_at to createdAt
-      return {
-        ...data,
-        createdAt: new Date(data.created_at)
-      } as Distribuidor;
+      return distribuidor;
     } catch (error) {
       // Log apenas em desenvolvimento
       if (process.env.NODE_ENV === 'development') {
@@ -104,22 +86,17 @@ export class DatabaseStorage implements IStorage {
 
   async createPerformanceMetric(metricData: InsertPerformanceMetric): Promise<PerformanceMetric> {
     try {
-      const { data, error } = await supabase
-        .from('performance_metrics')
-        .insert({
-          metric_name: metricData.metricName,
-          metric_value: metricData.metricValue,
-          user_agent: metricData.userAgent,
-          page_url: metricData.pageUrl
+      const [metric] = await db
+        .insert(performanceMetrics)
+        .values({
+          metricName: metricData.metricName,
+          metricValue: metricData.metricValue,
+          userAgent: metricData.userAgent,
+          pageUrl: metricData.pageUrl
         })
-        .select()
-        .single();
+        .returning();
 
-      if (error) {
-        throw error;
-      }
-
-      return data as PerformanceMetric;
+      return metric;
     } catch (error) {
       // Log apenas em desenvolvimento
       if (process.env.NODE_ENV === 'development') {
@@ -131,22 +108,20 @@ export class DatabaseStorage implements IStorage {
 
   async createAnalyticsEvent(eventData: InsertAnalyticsEvent & { userAgent?: string; ipAddress?: string }): Promise<AnalyticsEvent> {
     try {
-      const { data, error } = await supabase
-        .from('analytics_events')
-        .insert({
-          event_name: eventData.eventName,
-          session_id: eventData.sessionId,
-          page_url: eventData.pageUrl,
-          user_agent: eventData.userAgent
+      const [event] = await db
+        .insert(analyticsEvents)
+        .values({
+          eventName: eventData.eventName,
+          eventData: eventData.eventData,
+          userId: eventData.userId,
+          sessionId: eventData.sessionId,
+          pageUrl: eventData.pageUrl,
+          userAgent: eventData.userAgent,
+          ipAddress: eventData.ipAddress
         })
-        .select()
-        .single();
+        .returning();
 
-      if (error) {
-        throw error;
-      }
-
-      return data as AnalyticsEvent;
+      return event;
     } catch (error) {
       // Log apenas em desenvolvimento
       if (process.env.NODE_ENV === 'development') {
