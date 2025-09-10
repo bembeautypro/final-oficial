@@ -3,6 +3,7 @@ declare global {
   interface Window {
     dataLayer: any[];
     gtag: (...args: any[]) => void;
+    fbq: (...args: any[]) => void;
   }
 }
 
@@ -37,7 +38,11 @@ export function initEventTracking() {
       pro.removeEventListener('input', once);
     };
     pro.addEventListener('input', once);
-    pro.addEventListener('submit', () => window.dataLayer?.push({ event: 'generate_lead' }));
+    pro.addEventListener('submit', () => {
+      window.dataLayer?.push({ event: 'generate_lead' });
+      // Meta Pixel Lead event
+      if (window.fbq) window.fbq('track', 'Lead');
+    });
   }
 
   // Form tracking - Distributor Form
@@ -48,7 +53,11 @@ export function initEventTracking() {
       dist.removeEventListener('input', onceD);
     };
     dist.addEventListener('input', onceD);
-    dist.addEventListener('submit', () => window.dataLayer?.push({ event: 'generate_lead_distribuidor' }));
+    dist.addEventListener('submit', () => {
+      window.dataLayer?.push({ event: 'generate_lead_distribuidor' });
+      // Meta Pixel Lead event  
+      if (window.fbq) window.fbq('track', 'Lead');
+    });
   }
 
   // WhatsApp tracking with UTM injection
