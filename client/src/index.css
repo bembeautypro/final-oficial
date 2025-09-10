@@ -43,6 +43,16 @@
   will-change: transform, opacity; 
 }
 
+/* Mobile Modal Fix - Safe Area Support */
+.safe-area-inset {
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  margin-top: calc(env(safe-area-inset-top, 0px) + 8px);
+  margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+}
+
 /* Reduce motion support */
 @media (prefers-reduced-motion: reduce) { 
   *, *::before, *::after { 

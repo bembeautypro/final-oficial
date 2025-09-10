@@ -29,6 +29,12 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
       const res = await submitLead({ nome: f.nome, email: f.email, telefone: f.telefone });
       if (!res.ok) throw new Error(res.error);
       toast.success("Solicitação enviada!");
+      
+      // Meta Pixel Lead Event
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'Lead');
+      }
+      
       onClose();
     } catch (err: any) {
       toast.error(err?.message || "Erro");
@@ -43,8 +49,10 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
         // um único className
         className="
           w-[95vw] max-w-md
-          max-h-[90dvh] overflow-auto
+          max-h-[85vh] overflow-y-auto
           p-0 sm:rounded-xl
+          safe-area-inset
+          m-2 sm:m-0
         "
       >
         <DialogHeader className="space-y-3 pb-4 pt-6 px-6">

@@ -26,6 +26,12 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
       const r = await submitDistribuidor(f);
       if (!r.ok) throw new Error(r.error);
       toast.success('Cadastro enviado com sucesso!');
+      
+      // Meta Pixel Lead Event
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'Lead');
+      }
+      
       setF({ nome:"", email:"", telefone:"" });
       setIsSubmitted(true);
     } catch (err:any) { 
@@ -108,7 +114,7 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
 
         {/* Distributor Form Modal */}
         <Dialog open={isModalOpen} onOpenChange={(open) => { setIsModalOpen(open); if (!open) setIsSubmitted(false); }}>
-          <DialogContent className="w-[95vw] max-w-2xl mx-auto max-h-[95vh] overflow-y-auto">
+          <DialogContent className="w-[95vw] max-w-2xl max-h-[85vh] overflow-y-auto safe-area-inset m-2 sm:m-0">
             {isSubmitted ? (
               <div className="text-center py-8">
                 <div className="w-20 h-20 bg-gradient-accent rounded-full flex items-center justify-center mx-auto mb-6">
