@@ -42,7 +42,7 @@
         content="Retexturizador profissional sem formol, com tecnologia exclusiva e ativos da Amazônia para um resultado impecável." />
   <meta name="twitter:image" content="/frasco-nivela-destaque.webp" />
 
-  <!-- Google Tag Manager -->
+  <!-- Google Tag Manager (deferred) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments)}
@@ -53,19 +53,20 @@
       ad_personalization:'denied'
     });
   </script>
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  <script defer src="https://www.googletagmanager.com/gtag/js?id=G-SC9C7W6Q4F"></script>
+  <script defer>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.defer=true;j.src=
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-KZW3RTWD');</script>
 
-  <!-- Meta Pixel -->
-  <script>
+  <!-- Meta Pixel (deferred) -->
+  <script defer>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
+    n.queue=[];t=b.createElement(e);t.defer=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
@@ -75,6 +76,8 @@
 
   <!-- Performance -->
   <link rel="preload" as="image" href="/frasco-nivela-destaque.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="/nivela-hero.webp" fetchpriority="high" />
+  <link rel="preload" as="style" href="/assets/index-BH5MTdA5.css" fetchpriority="high" />
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
   <link rel="preconnect" href="https://connect.facebook.net" crossorigin />
   <link rel="dns-prefetch" href="https://www.facebook.com" />
@@ -99,15 +102,15 @@
   "productID": "1227649459",
   "sku": "RETBEM1L",
   "name": "NIVELA® - Retexturizador Hidro Nutritivo Profissional",
+  "description": "A Evolução da Escova Progressiva, com tecnologia patenteada ASTRO QUAT V3, ativos orgânicos da Amazônia e rendimento 30% superior.",
   "image": [
-    "/nivela-hero.webp",
-    "/frasco-nivela-destaque.webp"
+    "https://nivela.bembeauty.com.br/nivela-hero.webp",
+    "https://nivela.bembeauty.com.br/frasco-nivela-destaque.webp"
   ],
   "brand": {
     "@type": "Brand",
     "name": "Bem Beauty Professional"
   },
-  "description": "A Evolução da Escova Progressiva, com tecnologia patenteada ASTRO QUAT V3, ativos orgânicos da Amazônia e rendimento 30% superior.",
   "audience": {
     "@type": "PeopleAudience",
     "audienceType": "Profissionais de beleza"
