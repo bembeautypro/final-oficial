@@ -64,7 +64,7 @@ const Header = memo(({ id }: HeaderProps) => {
                 </p>
 
                 {/* Badges - Hierarchical design */}
-                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 w-full max-w-full lg:max-w-3xl mt-6 lg:mt-8 mb-6 lg:mb-8 px-4 sm:px-0">
+                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 w-full max-w-full lg:max-w-3xl mt-6 lg:mt-8 mb-4 lg:mb-6 px-4 sm:px-0">
                    <div className="bg-brand-deep/50 border border-brand-deep hover:bg-brand-deep/70 focus-visible:bg-brand-deep/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation" tabIndex={0} role="button" aria-label="Produto livre de formol">
                      <span className="text-base md:text-lg lg:text-xl font-bold text-brand-latte">LIVRE</span>
                      <span className="text-sm md:text-base font-normal text-brand-cloud/90">de formol</span>
@@ -82,12 +82,12 @@ const Header = memo(({ id }: HeaderProps) => {
                  {/* Primary CTA Button - Captura de Lead Premium */}
                  <button 
                    onClick={() => setIsModalOpen(true)}
-                   className="min-h-[56px] min-w-[280px] touch-manipulation px-6 sm:px-8 lg:px-10 rounded-xl hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-latte/50 focus:ring-offset-2 transition-all duration-300 ease-out text-sm sm:text-base lg:text-lg font-semibold w-full sm:w-auto max-w-sm bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black hover:shadow-premium active:scale-[0.98] cursor-pointer"
+                   className="mt-6 min-h-[56px] min-w-[280px] touch-manipulation px-6 sm:px-8 lg:px-10 rounded-xl hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-latte/50 focus:ring-offset-2 transition-all duration-300 ease-out text-base sm:text-base lg:text-lg font-semibold w-full sm:w-auto max-w-sm bg-gradient-to-r from-[#9D4916] to-[#D9C0AA] text-[#0D181C] shadow-xl hover:shadow-2xl active:scale-[0.98] cursor-pointer"
                    aria-label="Solicitar acesso exclusivo ao NIVELA - Formulário de cadastro profissional"
                    tabIndex={0}
                    data-testid="button-solicitar-acesso"
                  >
-                   SOLICITAR ACESSO EXCLUSIVO
+                   SOLICITAR ACESSO EXCLUSIVO →
                  </button>
                 
               </div>
@@ -108,7 +108,8 @@ const Header = memo(({ id }: HeaderProps) => {
                   width="800" 
                   height="933"
                   loading="eager"
-                  fetchpriority="high"
+                  // @ts-ignore - fetchPriority is a valid HTML attribute
+                  fetchPriority="high"
                   decoding="async"
                   style={{aspectRatio: '800/933', objectFit: 'contain'}}
                   className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
