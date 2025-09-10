@@ -108,8 +108,7 @@ const Header = memo(({ id }: HeaderProps) => {
                   width="800" 
                   height="933"
                   loading="eager"
-                  // @ts-ignore - fetchPriority is a valid HTML attribute
-                  fetchPriority="high"
+                  fetchpriority="high"
                   decoding="async"
                   style={{aspectRatio: '800/933', objectFit: 'contain'}}
                   className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
