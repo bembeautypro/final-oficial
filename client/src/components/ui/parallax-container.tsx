@@ -22,10 +22,9 @@ const ParallaxContainer = ({
   speed = "medium"
 }: ParallaxContainerProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
+  
+  // Use viewport-based scroll instead of target-based to avoid positioning warnings
+  const { scrollYProgress } = useScroll();
 
   const y = useTransform(
     scrollYProgress, 
