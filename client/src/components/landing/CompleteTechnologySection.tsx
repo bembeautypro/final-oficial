@@ -72,13 +72,15 @@ const CompleteTechnologySection = memo(({ id }: CompleteTechnologySectionProps) 
           <AnimatedSection animation="scale" className="mb-12">
             <div className="relative aspect-[4/3] max-w-md mx-auto rounded-xl overflow-hidden shadow-elegant">
               <VideoLazy
-                src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/videos/OFICIAL-Astroquat-animacaao-julho.mp4"
+                src="/videos/video-astroquat.mp4"
                 autoPlay
                 muted
                 loop
                 className="w-full h-full object-cover"
                 threshold={0.3}
                 onError={handleVideoError}
+                poster="/nivela-hero.webp"
+                preload="none"
               />
             </div>
           </AnimatedSection>
@@ -136,6 +138,8 @@ const CompleteTechnologySection = memo(({ id }: CompleteTechnologySectionProps) 
                   className="w-full h-full object-cover"
                   threshold={0.3}
                   onError={handleVideoError}
+                  poster="/nivela-hero.webp"
+                  preload="none"
                 />
               </div>
             </AnimatedSection>

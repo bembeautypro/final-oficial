@@ -71,6 +71,8 @@ const TechnologySection = memo(({ id }: TechnologySectionProps) => {
               loop={true}
               threshold={0.3}
               onError={handleVideoError}
+              poster="/nivela-hero.webp"
+              preload="none"
             />
           </div>
         </div>
@@ -122,6 +124,8 @@ const TechnologySection = memo(({ id }: TechnologySectionProps) => {
                 loop={true}
                 threshold={0.3}
                 onError={handleVideoError}
+                poster="/nivela-hero.webp"
+                preload="none"
               />
             </div>
           </div>

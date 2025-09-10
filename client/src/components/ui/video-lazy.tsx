@@ -8,6 +8,8 @@ interface VideoLazyProps {
   loop?: boolean;
   threshold?: number;
   onError?: (error: Error | Event) => void;
+  poster?: string;
+  preload?: 'none' | 'metadata' | 'auto';
 }
 
 export const VideoLazy = memo<VideoLazyProps>(({
@@ -17,7 +19,9 @@ export const VideoLazy = memo<VideoLazyProps>(({
   muted = true,
   loop = true,
   threshold = 0.3,
-  onError
+  onError,
+  poster,
+  preload = 'none'
 }) => {
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -73,10 +77,10 @@ export const VideoLazy = memo<VideoLazyProps>(({
         loop={loop}
         playsInline
         controls={false}
+        poster={poster}
+        preload={preload}
         disablePictureInPicture
         controlsList="nodownload nofullscreen noremoteplaybook"
-        preload="none"
-        poster="/nivela-hero.webp"
         className="w-full h-full object-cover"
         style={{ pointerEvents: 'none' }}
         onError={handleError}
