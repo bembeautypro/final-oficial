@@ -10,7 +10,7 @@ if (!databaseUrl) {
 }
 
 const client = postgres(databaseUrl, {
-  ssl: false, // Local database doesn't need SSL
+  ssl: { rejectUnauthorized: false }, // Replit database requires SSL
   max: 10,
   idle_timeout: 30,
   connect_timeout: 10,
