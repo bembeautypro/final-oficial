@@ -95,7 +95,7 @@ const LazyImage = ({
           sizes={sizes}
           width={props.width}
           height={props.height}
-          fetchpriority={priority ? "high" : "auto"}
+          {...({ fetchpriority: priority ? "high" : "auto" } as any)}
           style={{ 
             aspectRatio: props.width && props.height ? `${props.width}/${props.height}` : undefined 
           }}
