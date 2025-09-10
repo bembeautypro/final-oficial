@@ -1,0 +1,56 @@
+✅ Prompt Final – Otimização Profissional do Projeto NIVELA
+
+Objetivo: Aplique melhorias avançadas de performance, SEO, rastreamento e acessibilidade na landing page do projeto NIVELA. Mantenha o design visual intacto.
+
+1. Performance e Carregamento
+	•	Adicione fetchpriority="high" para a imagem principal (LCP).
+	•	Utilize formatos modernos como WebP ou AVIF com srcset e sizes adequados.
+	•	Configure preconnect e dns-prefetch para:
+	•	supabase.co
+	•	googletagmanager.com
+	•	facebook.com
+	•	Elimine qualquer JS ou CSS blocking render desnecessário.
+
+2. SEO (Google)
+	•	Padronize <title> e <meta description> com foco em palavras-chave do produto.
+	•	Adicione:
+	•	og:title, og:description, og:image, og:url
+	•	twitter:card, twitter:title, twitter:description
+	•	Gere e publique:
+	•	sitemap.xml
+	•	robots.txt com a URL correta do sitemap
+	•	Implemente dados estruturados (JSON-LD) para:
+	•	Organization (Bem Beauty Professional)
+	•	Product (NIVELA® – Retexturizador)
+
+3. Rastreamento e Métricas
+	•	Instale o Google Analytics 4 com Consent Mode v2 (consentimento negado por padrão).
+	•	Instale o Meta Pixel com eventos:
+	•	PageView
+	•	Lead (no clique do botão WhatsApp)
+	•	Adicione evento generate_lead via gtag e fbq no botão “Acessar loja oficial”.
+
+4. Acessibilidade e UX
+	•	Corrija contraste de cores para atingir padrão WCAG AA.
+	•	Insira aria-label em botões sem texto visível.
+	•	Garanta que todos os inputs tenham label associada.
+	•	Adicione foco visível ao navegar via teclado.
+
+5. PWA, Favicon e Manifest
+	•	Verifique o manifest.webmanifest com ícones 192px e 512px.
+	•	Adicione corretamente:
+	•	favicon.ico
+	•	apple-touch-icon
+	•	favicon.svg
+	•	Defina theme-color com base na identidade visual:
+	•	Azul Profundo: #254C5A
+
+6. Checklist Final
+	•	Valide métricas no Lighthouse e Core Web Vitals.
+	•	Garanta:
+	•	LCP ≤ 2.5s
+	•	CLS ≤ 0.1
+	•	FCP rápido
+	•	Landing deve estar 100% pronta para indexação e rastreamento.
+
+⚠️ Não altere o layout visual da landing page. Todas as melhorias devem ser estruturais ou de bastidores (infra, SEO, performance, rastreio e acessibilidade).
