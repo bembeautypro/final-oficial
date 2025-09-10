@@ -96,7 +96,7 @@ const Header = memo(({ id }: HeaderProps) => {
             {/* Product Image Section - 40% width on desktop */}
             <div className="lg:col-span-2 flex justify-center lg:justify-end order-1 lg:order-2 w-full px-4 sm:px-6 lg:px-0">
               <div className="relative w-full flex justify-center lg:justify-end max-w-lg lg:max-w-none">
-                {/* Product Image */}
+                {/* Product Image - Otimizada LCP com formato WebP */}
                 <img 
                   src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
                   srcSet="
@@ -108,7 +108,7 @@ const Header = memo(({ id }: HeaderProps) => {
                   width="800" 
                   height="933"
                   loading="eager"
-                  {...({ fetchpriority: "high" } as any)}
+                  fetchpriority="high"
                   decoding="async"
                   style={{aspectRatio: '800/933', objectFit: 'contain'}}
                   className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
