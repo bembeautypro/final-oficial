@@ -30,7 +30,7 @@ const Header = memo(({ id }: HeaderProps) => {
       {/* Navigation */}
       <nav className="w-full px-4 md:px-8 lg:px-12 py-8 flex justify-center items-center relative z-10">
         <PerformanceAwareImage 
-          src="/favicon.svg"
+          src="/logo-bembeauty-transparente.png"
           alt="Bem Beauty Professional - Logo da marca"
           className="h-8 md:h-10 w-auto object-contain"
           width={160}

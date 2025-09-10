@@ -46,27 +46,28 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
       <DialogContent
-        // um único className
+        // Responsivo para telas pequenas com max-h-[90svh] e centralização correta
         className="
-          w-[95vw] max-w-md
-          max-h-[85vh] overflow-y-auto
-          p-0 sm:rounded-xl
-          safe-area-inset
-          m-2 sm:m-0
+          w-[92vw] max-w-[400px] min-w-[320px]
+          max-h-[90svh] overflow-y-auto
+          p-0 rounded-lg sm:rounded-xl
+          mx-auto my-auto
+          bg-white dark:bg-gray-900
+          shadow-2xl border border-gray-200 dark:border-gray-700
         "
       >
-        <DialogHeader className="space-y-3 pb-4 pt-6 px-6">
-          <DialogTitle className="text-lg sm:text-xl font-bold text-center">
+        <DialogHeader className="space-y-2 pb-3 pt-4 px-4 sm:px-6 sm:pt-6 sm:pb-4">
+          <DialogTitle className="text-base sm:text-lg font-bold text-center leading-tight">
             Solicitar Acesso Exclusivo
           </DialogTitle>
-          <DialogDescription className="text-sm text-center text-muted-foreground">
+          <DialogDescription className="text-xs sm:text-sm text-center text-muted-foreground leading-tight">
             Preencha os dados abaixo para ter acesso ao NIVELA®
             <br />
             <span className="text-xs text-brand-latte font-medium">* Campos obrigatórios</span>
           </DialogDescription>
         </DialogHeader>
 
-        <form id="form-pro" data-form="lead" onSubmit={onSubmit} className="space-y-5 px-6 pb-6 form">
+        <form id="form-pro" data-form="lead" onSubmit={onSubmit} className="space-y-4 px-4 pb-4 sm:px-6 sm:pb-6 sm:space-y-5 form">
           {/* Honeypot anti-spam */}
           <input
             type="text" name="hp" id="hp"
@@ -74,9 +75,9 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
             tabIndex={-1} autoComplete="off"
           />
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
+              <label className="text-xs sm:text-sm font-medium text-foreground">
                 Nome completo <span className="text-red-500">*</span>
               </label>
               <Input
@@ -86,13 +87,13 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
                 onChange={(e) => setF({ ...f, nome: e.target.value })}
                 required
                 autoComplete="name"
-                className="h-12"
+                className="h-10 sm:h-12 text-sm"
                 style={{ fontSize: 16 }}
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
+              <label className="text-xs sm:text-sm font-medium text-foreground">
                 E-mail <span className="text-red-500">*</span>
               </label>
               <Input
@@ -102,13 +103,13 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
                 onChange={(e) => setF({ ...f, email: e.target.value })}
                 required
                 autoComplete="email"
-                className="h-12"
+                className="h-10 sm:h-12 text-sm"
                 style={{ fontSize: 16 }}
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-sm font-medium text-foreground">
+              <label className="text-xs sm:text-sm font-medium text-foreground">
                 WhatsApp <span className="text-red-500">*</span>
               </label>
               <Input
@@ -119,21 +120,28 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
                 onChange={(e) => setF({ ...f, telefone: e.target.value })}
                 required
                 autoComplete="tel"
-                className="h-12"
+                className="h-10 sm:h-12 text-sm"
                 style={{ fontSize: 16 }}
               />
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 pt-4">
-            <Button type="button" variant="outline" onClick={onClose} className="h-12 text-sm">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-3 sm:pt-4">
+            <Button 
+              type="button" 
+              variant="outline" 
+              onClick={onClose} 
+              className="h-10 sm:h-12 text-xs sm:text-sm order-2 sm:order-1"
+              data-testid="button-cancel"
+            >
               Cancelar
             </Button>
             <Button
               type="submit"
               disabled={isLoading}
               data-gtm-event="generate_lead"
-              className="flex-1 h-12 text-sm font-medium bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black hover:scale-105"
+              data-testid="button-submit-access"
+              className="flex-1 h-10 sm:h-12 text-xs sm:text-sm font-medium bg-gradient-to-r from-brand-caramel to-brand-latte text-brand-black hover:scale-105 order-1 sm:order-2"
             >
               {isLoading ? "Enviando..." : "Solicitar Acesso"}
             </Button>
