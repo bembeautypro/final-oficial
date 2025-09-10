@@ -23,8 +23,8 @@ const Index = memo(() => {
   useEffect(() => {
     // Preload critical images for immediate sections
     ImageOptimizer.preloadCriticalImages([
-      'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp',
-      'https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/frasco-nivela-destaque.webp'
+      '/nivela-hero.webp',
+      '/frasco-nivela-destaque.webp'
     ]);
   }, []);
 

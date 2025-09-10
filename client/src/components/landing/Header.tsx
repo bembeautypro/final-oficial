@@ -30,7 +30,7 @@ const Header = memo(({ id }: HeaderProps) => {
       {/* Navigation */}
       <nav className="w-full px-4 md:px-8 lg:px-12 py-8 flex justify-center items-center relative z-10">
         <PerformanceAwareImage 
-          src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/logo-bembeauty-transparente.png"
+          src="/favicon.svg"
           alt="Bem Beauty Professional - Logo da marca"
           className="h-8 md:h-10 w-auto object-contain"
           width={160}
@@ -98,18 +98,13 @@ const Header = memo(({ id }: HeaderProps) => {
               <div className="relative w-full flex justify-center lg:justify-end max-w-lg lg:max-w-none">
                 {/* Product Image - Otimizada LCP com formato WebP */}
                 <img 
-                  src="https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp"
-                  srcSet="
-                    https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 800w,
-                    https://fdyzlqovxvdpkzlwuhjj.supabase.co/storage/v1/object/public/imagens/nivela-hero.webp 1200w
-                  "
-                  sizes="(max-width: 640px) 320px, (max-width: 768px) 384px, (max-width: 1024px) 448px, (max-width: 1280px) 512px, 576px"
-                  alt="NIVELA® - A evolução da escova progressiva profissional"
-                  width="800" 
+                  src="/frasco-nivela-destaque.webp"
+                  alt="NIVELA® - frasco destaque"
+                  width="800"
                   height="933"
-                  loading="eager"
-                  {...{ fetchpriority: 'high' as any }}
                   decoding="async"
+                  {...{ fetchpriority: 'high' as any }}
+                  loading="eager"
                   style={{aspectRatio: '800/933', objectFit: 'contain'}}
                   className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
                 />
