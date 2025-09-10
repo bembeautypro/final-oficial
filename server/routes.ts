@@ -28,8 +28,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (error instanceof z.ZodError) {
         res.status(400).json({ error: "Invalid data", details: error.errors });
       } else {
-        // Error logged for development only
-        res.status(500).json({ error: "Internal server error" });
+        const errorCode = (error as any)?.code;
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        
+        if (errorCode === '23505' || errorMessage?.includes('duplicate') || errorMessage?.includes('unique')) {
+          // Duplicate email handled gracefully
+          res.status(409).json({ error: "Este email já está cadastrado. Tente com outro email ou entre em contato." });
+        } else {
+          // Error logged for development only
+          res.status(500).json({ error: "Internal server error" });
+        }
       }
     }
   });

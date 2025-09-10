@@ -43,9 +43,31 @@ const FAQSection = memo(({ id }: FAQSectionProps) => {
     },
   ];
 
+  // FAQ Schema JSON-LD para SEO
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
-    <section id={id} className="py-12 md:py-16 lg:py-20 px-4 md:px-6 lg:px-12 bg-gradient-subtle">
-      <div className="max-w-4xl mx-auto">
+    <>
+      {/* FAQ Schema JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema)
+        }}
+      />
+      <section id={id} className="py-12 md:py-16 lg:py-20 px-4 md:px-6 lg:px-12 bg-gradient-subtle">
+        <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16 lg:mb-20 space-y-4 lg:space-y-6">
           <div className="space-y-3 lg:space-y-4">
@@ -69,7 +91,7 @@ const FAQSection = memo(({ id }: FAQSectionProps) => {
                 <AccordionTrigger className="text-left font-semibold text-base md:text-lg lg:text-xl text-primary group-hover:text-accent transition-[transform,box-shadow] duration-200 ease-out py-5 min-h-[44px] focus-visible-enhanced">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground/90 text-sm md:text-base lg:text-lg leading-relaxed pb-5">
+                <AccordionContent className="text-muted-foreground text-sm md:text-base lg:text-lg leading-relaxed pb-5">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -79,7 +101,7 @@ const FAQSection = memo(({ id }: FAQSectionProps) => {
 
         {/* CTA Final */}
         <div className="mt-20 text-center space-y-8">
-          <p className="text-base md:text-lg lg:text-xl text-muted-foreground/90 font-montserrat">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground font-montserrat">
             Ainda tem dúvidas? Nossa equipe especializada está pronta para ajudar.
           </p>
           <a 
@@ -96,6 +118,7 @@ const FAQSection = memo(({ id }: FAQSectionProps) => {
         </div>
       </div>
     </section>
+    </>
   );
 });
 

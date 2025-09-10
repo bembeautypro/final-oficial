@@ -22,7 +22,7 @@ const ProductSection = memo(({ id }: ProductSectionProps) => {
               </h2>
               <div className="h-0.5 lg:h-1 bg-gradient-accent mx-auto w-16 lg:w-24"></div>
             </div>
-            <p className="text-base md:text-lg lg:text-xl text-muted-foreground/85 leading-relaxed max-w-3xl lg:max-w-4xl mx-auto">
+            <p className="text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-3xl lg:max-w-4xl mx-auto">
               NIVELA® é um retexturizador hidro nutritivo de alta performance, uma nova geração de escova progressiva sem formol, desenvolvida exclusivamente para profissionais.
             </p>
           </div>

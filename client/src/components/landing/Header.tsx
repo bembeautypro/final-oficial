@@ -59,23 +59,23 @@ const Header = memo(({ id }: HeaderProps) => {
                 </div>
                 
                 {/* Subtitle Description */}
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-montserrat text-brand-cloud/90 leading-relaxed max-w-full lg:max-w-4xl mt-4 lg:mt-8 px-2 sm:px-0">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-montserrat text-brand-cloud leading-relaxed max-w-full lg:max-w-4xl mt-4 lg:mt-8 px-2 sm:px-0">
                   Desenvolvido com tecnologia patenteada, sem formol, com ativos da Amazônia e rendimento 30% superior.
                 </p>
 
-                {/* Badges - Hierarchical design */}
-                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 w-full max-w-full lg:max-w-3xl mt-6 lg:mt-8 mb-4 lg:mb-6 px-4 sm:px-0">
-                   <div className="bg-brand-deep/50 border border-brand-deep hover:bg-brand-deep/70 focus-visible:bg-brand-deep/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation" tabIndex={0} role="button" aria-label="Produto livre de formol">
-                     <span className="text-base md:text-lg lg:text-xl font-bold text-brand-latte">LIVRE</span>
-                     <span className="text-sm md:text-base font-normal text-brand-cloud/90">de formol</span>
+                {/* Badges - Hierarchical design with mobile-first approach */}
+                 <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 w-full max-w-full lg:max-w-3xl mt-6 lg:mt-8 mb-4 lg:mb-6 px-2 xs:px-4 sm:px-0">
+                   <div className="bg-brand-deep/50 border border-brand-deep hover:bg-brand-deep/70 focus-visible:bg-brand-deep/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-3 xs:px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation" tabIndex={0} role="button" aria-label="Produto livre de formol">
+                     <span className="text-sm xs:text-base md:text-lg lg:text-xl font-bold text-brand-latte">LIVRE</span>
+                     <span className="text-xs xs:text-sm md:text-base font-normal text-brand-cloud">de formol</span>
                    </div>
-                   <div className="border border-brand-latte hover:bg-brand-latte/10 focus-visible:bg-brand-latte/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation" tabIndex={0} role="button" aria-label="Textura em gel">
-                     <span className="text-base md:text-lg lg:text-xl font-bold text-brand-latte">TEXTURA</span>
-                     <span className="text-sm md:text-base font-normal text-brand-latte/90">em gel</span>
+                   <div className="border border-brand-latte hover:bg-brand-latte/10 focus-visible:bg-brand-latte/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-3 xs:px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation" tabIndex={0} role="button" aria-label="Textura em gel">
+                     <span className="text-sm xs:text-base md:text-lg lg:text-xl font-bold text-brand-latte">TEXTURA</span>
+                     <span className="text-xs xs:text-sm md:text-base font-normal text-brand-latte/90">em gel</span>
                    </div>
-                   <div className="sm:col-span-2 lg:col-span-1 bg-brand-caramel/20 border border-brand-caramel hover:bg-brand-caramel/30 focus-visible:bg-brand-caramel/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation" tabIndex={0} role="button" aria-label="Tecnologia ASTRO QUAT V3">
-                     <span className="text-base md:text-lg lg:text-xl font-bold text-brand-latte">TECNOLOGIA</span>
-                     <span className="text-sm md:text-base font-normal text-brand-latte/90">ASTRO QUAT V3®</span>
+                   <div className="xs:col-span-2 lg:col-span-1 bg-brand-caramel/20 border border-brand-caramel hover:bg-brand-caramel/30 focus-visible:bg-brand-caramel/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-3 xs:px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation" tabIndex={0} role="button" aria-label="Tecnologia ASTRO QUAT V3">
+                     <span className="text-sm xs:text-base md:text-lg lg:text-xl font-bold text-brand-latte text-center">TECNOLOGIA</span>
+                     <span className="text-xs xs:text-sm md:text-base font-normal text-brand-latte/90 text-center">ASTRO QUAT V3®</span>
                    </div>
                  </div>
 
@@ -108,7 +108,7 @@ const Header = memo(({ id }: HeaderProps) => {
                   width="800" 
                   height="933"
                   loading="eager"
-                  fetchpriority="high"
+                  {...{ fetchPriority: 'high' as any }}
                   decoding="async"
                   style={{aspectRatio: '800/933', objectFit: 'contain'}}
                   className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"

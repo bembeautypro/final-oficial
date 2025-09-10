@@ -37,31 +37,31 @@ const Index = memo(() => {
           <ProductSection id="produto" />
           
           {/* Complete Technology Section with all 3 parts */}
-          <Suspense fallback={<div className="h-96 bg-gray-50 loading"></div>}>
+          <Suspense fallback={<div className="h-96 bg-background/50 animate-pulse loading"></div>}>
             <CompleteTechnologySection id="tecnologia" />
           </Suspense>
           
-          <Suspense fallback={<div className="h-96 bg-gray-50 loading"></div>}>
+          <Suspense fallback={<div className="h-96 bg-background/50 animate-pulse loading"></div>}>
             <AmazonIngredientsSection id="ingredientes" />
           </Suspense>
 
-          <Suspense fallback={<div className="h-64 bg-gray-50 loading"></div>}>
+          <Suspense fallback={<div className="h-64 bg-background/50 animate-pulse loading"></div>}>
             <SynergyCallout id="sinergia" />
           </Suspense>
           
-          <Suspense fallback={<div className="h-96 bg-gray-50 loading"></div>}>
+          <Suspense fallback={<div className="h-96 bg-background/50 animate-pulse loading"></div>}>
             <BemTechSection id="bemtech" />
           </Suspense>
           
-          <Suspense fallback={<div className="h-96 bg-gray-50 loading"></div>}>
+          <Suspense fallback={<div className="h-96 bg-background/50 animate-pulse loading"></div>}>
             <DistributorSection id="distributor" />
           </Suspense>
           
-          <Suspense fallback={<div className="h-96 bg-gray-50 loading"></div>}>
+          <Suspense fallback={<div className="h-96 bg-background/50 animate-pulse loading"></div>}>
             <FAQSection id="faq" />
           </Suspense>
           
-          <Suspense fallback={<div className="h-96 bg-gray-50 loading"></div>}>
+          <Suspense fallback={<div className="h-96 bg-background/50 animate-pulse loading"></div>}>
             <PreFooter id="prefooter" />
           </Suspense>
           
