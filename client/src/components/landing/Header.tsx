@@ -98,8 +98,8 @@ const Header = memo(({ id }: HeaderProps) => {
               <div className="relative w-full flex justify-center lg:justify-end max-w-lg lg:max-w-none">
                 {/* Product Image - Otimizada LCP com formato WebP */}
                 <img 
-                  src="/frasco-nivela-destaque.webp"
-                  alt="NIVELA® - frasco destaque"
+                  src="/nivela-hero.webp"
+                  alt="NIVELA® Hero"
                   width="800"
                   height="933"
                   decoding="async"
