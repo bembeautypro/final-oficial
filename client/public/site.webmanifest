@@ -1,19 +1,23 @@
 {
   "name": "NIVELA® - A Evolução da Escova Progressiva Profissional",
   "short_name": "NIVELA®",
-  "description": "Descubra NIVELA® - Desenvolvido com tecnologia patenteada, sem formol, com ativos da Amazônia e rendimento 30% superior.",
+  "description": "Descubra o NIVELA® — Desenvolvido com tecnologia patenteada ASTRO QUAT V3®, sem formol, com ativos da Amazônia e rendimento 30% superior.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#254C5A",
+  "background_color": "#0D181C",
   "theme_color": "#254C5A",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32 48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
     },
     {
       "src": "/favicon-96x96.png",
@@ -21,24 +25,27 @@
       "type": "image/png"
     },
     {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
       "src": "/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "/web-app-manifest-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/web-app-manifest-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    },
-    {
-      "src": "/favicon.ico",
-      "sizes": "48x48",
-      "type": "image/x-icon"
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }
