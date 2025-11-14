@@ -19,6 +19,23 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [f, setF] = useState({ nome:"", email:"", telefone:"" });
 
+  // Garante que o campo focado fique visível quando o teclado abre
+  React.useEffect(() => {
+    if (!isModalOpen) return;
+
+    const handleFocus = (e: FocusEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+      }
+    };
+
+    document.addEventListener('focusin', handleFocus);
+    return () => document.removeEventListener('focusin', handleFocus);
+  }, [isModalOpen]);
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault(); 
     setIsLoading(true);
@@ -117,10 +134,10 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
           <DialogContent
   className="
     fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-    w-[95vw] max-w-2xl
-    max-h-[85vh] overflow-y-auto
+    w-[calc(100vw-2rem)] max-w-2xl
+    max-h-[85dvh] overflow-y-auto
     safe-area-inset
-    m-2 sm:m-0
+    m-0 p-6
   "
 >
             {isSubmitted ? (
