@@ -45,17 +45,16 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent
-        // Responsivo para telas pequenas com max-h-[90svh] e centralização correta
-        className="
-          w-[92vw] max-w-[400px] min-w-[320px]
-          max-h-[90svh] overflow-y-auto
-          p-0 rounded-lg sm:rounded-xl
-          mx-auto my-auto
-          bg-white dark:bg-gray-900
-          shadow-2xl border border-gray-200 dark:border-gray-700
-        "
-      >
+     <DialogContent
+  className="
+    fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+    w-[92vw] max-w-[400px] min-w-[320px]
+    max-h-[90vh] overflow-y-auto
+    p-0 rounded-lg sm:rounded-xl
+    bg-white dark:bg-gray-900
+    shadow-2xl border border-gray-200 dark:border-gray-700
+  "
+>
         <DialogHeader className="space-y-2 pb-3 pt-4 px-4 sm:px-6 sm:pt-6 sm:pb-4">
           <DialogTitle className="text-base sm:text-lg font-bold text-center leading-tight">
             Solicitar Acesso Exclusivo
