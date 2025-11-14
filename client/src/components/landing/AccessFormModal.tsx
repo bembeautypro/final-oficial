@@ -22,6 +22,23 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
     return () => { document.body.style.overflow = prev; };
   }, [isOpen]);
 
+  // Garante que o campo focado fique visível quando o teclado abre
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleFocus = (e: FocusEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 300);
+      }
+    };
+
+    document.addEventListener('focusin', handleFocus);
+    return () => document.removeEventListener('focusin', handleFocus);
+  }, [isOpen]);
+
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     try {
@@ -48,11 +65,12 @@ export default function AccessFormModal({ isOpen, onClose }: AccessFormModalProp
      <DialogContent
   className="
     fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-    w-[92vw] max-w-[400px] min-w-[320px]
-    max-h-[90vh] overflow-y-auto
-    p-0 rounded-lg sm:rounded-xl
+    w-[calc(100vw-2rem)] max-w-[400px] min-w-[280px]
+    max-h-[90dvh] overflow-y-auto
+    p-0 m-0 rounded-lg sm:rounded-xl
     bg-white dark:bg-gray-900
     shadow-2xl border border-gray-200 dark:border-gray-700
+    safe-area-inset
   "
 >
         <DialogHeader className="space-y-2 pb-3 pt-4 px-4 sm:px-6 sm:pt-6 sm:pb-4">

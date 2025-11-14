@@ -36,14 +36,14 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        // centralização perfeita em qualquer tela
-        "fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4",
+        // centralização perfeita em qualquer tela - usando !important para não ser sobrescrito
+        "!fixed !left-1/2 !top-1/2 !z-50 grid w-full max-w-lg !-translate-x-1/2 !-translate-y-1/2 gap-4",
         // visual / tema
         "rounded-2xl border border-[#24323F] bg-[#07141C] p-6 text-brand-latte shadow-2xl",
         // animações (opcional, mas mantive)
         "duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
-        // responsivo
-        "max-h-[90vh] overflow-y-auto",
+        // responsivo - usando dvh para melhor suporte mobile
+        "max-h-[90dvh] overflow-y-auto",
         className
       )}
       {...props}
