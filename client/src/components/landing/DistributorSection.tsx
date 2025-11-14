@@ -114,7 +114,15 @@ const DistributorSection = memo(({ id }: DistributorSectionProps) => {
 
         {/* Distributor Form Modal */}
         <Dialog open={isModalOpen} onOpenChange={(open) => { setIsModalOpen(open); if (!open) setIsSubmitted(false); }}>
-          <DialogContent className="w-[95vw] max-w-2xl max-h-[85vh] overflow-y-auto safe-area-inset m-2 sm:m-0">
+          <DialogContent
+  className="
+    fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+    w-[95vw] max-w-2xl
+    max-h-[85vh] overflow-y-auto
+    safe-area-inset
+    m-2 sm:m-0
+  "
+>
             {isSubmitted ? (
               <div className="text-center py-8">
                 <div className="w-20 h-20 bg-gradient-accent rounded-full flex items-center justify-center mx-auto mb-6">
