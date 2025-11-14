@@ -55,12 +55,12 @@ const Footer = ({ id }: FooterProps) => {
             <div className="space-y-6">
               <div className="space-y-4">
                 <img 
-                  src="/logo-bembeauty-transparente.png" 
+                  src="/logo-bembeauty.webp" 
                   alt="Bem Beauty Professional" 
                   className="h-14 object-contain"
                   loading="lazy"
-                  width="200"
-                  height="56"
+                  width={160}
+                  height={40}
                 />
                 <p className="text-base font-montserrat text-brand-latte leading-relaxed">
                   Fórmulas exclusivas e seguras para profissionais que buscam excelência.
