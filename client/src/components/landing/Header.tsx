@@ -1,14 +1,6 @@
-import React, { memo, useState, useEffect } from "react";
-import { Badge } from "@/components/ui/badge";
-import { AnimatedSection } from "@/components/ui/animated-section";
-import { ParallaxContainer } from "@/components/ui/parallax-container";
-import { StaggerContainer } from "@/components/ui/stagger-container";
+import React, { memo, useState } from "react";
 import { PerformanceAwareImage } from "@/components/ui/performance-aware-image";
-import { CTAButton, CTAStrategies } from "@/components/ui/cta-button";
 import AccessFormModal from "./AccessFormModal";
-
-
-import { ChevronDown } from "lucide-react";
 
 interface HeaderProps {
   id?: string;
@@ -17,20 +9,19 @@ interface HeaderProps {
 const Header = memo(({ id }: HeaderProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   return (
     <header id={id} className="hero-section relative overflow-hidden">
       {/* Spotlight Effect Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-radial opacity-80"></div>
+        <div className="absolute inset-0 bg-gradient-radial opacity-80" />
         {/* Additional focused light spot */}
-        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 bg-brand-latte/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 bg-brand-latte/10 rounded-full blur-3xl" />
       </div>
-      
+
       {/* Navigation */}
       <nav className="w-full px-4 md:px-8 lg:px-12 py-8 flex justify-center items-center relative z-10">
-        <PerformanceAwareImage 
-          src="/logo-bembeauty-transparente.png"
+        <PerformanceAwareImage
+          src="/logo-bembeauty.webp"
           alt="Bem Beauty Professional - Logo da marca"
           className="h-8 md:h-10 w-auto object-contain"
           width={160}
@@ -44,11 +35,9 @@ const Header = memo(({ id }: HeaderProps) => {
       <div className="flex-1 px-4 sm:px-6 md:px-8 lg:px-12 pb-12 lg:pb-20">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-center justify-center min-h-[85vh] lg:min-h-screen py-4 lg:py-6">
-            
             {/* Content Section - 60% width on desktop */}
             <div className="lg:col-span-3 order-2 lg:order-1 w-full flex justify-center">
               <div className="hero-content flex flex-col items-center lg:items-start text-center lg:text-left space-y-4 lg:space-y-6 w-full max-w-full lg:max-w-5xl px-2 sm:px-4 lg:px-0">
-                
                 {/* Unified Brand + Title Block */}
                 <div className="space-y-3 lg:space-y-4">
                   <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-montserrat font-bold text-brand-light leading-[1.1] tracking-tight">
@@ -57,82 +46,119 @@ const Header = memo(({ id }: HeaderProps) => {
                     <span className="block">escova progressiva</span>
                   </h1>
                 </div>
-                
+
                 {/* Subtitle Description */}
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-montserrat text-brand-cloud leading-relaxed max-w-full lg:max-w-4xl mt-4 lg:mt-8 px-2 sm:px-0">
                   Desenvolvido com tecnologia patenteada, sem formol, com ativos da Amazônia e rendimento 30% superior.
                 </p>
 
                 {/* Badges - Hierarchical design with mobile-first approach */}
-                 <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 w-full max-w-full lg:max-w-3xl mt-6 lg:mt-8 mb-4 lg:mb-6 px-2 xs:px-4 sm:px-0">
-                   <div className="bg-brand-deep/50 border border-brand-deep hover:bg-brand-deep/70 focus-visible:bg-brand-deep/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-3 xs:px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation" tabIndex={0} role="button" aria-label="Produto livre de formol">
-                     <span className="text-sm xs:text-base md:text-lg lg:text-xl font-bold text-brand-latte">LIVRE</span>
-                     <span className="text-xs xs:text-sm md:text-base font-normal text-brand-cloud">de formol</span>
-                   </div>
-                   <div className="border border-brand-latte hover:bg-brand-latte/10 focus-visible:bg-brand-latte/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-3 xs:px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation" tabIndex={0} role="button" aria-label="Textura em gel">
-                     <span className="text-sm xs:text-base md:text-lg lg:text-xl font-bold text-brand-latte">TEXTURA</span>
-                     <span className="text-xs xs:text-sm md:text-base font-normal text-brand-latte/90">em gel</span>
-                   </div>
-                   <div className="xs:col-span-2 lg:col-span-1 bg-brand-caramel/20 border border-brand-caramel hover:bg-brand-caramel/30 focus-visible:bg-brand-caramel/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-3 xs:px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation" tabIndex={0} role="button" aria-label="Tecnologia ASTRO QUAT V3">
-                     <span className="text-sm xs:text-base md:text-lg lg:text-xl font-bold text-brand-latte text-center">TECNOLOGIA</span>
-                     <span className="text-xs xs:text-sm md:text-base font-normal text-brand-latte/90 text-center">ASTRO QUAT V3®</span>
-                   </div>
-                 </div>
+                <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 w-full max-w-full lg:max-w-3xl mt-6 lg:mt-8 mb-4 lg:mb-6 px-2 xs:px-4 sm:px-0">
+                  <div
+                    className="bg-brand-deep/50 border border-brand-deep hover:bg-brand-deep/70 focus-visible:bg-brand-deep/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-3 xs:px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation"
+                    tabIndex={0}
+                    role="button"
+                    aria-label="Produto livre de formol"
+                  >
+                    <span className="text-sm xs:text-base md:text-lg lg:text-xl font-bold text-brand-latte">
+                      LIVRE
+                    </span>
+                    <span className="text-xs xs:text-sm md:text-base font-normal text-brand-cloud">
+                      de formol
+                    </span>
+                  </div>
 
-                 {/* Primary CTA Button - Captura de Lead Premium */}
-                 <button 
-                   onClick={() => setIsModalOpen(true)}
-                   className="mt-6 min-h-[56px] min-w-[280px] touch-manipulation px-6 sm:px-8 lg:px-10 rounded-xl hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-latte/50 focus:ring-offset-2 transition-all duration-300 ease-out text-base sm:text-base lg:text-lg font-semibold w-full sm:w-auto max-w-sm bg-gradient-to-r from-[#9D4916] to-[#D9C0AA] text-[#0D181C] shadow-xl hover:shadow-2xl active:scale-[0.98] cursor-pointer"
-                   aria-label="Solicitar acesso exclusivo ao NIVELA - Formulário de cadastro profissional"
-                   tabIndex={0}
-                   data-testid="button-solicitar-acesso"
-                 >
-                   SOLICITAR ACESSO EXCLUSIVO →
-                 </button>
-                
+                  <div
+                    className="border border-brand-latte hover:bg-brand-latte/10 focus-visible:bg-brand-latte/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-3 xs:px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation"
+                    tabIndex={0}
+                    role="button"
+                    aria-label="Textura em gel"
+                  >
+                    <span className="text-sm xs:text-base md:text-lg lg:text-xl font-bold text-brand-latte">
+                      TEXTURA
+                    </span>
+                    <span className="text-xs xs:text-sm md:text-base font-normal text-brand-latte/90">
+                      em gel
+                    </span>
+                  </div>
+
+                  <div
+                    className="xs:col-span-2 lg:col-span-1 bg-brand-caramel/20 border border-brand-caramel hover:bg-brand-caramel/30 focus-visible:bg-brand-caramel/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-latte/50 hover:scale-[1.02] focus-visible:scale-[1.02] transition-[transform,background-color] duration-200 ease-out px-3 xs:px-4 py-3 lg:px-5 lg:py-4 rounded-xl flex flex-col items-center justify-center backdrop-blur-sm shadow-lg hover:shadow-xl min-h-[60px] touch-manipulation"
+                    tabIndex={0}
+                    role="button"
+                    aria-label="Tecnologia ASTRO QUAT V3"
+                  >
+                    <span className="text-sm xs:text-base md:text-lg lg:text-xl font-bold text-brand-latte text-center">
+                      TECNOLOGIA
+                    </span>
+                    <span className="text-xs xs:text-sm md:text-base font-normal text-brand-latte/90 text-center">
+                      ASTRO QUAT V3®
+                    </span>
+                  </div>
+                </div>
+
+                {/* Primary CTA Button - Captura de Lead Premium */}
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="mt-6 min-h-[56px] min-w-[280px] touch-manipulation px-6 sm:px-8 lg:px-10 rounded-xl hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-latte/50 focus:ring-offset-2 transition-all duration-300 ease-out text-base sm:text-base lg:text-lg font-semibold w-full sm:w-auto max-w-sm bg-gradient-to-r from-[#9D4916] to-[#D9C0AA] text-[#0D181C] shadow-xl hover:shadow-2xl active:scale-[0.98] cursor-pointer"
+                  aria-label="Solicitar acesso exclusivo ao NIVELA - Formulário de cadastro profissional"
+                  tabIndex={0}
+                  data-testid="button-solicitar-acesso"
+                >
+                  SOLICITAR ACESSO EXCLUSIVO →
+                </button>
               </div>
             </div>
 
             {/* Product Image Section - 40% width on desktop */}
             <div className="lg:col-span-2 flex justify-center lg:justify-end order-1 lg:order-2 w-full px-4 sm:px-6 lg:px-0">
               <div className="relative w-full flex justify-center lg:justify-end max-w-lg lg:max-w-none">
-                {/* Product Image - Otimizada LCP com formato WebP */}
-                <img 
-                  src="/nivela-hero.webp"
-                  alt="NIVELA® Hero"
-                  width="800"
-                  height="933"
-                  decoding="async"
-                  {...{ fetchpriority: 'high' as any }}
-                  loading="eager"
-                  style={{aspectRatio: '800/933', objectFit: 'contain'}}
-                  className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain drop-shadow-2xl scale-110"
-                />
-                
+                {/* Product Image - otimizada com srcSet + imagem responsiva */}
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcSet="
+                      /nivela-hero-600.webp 600w,
+                      /nivela-hero-900.webp 900w,
+                      /nivela-hero-1200.webp 1200w
+                    "
+                    sizes="(max-width: 768px) 90vw,
+                           (max-width: 1024px) 60vw,
+                           800px"
+                  />
+                  <img
+                    src="/nivela-hero-1200.webp"
+                    alt="NIVELA® Hero"
+                    width={800}
+                    height={933}
+                    loading="eager"
+                    decoding="async"
+                    {...({ fetchpriority: "high" } as any)}
+                    style={{ aspectRatio: "800/933", objectFit: "contain" }}
+                    className="w-72 sm:w-80 md:w-96 lg:w-[28rem] xl:w-[32rem] 2xl:w-[36rem] h-auto object-contain"
+                  />
+                </picture>
+
                 {/* Enhanced spotlight glow effect */}
-                <div className="absolute inset-0 bg-white/15 rounded-full blur-3xl -z-10 scale-110"></div>
-                <div className="absolute inset-0 bg-brand-latte/25 rounded-full blur-2xl -z-10 scale-150"></div>
-                <div className="absolute inset-0 bg-white/8 rounded-full blur-xl -z-10 scale-200"></div>
+                <div className="absolute inset-0 bg-white/15 rounded-full blur-3xl -z-10 scale-110" />
+                <div className="absolute inset-0 bg-brand-latte/25 rounded-full blur-2xl -z-10 scale-150" />
+                <div className="absolute inset-0 bg-white/8 rounded-full blur-xl -z-10 scale-200" />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-
       {/* Background decorative elements */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-gradient-accent/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-brand-deep/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-gradient-accent/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-brand-deep/10 rounded-full blur-3xl" />
 
       {/* Access Form Modal */}
-      <AccessFormModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
+      <AccessFormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </header>
   );
 });
 
-Header.displayName = 'Header';
+Header.displayName = "Header";
 
 export default Header;
